@@ -1,24 +1,32 @@
 <!-- /snippets/blog-sidebar.liquid -->
-<div id="js-stickySidebar" class="col-xs-12 col-sm-12 col-md-3 sidebar js-sidebar-mobile-content sidebar-moible sidebar-{% if layout == 2 or layout ==5 %}left{% else %}right{% endif %} ps-container">
-  <div class="title_sidebar">
+<div
+  id="js-stickySidebar"
+  class="col-xs-12 col-sm-12 col-md-3 sidebar js-sidebar-mobile-content sidebar-moible sidebar-{% if layout == 2 or layout ==5 %}left{% else %}right{% endif %} ps-container">
+  <div
+    class="title_sidebar">
     <h3>{{ 'blogs.article.sidebar' | t }}</h3>
-    <div class="js-close-sidebar close-sidebar-btn hidden-lg hidden-md">
-      <i class="icon-x"></i>
+    <div
+      class="js-close-sidebar close-sidebar-btn hidden-lg hidden-md">
+      <i
+        class="icon-x"></i>
     </div>
   </div>
 
   {%- for block in section.blocks -%}
     {%- case block.type -%}
       {%- when 'search' -%}
-      <div class="widget widget-search">
+      <div
+        class="widget widget-search">
         <form
           id="searchForm"
           method="get"
           class="searchform"
           action="/search"
           role="search">
-          <div class="search-block">
-            <div class="search-inner">
+          <div
+            class="search-block">
+            <div
+              class="search-inner">
               <input
                 type="text"
                 class="search-info"
@@ -30,7 +38,7 @@
               <input
                 type="hidden"
                 name="type"
-                value="article" />
+                value="article">
               <a
                 id="btn_submit_search"
                 href="javascript:void(0)"
@@ -42,17 +50,23 @@
         </form>
       </div>
       {%- when 'social' -%}
-      <div class="widget widget-text sidebar-border">
-        <h3 class="widgettitle">{{ block.settings.title }}</h3>
-        <div class="content">
+      <div
+        class="widget widget-text sidebar-border">
+        <h3
+          class="widgettitle">{{ block.settings.title }}</h3>
+        <div
+          class="content">
           {% include 'social_link' %}
         </div>
       </div>
       {%- when 'category' -%}
-      <div class="widget widget-blog-categories sidebar-border">
-        <h3 class="widgettitle">{{ block.settings.title_category_sidebar }}</h3>
+      <div
+        class="widget widget-blog-categories sidebar-border">
+        <h3
+          class="widgettitle">{{ block.settings.title_category_sidebar }}</h3>
         {%- assign limit = block.settings.pagination_limit_category -%}
-        <ul class="blog-categories">
+        <ul
+          class="blog-categories">
           {% if linklists.blog-category.links.size > 0 %}
             {% for link in linklists.blog-category.links limit: limit %}
               {% assign blog_t = link.object %}
@@ -61,10 +75,12 @@
                 {% if blog_t.handle == blog.handle %}
                 class="active"
                 {% endif %}>
-                <a href="{{blog_t.url}}">
+                <a
+                  href="{{blog_t.url}}">
                   {{ blog_t.title }}
                 </a>
-                <span class="count">
+                <span
+                  class="count">
                   ({% if count < 10 and count >= 0 %}
                     {{ "0" }}{% endif %}
                   {{ count }})
@@ -74,11 +90,13 @@
           {% else %}
             <p
               style="text-align: justify;">Please
-              <b class="note">{{ 'create a link list' | link_to: '/admin/links' }}
+              <b
+                class="note">{{ 'create a link list' | link_to: '/admin/links' }}
               </b>
               that contains links to all the blogs you wish to Sidebar Blog on this page. The title of that link list must be
               <strong>Blog Category</strong>. If you want your collections to be listed alphabetically, reorder them alphabetically on your
-              <b class="note">
+              <b
+                class="note">
                 {{ 'Navigation page' | link_to: '/admin/links' }}</b>.</p>
           {% endif %}
         </ul>
@@ -86,16 +104,23 @@
       {%- when 'latestpost' -%}
       {%- assign limit = block.settings.limit_blog_latest -%}
       {%- assign blogs = blogs[block.settings.blog].articles -%}
-      <div class="widget widget-recent-post sidebar-border">
-        <h3 class="widgettitle">{{ block.settings.title }}</h3>
-        <ul class="list-recent-posts blog-list">
+      <div
+        class="widget widget-recent-post sidebar-border">
+        <h3
+          class="widgettitle">{{ block.settings.title }}</h3>
+        <ul
+          class="list-recent-posts blog-list">
 
           {% for article in blogs limit: limit %}
             {% if forloop.first %}
-              <li class="post-item">
+              <li
+                class="post-item">
                 {% if article.image %}
-                  <div class="post-format">
-                    <a class="post-image" href="{{article.url}}">
+                  <div
+                    class="post-format">
+                    <a
+                      class="post-image"
+                      href="{{article.url}}">
                       <div
                         class="pr_lazy_img lazyload item__position"
                         data-bgset="{{ article | img_url: 'large'}}"
@@ -105,24 +130,36 @@
                     </a>
                   </div>
                 {% endif %}
-                <div class="post-info col">
-                  <div class="head">
-                    <a href="{{article.url}}" class="post-title h3">{{ article.title | truncate: 45 }}</a>
+                <div
+                  class="post-info col">
+                  <div
+                    class="head">
+                    <a
+                      href="{{article.url}}"
+                      class="post-title h3">{{ article.title | truncate: 45 }}</a>
                   </div>
-                  <div class="main-info-post">
-                    <ul class="meta-post">
-                      <li class="time-post">
-                        <a href="javascript:void(0)">{{ article.created_at | date: "%b" }} {{ article.created_at | date: "%d" }} {{ article.created_at | date: "%Y" }}</a>
+                  <div
+                    class="main-info-post">
+                    <ul
+                      class="meta-post">
+                      <li
+                        class="time-post">
+                        <a
+                          href="javascript:void(0)">{{ article.created_at | date: "%b" }} {{ article.created_at | date: "%d" }} {{ article.created_at | date: "%Y" }}</a>
                       </li>
                     </ul>
                   </div>
                 </div>
               </li>
             {% else %}
-              <li class="post-item">
+              <li
+                class="post-item">
                 {% if article.image %}
-                  <div class="post-format">
-                    <a class="post-image" href="{{article.url}}">
+                  <div
+                    class="post-format">
+                    <a
+                      class="post-image"
+                      href="{{article.url}}">
                       <div
                         class="pr_lazy_img lazyload item__position"
                         data-bgset="{{ article | img_url: 'large'}}"
@@ -132,14 +169,22 @@
                     </a>
                   </div>
                 {% endif %}
-                <div class="post-info col">
-                  <div class="head">
-                    <a href="{{article.url}}" class="post-title h3">{{ article.title | truncate: 45 }}</a>
+                <div
+                  class="post-info col">
+                  <div
+                    class="head">
+                    <a
+                      href="{{article.url}}"
+                      class="post-title h3">{{ article.title | truncate: 45 }}</a>
                   </div>
-                  <div class="main-info-post">
-                    <ul class="meta-post">
-                      <li class="time-post">
-                        <a href="javascript:void(0)">{{ article.created_at | date: "%b" }} {{ article.created_at | date: "%d" }} {{ article.created_at | date: "%Y" }}</a>
+                  <div
+                    class="main-info-post">
+                    <ul
+                      class="meta-post">
+                      <li
+                        class="time-post">
+                        <a
+                          href="javascript:void(0)">{{ article.created_at | date: "%b" }} {{ article.created_at | date: "%d" }} {{ article.created_at | date: "%Y" }}</a>
                       </li>
                     </ul>
                   </div>
@@ -150,9 +195,12 @@
         </ul>
       </div>
       {%- when 'newsletter' -%}
-      <div class="widget widget-recent-post sidebar-border">
-        <h3 class="widgettitle">{{ block.settings.title }}</h3>
-        <p class="widget_sub_title">{{ block.settings.subtitle }}</p>
+      <div
+        class="widget widget-recent-post sidebar-border">
+        <h3
+          class="widgettitle">{{ block.settings.title }}</h3>
+        <p
+          class="widget_sub_title">{{ block.settings.subtitle }}</p>
         <form
           id="newsletterForm"
           method="post"
@@ -172,8 +220,10 @@
             type="hidden"
             name="contact[tags]"
             value="newsletter">
-          <div class="signup-newsletter-form  ">
-            <div class="content">
+          <div
+            class="signup-newsletter-form  ">
+            <div
+              class="content">
               <input
                 type="email"
                 name="contact[email]"
@@ -181,35 +231,40 @@
                 value=""
                 class=" input-text"
                 required="required">
-              <div class="group_checkbox">
+              <div
+                class="group_checkbox">
                 <input
                   type="checkbox"
                   name="chk_enable"
                   id="chk_newsletter"
                   required="required"
                   value=""
-                  style="display:block;" />
+                  style="display:block;">
                 <label>{{ block.settings.title_newsletter_checkbox }}</label>
               </div>
               <input
                 type="submit"
                 name="submit"
                 class="btn-newsletter"
-                value="{{ block.settings.title_newsletter_button}}" />
+                value="{{ block.settings.title_newsletter_button}}">
             </div>
           </div>
         </form>
       </div>
       {%- when 'tags' -%}
       {%- assign limit = block.settings.limit_tags -%}
-      <div class="widget widget-tags-post sidebar-border">
-        <h3 class="widgettitle">{{ block.settings.title }}</h3>
+      <div
+        class="widget widget-tags-post sidebar-border">
+        <h3
+          class="widgettitle">{{ block.settings.title }}</h3>
         <ul>
           {% for tag in blog.all_tags limit: limit %}
             {% if current_tags contains tag %}
-              <li class="{{ tag | handleize }} current">{{ tag | link_to_tag: tag }}</li>
+              <li
+                class="{{ tag | handleize }} current">{{ tag | link_to_tag: tag }}</li>
             {% else %}
-              <li class="{{ tag | handleize }}">{{ tag | link_to_tag: tag }}</li>
+              <li
+                class="{{ tag | handleize }}">{{ tag | link_to_tag: tag }}</li>
             {% endif %}
           {% endfor %}
 
@@ -220,17 +275,18 @@
 
 </div>
 
-<script type="text/javascript">
+<script
+  type="text/javascript">
   jQuery(document).ready(function($) {
   $("#btn_submit_search").on('click',function(e){
-         	$("#searchForm").submit();
-      })    
-      $(".js-mobile-sidebar").on('click',function(e){
-         $(".js-mobile-sidebar-panel").addClass('active');
-         $(".js-sidebar-mobile-content").addClass('active');
-      })   
-      $(".js-close-sidebar").on('click',function(){
-         $(".js-mobile-sidebar-panel").removeClass('active'); 
-         $(".js-sidebar-mobile-content").removeClass('active');
-      })
-    })</script>
+           	$("#searchForm").submit();
+        })    
+        $(".js-mobile-sidebar").on('click',function(e){
+           $(".js-mobile-sidebar-panel").addClass('active');
+           $(".js-sidebar-mobile-content").addClass('active');
+        })   
+        $(".js-close-sidebar").on('click',function(){
+           $(".js-mobile-sidebar-panel").removeClass('active'); 
+           $(".js-sidebar-mobile-content").removeClass('active');
+        })
+      })</script>

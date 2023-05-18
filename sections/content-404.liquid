@@ -24,22 +24,6 @@
           
           <p>{{section.settings.content}}</p>
           <div class="wrap-help col-lg-4 col-md-6 col-12">
-            {%comment%}
-            <form id="searchForm404" method="get" class="search-404" action="/search" role="search">
-              <div class="search-block">
-                <div class="search-inner">
-                  
-                  <input type="text" class="search-info" placeholder="{{"general.404.key_word_search" | t}}" name="q" {% if search.performed %} value="{{ search.terms | escape | downcase }}"{% endif %}>
-                  <input type="hidden" name="type" value="page" />
-                  
-                  <button type="submit" class="search-button">
-                    <i class="icon-search"></i>
-                  </button>
-                 
-                </div>
-              </div>
-            </form>
-            {%endcomment%}
           	<a class="back-homepage" href="{{ routes.root_url }}">{{"general.404.link" | t}} </a>
           </div>
         </div>

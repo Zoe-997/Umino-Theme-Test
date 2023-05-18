@@ -1,24 +1,42 @@
-<h3 class="title">{{'blogs.comments.title'|t}}</h3>
-{% form 'new_comment', article %}  
-	{{ form.errors | default_errors }}
-    <div class="row">
-      <div class="col-xs-12 col-sm-6 comment-form-column">      
-        <input type="text" class="input-info" placeholder="{{'blogs.comments.name'|t}}" id="name" name="comment[author]">
-      </div>
-      <div class="col-xs-12 col-sm-6 comment-form-column">      
-        <input type="text" class="input-info" placeholder="{{'blogs.comments.email'|t}}" id="email" name="comment[email]">
-      </div>
-      {%comment%}
-      <div class="col-xs-12 col-sm-4 comment-form-column">      
-        <input type="text" class="input-info" placeholder="{{'blogs.comments.website'|t}}" id="website" name="comment[website]">
-      </div>
-      {%endcomment%}
-    </div>  
-    <textarea rows="6"  class="input-info input-note" placeholder="{{'blogs.comments.message'|t}}" id="message" name="comment[body]"></textarea>
-    {% if blog.moderated? %}
-    	<span class="label-text">{{ 'blogs.comments.moderated' | t }}</span>
-    {% endif %}
-    <div class="group-button">
-      <button class="button submit" type="submit">{{ 'blogs.comments.post' | t }}</button>
+<h3
+  class="title">{{ 'blogs.comments.title' | t }}</h3>
+{% form 'new_comment', article %}
+  {{ form.errors | default_errors }}
+  <div
+    class="row">
+    <div
+      class="col-xs-12 col-sm-6 comment-form-column">
+      <input
+        type="text"
+        class="input-info"
+        placeholder="{{'blogs.comments.name'|t}}"
+        id="name"
+        name="comment[author]">
     </div>
+    <div
+      class="col-xs-12 col-sm-6 comment-form-column">
+      <input
+        type="text"
+        class="input-info"
+        placeholder="{{'blogs.comments.email'|t}}"
+        id="email"
+        name="comment[email]">
+    </div>
+  </div>
+  <textarea
+    rows="6"
+    class="input-info input-note"
+    placeholder="{{'blogs.comments.message'|t}}"
+    id="message"
+    name="comment[body]"></textarea>
+  {% if blog.moderated? %}
+    <span
+      class="label-text">{{ 'blogs.comments.moderated' | t }}</span>
+  {% endif %}
+  <div
+    class="group-button">
+    <button
+      class="button submit"
+      type="submit">{{ 'blogs.comments.post' | t }}</button>
+  </div>
 {% endform %}

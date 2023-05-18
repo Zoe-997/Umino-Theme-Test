@@ -17,10 +17,10 @@
     </p>  
     <p class="field form-row form-row-wide">
       {%comment%}<label for="address_zip">{{ 'cart.shipping_rates.zip_Code' | t }}</label>{%endcomment%}
-      <input placeholder="{{ 'cart.shipping_rates.zip_Code' | t }}"  type="text" style="width: 100%;" id="address_zip" name="address[zip]"{% if shop.customer_accounts_enabled and customer %} value="{{ customer.default_address.zip }}"{% endif %} />
+      <input placeholder="{{ 'cart.shipping_rates.zip_Code' | t }}"  type="text" style="width: 100%;" id="address_zip" name="address[zip]"{% if shop.customer_accounts_enabled and customer %} value="{{ customer.default_address.zip }}"{% endif %}>
     </p>
     <p class="field last">
-      <input  type="button" class="get-rates btn button button-duck" value="{{ settings.shipping_calculator_submit_button_label | default: 'Update' }}" />
+      <input  type="button" class="get-rates btn button button-duck" value="{{ settings.shipping_calculator_submit_button_label | default: 'Update' }}">
     </p>
     <span id="wrapper-response"></span>
   </div>

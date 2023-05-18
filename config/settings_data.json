@@ -1607,7 +1607,7 @@
               "tt_hd": "Shop Layout",
               "url": "#",
               "open_link": "_self",
-              "menu": "",
+              "menu": "menu-child-1",
               "col": "3"
             }
           },
@@ -1617,7 +1617,7 @@
               "tt_hd": "Products Pages",
               "url": "#",
               "open_link": "_self",
-              "menu": "",
+              "menu": "menu-child-1",
               "col": "3"
             }
           },
@@ -1627,7 +1627,7 @@
               "tt_hd": "Heading",
               "url": "",
               "open_link": "_self",
-              "menu": "",
+              "menu": "menu-child-1",
               "col": "3"
             }
           },
@@ -1637,7 +1637,7 @@
               "tt_hd": "Heading",
               "url": "",
               "open_link": "_self",
-              "menu": "",
+              "menu": "menu-child-1",
               "col": "3"
             }
           },
@@ -1655,7 +1655,7 @@
               "pos_rel": false,
               "wid": "cus",
               "cus_wid": 1200,
-              "bg": "#ffffff"
+              "bg": "#fff"
             }
           },
           "8f05fad1-35de-475f-9f44-61e37029c130": {
@@ -1664,7 +1664,7 @@
               "tt_hd": "Heading",
               "url": "",
               "open_link": "_self",
-              "menu": "",
+              "menu": "menu-child-1",
               "col": "4"
             }
           },
@@ -1674,7 +1674,7 @@
               "tt_hd": "Heading",
               "url": "",
               "open_link": "_self",
-              "menu": "",
+              "menu": "menu-child-1",
               "col": "4"
             }
           },
@@ -1684,7 +1684,7 @@
               "tt_hd": "Heading",
               "url": "",
               "open_link": "_self",
-              "menu": "",
+              "menu": "menu-child-1",
               "col": "4"
             }
           },
@@ -1694,7 +1694,7 @@
               "title": "Pages",
               "url": "",
               "open_link": "_self",
-              "menu": "",
+              "menu": "page",
               "icon": "",
               "cus_cl": false,
               "cl": "#ec0101",
@@ -3032,7 +3032,7 @@
             "type": "menu",
             "settings": {
               "title": "CUSTOMER SERVICE",
-              "menu": "",
+              "menu": "customer-service",
               "cl": "2",
               "cl_tb": "6",
               "cl_mb": "12",
@@ -3044,7 +3044,7 @@
             "type": "menu",
             "settings": {
               "title": "SHOP BY CATEGORIES",
-              "menu": "",
+              "menu": "shop-by-categories",
               "cl": "2",
               "cl_tb": "6",
               "cl_mb": "12",
@@ -3176,7 +3176,7 @@
           "a27f11f3-0232-4468-8d8f-6079be362242-1684399084bb36834f-2": {
             "type": "collection",
             "settings": {
-              "collection": "lighting-decor",
+              "collection": "dining-kitchen",
               "title": ""
             }
           },
@@ -3254,7 +3254,7 @@
           "4d7b5277-720a-4ecc-ba9a-db527e51b09e-1684399191aa5ce6f4-0": {
             "type": "img",
             "settings": {
-              "image_sl": "shopify:\/\/shop_images\/img_7dc54578-08fb-4af4-8196-0c802db1495f.png",
+              "image_sl": "shopify:\/\/shop_images\/img_2ffc7a5f-92d1-4447-a604-691c0f646184.png",
               "link_img": "",
               "open_link": "_blank",
               "img_radius": 20,
@@ -3358,7 +3358,7 @@
           "4d7b5277-720a-4ecc-ba9a-db527e51b09e-1684399191aa5ce6f4-1": {
             "type": "img",
             "settings": {
-              "image_sl": "shopify:\/\/shop_images\/img_7dc54578-08fb-4af4-8196-0c802db1495f.png",
+              "image_sl": "shopify:\/\/shop_images\/img_2ffc7a5f-92d1-4447-a604-691c0f646184.png",
               "link_img": "",
               "open_link": "_blank",
               "img_radius": 20,
@@ -3434,7 +3434,7 @@
           "content": "Our products are designed for everyone, environmentally friendly.",
           "text_size": "large",
           "style_title": "style_1",
-          "collection": "lighting-decor",
+          "collection": "dining-kitchen",
           "max_count": 8,
           "use-slider": true,
           "slides-To-Scroll": 1,

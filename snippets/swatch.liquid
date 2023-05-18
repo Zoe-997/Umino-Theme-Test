@@ -58,7 +58,7 @@
         {% if is_color %}
         <!--<div class="tooltip">{{ value }}</div>-->
         {% endif %}
-        	<input id="swatch-{{ option_index }}-{{ value | handle }}" type="radio" name="option-{{ option_index }}" value="{{ value | escape }}"{% if forloop.first %} checked{% endif %} {% unless variant.available %}disabled{% endunless %} />
+        	<input id="swatch-{{ option_index }}-{{ value | handle }}" type="radio" name="option-{{ option_index }}" value="{{ value | escape }}"{% if forloop.first %} checked{% endif %} {% unless variant.available %}disabled{% endunless %}>
         {% if is_color %}
         {% assign color__checkstyle = value | split: ' ' | last | handle %}
         <label for="swatch-{{ option_index }}-{{ value | handle }}" data-js-option-value data-color="{{ value | escape }}" style="border-radius: 50%;"

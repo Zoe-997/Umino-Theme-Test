@@ -2,7 +2,7 @@
   <h3>{{section.settings.title}}</h3> <div class="js-close-sidebar close-sidebar-btn"><i class="icon-x"></i></div>
 </div>
 <div class="content-sidebar sidebar-detail">
-  <input type="hidden" value="{{collection.handle}}" name="currency-collection-handle" id="currency_collection_handle"/>
+  <input type="hidden" value="{{collection.handle}}" name="currency-collection-handle" id="currency_collection_handle">
   {% assign index = 0 %}
   
   {%- for block in section.blocks -%}    
@@ -208,21 +208,6 @@
              
           </div>
       {%- endcapture -%}  
-    {%comment%}
-       {%- when 'filter_by_price' -%}
-            {%- capture navigation_content -%}
-        {% assign products = collection.products | sort: 'price' %}
-              <div class="widget widget_filter_price box-has-content">               
-                <div class="price-filter">
-                  <div data-range-price data-label-reasult="price:" data-min="{{products.first.price | divided_by: 100 }}" data-max="{{products.last.price | divided_by: 100 }}" data-unit="$" class="range-price" data-value-min="{{products.first.price | divided_by: 100 }}" data-value-max="{{ products.last.price | divided_by: 100 }}"></div>
-                  <div data-amount-price class="amount-range-price"><span data-from class="from">{{products.first.price | money}}</span> - <span data-to class="to">{{products.last.price | money}}</span></div>                  
-                  <input type="hidden" id="min_price" value="{{products.first.price | divided_by: 100 }}"/>
-                  <input type="hidden" id="max_price" value="{{ products.last.price | divided_by: 100 }}"/>
-                </div>
-              </div>
-            {%- endcapture -%}
-            {%- assign has_content = true -%}
-  {%endcomment%}
       {%- when 'products' -%}
             {% capture no_content_message %}{{ 'collections.sidebar.no_content' | t }}{% endcapture %}
             {%- capture navigation_content -%}
