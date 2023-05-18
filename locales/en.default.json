@@ -115,6 +115,11 @@
     }
   },
   "sections": {
+    "label_tags": {
+      "new": "New",
+      "sale": "Sale",
+      "hot": "Hot"
+    },
     "slideshow": {
       "next_slide": "Next slide",
       "previous_slide": "Previous slide",
@@ -134,8 +139,7 @@
       "you_are_in": "You are in:"
     },
     "collection_list": {
-      "view_all": "View all",
-      "all_collection": "All Categories"
+      "view_all": "View all"
     },
     "collection_template": {
       "apply": "Apply",
@@ -174,7 +178,7 @@
       "by_author": "Post by {{ author }}",
       "post_date": "Post Date",
       "posted_in": "Posted in",
-      "read_more": "Continue reading",
+      "read_more": "Read More",
       "comments": "Comments",
       "back_to_blog": "Back to {{ title }}",
       "by": "By",
@@ -350,7 +354,8 @@
       "phone": "Phone Number",
       "message": "Message",
       "submit": "Send Message",
-      "post_success": "Thanks for contacting us. We'll get back to you as soon as possible."
+      "post_success": "Thanks for contacting us. We'll get back to you as soon as possible.",
+      "hotline": "Hotline"
     }
   },
   "customer": {
@@ -451,7 +456,7 @@
     "recover_password": {
       "title": "Reset your password",
       "email": "Email",
-      "placeholder": "alothemes@gmail.com",
+      "placeholder": "Gosto@gmail.com",
       "submit": "Submit",
       "cancel": "Cancel",
       "subtext": "We will send you an email to reset your password.",
@@ -476,33 +481,6 @@
       "or": "or",
       "register": "Register",
       "submit": "Create New Account"
-    }
-  },
-  "home_page": {
-    "onboarding": {
-      "vendor_title": "ブランド名",
-      "product_title": "商品名",
-      "product_description": "商品の説明を使用して、商品の機能と利点を紹介できます。 Shopifyのeコマースブログで、商品を適切に販売するためのインスピレーションとアドバイスを確認できます。",
-      "collection_title": "コレクションの名前",
-      "article_name": "投稿の名前",
-      "article_category": "カテゴリー",
-      "article_excerpt": "ストアはまだブログ投稿を公開していません。 ブログを使用して、新商品の発売、ヒント、またはお客様と共有したいその他のニュースについて話すことができます。 Shopifyのeコマースブログで、自分の店やブログのインスピレーションとアドバイスを確認できます。"
-    },
-    "featured_product": {
-      "view_product": "商品の詳細を見る"
-    },
-    "shop_the_look": {
-      "view_product": "この商品を見る",
-      "view_products": "商品を見る",
-      "popover_title": "Shop the look"
-    },
-    "featured_video": {
-      "play": "動画を再生します"
-    },
-    "newsletter": {
-      "input": "メールアドレス",
-      "submit": "申し込む",
-      "success": "ご購読ありがとうございます。"
     }
   },
   "homepage": {
@@ -584,7 +562,7 @@
       "quantity": "Qty:",
       "description": "Description",
       "default_variant_title": "Default variant",
-      "add_to_cart": "カートに入れる",
+      "add_to_cart": "Add to cart",
       "out_stock": "Out Stock",
       "text_countdown_html": "Order in the next {{ counter }} to get it",
       "visitors_html": "<label class=\"label\">Real time<\/label> {{ counter }} visitor right now",
@@ -732,5 +710,10 @@
   },
   "date_formats": {
     "month_day_year": "%B %d, %Y"
+  },
+  "language": {
+    "en": "English",
+    "vi": "Tiếng Việt",
+    "ar": "Arabic"
   }
 }
