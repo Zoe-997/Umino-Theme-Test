@@ -36,26 +36,6 @@
                                   </div>
                     <input type="email" name="EMAIL" placeholder="{{section.settings.placeholder_newsletter}}"  value="{% if customer %}{{ customer.email }}{% endif %}" class="input-text" required="required">
                   </div>
-                  {%comment%}
-                  <div class="group-input">
-                    <label class="radio radio-before">
-                      <span class="radio__input">
-                        <input type="radio" name="radio">
-                        <span class="radio__control"></span>
-                      </span>
-                      <span class="radio__label">Man</span>
-                    </label>
-                    <label class="radio radio-before">
-                      <span class="radio__input">
-                        <input type="radio" name="radio">
-                        <span class="radio__control"></span>
-                      </span>
-                      <span class="radio__label">Women</span>
-                    </label>
-                    <!--<input type="radio" name="gender" value="man"/> <label>Man</label>
-                    <input class="women" type="radio" name="gender" value="women" checked /> <label>Women</label>-->
-                  </div>
-                  {%endcomment%}
                   <div class="col-auto"><button type="submit" class="btn btn-theme">{{section.settings.button_newsletter}}</button></div>
                </div>          
             </form>  

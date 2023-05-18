@@ -1,53 +1,29 @@
-<input
-  type="hidden"
-  value="0"
-  id="compare_value">
-<div
-  class="modal fade bs-example-modal-lg"
-  id="moda-compare"
-  tabindex="-1"
-  role="dialog">
-  <div
-    class="modal-dialog modal-lg">
-    <div
-      class="modal-content"
-      id="compare-modal">
-      <div
-        class="modal-header">
-        <h4
-          class="modal-title"
-          style="    float: left;">{{ settings.product_page_compare_button }}</h4>
-        <button
-          type="button"
-          class="close"
-          title="Close"
-          data-dismiss="modal"
-          aria-label="Close">
-          <span
-            title="Close"
-            aria-hidden="true">&times;</span>
-        </button>
+<input type="hidden" value="0" id="compare_value">   
+<div class="modal fade bs-example-modal-lg" id="moda-compare" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content" id="compare-modal">
+      <div class="modal-header">
+        <h4 class="modal-title" style="    float: left;">{{settings.product_page_compare_button}}</h4>
+        <button type="button" class="close" title="Close" data-dismiss="modal" aria-label="Close"><span title="Close" aria-hidden="true">&times;</span></button>
       </div>
-      <div
-        class="modal-body">
-        <div
-          class="table-wrapper">
-          <table
-            class="table table-hover">
+      <div class="modal-body">
+        <div class="table-wrapper">
+          <table class="table table-hover">
             <thead>
-              <tr
-                class="th-compare">
+              <tr class="th-compare">
                 <th></th>
               </tr>
             </thead>
-            <tbody
-              id="table-compare"></tbody>
+            <tbody id="table-compare">
+
+            </tbody>
 
           </table>
         </div>
       </div>
-      <div
-        class="modal-footer"></div>
+      <div class="modal-footer">
+
+      </div>
     </div>
   </div>
 </div>
