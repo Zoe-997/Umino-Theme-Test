@@ -14,11 +14,11 @@
                     <div class="top_contac">
                       <ul>
                         {%- if block.settings.show_phone -%}
-                              <li><a href="tel:{{shop.phone}}"><i class="icon-phone-call"></i> {{shop.phone}}</a></li>
-                         {%endif%}
-                         {%- if block.settings.show_email -%}
-                              <li><a href="mailto:{{shop.email}}"><i class="icon-mail"></i> {{shop.email}}</a></li>
-                         {%endif%}
+                          <li><a href="tel:{{shop.phone}}">{% if block.settings.show_icon %}<i class="icon-phone-call"></i> {% endif %}{% if shop.phone %}{{shop.phone}}{% else %}Add your store phone number{% endif %}</a></li>
+                        {%endif%}
+                        {%- if block.settings.show_email -%}
+                          <li><a href="mailto:{{shop.email}}">{% if block.settings.show_icon %}<i class="icon-mail"></i> {% endif %}{% if shop.phone %}{{shop.email}}{% else %}Add your store email address{% endif %}</a></li>
+                        {%endif%}
                       </ul>
                     </div>
                   </div>
@@ -111,7 +111,7 @@
     "name": "Top header",
     "class":"cms-top-header",
     "settings": [
-		{
+      {
           "type": "header",
           "content": "General settings"
         },
@@ -174,22 +174,28 @@
 	],
 	"blocks": [
 		{
-          "type": "contac_header",
-          "name": "Top contac header",
-          "limit": 1,
-          "settings": [
-              {
+      "type": "contac_header",
+      "name": "Top contac header",
+      "limit": 1,
+      "settings": [
+        {
           "type": "checkbox",
           "id": "show_phone",
           "label": "Show Phone",
           "default": true
-          },
-          {
+        },
+        {
           "type": "checkbox",
           "id": "show_email",
           "label": "Show Email",
           "default": true
-          },	    
+        },	
+        {
+          "type": "checkbox",
+          "id": "show_icon",
+          "label": "Show Icon",
+          "default": false
+        },	    
 				{
                 "type": "select",
                 "id": "text_align",
