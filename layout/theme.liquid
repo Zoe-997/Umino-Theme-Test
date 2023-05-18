@@ -18,13 +18,15 @@
     {% if current_page != 1 %} &ndash; {{ 'general.meta.page' | t: page: current_page }}{% endif %}
     {% unless page_title contains shop.name %}&ndash; {{ shop.name }}{% endunless %}
   {% endcapture %}
-  <title>{{ seo_title | strip_newlines | remove:"  " }}</title>
+  <title>{{ seo_title | strip_newlines | remove: "  " }}</title>
     {% if page_description %}
       <meta name="description" content="{{ page_description | escape }}">
     {% endif %}
   {%- if settings.favicon != blank %}<link rel="shortcut icon" type="image/png" href="{{ settings.favicon | img_url: '32x' }}">{% endif -%}
   {%- if settings.favicon_apple != blank %}<link rel="apple-touch-icon-precomposed" type="image/png" sizes="152x152" href="{{ settings.favicon_apple | img_url: '152x' }}">{% endif -%}
   {% comment %}{% include 'social-meta-tags' %} {% endcomment %}
+  <meta name="keywords" content="{{ settings.home_keywords }}">
+  <meta name="author" content="{{ settings.shop_author }}">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="{{ settings.color_primary }}">
   {% include 'language-rtl' %}
@@ -46,11 +48,11 @@
   {%if settings.show_load_page%}
   <div class="page-load circle-loadding"><span></span></div>
   {%endif%}
-  <div class="main {{class_sidebar}}" style="transform: none;">
+  <div class="main {{ class_sidebar }}" style="transform: none;">
   <header id="header">  
   {% include 'currencies' %}
 
-        {% assign import_header = settings.select_header | plus: 0%}
+        {% assign import_header = settings.select_header | plus: 0 %}
         {% case import_header %}     
           {% when 1 %}
               {% section 'top-bar' %}
