@@ -3,56 +3,57 @@
 {% capture styleCss %}
 /*================ Typography ================*/
 :root {
---color-bg-body:{{settings.color_body_bg}};
---color-text-body:{{settings.color_body_text}};
+--color-bg-body:{{ settings.color_body_bg}};
+--color-text-body:{{ settings.color_body_text}};
 
---color-main: {{settings.color_main}};
+--color-main: {{ settings.color_main}};
 
---color-link: {{settings.color_link}};
---color-link-hover: {{settings.color_link_hover}};
+--color-link: {{ settings.color_link}};
+--color-link-hover: {{ settings.color_link_hover}};
 
---color-scrollbar: {{settings.color_scrollbar}};  
+--color-scrollbar: {{ settings.color_scrollbar}}; 
+--color-border: {{ settings.color_border }};
 
 /*================ megamenu ================*/
---color-link-menu:{{settings.color_link_menu}};
---color-link-menu-heading:{{settings.color_menu_heading}};
---color-link-menu-sub:{{settings.color_link_menu_sub}};
---color-link-menu-hover:{{settings.color_link_menu_hover}};
+--color-link-menu:{{ settings.color_link_menu}};
+--color-link-menu-heading:{{ settings.color_menu_heading}};
+--color-link-menu-sub:{{ settings.color_link_menu_sub}};
+--color-link-menu-hover:{{ settings.color_link_menu_hover}};
 
 /*================ product item ================*/ 
---color-name-product:{{settings.color_name_product }};
---color-name-product-hover:{{settings.color_name_product_hover }};
---color-star-product:{{settings.color_star_product }};
+--color-name-product:{{ settings.color_name_product }};
+--color-name-product-hover:{{ settings.color_name_product_hover }};
+--color-star-product:{{ settings.color_star_product }};
 
---color-compare-price-product:{{settings.color_compare_price_product }};
---color-price-product:{{settings.color_price_product }};
---color-current-product:{{settings.color_price_current_product }};
+--color-compare-price-product:{{ settings.color_compare_price_product }};
+--color-price-product:{{ settings.color_price_product }};
+--color-current-product:{{ settings.color_price_current_product }};
 
---color-btn-product:{{settings.color_btn_product }};
---color-btn-product-hover:{{settings.color_btn_product_hover }};
+--color-btn-product:{{ settings.color_btn_product }};
+--color-btn-product-hover:{{ settings.color_btn_product_hover }};
   
---bg-btn-product:{{settings.bg_btn_product }};
---bg-btn-product-hover:{{settings.bg_btn_product_hover }};
+--bg-btn-product:{{ settings.bg_btn_product }};
+--bg-btn-product-hover:{{ settings.bg_btn_product_hover }};
   
---color-label-hot:{{settings.color_label_hot }};
---color-label-new:{{settings.color_label_new }};
---color-label-sale:{{settings.color_label_sale }};
---color-label-in:{{settings.color_label_in }};
---color-label-out:{{settings.color_label_out }};
+--color-label-hot:{{ settings.color_label_hot }};
+--color-label-new:{{ settings.color_label_new }};
+--color-label-sale:{{ settings.color_label_sale }};
+--color-label-in:{{ settings.color_label_in }};
+--color-label-out:{{ settings.color_label_out }};
 
 /*================ Butoom ================*/
 
---color-btn-text:{{settings.color_btn_text }};
---color-btn:{{settings.color_btn }};
---color-border-btn:{{settings.color_border_btn }};
---color-btn-text_hover:{{settings.color_btn_text_hover }};
---color-btn-hover:{{settings.color_btn_hover }};
---color-border-btn-hover:{{settings.color_border_btn_hover }};
+--color-btn-text:{{ settings.color_btn_text }};
+--color-btn:{{ settings.color_btn }};
+--color-border-btn:{{ settings.color_border_btn }};
+--color-btn-text_hover:{{ settings.color_btn_text_hover }};
+--color-btn-hover:{{ settings.color_btn_hover }};
+--color-border-btn-hover:{{ settings.color_border_btn_hover }};
  /*================ Butoom Previous & Next ================*/ 
-  --color-cl-btn-p-n:{{settings.cl_btn_p_n }};
-  --color-bg-btn-p-n:{{settings.bg_btn_p_n }};
-  --color-cl-btn-p-n-hover:{{settings.cl_btn_p_n_hover }};
-  --color-bg-btn-p-n-hover:{{settings.bg_btn_p_n_hover }};
+  --color-cl-btn-p-n:{{ settings.cl_btn_p_n }};
+  --color-bg-btn-p-n:{{ settings.bg_btn_p_n }};
+  --color-cl-btn-p-n-hover:{{ settings.cl_btn_p_n_hover }};
+  --color-bg-btn-p-n-hover:{{ settings.bg_btn_p_n_hover }};
 }
   html ::-webkit-scrollbar {
     width: 5px;
@@ -194,7 +195,7 @@ div.main{
       max-width: {{ cusotm_width }}px;
     }
   } 
-  {%endif%}
+  {% endif %}
   
 .full-width,  
 .container.full-width {max-width:100%;} 
