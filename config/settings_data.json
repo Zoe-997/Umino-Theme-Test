@@ -2188,6 +2188,7 @@
           "show_close": true,
           "close": "close",
           "show_logo": false,
+          "logo": "shopify:\/\/shop_images\/Logo.svg",
           "logo_max_width": 120,
           "bg_menu": "#ffffff",
           "color_text": "#1a1a1a",
@@ -3307,8 +3308,8 @@
               "custom_mark_color": "#fbb71c",
               "mobile_fw_text": 600,
               "mobile_lh_text": 0,
-              "mobile_font_text": 14,
-              "mobile_mg_top": 0
+              "mobile_font_text": 40,
+              "mobile_mg_top": 5
             }
           },
           "59274ab4-527b-4de3-86ae-9f20096894d8": {
@@ -3327,7 +3328,7 @@
               "mobile_fw_text": 600,
               "mobile_lh_text": 0,
               "mobile_font_text": 14,
-              "mobile_mg_top": 0
+              "mobile_mg_top": 5
             }
           },
           "66abf253-6c08-4312-bed8-9ec0a3501e7d": {
@@ -3350,8 +3351,8 @@
               "pd": "19px 54px",
               "ls_text": 0,
               "mobile_fw_text": 600,
-              "mobile_font_text": 12,
-              "mobile_mg_top": 0,
+              "mobile_font_text": 13,
+              "mobile_mg_top": 20,
               "mobile_pd": "15px 32px 10px 32px"
             }
           },
@@ -3499,7 +3500,7 @@
               "text_transform": "uppercase",
               "mg_bottom": 10,
               "mobile_font_text": 12,
-              "mobile_mg_bottom": 0
+              "mobile_mg_bottom": 5
             }
           },
           "a9fcad43-08e3-4ee4-88e6-dd2712582a9b": {
@@ -3514,8 +3515,8 @@
               "ls_text": "0",
               "text_transform": "none",
               "mg_bottom": 20,
-              "mobile_font_text": 12,
-              "mobile_mg_bottom": 0
+              "mobile_font_text": 25,
+              "mobile_mg_bottom": 10
             }
           },
           "36ec2140-f3b3-4332-9609-077f86e92332": {
@@ -3531,7 +3532,7 @@
               "mg_bottom": 50,
               "hide": false,
               "mobile_font_text": 14,
-              "mobile_mg_bottom": 0
+              "mobile_mg_bottom": 20
             }
           },
           "85499f45-7112-4330-aec9-16a0367409b2": {
