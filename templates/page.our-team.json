@@ -1,0 +1,267 @@
+{
+  "sections": {
+    "1636185893296a5405": {
+      "type": "banner-full-width",
+      "blocks": {
+        "1636185893296a5405-0": {
+          "type": "banner_img",
+          "settings": {
+            "link_img": "",
+            "open_link": "_blank",
+            "h_position": "center",
+            "v_position": "middle",
+            "txt_align": "center",
+            "mg_bottom": 0
+          }
+        },
+        "640b336f-397e-4c95-a1f9-e45e233ea8de": {
+          "type": "subhd",
+          "settings": {
+            "title": "Perfect Target",
+            "color": "#ffffff",
+            "fw_text": 400,
+            "fs_text": 18,
+            "lh_text": 0,
+            "ls_text": 0,
+            "text_transform": "none",
+            "mg_bottom": 30,
+            "hide": false,
+            "mobile_font_text": 14,
+            "mobile_mg_bottom": 15
+          }
+        },
+        "a7184b49-7d2d-4a43-9731-333f1757ef03": {
+          "type": "hd",
+          "settings": {
+            "title": "Our Team",
+            "color": "#ffffff",
+            "fw_text": 400,
+            "fs_text": 80,
+            "lh_text": 0,
+            "ls_text": 0,
+            "text_transform": "none",
+            "mg_bottom": 30,
+            "hide": false,
+            "mobile_font_text": 40,
+            "mobile_mg_bottom": 15
+          }
+        },
+        "dc7fec51-dbf8-4d7d-9f30-3a4d9e319aa8": {
+          "type": "txt",
+          "settings": {
+            "title": "Staying locked up in four walls have restricted our thinking. We are so used to schedules <br>\nand predictable life that we have successfully suppressed our creative side.",
+            "color": "#ffffff",
+            "fw_text": 400,
+            "fs_text": 18,
+            "lh_text": 0,
+            "ls_text": 0,
+            "mg_bottom": 50,
+            "hide": false,
+            "mobile_font_text": 14,
+            "mobile_mg_bottom": 25
+          }
+        },
+        "96331a5b-50ef-4518-be98-148e01904abd": {
+          "type": "btn",
+          "settings": {
+            "title": "Let’s Talk",
+            "btn_link": "",
+            "open_link": "_blank",
+            "cl_txt": "#222222",
+            "cl_txt_hover": "#222222",
+            "cl_bg": "#ffffff",
+            "cl_bg_hover": "#ffffff",
+            "cl_border": "#ffffff",
+            "cl_border_hover": "#ffffff",
+            "fs_text": 12,
+            "fw_text": 600,
+            "button_transform": "uppercase",
+            "br_button": "2px 2px",
+            "mg": "0px 0px 0px 0px",
+            "pd": "12px 50px 12px 50px",
+            "icon_button": "",
+            "ls_text": 0,
+            "mobile_font_text": 14,
+            "mobile_mg_bottom": 0,
+            "mobile_mg": "0px 0px 0px 0px",
+            "mobile_pd": "10px 25px 10px 25px"
+          }
+        },
+        "f7908a86-081a-48d0-bb06-a87b152760a2": {
+          "type": "btn",
+          "settings": {
+            "title": "Explore now",
+            "btn_link": "#",
+            "open_link": "_blank",
+            "cl_txt": "#ffffff",
+            "cl_txt_hover": "#222222",
+            "cl_bg": "rgba(0,0,0,0)",
+            "cl_bg_hover": "#ffffff",
+            "cl_border": "#ffffff",
+            "cl_border_hover": "#ffffff",
+            "fs_text": 12,
+            "fw_text": 600,
+            "button_transform": "uppercase",
+            "br_button": "2px 2px",
+            "mg": "0px 0px 0px 0px",
+            "pd": "11px 40px 11px 40px",
+            "icon_button": "",
+            "ls_text": 0,
+            "mobile_font_text": 14,
+            "mobile_mg_bottom": 0,
+            "mobile_mg": "0px 0px 0px 0px",
+            "mobile_pd": "10px 25px 10px 25px"
+          }
+        }
+      },
+      "block_order": [
+        "1636185893296a5405-0",
+        "640b336f-397e-4c95-a1f9-e45e233ea8de",
+        "a7184b49-7d2d-4a43-9731-333f1757ef03",
+        "dc7fec51-dbf8-4d7d-9f30-3a4d9e319aa8",
+        "96331a5b-50ef-4518-be98-148e01904abd",
+        "f7908a86-081a-48d0-bb06-a87b152760a2"
+      ],
+      "settings": {
+        "use_custom_h": "1",
+        "h_des": "650px",
+        "h_tb": "500px",
+        "h_mb": "350px",
+        "full_width": false,
+        "cl_bg": "#fff",
+        "mg": "",
+        "pd": "",
+        "mg_mb": "",
+        "pd_mb": ""
+      }
+    },
+    "custom-section": {
+      "type": "custom-section",
+      "blocks": {
+        "e2e13c32-b2c1-442f-b52e-ece3a2d29569": {
+          "type": "image",
+          "settings": {
+            "cl": "6",
+            "cl_tb": "6",
+            "cl_mb": "12"
+          }
+        },
+        "82ae5f3b-136b-4cfa-bfb0-a6e19c20c797": {
+          "type": "text",
+          "settings": {
+            "title": "we create trends",
+            "sub_title": "endless passion",
+            "text": "<p>It is accompanied by a case that can contain up to three different diffusers and can be used for dry storage of loose tea.<\/p><p>The perfect way to enjoy brewing tea on low hanging fruit to identify. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis. <\/p>",
+            "btn_text": "Discover now",
+            "link_btn": "#",
+            "open_link": "_blank",
+            "cl": "6",
+            "cl_tb": "6",
+            "cl_mb": "12"
+          }
+        }
+      },
+      "block_order": [
+        "e2e13c32-b2c1-442f-b52e-ece3a2d29569",
+        "82ae5f3b-136b-4cfa-bfb0-a6e19c20c797"
+      ],
+      "settings": {
+        "layout": "container",
+        "cl_bg": "#ffffff",
+        "mg": "",
+        "pd": "100px,0,100px,0",
+        "mg_mb": "",
+        "pd_mb": "50px,0,50px,0"
+      }
+    },
+    "1636304251b7c809f7": {
+      "type": "testimonials-section-home1",
+      "blocks": {
+        "1636304251b7c809f7-0": {
+          "type": "quote",
+          "settings": {
+            "content": "<p>“ Congue condimentum et non eu arcu sociis aenean vivamus quisque. Porta purus urna. <\/p><p>Massa id blandit enim cursus ante. Nec consectetuer imperdiet ipsum. Magnis rutrum tristique rutrum <\/p><p>lobortis nulla nec hendrerit convallis suspendisse...”<\/p>",
+            "title": "algistino",
+            "address": "Chief Operating Officer",
+            "rating": 5
+          }
+        },
+        "1636304251b7c809f7-1": {
+          "type": "quote",
+          "settings": {
+            "content": "<p>“ Congue condimentum et non eu arcu sociis aenean vivamus quisque. Porta purus urna. <\/p><p>Massa id blandit enim cursus ante. Nec consectetuer imperdiet ipsum. Magnis rutrum tristique rutrum<\/p><p> lobortis nulla nec hendrerit convallis suspendisse...”<\/p>",
+            "title": "algistino",
+            "address": "Chief Operating Officer",
+            "rating": 5
+          }
+        },
+        "1636304251b7c809f7-2": {
+          "type": "quote",
+          "settings": {
+            "content": "<p>“ Congue condimentum et non eu arcu sociis aenean vivamus quisque. Porta purus urna. <\/p><p>Massa id blandit enim cursus ante. Nec consectetuer imperdiet ipsum. Magnis rutrum tristique rutrum <\/p><p>lobortis nulla nec hendrerit convallis suspendisse...”<\/p>",
+            "title": "algistino",
+            "address": "Chief Operating Officer",
+            "rating": 5
+          }
+        },
+        "1636304251b7c809f7-3": {
+          "type": "quote",
+          "settings": {
+            "content": "<p>“ Congue condimentum et non eu arcu sociis aenean vivamus quisque. Porta purus urna. <\/p><p>Massa id blandit enim cursus ante. Nec consectetuer imperdiet ipsum. Magnis rutrum tristique rutrum <\/p><p>lobortis nulla nec hendrerit convallis suspendisse...”<\/p>",
+            "title": "algistino",
+            "address": "Chief Operating Officer",
+            "rating": 5
+          }
+        }
+      },
+      "block_order": [
+        "1636304251b7c809f7-0",
+        "1636304251b7c809f7-1",
+        "1636304251b7c809f7-2",
+        "1636304251b7c809f7-3"
+      ],
+      "settings": {
+        "hidden": false,
+        "layout": "container",
+        "width_c": 100,
+        "style": "style1",
+        "title": "",
+        "sub_title": "",
+        "content": "",
+        "use-slider": true,
+        "slides-To-Scroll": 1,
+        "visible": 5,
+        "widescreen": 4,
+        "desktop": 4,
+        "laptop": 3,
+        "notebook": 3,
+        "tablet": 3,
+        "landscape": 2,
+        "portrait": 2,
+        "mobile": 1,
+        "rows": 1,
+        "autoplay": true,
+        "speed": "300",
+        "autoplay-Speed": "3000",
+        "arrows": true,
+        "fade": false,
+        "center-Mode": false,
+        "adaptive-Height": false,
+        "dots": false,
+        "infinite": false,
+        "padding": 10,
+        "vertical": false,
+        "cl_bg": "#f6f7f9",
+        "mg": "",
+        "pd": "100px,0,100px,0",
+        "mg_mb": "",
+        "pd_mb": "50px,0,50px,0"
+      }
+    }
+  },
+  "order": [
+    "1636185893296a5405",
+    "custom-section",
+    "1636304251b7c809f7"
+  ]
+}

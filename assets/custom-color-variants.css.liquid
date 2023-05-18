@@ -1,0 +1,525 @@
+{%- assign productionMode = settings.production_mode -%}
+{%- capture styleCss -%}
+{%- capture style -%}
+{%- if settings.custom_color_variants contains '|' -%}
+{%- assign custom_color_variants = settings.custom_color_variants | split: '|' -%}
+{%- else -%}
+{%- assign custom_color_variants = settings.custom_color_variants | split: ',' -%}
+{%- endif -%}
+{%- for custom_color in custom_color_variants  -%}
+      {%- assign color = custom_color | remove: ' ' | split: ':'  -%}
+      .{{color[0]}},
+      .standard-color-{{color[0]}}{
+        background-color:{{color[1]}} !important;
+      }
+{% endfor %}
+  
+{%- assign name_material_1 = settings.name_material_1 | remove: ' ' -%}
+{% if name_material_1 != blank %}
+    .{{ name_material_1 }}{
+      background-image:url("{{ settings.img_material_1 | img_url: '60x60'}}") !important;
+      display: block !important;
+      text-indent: -999em;
+      width: 50px !important;
+      height: 50px !important;
+    }
+{% endif %}
+{%- assign name_material_2 = settings.name_material_2 | remove: ' ' -%}
+{% if name_material_2 != blank %}
+    .{{ name_material_2 }}{
+      background-image:url("{{ settings.img_material_2 | img_url: '60x60'}}") !important;
+      display: block !important;
+      text-indent: -999em;
+      width: 50px !important;
+      height: 50px !important;
+    }
+{% endif %}
+{%- assign name_material_3 = settings.name_material_3 | remove: ' ' -%}
+{% if name_material_3 != blank %}
+    .{{ name_material_3 }}{
+      background-image:url("{{ settings.img_material_3 | img_url: '60x60'}}") !important;
+      display: block !important;
+      text-indent: -999em;
+      width: 50px !important;
+      height: 50px !important;
+    }
+{% endif %}
+{%- assign name_material_4 = settings.name_material_4 | remove: ' ' -%}
+{% if name_material_4 != blank %}
+    .{{ name_material_4 }}{
+      background-image:url("{{ settings.img_material_4 | img_url: '60x60'}}") !important;
+      display: block !important;
+      text-indent: -999em;
+      width: 50px !important;
+      height: 50px !important;
+    }
+{% endif %}
+{%- assign name_material_5 = settings.name_material_5 | remove: ' ' -%}
+{% if name_material_5 != blank %}
+    .{{ name_material_5 }}{
+      background-image:url("{{ settings.img_material_5 | img_url: '60x60'}}") !important;
+      display: block !important;
+      text-indent: -999em;
+      width: 50px !important;
+      height: 50px !important;
+    }
+{% endif %}    
+{%- assign name_material_6 = settings.name_material_6 | remove: ' ' -%}
+{% if name_material_6 != blank %}
+    .{{ name_material_6 }}{
+      background-image:url("{{ settings.img_material_6 | img_url: '60x60'}}") !important;
+      display: block !important;
+      text-indent: -999em;
+      width: 50px !important;
+      height: 50px !important;
+    }
+{% endif %}
+{%- assign name_material_7 = settings.name_material_7 | remove: ' ' -%}
+{% if name_material_7 != blank %}
+    .{{ name_material_7 }}{
+      background-image:url("{{ settings.img_material_7 | img_url: '60x60'}}") !important;
+      display: block !important;
+      text-indent: -999em;
+      width: 50px !important;
+      height: 50px !important;
+    }
+{% endif %}
+{%- assign name_material_8 = settings.name_material_8 | remove: ' ' -%}
+{% if name_material_8 != blank %} 
+    .{{ name_material_8 }}{
+      background-image:url("{{ settings.img_material_8 | img_url: '60x60'}}") !important;
+      display: block !important;
+      text-indent: -999em;
+      width: 50px !important;
+      height: 50px !important;
+    }
+{% endif %}
+{%- assign name_material_9 = settings.name_material_9 | remove: ' ' -%}
+{% if name_material_9 != blank %}
+    .{{ name_material_9 }}{
+      background-image:url("{{ settings.img_material_9 | img_url: '60x60'}}") !important;
+      display: block !important;
+      text-indent: -999em;
+      width: 50px !important;
+      height: 50px !important;
+    }
+{% endif %}
+{%- assign name_material_10 = settings.name_material_10 | remove: ' ' -%}
+{% if name_material_10 != blank %}
+    .{{ name_material_10 }}{
+      background-image:url("{{ settings.img_material_10 | img_url: '60x60'}}") !important;
+      display: block !important;
+      text-indent: -999em;
+      width: 50px !important;
+      height: 50px !important;
+    }
+{% endif %}
+{%- assign name_material_11 = settings.name_material_11 | remove: ' ' -%}
+{% if name_material_11 != blank %}
+    .{{ name_material_11 }}{
+      background-image:url("{{ settings.img_material_11 | img_url: '60x60'}}") !important;
+      display: block !important;
+      text-indent: -999em;
+      width: 50px !important;
+      height: 50px !important;
+    }
+{% endif %}
+{%- assign name_material_12 = settings.name_material_12 | remove: ' ' -%}
+{% if name_material_12 != blank %}
+    .{{ name_material_12 }}{
+      background-image:url("{{ settings.img_material_12 | img_url: '60x60'}}") !important;
+      display: block !important;
+      text-indent: -999em;
+      width: 50px !important;
+      height: 50px !important;
+    }
+{% endif %}
+{%- assign name_material_13 = settings.name_material_13 | remove: ' ' -%}
+{% if name_material_13 != blank %}
+    .{{ name_material_13 }}{
+      background-image:url("{{ settings.img_material_13 | img_url: '60x60'}}") !important;
+      display: block !important;
+      text-indent: -999em;
+      width: 50px !important;
+      height: 50px !important;
+    }
+{% endif %}
+{%- assign name_material_14 = settings.name_material_14 | remove: ' ' -%}
+{% if name_material_14 != blank %}
+    .{{ name_material_14 }}{
+      background-image:url("{{ settings.img_material_14 | img_url: '60x60'}}") !important;
+      display: block !important;
+      text-indent: -999em;
+      width: 50px !important;
+      height: 50px !important;
+    }
+{% endif %}
+{%- assign name_material_15 = settings.name_material_15 | remove: ' ' -%}
+{% if name_material_15 != blank %}
+    .{{ name_material_15 }}{
+      background-image:url("{{ settings.img_material_15 | img_url: '60x60'}}") !important;
+      display: block !important;
+      text-indent: -999em;
+      width: 50px !important;
+      height: 50px !important;
+    }
+{% endif %}    
+{%- assign name_material_16 = settings.name_material_16 | remove: ' ' -%}
+{% if name_material_16 != blank %}
+    .{{ name_material_16 }}{
+      background-image:url("{{ settings.img_material_16 | img_url: '60x60'}}") !important;
+      display: block !important;
+      text-indent: -999em;
+      width: 50px !important;
+      height: 50px !important;
+    }
+{% endif %}
+{%- assign name_material_17 = settings.name_material_17 | remove: ' ' -%}
+{% if name_material_17 != blank %}
+    .{{ name_material_17 }}{
+      background-image:url("{{ settings.img_material_17 | img_url: '60x60'}}") !important;
+      display: block !important;
+      text-indent: -999em;
+      width: 50px !important;
+      height: 50px !important;
+    }
+{% endif %}
+{%- assign name_material_18 = settings.name_material_18 | remove: ' ' -%}
+{% if name_material_18 != blank %} 
+    .{{ name_material_18 }}{
+      background-image:url("{{ settings.img_material_18 | img_url: '60x60'}}") !important;
+      display: block !important;
+      text-indent: -999em;
+      width: 50px !important;
+      height: 50px !important;
+    }
+{% endif %}
+{%- assign name_material_19 = settings.name_material_19 | remove: ' ' -%}
+{% if name_material_19 != blank %}
+    .{{ name_material_19 }}{
+      background-image:url("{{ settings.img_material_19 | img_url: '60x60'}}") !important;
+      display: block !important;
+      text-indent: -999em;
+      width: 50px !important;
+      height: 50px !important;
+    }
+{% endif %}
+{%- assign name_material_20 = settings.name_material_20 | remove: ' ' -%}
+{% if name_material_20 != blank %}
+    .{{ name_material_20 }}{
+      background-image:url("{{ settings.img_material_20 | img_url: '60x60'}}") !important;
+      display: block !important;
+      text-indent: -999em;
+      width: 50px !important;
+      height: 50px !important;
+    }
+{% endif %}
+{%- assign name_material_21 = settings.name_material_21 | remove: ' ' -%}
+{% if name_material_21 != blank %}
+    .{{ name_material_21 }}{
+      background-image:url("{{ settings.img_material_21 | img_url: '60x60'}}") !important;
+      display: block !important;
+      text-indent: -999em;
+      width: 50px !important;
+      height: 50px !important;
+    }
+{% endif %}
+{%- assign name_material_22 = settings.name_material_22 | remove: ' ' -%}
+{% if name_material_22 != blank %}
+    .{{ name_material_22 }}{
+      background-image:url("{{ settings.img_material_22 | img_url: '60x60'}}") !important;
+      display: block !important;
+      text-indent: -999em;
+      width: 50px !important;
+      height: 50px !important;
+    }
+{% endif %}
+{%- assign name_material_23 = settings.name_material_23 | remove: ' ' -%}
+{% if name_material_23 != blank %}
+    .{{ name_material_23 }}{
+      background-image:url("{{ settings.img_material_23 | img_url: '60x60'}}") !important;
+      display: block !important;
+      text-indent: -999em;
+      width: 50px !important;
+      height: 50px !important;
+    }
+{% endif %}
+{%- assign name_material_24 = settings.name_material_24 | remove: ' ' -%}
+{% if name_material_24 != blank %}
+    .{{ name_material_24 }}{
+      background-image:url("{{ settings.img_material_24 | img_url: '60x60'}}") !important;
+      display: block !important;
+      text-indent: -999em;
+      width: 50px !important;
+      height: 50px !important;
+    }
+{% endif %}
+{%- assign name_material_25 = settings.name_material_25 | remove: ' ' -%}
+{% if name_material_25 != blank %}
+    .{{ name_material_25 }}{
+      background-image:url("{{ settings.img_material_25 | img_url: '60x60'}}") !important;
+      display: block !important;
+      text-indent: -999em;
+      width: 50px !important;
+      height: 50px !important;
+    }
+{% endif %}    
+{%- assign name_material_26 = settings.name_material_26 | remove: ' ' -%}
+{% if name_material_26 != blank %}
+    .{{ name_material_26 }}{
+      background-image:url("{{ settings.img_material_26 | img_url: '60x60'}}") !important;
+      display: block !important;
+      text-indent: -999em;
+      width: 50px !important;
+      height: 50px !important;
+    }
+{% endif %}
+{%- assign name_material_27 = settings.name_material_27 | remove: ' ' -%}
+{% if name_material_27 != blank %}
+    .{{ name_material_27 }}{
+      background-image:url("{{ settings.img_material_27 | img_url: '60x60'}}") !important;
+      display: block !important;
+      text-indent: -999em;
+      width: 50px !important;
+      height: 50px !important;
+    }
+{% endif %}
+{%- assign name_material_28 = settings.name_material_28 | remove: ' ' -%}
+{% if name_material_28 != blank %} 
+    .{{ name_material_8 }}{
+      background-image:url("{{ settings.img_material_28 | img_url: '60x60'}}") !important;
+      display: block !important;
+      text-indent: -999em;
+      width: 50px !important;
+      height: 50px !important;
+    }
+{% endif %}
+{%- assign name_material_9 = settings.name_material_29 | remove: ' ' -%}
+{% if name_material_29 != blank %}
+    .{{ name_material_29 }}{
+      background-image:url("{{ settings.img_material_29 | img_url: '60x60'}}") !important;
+      display: block !important;
+      text-indent: -999em;
+      width: 50px !important;
+      height: 50px !important;
+    }
+{% endif %}
+{%- assign name_material_30 = settings.name_material_30 | remove: ' ' -%}
+{% if name_material_30 != blank %}
+    .{{ name_material_30 }}{
+      background-image:url("{{ settings.img_material_30 | img_url: '60x60'}}") !important;
+      display: block !important;
+      text-indent: -999em;
+      width: 50px !important;
+      height: 50px !important;
+    }
+{% endif %}
+{%- assign name_material_31 = settings.name_material_31 | remove: ' ' -%}
+{% if name_material_31 != blank %}
+    .{{ name_material_31 }}{
+      background-image:url("{{ settings.img_material_31 | img_url: '60x60'}}") !important;
+      display: block !important;
+      text-indent: -999em;
+      width: 50px !important;
+      height: 50px !important;
+    }
+{% endif %}
+{%- assign name_material_32 = settings.name_material_32 | remove: ' ' -%}
+{% if name_material_32 != blank %}
+    .{{ name_material_32 }}{
+      background-image:url("{{ settings.img_material_32 | img_url: '60x60'}}") !important;
+      display: block !important;
+      text-indent: -999em;
+      width: 50px !important;
+      height: 50px !important;
+    }
+{% endif %}
+{%- assign name_material_33 = settings.name_material_33 | remove: ' ' -%}
+{% if name_material_33 != blank %}
+    .{{ name_material_33 }}{
+      background-image:url("{{ settings.img_material_33 | img_url: '60x60'}}") !important;
+      display: block !important;
+      text-indent: -999em;
+      width: 50px !important;
+      height: 50px !important;
+    }
+{% endif %}
+{%- assign name_material_34 = settings.name_material_34 | remove: ' ' -%}
+{% if name_material_34 != blank %}
+    .{{ name_material_4 }}{
+      background-image:url("{{ settings.img_material_34 | img_url: '60x60'}}") !important;
+      display: block !important;
+      text-indent: -999em;
+      width: 50px !important;
+      height: 50px !important;
+    }
+{% endif %}
+{%- assign name_material_35 = settings.name_material_35 | remove: ' ' -%}
+{% if name_material_35 != blank %}
+    .{{ name_material_35 }}{
+      background-image:url("{{ settings.img_material_35 | img_url: '60x60'}}") !important;
+      display: block !important;
+      text-indent: -999em;
+      width: 50px !important;
+      height: 50px !important;
+    }
+{% endif %}    
+{%- assign name_material_36 = settings.name_material_36 | remove: ' ' -%}
+{% if name_material_36 != blank %}
+    .{{ name_material_36 }}{
+      background-image:url("{{ settings.img_material_36 | img_url: '60x60'}}") !important;
+      display: block !important;
+      text-indent: -999em;
+      width: 50px !important;
+      height: 50px !important;
+    }
+{% endif %}
+{%- assign name_material_37 = settings.name_material_37 | remove: ' ' -%}
+{% if name_material_37 != blank %}
+    .{{ name_material_37 }}{
+      background-image:url("{{ settings.img_material_37 | img_url: '60x60'}}") !important;
+      display: block !important;
+      text-indent: -999em;
+      width: 50px !important;
+      height: 50px !important;
+    }
+{% endif %}
+{%- assign name_material_38 = settings.name_material_38 | remove: ' ' -%}
+{% if name_material_38 != blank %} 
+    .{{ name_material_38 }}{
+      background-image:url("{{ settings.img_material_38 | img_url: '60x60'}}") !important;
+      display: block !important;
+      text-indent: -999em;
+      width: 50px !important;
+      height: 50px !important;
+    }
+{% endif %}
+{%- assign name_material_39 = settings.name_material_39 | remove: ' ' -%}
+{% if name_material_39 != blank %}
+    .{{ name_material_39 }}{
+      background-image:url("{{ settings.img_material_39 | img_url: '60x60'}}") !important;
+      display: block !important;
+      text-indent: -999em;
+      width: 50px !important;
+      height: 50px !important;
+    }
+{% endif %}
+{%- assign name_material_40 = settings.name_material_40 | remove: ' ' -%}
+{% if name_material_40 != blank %}
+    .{{ name_material_40 }}{
+      background-image:url("{{ settings.img_material_40 | img_url: '60x60'}}") !important;
+      display: block !important;
+      text-indent: -999em;
+      width: 50px !important;
+      height: 50px !important;
+    }
+{% endif %}
+{%- assign name_material_41 = settings.name_material_41 | remove: ' ' -%}
+{% if name_material_41 != blank %}
+    .{{ name_material_41 }}{
+      background-image:url("{{ settings.img_material_41 | img_url: '60x60'}}") !important;
+      display: block !important;
+      text-indent: -999em;
+      width: 50px !important;
+      height: 50px !important;
+    }
+{% endif %}
+{%- assign name_material_42 = settings.name_material_42 | remove: ' ' -%}
+{% if name_material_42 != blank %}
+    .{{ name_material_42 }}{
+      background-image:url("{{ settings.img_material_42 | img_url: '60x60'}}") !important;
+      display: block !important;
+      text-indent: -999em;
+      width: 50px !important;
+      height: 50px !important;
+    }
+{% endif %}
+{%- assign name_material_43 = settings.name_material_43 | remove: ' ' -%}
+{% if name_material_43 != blank %}
+    .{{ name_material_43 }}{
+      background-image:url("{{ settings.img_material_43 | img_url: '60x60'}}") !important;
+      display: block !important;
+      text-indent: -999em;
+      width: 50px !important;
+      height: 50px !important;
+    }
+{% endif %}
+{%- assign name_material_44 = settings.name_material_44 | remove: ' ' -%}
+{% if name_material_44 != blank %}
+    .{{ name_material_44 }}{
+      background-image:url("{{ settings.img_material_44 | img_url: '60x60'}}") !important;
+      display: block !important;
+      text-indent: -999em;
+      width: 50px !important;
+      height: 50px !important;
+    }
+{% endif %}
+{%- assign name_material_45 = settings.name_material_45 | remove: ' ' -%}
+{% if name_material_45 != blank %}
+    .{{ name_material_5 }}{
+      background-image:url("{{ settings.img_material_45 | img_url: '60x60'}}") !important;
+      display: block !important;
+      text-indent: -999em;
+      width: 50px !important;
+      height: 50px !important;
+    }
+{% endif %}    
+{%- assign name_material_46 = settings.name_material_46 | remove: ' ' -%}
+{% if name_material_46 != blank %}
+    .{{ name_material_46 }}{
+      background-image:url("{{ settings.img_material_46 | img_url: '60x60'}}") !important;
+      display: block !important;
+      text-indent: -999em;
+      width: 50px !important;
+      height: 50px !important;
+    }
+{% endif %}
+{%- assign name_material_47 = settings.name_material_47 | remove: ' ' -%}
+{% if name_material_47 != blank %}
+    .{{ name_material_47 }}{
+      background-image:url("{{ settings.img_material_47 | img_url: '60x60'}}") !important;
+      display: block !important;
+      text-indent: -999em;
+      width: 50px !important;
+      height: 50px !important;
+    }
+{% endif %}
+{%- assign name_material_48 = settings.name_material_48 | remove: ' ' -%}
+{% if name_material_48 != blank %} 
+    .{{ name_material_48 }}{
+      background-image:url("{{ settings.img_material_48 | img_url: '60x60'}}") !important;
+      display: block !important;
+      text-indent: -999em;
+      width: 50px !important;
+      height: 50px !important;
+    } 
+{% endif %}
+{%- assign name_material_49 = settings.name_material_49 | remove: ' ' -%}
+{% if name_material_49 != blank %}
+    .{{ name_material_49 }}{
+      background-image:url("{{ settings.img_material_49 | img_url: '60x60'}}") !important;
+      display: block !important;
+      text-indent: -999em;
+      width: 50px !important;
+      height: 50px !important;
+    }
+{% endif %}
+{%- assign name_material_50 = settings.name_material_50 | remove: ' ' -%}
+{% if name_material_50 != blank %}
+    .{{ name_material_50 }}{
+      background-image:url("{{ settings.img_material_50 | img_url: '60x60'}}") !important;
+      display: block !important;
+      text-indent: -999em;
+      width: 50px !important; 
+      height: 50px !important;
+    }
+{% endif %}
+{%- endcapture -%}
+{{ style | strip_newlines | remove:" "}}
+{%- endcapture -%}
+{%- if productionMode -%}
+    {%- assign paragraphs = styleCss | newline_to_br | split: '<br />' -%}
+    {%- for paragraph in paragraphs %}{{- paragraph | strip -}}{% endfor -%}
+{%- else -%}
+    {{styleCss}}
+{%- endif -%}

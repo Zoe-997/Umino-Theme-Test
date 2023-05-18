@@ -1,0 +1,35 @@
+{
+  "sections": {
+    "breadcrumb": {
+      "type": "breadcrumb",
+      "settings": {
+        "show_title_page": true,
+        "h_position": "center",
+        "v_position": "middle",
+        "txt_align": "center",
+        "bg": "#f7f7f9",
+        "b_height": 200,
+        "mg_bottom": 0,
+        "mobile_bg": "#f5f5f5",
+        "mobile_ht": 100,
+        "mobile_mg_bottom": 0
+      }
+    },
+    "main": {
+      "type": "main-page",
+      "settings": {
+        "show_page": false,
+        "cl_bg": "#ffffff",
+        "pd_c": "",
+        "mg": "",
+        "pd": "80px,0,80px,0",
+        "mg_mb": "",
+        "pd_mb": "50px,0,50px,0"
+      }
+    }
+  },
+  "order": [
+    "breadcrumb",
+    "main"
+  ]
+}

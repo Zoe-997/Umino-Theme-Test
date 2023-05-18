@@ -1,0 +1,50 @@
+{%- liquid
+  assign collection = collections[block.settings.collection]
+  assign image = block.settings.image | default:collection.image
+  assign home_t = 'homepage.onboarding.collection_title' | t
+  assign ratio = image.aspect_ratio 
+-%}
+<div id="bk_{{block.id}}" class="laber_banner cat_grid_item cat_space_item cat_grid_item_{{for_i}} {{ccol}}" style="margin-bottom:{{ block.settings.mg_bottom }}px;" {{ block.shopify_attributes }} >
+  <div class="cat_grid_item__content">
+    <a href="{{ collection.url | default:'/admin/collections' }}" class="cat_grid_item__link">
+      {%- if image != blank -%}
+      	<div data-image-effect class="pr_lazy_img main-img lazyload laber_bg_lz " data-id="{{image.id}}" data-bgset="{{ image | img_url: '1x1' }}" data-parent-fit="width" data-wiis data-ratio="{{ratio}}" data-sizes="auto" style="padding-top:{{ 1 | divided_by: ratio | times: 100}}%;"></div>
+        {% if section.settings.show_btn %}
+        <span class="icon">
+          <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><defs><style>.cls-1{fill:none;}</style></defs><title></title><g data-name="Layer 2" id="Layer_2"><path d="M19,26a1,1,0,0,1-.71-.29,1,1,0,0,1,0-1.42L26.59,16l-8.3-8.29a1,1,0,0,1,1.42-1.42l9,9a1,1,0,0,1,0,1.42l-9,9A1,1,0,0,1,19,26Z"></path><path d="M28,17H4a1,1,0,0,1,0-2H28a1,1,0,0,1,0,2Z"></path></g><g id="frame"><rect class="cls-1" height="32" width="32"></rect></g></svg>          
+        </span> 
+        {% endif %}
+    {%- else -%}
+        <div class="pr_lazy_img main-img lazyload laber_bg_lz {{block.settings.img_align}}" data-bgset="{{cimg}}" data-parent-fit="width"  data-sizes="auto" style="padding-top:{{ ratio_demo }}%;"></div>
+      {%- endif -%}
+      
+    </a>
+    <div class="cat_grid_item__wrapper text_{{block.settings.txt_align}} v_{{ block.settings.v_position }} h_{{ block.settings.h_position }}">
+      <div class="cat_grid_item__title style_{{ section.settings.style }}">
+        {% if block.settings.title %}
+          <a href="{{ collection.url | default:'/admin/collections' }}">
+              {{ block.settings.title | default:collection.title | default:home_t }}
+            {% if num_p_qty %}
+              {% if collection != blank %}
+                <span class="cat_grid_item__count ">
+                  {{collection.all_products_count}} 
+                  {% comment %}<span>
+                    {% if collection.all_products_count > 1 %} 
+                        {{'homepage.section.items' | t}} 
+                    {% else %}
+                        {{'homepage.section.item' | t}} 
+                    {% endif %}
+                  </span>
+                {% endcomment %}
+                </span>
+              {% endif %}
+            {% endif %}
+         </a>
+        {%endif%}
+      </div>
+    </div>
+  </div>
+</div>
+
+
+

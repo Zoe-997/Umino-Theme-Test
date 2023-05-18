@@ -1,0 +1,29 @@
+<!-- Created by Andy 21/10/2016 -->
+<!-- /snippets/tags-article.liquid -->
+{% comment %}
+
+  This snippet renders a list item with all tags listed out.
+  It is used in article.liquid and blog.liquid.
+
+  More information:
+   - index#article-tags
+   - http://docs.shopify.com/themes/liquid-variables/article
+
+{% endcomment %}
+
+{% assign _share_permalink = product.url |default:article.url |default:page.url %}
+{% assign _share_permalink2 = shop.url | append:_share_permalink %}
+{% assign permalinkURL = share_permalink |default:_share_permalink2 %}
+{% assign _share_title = share_title |default:product.title |default:article.title |default:page.title |default:shop.name %}
+{% assign permaTitle = _share_title | url_param_escape %}
+{% assign _share_image = share_image |default:product.featured_image |default:article.image |default:settings.share_image | default: page_image | default: settings.logo %}
+{% assign permaImage = _share_image | img_url: '1024x1024' %}
+
+<div class="title">
+  <div class="tag-area">
+    <span>{{ 'blogs.article.tags' | t }}: </span>
+    {% for tag in article.tags limit: limit %}
+    <a href="{{ blog.url }}/tagged/{{ tag | handle }}">{{ tag }}</a>{% comment %}{% unless forloop.last %},{% endunless %}{% endcomment %}
+    {% endfor %}  
+  </div>
+</div>

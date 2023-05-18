@@ -1,0 +1,207 @@
+<!--  Check and get menu --> 
+{% if settings.menu_nav_choose   %} 
+	{% assign handle_parent_menu = settings.menu_nav_choose %}
+{% else %}
+	{% assign handle_parent_menu = 'main-menu' %}
+{% endif %}
+
+{% capture check_type %}{{type}}{% endcapture %}
+{% assign menu_type = 'horizontal'  %}
+{% if check_type contains 'horizontal'  or check_type contains 'vertical' %}
+	{% assign menu_type = check_type %}
+{% endif %}
+<!-- /End check and get menu -->
+<!--  Check and get number lever -->
+{% if settings.menu_number_lever %}
+	{% assign menu_number_lever = settings.menu_number_lever | plus: 0 %}
+{% else %}
+	{% assign menu_number_lever = 2 %}
+{% endif %}
+<!--  /End check -->
+<!--  Check and get sticky menu-->
+{% if settings.menu_sticky  %}
+	{% assign  menu_sticky = true %}
+{% else %}
+	{% assign  menu_sticky = false %}
+{% endif %}
+
+<!--/End check -->
+{% if settings.menu_use_animation   %}
+    {% assign  menu_use_animation =true %}
+    {% assign menu_type_animation = settings.menu_type_animation %}
+    {% assign menu_animation= ' animated ' | append: settings.menu_type_animation  %}
+    {% else %}
+    {% assign menu_use_animation =false %}
+    {% assign menu_animation= ''  %}
+{% endif %} 
+
+
+{% assign limit_item_menu = 100 %}
+
+<!-- Main Nav Menu -->
+ 
+<ul class="cms-nav main-menu-vertical">
+  {% for link in linklists[handle_parent_menu].links limit: limit_item_menu %}  
+  	{% assign child_list_handle = link.title | handleize %}
+  	{% if linklists[child_list_handle].links != blank and  menu_number_lever >=2 %}
+  		{% assign type  = link.title |  split: '[' | last  | split: ']' | first | remove:" "|  strip_html %}
+  
+  		{% assign size_item_menu = linklists[child_list_handle].links.size %}
+  		{% if size_item_menu <= 5 %}
+  			{% assign width_wrapper_submenu = 230 %}
+  			{% assign class_submenu_item = '12' %}
+  		{% elsif size_item_menu <= 10%}
+  			{% assign width_wrapper_submenu = 430 %}
+  			{% assign class_submenu_item = '6' %}
+  		{% elsif size_item_menu <= 15%}
+  			{% assign width_wrapper_submenu = 630 %}
+  			{% assign class_submenu_item = '4' %}
+  		{% else %}
+  			{% assign width_wrapper_submenu = 830 %}
+  			{% assign class_submenu_item = '3' %}
+  		{% endif %}
+  		{% if type == "megamenu" %}
+  			<li class="menu-item-has-children {% if link.active %}active{% endif %}">
+              <a href="{{ link.url }}">
+                  {% if link.title contains '['%}                  	
+                  	{{ link.title |  split: '[' | first }}
+                  {%else %}
+                  	{{ link.title }}
+                  {% endif %}
+               </a>
+            
+              <div style="width:{{width_wrapper_submenu}}px;" class="sub-menu megamenu">
+                <div class="row">
+                  {% if linklists[child_list_handle].links.size <= 5 %}
+                  <div class="col-md-{{class_submenu_item}} col-sm-12">
+                    <div class="widget widget_nav_menu">                                 
+                      <ul>
+                        {% for child_link in linklists[child_list_handle].links %}
+                        {% assign grand_child_list_handle = child_link.title | handle %}
+                        <li class="{% if child_link.active %}active{% endif %}"><a href="{{ child_link.url }}">{{ child_link.title }}</a></li>
+                        {% endfor %}
+                      </ul>
+                    </div>                      
+                  </div>                                
+                  {% else %}
+
+                  	{% assign first_index = 1 %}
+                  	{% assign index = 1 %}                                	
+                    <div class="col-md-{{class_submenu_item}} col-sm-12">
+                      <div class="widget widget_nav_menu">                                 
+                        <ul>
+                          {% for child_link in linklists[child_list_handle].links %}
+                              {% if index != 6 %}                                			 	
+                                  {% assign grand_child_list_handle = child_link.title | handle %}
+                                  <li class="{% if child_link.active %}active{% endif %}">
+                                    <a href="{{ child_link.url }}">{{ child_link.title }}</a>
+                                  </li>
+                              {% else %}
+                                        </ul>
+                                      </div>
+                                    </div>
+
+                                  <div class="col-md-{{class_submenu_item}} col-sm-12" {% if first_index == 17 %} style="margin-top:20px"  {% endif %}>
+                                    <div class="widget widget_nav_menu">                                 
+                                      <ul>                    
+                                        {% assign index = 1 %}
+                                        {% assign grand_child_list_handle = child_link.title | handle %}
+                                        <li class="{% if child_link.active %}active{% endif %}">
+                                          <a href="{{ child_link.url }}">{{ child_link.title }}</a>
+                                        </li>
+                              {% endif %}                                         
+
+                              {% assign index = index | plus : 1 %}
+                              {% assign first_index = first_index | plus : 1 %}
+
+                            {% endfor %}
+                                      </ul>  
+                          </div>
+                  		</div>            
+                     {% endif %}
+                    
+                </div>
+              </div>
+          </li>
+  		{%else%}
+            	{% if type == "megamenu_image" %}
+  					<li class="menu-item-has-children {% if link.active %}active{% endif %}">
+                        <a href="{{ link.url }}">
+                          {% if link.title contains '['%}                  	
+                            {{ link.title |  split: '[' | first | remove:" "}}
+                          {%else %}
+                              {{ link.title | remove:" "}}
+                          {% endif %} 
+                      	</a>
+                      <div class="sub-menu megamenu" style="width:970px;">
+                        <div class="megamenu-inner">
+                          <div class="megamenu-content ">
+                            <div style="width:100%;">
+                              <div class="row">
+                                <div class="col-sm-8">
+                                  <div class="row">
+                                    {% for child_link in linklists[child_list_handle].links %}
+                                    {% assign grand_child_list_handle = child_link.title | handle %}
+                                    <div class="col-md-3 col-sm-6">
+                                      <div class="widget widget_nav_menu">
+                                        <h5 class="widget-title">{{child_link.title}}</h5>
+                                        <div class="widget-content">
+                                          <ul class="menu" style="padding:0px;">
+                                            {% for child_third_link in linklists[grand_child_list_handle].links %}
+                                            {% assign final_child_list_handle = child_third_link.title | handle %}                                                    
+                                            <li class="menu-item"><a href="{{child_third_link.url}}">{{child_third_link.title}}</a></li>                                                    
+                                            {% endfor %}
+                                          </ul>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    {% endfor %}
+                                  </div>
+                                </div>
+                                <div class="col-sm-4">
+                                  <div class="widget">
+                                    <figure>
+                                      <img src="{{ link.url |  split: '#' | last}}" alt="img">
+                                    </figure>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>  
+                          </div>
+                        </div>
+                      </div>
+                      
+  					</li>		
+  				{% else%} 
+                      <li class="menu-item-has-children {% if link.active %} active {% endif %}">
+                        <a href="{{ link.url }}">
+                          {% if link.title contains '['%}                  	
+                          {{ link.title |  split: '[' | first }}
+                          {%else %}
+                          {{ link.title }}
+                          {% endif %}                  
+                        </a>
+                        <ul class="sub-menu"> 
+                          {% for child_link in linklists[child_list_handle].links %}
+                          <li><a href="{{child_link.url}}">{{child_link.title}}</a></li>
+                          {% endfor %}
+                        </ul>                        
+                      </li>
+  				{% endif %}
+  		{% endif %}  
+  	{% else %}
+        <li class="{% if link.active %} active {% endif %}{% if forloop.first %} first {% endif %}{% if forloop.last %} last {% endif%}">
+          <a href="{{ link.url }}" > 
+            {% if link.title contains '['%}                  	
+            	{{ link.title |  split: '[' | first }}
+            {%else %}
+            	{{ link.title }}
+            {% endif %}
+          </a>
+        </li>
+  	{% endif %}
+  {% endfor %}
+</ul>
+<input type="hidden" id="sticky_menu" value="{{settings.menu_sticky}}" />
+<input type="hidden" id="enable_effect_menu" value="{{settings.menu_use_animation}}" />
+<input type="hidden" id="effect_menu" value="{{settings.menu_type_animation}}" />

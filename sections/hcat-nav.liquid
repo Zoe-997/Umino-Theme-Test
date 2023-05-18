@@ -1,0 +1,121 @@
+{%- assign se_blocks = section.blocks -%} 
+
+{%- if template.suffix == "hcat-nav" and template.name == 'search' -%}
+
+	[shopify]
+      {%- for block in se_blocks -%}
+      <li id="item_{{block.id}}" class="cat_menu">
+        <a class="cat_link" href="{{block.settings.url}}"{% if block.settings.cus_cl %} style="color: {{block.settings.cl}} !important"{% endif %}>
+          {%- render 'title_menu_cat',block:block -%}
+        </a>
+      </li>
+      {%- endfor -%}
+	[shopify]
+{%- else -%}
+  <div id="html_hcat_nav" class="">
+  	 {%- for block in se_blocks -%}
+      <li class="item_{{block.id}}" class="cat_menu">
+        <a class="cat_link" href="{{block.settings.url}}"{% if block.settings.cus_cl %} style="color: {{block.settings.cl}} !important"{% endif %} {{ block.shopify_attributes }}>
+          {%- render 'title_menu_cat',block:block -%}
+        </a>
+      </li>
+    {%- endfor -%}
+  </div>
+{%- endif -%}
+
+{%- schema -%}
+  {
+    "name": "Header category",
+    "max_blocks": 40,   
+    "blocks": [
+      {
+        "type": "simple",
+        "name":"Item by category",
+        "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Heading",
+            "default": "Heading"
+          },
+          {
+            "type": "url",
+            "id": "url",
+            "label": "Link",
+            "default": "/"
+          },
+         {
+           "type": "select",
+           "id": "icons_op",
+           "options": [
+             {
+               "value": "0",
+               "label": "None"
+             },
+             {
+               "value": "1",
+               "label": "Image"
+             },
+             {
+               "value": "2",
+               "label": "Icon"
+             }
+           ],
+           "label": "== Show icons option:",
+           "default": "2"
+         },
+         {
+             "type": "image_picker",
+             "id": "image",
+             "label": "Image"
+         },
+         {
+            "id": "icon",
+            "type": "text",
+            "label": "Icon",
+            "default":"chair",
+            "info":"Ex:fa-camera-retro [Font awesome icons](https://fontawesome.com/icons?d=gallery&m=free)"
+         },
+          {
+            "type": "checkbox",
+            "id": "cus_cl",
+            "label": "Use cusom heading color?",
+            "default": false
+          },
+          {
+            "type":"color",
+            "id":"cl",
+            "default": "#ec0101",
+            "label":"Heading color"
+          },
+          {
+            "type":"text",
+            "id":"lb",
+            "label":"Label text"
+          },
+          {
+            "type":"color",
+            "id":"lb_cl",
+            "label":"Label color"
+          }
+        ]
+      }
+   ],
+    "default": {
+      "blocks": [
+        {
+          "type": "simple",
+          "settings": {
+            "title": "Heading 1","url":"#"
+          }
+        },
+        {
+          "type": "simple",
+          "settings": {
+            "title": "Heading 2","url":"#"
+          }
+        }
+      ]
+    }
+  }
+{% endschema %}

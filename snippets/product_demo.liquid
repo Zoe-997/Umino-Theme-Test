@@ -1,0 +1,38 @@
+{%- assign design_product = settings.design_product -%}
+{%- assign style_product = settings.content_style_product -%}
+<div class="product-item laber-product-item-{{design_product}}" >
+  <div class="product-collection" >
+    <div class="product-collection__image">
+      <div class="product-inner">
+        <div class="product-image">
+          <a class="db" href="{{ routes.root_url }}admin/products">
+            {% capture current %}{% cycle 1, 2, 3, 4, 5, 6 %}{% endcapture %}
+            {{ 'product-' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
+          </a>
+        </div>
+      </div>
+    </div>
+    
+    <div class="product-collection__content style_{{style_product}}">  
+
+      <div class="product-collection__title">
+        <h2><a class="cd" href="{{ routes.root_url }}admin/products">
+          {{ 'homepage.onboarding.product_title' | t }}</a>
+        </h2>
+      </div>
+      <div class="product-collection__reviews">
+        <div class="spr spr--text-hide">
+          <span class="spr-badge"><span class="spr-starrating spr-badge-starrating"><i class="spr-icon spr-icon-star" aria-hidden="true"></i><i class="spr-icon spr-icon-star" aria-hidden="true"></i><i class="spr-icon spr-icon-star" aria-hidden="true"></i><i class="spr-icon spr-icon-star" aria-hidden="true"></i><i class="spr-icon spr-icon-star" aria-hidden="true"></i></span><span class="spr-badge-caption">1 review</span>
+          </span>
+        </div>
+      </div>
+      <div class="frm-price-color">
+        <div class="product-collection__price ">
+          <span class="price price--sale" data-js-product-price="">
+            <span class="current">$56.00</span> <span class="compare">$19.00 </span>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

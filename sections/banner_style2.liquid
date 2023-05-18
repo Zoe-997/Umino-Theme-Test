@@ -1,0 +1,304 @@
+{% liquid
+  assign sid = section.id 
+  assign layout = section.settings.layout
+  assign se_blocks = section.blocks
+  assign se_size = se_blocks.size
+%}
+   
+{%- for i in (1..1) -%}
+{%- if section.settings.hidden %}{% break %}{% endif -%}
+<section id="laber_{{sid}}">       
+  <div class=" container {%if layout == 'full-width' %}{{layout}}{%endif%}">
+    {% if section.settings.title != blank or section.settings.sub_title!= blank %}
+    <div class="wrap_title col-lg-auto col-12">
+      <div class="wrap_inner_title">
+        {% if section.settings.title != blank %}
+        <h3 class="section-title">{{section.settings.title}}</h3>  
+        {% endif %}
+        {% if section.settings.sub_title!= blank %}
+        <span class="section-subtitle">{{section.settings.sub_title}}</span>
+        {% endif %}
+      </div>
+    </div> 
+    {% endif %} 
+    <div class="row laber-row">
+      {%- case se_size -%}
+			{%- when 1 -%}
+      			{%- render 'banner-item',block:se_blocks[0], cimg:'https://placehold.jp/100/f76b6a/fff/1080x818.png?text=1080x818',ratio_demo:'16.7939%' ,ccol:'laber-col col-sm-12',for_i:1 -%}
+			{%- when 2 -%}
+      			{%- render 'banner-item',block:se_blocks[0], cimg:'https://placehold.jp/100/f76b6a/fff/692x400.png?text=692x400',ratio_demo:'57.803' ,ccol:'laber-col col-md-6 col-sm-12',for_i:1 -%}
+      			{%- render 'banner-item',block:se_blocks[1,  cimg:'https://placehold.jp/100/f76b6a/fff/692x400.png?text=692x400',ratio_demo:'57.803' ,ccol:'laber-col col-md-6 col-sm-12',for_i:1 -%}	
+      		{%- when 3 -%}
+      			{%- render 'banner-item',block:se_blocks[0], cimg:'https://placehold.jp/50/aec7cb/aec7cb/642x397.png?text=642x397',ratio_demo:'61.838' ,ccol:'laber-col col-lg-4 col-md-4 col-sm-12',for_i:1 -%}
+      			{%- render 'banner-item',block:se_blocks[1], cimg:'https://placehold.jp/50/ebc7bb/ebc7bb/475x475.png?text=475x475',ratio_demo:'100' ,ccol:'laber-col col-lg-4 col-md-4 col-sm-12',for_i:2 -%}
+     			{%- render 'banner-item',block:se_blocks[2], cimg:'https://placehold.jp/50/e8dabf/e8dabf/475x475.png?text=475x475',ratio_demo:'100' ,ccol:'laber-col col-lg-4 col-md-4 col-sm-12',for_i:3 -%}
+      		{%- when 4 -%}
+      			<div class="laber-col col-md-6 col-sm-12">
+                  <div class="row laber-row">
+      				{%- render 'banner-item',block:se_blocks[0], cimg:'https://placehold.jp/30/27282a/fff/695x500.png?text=695x500',ratio_demo:'500' ,ccol:'laber-col col-sm-12',for_i:1 -%}
+                  </div>
+      			</div>
+      			<div class="laber-col col-md-6 col-sm-12">
+                  <div class="row laber-row">
+                    {%- render 'banner-item',block:se_blocks[1], cimg:'https://placehold.jp/30/e29b03/fff/695x240.png?text=695x240',ratio_demo:'240' ,ccol:'laber-col col-sm-12',for_i:2 -%}
+     			    {%- render 'banner-item',block:se_blocks[2], cimg:'https://placehold.jp/30/5db24a/fff/337x240.png?text=337x240',ratio_demo:'240' ,ccol:'laber-col col-md-6 col-sm-6',for_i:3 -%}
+      			    {%- render 'banner-item',block:se_blocks[3], cimg:'https://placehold.jp/30/27282a/fff/337x240.png?text=337x240',ratio_demo:'240' ,ccol:'laber-col col-md-6 col-sm-6',for_i:4 -%}
+                  </div>
+      			</div>
+      		{%- when 5 -%}
+      			<div class="laber-col col-md-8 col-sm-12">
+                  <div class="row laber-row">
+                    {%- render 'banner-item',block:se_blocks[0], cimg:'https://placehold.jp/100/f76b6a/fff/1880x820.png?text=930x500',ratio_demo:'53.763' ,ccol:'laber-col col-sm-12',for_i:1 -%}
+                    {%- render 'banner-item',block:se_blocks[1], cimg:'https://placehold.jp/100/f76b6a/fff/1880x820.png?text=450x185',ratio_demo:'41.111' ,ccol:'laber-col col-md-6 col-sm-12',for_i:1 -%}
+                    {%- render 'banner-item',block:se_blocks[2], cimg:'https://placehold.jp/100/f76b6a/fff/1880x820.png?text=450x185',ratio_demo:'41.111' ,ccol:'laber-col col-md-6 col-sm-12',for_i:1 -%}
+                  </div>
+                </div>
+      			<div class="laber-col col-md-4 col-sm-12">
+                  <div class="row laber-row">
+                    {%- render 'banner-item',block:se_blocks[3], cimg:'https://placehold.jp/100/f76b6a/fff/1880x820.png?text=450x185',ratio_demo:'41.111' ,ccol:'laber-col col-sm-12',for_i:1 -%}
+                    {%- render 'banner-item',block:se_blocks[4], cimg:'https://placehold.jp/100/f76b6a/fff/1880x820.png?text=450x500',ratio_demo:'111.111' ,ccol:'laber-col col-sm-12',for_i:1 -%}
+                  </div>
+      			</div>
+            {%- when 6-%}
+      			{%- render 'banner-item',block:se_blocks[0], cimg:'https://placehold.jp/100/f76b6a/fff/1880x820.png?text=1880x820',ratio_demo:'43.617' ,ccol:'laber-col col-md-4 col-sm-12',for_i:1 -%}
+      			{%- render 'banner-item',block:se_blocks[1], cimg:'https://placehold.jp/100/f76b6a/fff/1880x820.png?text=1880x820',ratio_demo:'43.617' ,ccol:'laber-col col-md-4 col-sm-12',for_i:1 -%}
+     			{%- render 'banner-item',block:se_blocks[2], cimg:'https://placehold.jp/100/f76b6a/fff/1880x820.png?text=1880x820',ratio_demo:'43.617' ,ccol:'laber-col col-md-4 col-sm-12',for_i:1 -%}
+      			{%- render 'banner-item',block:se_blocks[3], cimg:'https://placehold.jp/100/f76b6a/fff/1880x820.png?text=1880x820',ratio_demo:'43.617' ,ccol:'laber-col col-md-4 col-sm-12',for_i:1 -%}
+     			{%- render 'banner-item',block:se_blocks[4], cimg:'https://placehold.jp/100/f76b6a/fff/1880x820.png?text=1880x820',ratio_demo:'43.617' ,ccol:'laber-col col-md-4 col-sm-12',for_i:1 -%}
+     			{%- render 'banner-item',block:se_blocks[5], cimg:'https://placehold.jp/100/f76b6a/fff/1880x820.png?text=1880x820',ratio_demo:'43.617' ,ccol:'laber-col col-md-4 col-sm-12',for_i:1 -%}
+     {%- endcase -%}
+      
+    </div>    
+  </div>
+</section>
+{%- render 'section_style' -%}
+{%- endfor -%}
+
+
+{%- schema -%}
+  {
+    "name": "Banner images (style 2)",
+    "class": "laber_section cms_section type_banner_2 banner_style2 zoom_img",	
+    "max_blocks": 3,
+    "settings": [
+      {
+      "type": "checkbox",
+      "id": "hidden",
+      "label": "Hidden Section?",
+      "default": false
+      },
+	  {
+        "type": "header",
+        "content": "== General Settings"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading of section",
+		"default":"What ingredients?"
+      },     
+      {
+        "type": "header",
+        "content": "== Design Options"
+      }, 
+	  
+      {
+      "type": "text",
+      "id": "border_radius",
+      "label": "Border radius",
+      "info":"border top, border right, border bottom, border left. If you not use to blank"
+      },
+      {
+        "type": "select",
+        "id": "layout",
+        "default": "container",
+        "options": [
+         {
+            "value": "container",
+            "label": "Container"
+         },
+         {
+            "value": "full-width",
+            "label": "Full Width"
+          }
+        ],
+        "label": "Layout"
+      },    
+      {
+        "type": "color",
+        "id": "cl_bg",
+        "label": "Background color",
+        "default": "#fff"
+      },
+      {
+        "type": "text",
+        "id": "mg",
+        "label": "Margin",
+        "info":"Margin top, margin right, margin bottom, margin left. If you not use to blank"
+      },
+      {
+        "type": "text",
+        "id": "pd",
+        "label": "Padding",
+        "info":"Padding top, padding right, padding bottom, padding left. If you not use to blank"
+      },
+     {
+        "type": "header",
+        "content": "== Design Mobile Options"
+      },
+      {
+        "type": "text",
+        "id": "mg_mb",
+        "label": "Margin"
+      },
+      {
+        "type": "text",
+        "id": "pd_mb",
+        "label": "Padding"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "banner",
+        "name": "Item",
+        "settings": [          
+          {
+            "type": "header",
+            "content": "== Image settings"
+          },
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image",
+            "info" :"Dimension: 150 x 150 (px)"
+          },	
+          {
+          "type": "url",
+          "id": "link_img",
+          "label": "Link image",
+          "info": "The image becomes clickable."
+          },
+          
+          {
+            "type": "header",
+            "content": "== Text settings"
+          },
+          {
+          "type": "checkbox",
+          "id": "hidden_content",
+          "label": "Hidden Content ?",
+          "default": false
+          }, 
+          {
+          "type": "select",
+          "id": "c_style",
+          "default": "1",
+          "options": [
+          {
+          "value": "1",
+          "label": "style 1"
+          },
+          {
+          "value": "2",
+          "label": "style 2"
+          }
+          
+          ],
+          "label": "Content style"
+          },
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Heading",
+            "default": "New Arrivals"
+          },
+          {
+          "type": "color",
+          "id": "cl_title",
+          "label": "Color title",
+          "default": "#fff"
+          },
+                    {
+          "type": "paragraph",
+          "content": "—————————————————"
+          },
+          {
+          "type": "textarea",
+          "id": "content",
+          "label": "Content",
+          "default": "Do not miss the current offers of us!",
+          "info":"Insert <br> to line break"
+          },	
+          {
+          "type": "color",
+          "id": "cl_content",
+          "label": "Color sub title",
+          "default": "#fff"
+          },
+          {
+          "type": "paragraph",
+          "content": "—————————————————"
+          },
+        {
+        "type": "text",
+        "id": "btn",
+        "label": "Buttom",
+        "default": "Shop Now",
+        "info":"If you don't use it, leave it blank"
+        }, 
+        {
+          "type": "color",
+          "id": "cl_btn",
+          "label": "Color Buttom",
+          "default": "#96AE00"
+          },
+         {
+          "type": "color",
+          "id": "bg_btn",
+          "label": "background Buttom",
+          "default": "#fff"
+          }, 
+          {
+          "type": "color",
+          "id": "cl_btn_hover",
+          "label": "Color Buttom (Hover)",
+          "default": "#fff"
+          },
+         {
+          "type": "color",
+          "id": "bg_btn_hover",
+          "label": "background Buttom (Hover)",
+          "default": "#2d2a6e"
+          },
+        {
+        "type": "header",
+        "content": "== Settings Position"
+        },    
+        {
+        "type": "text",
+        "id": "width_item",
+        "label": "Width",
+        "info": "Unit block width (%),If you don't use it, you can leave it blank"
+        },
+        {
+            "type": "range",
+            "id": "mg_bottom",
+            "label": "Margin bottom",
+            "default": 0,
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "unit": "px"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Banner images (Style 2)",
+        "category": "Images",
+		"blocks": [{"type": "banner"}]		
+      }
+    ]
+  }
+{% endschema %}

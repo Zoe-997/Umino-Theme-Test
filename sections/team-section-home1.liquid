@@ -1,0 +1,246 @@
+{% liquid
+  assign sid = section.id 
+%}
+   
+{%- for i in (1..1) -%}
+  
+<section style="margin:{{section.settings.mg_top}}px {{section.settings.mg_right}}px {{section.settings.mg_bottom}}px {{section.settings.mg_left}}px; background-color:{{section.settings.cl_bg}};">          
+  <div class="nt_se_{{sid}} {{section.settings.layout}}">    
+    {%- if section.settings.hidden %}{% break %}{% endif -%}
+
+    <div class="{% if section.settings.title != blank %} wrap_title {% endif %}">
+      {% if section.settings.sub_title != blank %}<span class="section-subtitle">{{section.settings.sub_title | downcase }}</span>{% endif %} 
+      {% if section.settings.title != blank %}<h3 class="section-title"><span > {{section.settings.title | downcase}}</span></h3>{% endif %} 
+    </div> 
+    <div class="section_content" data-js-team data-slick='{"slidesToShow": 3 , "slidesToScroll": 1, "infinite": true, "lazyLoad": "ondemand", "autoplay": false, "autoplaySpeed": 2000, "arrows": false, "dots": false}'>
+
+      {%- for block in section.blocks -%}
+      {% if block.type == 'team' %} 
+      <div class="item">
+        <div class="avatar">
+          {%- assign img_url = block.settings.avatar -%}
+          {% if img_url != blank %}
+          	<img title="{{img_url}}" class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="{{img_url | img_url: '217x'}}" width="217" alt="" style="height:auto;"/>
+          {% endif %}
+        </div>
+        <div class="info">
+          <h4>{{block.settings.name}}</h4>
+          <span>{{block.settings.job}}</span>
+          <p>{{block.settings.des}}</p>
+        </div>
+        <div class="social">
+          <ul>
+            {% if block.settings.enable_use_facebook %}
+            <li><a href="{{block.settings.facebook_link}}"><span class="fa fa-facebook"></span></a></li>
+            {% endif %}
+            {% if block.settings.enable_use_twitter %}
+            <li><a href="{{block.settings.twitter_link}}"><span class="fa fa-twitter"></span></a></li>                  
+            {% endif %}
+            {% if block.settings.enable_use_instagram %}
+            <li><a href="{{block.settings.instagram_link}}"><span class="fa fa-instagram"></span></a></li>
+            {% endif %}
+            {% if block.settings.enable_use_youtube %}
+            <li><a href="{{block.settings.youtube_link}}"><span class="fa fa-youtube"></span></a></li>
+            {% endif %}
+          </ul>
+        </div>
+      </div>
+      {% endif %}
+      {% endfor %}
+
+    </div>
+  </div>
+</section>
+{%- endfor -%}
+
+{%- schema -%}
+  {
+    "name": "Our team",
+    "class": "cms_section type_team",
+	"max_blocks": 20,	
+    "settings": [
+	  {
+        "type": "header",
+        "content": "== Design Options"
+      },
+      {
+        "type": "checkbox",
+        "id": "hidden",
+        "label": "Hidden Section?",
+        "default": false
+      },      
+      {
+        "type": "select",
+        "id": "layout",
+        "default": "container",
+        "options": [
+         {
+            "value": "container",
+            "label": "Container"
+         },
+         {
+            "value": "nt_full",
+            "label": "Full Width"
+          }
+        ],
+        "label": "Layout"
+      },     
+      {
+        "type": "color",
+        "id": "cl_bg",
+        "label": "Background color",
+        "default": "#fff"
+      },
+      {
+        "type": "range",
+        "id": "mg_top",
+        "label": "Margin top",
+        "default": 0,
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "mg_right",
+        "label": "Margin right",
+        "default": 0,
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "mg_bottom",
+        "label": "Margin bottom",
+        "default": 0,
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "mg_left",
+        "label": "Margin left",
+        "default": 0,
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "px"
+      },
+      {
+        "type": "header",
+        "content": "==General setting"
+      },     
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title of section",
+        "default": "Professional team"
+      },
+	  {
+        "type": "text",
+        "id": "sub_title",
+        "label": "Subtitle"
+      } 
+    ],
+	"blocks": [		
+		{
+          "type": "team",
+          "name": "Member",
+          "settings": [
+			  {
+                "type": "image_picker",
+                "id": "avatar",
+                "label": "Avatar",
+                "info":"Dimension: 217 x 230 (px)"
+              },   	
+              {
+                "type": "text",
+                "id": "name",
+                "label": "Name",
+                "default": "Danielle Welling"
+              },
+			  {
+                "type": "text",
+                "id": "job",
+                "label": "Job",
+                "default": "Nail master"
+              },
+			  {
+                "type": "textarea",
+                "id": "des",
+                "label": "Description",
+                "default": "A master's degree in librarianship from a program accredited"
+              },
+              {
+                "type": "header",
+                "content": "==Social setting"
+              },
+			  {
+                "type": "text",
+                "id": "facebook_link",
+                "label": "Facebook link",
+                "default": "#"
+              },
+			  {
+                "type": "checkbox",
+                "id": "enable_use_facebook",
+                "label": "Use facebook",
+                "default": true
+              },
+		      {
+                "type": "text",
+                "id": "twitter_link",
+                "label": "Twitter link",
+                "default": "#"
+              },
+			  {
+                "type": "checkbox",
+                "id": "enable_use_twitter",
+                "label": "Use twitter",
+                "default": true
+              },
+			  {
+                "type": "text",
+                "id": "instagram_link",
+                "label": "Instagram link",
+                "default": "#"
+              },
+			  {
+                "type": "checkbox",
+                "id": "enable_use_instagram",
+                "label": "Use instagram",
+                "default": true
+              },
+			  {
+                "type": "text",
+                "id": "youtube_link",
+                "label": "Youtube link",
+                "default": "#"
+              },
+			  {
+                "type": "checkbox",
+                "id": "enable_use_youtube",
+                "label": "Use youtube",
+                "default": true
+              }
+          ]
+    	}
+    ],
+    "presets": [
+      {
+        "name": "2. Our team",
+        "category": "Introduce",
+		"blocks": [
+          { "type": "team" },
+          { "type": "team" },
+          { "type": "team" }         
+        ]
+      }
+    ]
+  }
+{% endschema %}

@@ -1,0 +1,86 @@
+{%- liquid
+	layout none
+	assign collection = collections['frontpage']
+	assign limit = 5
+	assign search_pr_type = search.terms
+    assign check = true 
+    assign on_sale_txt = 'products.product.on_sale' | t
+    assign save_js = 'products.product.save_js' | t: saved_amount:'saved_amount' 
+    
+    assign show_all_categories = settings.show_all_categories
+    assign show_key_word = settings.show_key_word
+    assign title_key_word = settings.title_key_word
+    assign key_word = settings.key_word
+-%}
+<i class="close_popup_ajax icon-x"></i>
+<div class="container">  
+<div class="laber_mini_cart">
+	<div class="mini_cart_header flex fl_between al_center">
+      	<h3 class="widget-title">{{ 'general.search.title' | t }}</h3>
+  </div>
+	<div class="mini_cart_wrap">
+		<form action="{{ routes.search_url }}" method="post" class="search_header mini_search_frm pr js_frm_search" role="search">
+			<input type="hidden" name="type" value="product">
+			<input type="hidden" name="options[unavailable_products]" value="last">
+			<input type="hidden" name="options[prefix]" value="none">
+         {%if show_all_categories%}
+          <div class="frm_search_cat">
+            <select name="product_type">
+              <option value="*">{{ 'general.search.all_cat' | t }}</option>
+              {%- for product_type in shop.types -%}{%- if product_type == blank %}{% continue-%}{% endif -%}<option value="{{product_type}}"{% if search_pr_type == product_type %} selected="selected"{% endif %}>{{product_type}}</option>{%- endfor -%}
+            </select>
+          </div>
+         {%endif%}
+		  <div class="frm_search_input">
+			  <input class="col search_header__input js_iput_search" autocomplete="off" type="text" name="q" placeholder="{{ 'general.search.placeholder' | t }}">
+			  <button class="col-lg-auto search_header__submit js_btn_search{% if settings.ajax_search %} pe_none{% endif %}" type="submit">
+                <i class="icon-search"></i>
+            	</button>
+		  </div>
+		  <div class="ld_bar_search"></div>
+          <div class="skeleton_wrap skeleton_js d-none">
+            <div class="page-load circle-loadding"><span></span></div>
+          </div>
+		</form>
+      {%if show_key_word%}
+      <div class="popular-search-keywords">
+        <span class="title_key_word">{{title_key_word}}</span>
+        {%- if key_word != blank %}
+       	{% assign arr_key_word = key_word | split:',' -%}
+        
+        {% assign size_key_word = arr_key_word.size |plus:0 -%}
+        {% assign limit = size_key_word | minus: 1 -%}
+        {%- for i in (0..limit) -%}
+        	
+        	<a href="{{shop.url}}/search?type=product&options%5Bunavailable_products%5D=last&options%5Bprefix%5D=none&q={{arr_key_word[i]| replace: ' ', '+'}}">{{arr_key_word[i]}}</a>
+        {%- endfor -%} 
+        {%endif%}
+      {%endif%}  
+      </div>
+		<div class="search_header__prs hidden">
+			<span class="h_results dn">{{ 'general.search.suggest' | t }}</span>
+		</div> 
+      <div class="mini_cart_content fixcl-scroll widget">
+         <div class="fixcl-scroll-content product_list_widget">
+         	<div class="js_prs_search zoom_img">
+              <div class="row">
+                {%- if collection != blank  -%}
+              		
+                      {%- for product in collection.products limit:limit -%}
+                      	{%- render 'product_ajax_js',product:product,on_sale_txt:on_sale_txt,save_js:save_js -%}
+                      {%- endfor -%}
+              		 
+                    {%- if collection.all_products_count > limit -%}
+              	
+              			<a href="{{ routes.root_url }}collections/all" class="btn fwsb detail_link">{{ 'general.search.view_all' | t }}</a>
+              
+              		{%- endif -%}
+                {%- endif -%}
+              </div>
+           </div>
+         </div>
+      </div>
+	</div>
+</div>
+</div>
+

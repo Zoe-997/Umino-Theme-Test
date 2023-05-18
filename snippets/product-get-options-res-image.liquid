@@ -1,0 +1,12 @@
+{%- assign option_image = null -%}
+{%- for variant in product.variants -%}
+    {%- if value == variant.option1 or value == variant.option2 or value == variant.option3 -%}
+        {%- if variant.image != blank -%}
+            {%- assign option_image = variant.image -%}
+            {%- break -%}
+        {%- endif -%}
+    {%- endif -%}
+{%- endfor -%}
+{%- if option_image == null -%}
+    {%- assign option_image = image -%}
+{%- endif -%}

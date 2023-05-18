@@ -1,0 +1,323 @@
+{%- liquid
+  assign sett_equal = section.settings.use_eq_height
+  assign col = section.settings.col_pr
+  assign col_tb = section.settings.col_pr_tb
+  assign cl_mb = section.settings.col_pr_mb 
+  assign col_mb = '' | prepend:cl_mb
+  assign limit = section.settings.limit
+  assign use_pagination = section.settings.use_pagination
+  assign shop_des = section.settings.shop_des
+  assign sid = section.id -%}
+<div class="main-content shop-page main-content-blog">
+  <div class="container">
+    <div class="breadcrumbs">
+      <a href="{{ routes.root_url }}">Home</a> / <span class="current">{{ 'Blog'| link_to: blog.url}}</span>
+    </div>
+  </div>
+</div>
+{%- paginate blog.articles by limit -%}
+    <div class="container js_container_cat cat_{{section.settings.ptf_layout}}">
+         {%- if blog.all_tags.size > 0 -%}
+      		{%- assign blog_handle = blog.handle -%}            
+                 <div class="laber_filter_block portfolio_filter">
+                    <a class="{% unless current_tags %} selected{% endunless %}" href="{{ routes.root_url }}blogs/{{blog_handle}}">{{ 'blogs.portfolio.filter_all' | t }}</a>
+                    {%- for tag in blog.all_tags -%}
+                        {%- if current_tags contains tag -%}
+                              <a class="selected" href="{{ routes.root_url }}blogs/{{blog_handle}}">{{ tag }} <span class="blg_count">({{ tag.total_count }})</span></a>
+                        {%- else -%}
+                              <a href="{{ routes.root_url }}blogs/{{blog_handle}}/tagged/{{ tag | handleize }}">{{ tag }} <span class="blg_count">({{ tag.total_count }})</span></a>
+                        {%- endif -%}
+                    {%- endfor -%}
+                 </div>            
+         {%- endif -%}
+         <div class="nt_svg_loader"></div>
+         {%- if shop_des == 'masonry' -%}
+      		{%- assign rtl = settings.use_rtl -%}
+    	     <div class="row blog js_products_holder js_isotope" data-isotope='{ "itemSelector": ".portfolio-item", "layoutMode": "masonry","columnWidth":".grid-sizer","rtl": false }'>
+    	     	   <div class="col-lg-{{col}} col-md-{{col_tb}} col-{{col_mb}} grid-sizer"></div>
+               {%- for article in blog.articles -%}
+               	  {%- assign image = article.image -%}
+                  <div class="post-{{article.id}} portfolio-item col-lg-{{col}} col-md-{{col_tb}} col-{{col_mb}}">
+                    {%- if image -%}
+                      <a href="{{article.url}}" class="mask">
+                        <div class="lazyload pr_lazy_img" data-bgset="{{ image | img_url: '1x1' }}" data-ratio="{{image.aspect_ratio}}" data-sizes="auto"{% if sett_equal == false %} style="padding-top:{{ 1 | divided_by: image.aspect_ratio | times: 100}}%;"{% endif %}></div>
+                      </a>
+                      <div class="portfolio-title">
+                          <h4><a href="{{article.url}}">{{article.title}}</a></h4>
+                          {%- if article.tags.size > 0 -%}<span class="laber_filter_block">
+                            {%- for tag in article.tags limit:5 -%}
+                              <a class="cd chp" href="{{ blogs[blog.handle].url }}/tagged/{{ tag | handle }}">{{ tag }}</a>{% unless forloop.last %}, {% endunless %}
+                            {%- endfor -%}
+                          </span>{%- endif -%}
+                      </div>
+                    {%- else -%}                      
+                      <div class="portfolio-title">
+                          <h4><a href="{{article.url}}">{{article.title}}</a></h4>
+                          {%- if article.tags.size > 0 -%}
+                            <span class="laber_filter_block">
+                              {%- for tag in article.tags limit:5 -%}
+                              	<a href="{{ blogs[blog.handle].url }}/tagged/{{ tag | handle }}">{{ tag }}</a>{% unless forloop.last %}, {% endunless %}
+                              {%- endfor -%}
+                            </span>
+                          {%- endif -%}
+                      </div>
+                    {%- endif -%}
+                  </div>
+               {%- endfor -%}<!--split-->
+    	     </div>
+         {%- else -%}
+    	     <div class="blog nt_products_holder row">
+               {%- for article in blog.articles -%}{%- assign image = article.image -%}
+                  <div class="post-{{article.id}} portfolio-item col-lg-{{col}} col-md-{{col_tb}} col-{{col_mb}} mb__30">
+                    {%- if image -%}
+                      <a href="{{article.url}}" class="mask">
+                        <div class="lazyload pr_lazy_img" data-bgset="{{ image | img_url: '1x1' }}" data-ratio="{{image.aspect_ratio}}" data-sizes="auto"{% if sett_equal == false %} style="padding-top:{{ 1 | divided_by: image.aspect_ratio | times: 100}}%;"{% endif %}></div>
+                      </a>
+                      <div class="portfolio-title">
+                          <h4><a href="{{article.url}}">{{article.title}}</a></h4>
+                          {%- if article.tags.size > 0 -%}
+                            <span class="laber_filter_block">
+                              {%- for tag in article.tags limit:5 -%}
+                              	<a href="{{ blogs[blog.handle].url }}/tagged/{{ tag | handle }}">{{ tag }}</a>{% unless forloop.last %}, {% endunless %}
+                              {%- endfor -%}
+                            </span>
+                          {%- endif -%}
+                      </div>
+                    {%- else -%}                      
+                      <div class="portfolio-title">
+                          <h4><a href="{{article.url}}">{{article.title}}</a></h4>
+                          {%- if article.tags.size > 0 -%}
+                          <span class="laber_filter_block">
+                            {%- for tag in article.tags limit:5 -%}
+                            <a href="{{ blogs[blog.handle].url }}/tagged/{{ tag | handle }}">{{ tag }}</a>{% unless forloop.last %}, {% endunless %}
+                            {%- endfor -%}
+                          </span>
+                          {%- endif -%}
+                      </div>
+                    {%- endif -%}
+                  </div>
+               {%- endfor -%}
+    	     </div>
+    	 {%- endif -%}
+          {% if paginate.pages > 1 %}
+          <div class="row">     
+            {%comment%}{{ paginate | default_pagination | replace: '&laquo; Previous', '&larr;' | replace: 'Next &raquo;', '&rarr;' }}{%endcomment%}
+            <div class="pagination">
+              <ul class="list-page">
+                {% if paginate.previous.is_link %}
+                <li><a href="{{ paginate.previous.url }}#primary" class="nav-button page-numbers"> {{ paginate.previous.title }}</a></li>
+                {% endif %}
+
+                {% assign i=1 %}
+                {% for i in (1..paginate.pages) %}
+                {% if paginate.current_page == i %}                        
+                <li><a href="#" class="page-number current">{{i}}</a></li>
+                {% else %}
+                <li><a href="{{ routes.root_url }}blogs/{{blog.handle}}?page={{i}}#primary" class="page-number">{{i}}</a></li>
+                {%endif%}
+                {% endfor %}
+
+                {% if paginate.next.is_link %}
+                <li><a href="{{ paginate.next.url }}#primary" class="nav-button page-numbers">{{ paginate.next.title }}</a></li>
+                {% endif %}
+              </ul>
+            </div>
+          </div>
+          {% endif %}    
+
+        <style>
+          .cms_single_portfolio .portfolio-item {margin-bottom: {{section.settings.space}}px;}          
+          .portfolio-item:hover .mask:before {
+              top: 0;
+              height: 100%;
+              opacity: 1;
+          }
+          
+        </style> 
+    </div>
+
+{%- endpaginate -%}
+
+{%- schema -%}
+  {
+    "name": "Portfolio",
+    "class": "laber_section cms_single_portfolio type_isotope",
+    "settings": [
+      {
+        "type": "header",
+        "content": "== General Settings"
+      },
+      {
+        "type": "select",
+        "id": "ptf_layout",
+        "default": "default",
+        "options": [
+          {
+            "value": "default",
+            "label": "Default"
+          },
+          {
+            "value": "wide",
+            "label": "Wide (1600px)"
+          },
+          {
+            "value": "full",
+            "label": "full Width"
+          }
+        ],
+        "label": "Portfolio Width"
+      },
+      {
+        "type": "select",
+        "id": "shop_des",
+        "options": [
+          {
+            "value": "default",
+            "label": "Default"
+          },
+          {
+            "value": "masonry",
+            "label": "Masonry"
+          }
+        ],
+        "label": "Layout design",
+        "default": "masonry"
+      },
+      {
+        "type": "range",
+        "id": "limit",
+        "min": 1,
+        "max": 50,
+        "step": 1,
+        "label": "Portfolio per page",
+        "info": "Number of portfolio per page",
+        "default": 5
+      },
+      {
+        "type": "range",
+        "id": "space",
+        "min": 30,"max": 100,"step": 5,
+        "unit": "px",
+        "label": "Space between portfolio",
+        "default": 30
+      },     
+      {
+        "type": "checkbox",
+        "id": "btn_rd",
+        "label": "Button pagination radius?",
+        "default": true
+      },
+      {
+        "type": "select",
+        "id": "btn_style",
+        "label": "Button pagination style",
+        "default": "default",
+        "options": [
+          {
+            "value": "default",
+            "label": "Default"
+          },
+          {
+            "value": "primary",
+            "label": "Primary"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "col_pr",
+        "label": "Portfolio columns (desktop)",
+        "info": "How many portfolio you want to show per row",
+        "default": "4",
+        "options": [
+          {
+            "value": "12",
+            "label": "1"
+          },
+          {
+            "value": "6",
+            "label": "2"
+          },
+          {
+            "value": "4",
+            "label": "3"
+          },
+          {
+            "value": "3",
+            "label": "4"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "col_pr_tb",
+        "label": "Portfolio columns (tablet)",
+        "default": "6",
+        "options": [
+          {
+            "value": "12",
+            "label": "1"
+          },
+          {
+            "value": "6",
+            "label": "2"
+          },
+          {
+            "value": "4",
+            "label": "3"
+          },
+          {
+            "value": "3",
+            "label": "4"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "col_pr_mb",
+        "label": "Portfolio columns (mobile)",
+        "default": "12",
+        "options": [
+          {
+            "value": "12",
+            "label": "1"
+          },
+          {
+            "value": "6",
+            "label": "2"
+          }
+        ]
+      },
+      {
+        "type": "header",
+        "content": "== Design Image"
+      },
+      {
+        "type": "checkbox",
+        "id": "use_eq_height",
+        "label": "Use equal height images?",
+        "default": false
+      },
+             
+      
+      {
+        "type": "header",
+        "content": "== Manually blocks:"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "tag",
+        "name": "Tag",
+        "limit": 10,
+        "settings": [
+           {
+             "type": "text",
+             "id": "title",
+             "label": "Tag Name"
+           }
+         ]
+       }
+    ]
+  }
+{% endschema %}

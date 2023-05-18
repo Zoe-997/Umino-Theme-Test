@@ -1,0 +1,339 @@
+<!--Footer-->
+  <div class="footer" style="
+                             background-color:{{section.settings.bg}};
+                             {% if section.settings.image != blank %} 
+                             	background-image:url('{{section.settings.image | img_url:"1920x682"}}'); 
+                             	background-position: center bottom;
+    							background-repeat: no-repeat;
+                             {% endif %}">
+    <div class="main-footer">
+        <div class="container">
+        	<div class="row">
+          {%- for block in section.blocks -%}
+              
+                  {%- case block.type -%}
+              		{%- when 'mail' -%} 
+                  <div class="footer-iteam col-lg-{{block.settings.cl}} col-md-{{block.settings.cl_tb}} col-{{block.settings.cl_mb}}" {{ block.shopify_attributes }}> 
+                    <aside id="block_{{block.id}}" class="widget widget_nav_menu">
+                      {%- if block.settings.title != blank -%}
+                          <h3 class="widget-title">
+                            <span class="txt_title">{{block.settings.title}}</span>
+                            <span class="icon_mobile"><i class="laber-icon-down icon-chevron-down"></i>
+                            <i class="laber-icon-up icon-chevron-up"></i></span>
+                          </h3>
+                          {%- endif -%}
+                    <div class="textwidget widget_footer">
+                      <div class="labernewsletter">	
+                        <div class="newsletter-content">	
+                          
+                            <div class="footer-mail">                                   	
+                              {%- form 'customer', class:'newsletter-form-footer' -%}
+                              <input type="hidden" name="contact[tags]" value="newsletter">
+                              <div class="mc4wp-form-fields">
+                                <div class="signup-newsletter-form  {{class}}">
+                                  <div class="icon">
+                                  	<svg width="18" height="14" viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                      <path d="M9.10791 1H14.3079C15.8543 1 17.1079 2.2536 17.1079 3.8V10.2C17.1079 11.7464 15.8543 13 14.3079 13H3.90791C2.36151 13 1.10791 11.7464 1.10791 10.2V3.8C1.10791 2.2536 2.36151 1 3.90791 1H5.10791" stroke="#ACAFB7" stroke-width="1.5" stroke-linecap="round"/>
+                                      <path d="M5.10791 5L8.50791 7.55019C8.86348 7.81688 9.3524 7.81688 9.70797 7.55019L13.108 5" stroke="#ACAFB7" stroke-width="1.5" stroke-linecap="round"/>
+                                      </svg>
+                                  </div>
+                                  <div class="col_email"><input type="email" name="contact[email]" placeholder="{{ 'general.newsletter_form.email_placeholder' | t }}"  value="{% if customer %}{{ customer.email }}{% endif %}" class="{{class_ip}} input-text" required="required"></div>
+                                  <div class="col_btn">
+                                    <button type="submit" class="submit-btn truncate{% if settings.checkbox_mail %} mail_agree pr{% endif %}">
+                                      <span> 
+                                        {{ 'general.newsletter_form.submit' | t }} 
+                                      </span>
+                                    </button>
+                                  </div>
+                                </div>
+                                {%- if settings.checkbox_mail -%}{%- render 'conditions_mail',html:'p',margin:'mt__15',stt_link:settings.link_mail,sid:sid -%}{%- endif -%}
+                              </div>
+                              {% if block.settings.sub_title %}
+                                <div class="sub-email">
+                                  {{block.settings.sub_title}}
+                                </div>
+                                {% endif %}  
+                              <div class="mc4wp-response">
+                                {%- if form.posted_successfully? -%}<div class="shopify-message"><i class="las la-check"></i>{{ 'general.newsletter_form.confirmation' | t }}</div>{%- elsif form.errors -%}<div class="shopify-error"><i class="las la-exclamation-triangle"></i>{{ form.errors | default_errors }}</div>{%- endif -%}
+                              </div>
+                              {%- endform -%}								
+                            </div>
+
+                          </div>
+                          
+                      </div>	
+
+                    </aside>
+                    {%style%}
+                    .footer #block_{{block.id}} .widget_footer .signup-newsletter-form .submit-btn{
+                      color: {{block.settings.cl_btn}};
+                      background-color: {{block.settings.bg_btn}};
+                      border-color: {{block.settings.bg_btn}};
+                    }
+                    {%endstyle%}
+                    {%if block.settings.use_social%}
+                    <aside id="block_{{block.id}}" class="widget widget_nav_menu footer-social">
+                      {%- if block.settings.title_social != blank-%}
+                        <h3 class="widget-title"><span class="txt_title">{{block.settings.title_social}}</span>
+                       <span class="icon_mobile"><i class="laber-icon-down icon-chevron-down"></i>
+                              <i class="laber-icon-up icon-chevron-up"></i></span> 	
+                      </h3>
+                      {%endif%}
+                      
+                      <div class="textwidget widget_footer">
+                        {% assign type_social = block.settings.type_social | plus: 0 %}
+                        {%- if type_social == 1 -%}
+                          {% render 'social_link' %}
+                        {%- else -%}
+                          {% render 'social-sharing' %}
+                        {%- endif -%}
+                      </div>
+                    </aside>
+                    {% endif %}
+                  </div>
+                  
+                  {%- when 'collection' -%}
+                          
+                      {%- liquid
+                       assign on_sale_txt = 'products.product.on_sale' | t
+                       assign save_js = 'products.product.save_js' | t: saved_amount:'saved_amount' -%}
+                      <div class="footer-iteam col-lg-{{block.settings.cl}} col-md-{{block.settings.cl_tb}} col-{{block.settings.cl_mb}}" {{ block.shopify_attributes }}>    
+                      <aside id="block_{{block.id}}" class="widget widget_product_list">
+                        {%- if block.settings.title != blank -%}
+                        	<h3 class="widget-title"><span class="txt_title">{{block.settings.title}}</span>
+                        		<span class="icon_mobile"><i class="laber-icon-down icon-chevron-down"></i>
+                                      	<i class="laber-icon-up icon-chevron-up"></i></span>
+                            </h3>
+                        {%- endif -%}
+                         {%- if block.settings.collection == blank -%}
+                            <p>{{ 'homepage.onboarding.no_content' | t }}</p>
+                         {%- else -%}
+                         <div class="widget_footer product_list_widget">
+                           <div class="laberProducts-column">
+                            {%- for product in collections[block.settings.collection].products limit: block.settings.limit -%}
+                               {%- render 'pr_group_loop',product:product,c:collections[block.settings.collection],on_sale_txt:on_sale_txt,save_js:save_js -%}
+                            {%- endfor -%}
+                         </div>
+                        </div>
+                         {%- endif -%}
+                      </aside>
+                        </div>
+				  {%- when 'text' -%}
+                          <div class="footer-iteam col-lg-{{block.settings.cl}} col-md-{{block.settings.cl_tb}} col-{{block.settings.cl_mb}}" {{ block.shopify_attributes }}>
+                        <aside id="block_{{block.id}}" class="widget widget_text">
+                             {%- if block.settings.title != blank -%}
+                            	<h3 class="widget-title"><span class="txt_title">{{block.settings.title}}</span>
+                                  <span class="icon_mobile"><i class="laber-icon-down icon-chevron-down"></i>
+                                      	<i class="laber-icon-up icon-chevron-up"></i></span>
+                            	</h3>{%- endif -%}
+                             <div class="textwidget widget_footer">{{block.settings.content}}</div>
+                          </aside>
+						</div>
+                   {%- when 'contact_information' -%}
+                        <div class="footer-iteam contact_information col-lg-{{block.settings.cl}} col-md-{{block.settings.cl_tb}} col-{{block.settings.cl_mb}}" {{ block.shopify_attributes }}>
+                        <aside id="block_{{block.id}}" class="widget widget_text">
+                             {%- if block.settings.title != blank -%}
+                            	<h3 class="widget-title"><span class="txt_title">{{block.settings.title}}</span>
+                                  <span class="icon_mobile"><i class="laber-icon-down icon-chevron-down"></i>
+                                      	<i class="laber-icon-up icon-chevron-up"></i></span>
+                            	</h3>{%- endif -%}
+                             <div class="textwidget widget_footer">
+                                {% if block.settings.use_logo_footer %}
+                                  <div class="logo-footer">
+                                    {% if block.settings.logo_footer != blank %}
+                                      <a href="{{ routes.root_url }}" class="site-header__logo-image">
+                                      {% capture image_size %}{{ block.settings.logo_max_width | escape }}{% endcapture %}
+                                      <img                                          
+                                      src="{{ block.settings.logo_footer | img_url: image_size, scale: 2 }}"                      
+                                      alt="{{ logo_alt | escape }}"
+                                      style="max-width: {{ image_size }}px; width:auto; height:auto;">
+                                      </a>
+                                    {% else %}
+                                      <a class="site-title" href="{{ routes.root_url }}" itemprop="url"><span class="logo-default">{{ settings.logo_text  }}</span></a>
+                                    {% endif %}
+                                 </div>
+                                {% endif %}
+                    
+                               <div class="information">
+                                    {%- if block.settings.title2 != blank -%}<h4>{{block.settings.title2}}</h4>{% endif %}
+                                    {%- if block.settings.show_phone -%}
+                                 		<p><a href="tel:{{shop.phone}}">{{shop.phone}}</a></p>
+                                   {%endif%}
+                                 
+                                   {%- if block.settings.show_email -%}
+                                 		<p><a href="mailto:{{shop.email}}">{{shop.email}}</a></p>
+                                   {%endif%}
+                               </div>	
+                               {%- if block.settings.description != blank -%}
+                               <div class="contentHtml">
+                                 {%- if block.settings.title3 != blank -%}<h4>{{block.settings.title3}}</h4>{% endif %}
+                                 {{block.settings.description}}
+                               </div>
+                               {%endif%}
+                              {% assign payment_image = block.settings.footer_payment %}
+                               {% if payment_image != blank%}
+                               <div class="Paymen_img">
+                                  {%- if block.settings.title4 != blank -%}<h4>{{block.settings.title4}}</h4>{% endif %}
+                                  <div class="payment">
+                                    {%- assign img_url_payment = payment_image | img_url: '222x' -%}
+                                    <img class="lazyload" data-src="{{ img_url_payment }}" data-sizes="auto" alt="{{payment_image.alt | escape}}">
+                                  </div>
+                               </div>
+                               {%endif%}     
+                          	 </div>
+                          </aside>
+						</div>
+                   {%- when 'html' -%}
+                          <div class="footer-iteam col-lg-{{block.settings.cl}} col-md-{{block.settings.cl_tb}} col-{{block.settings.cl_mb}} " {{ block.shopify_attributes }}>
+                            <aside id="block_{{block.id}}" class="widget widget_text ">
+                             {%- if block.settings.title != blank -%}
+                            	<h3 class="widget-title"><span class="txt_title">{{block.settings.title}}</span>
+                                 <span class="icon_mobile"><i class="laber-icon-down icon-chevron-down"></i>
+                                      	<i class="laber-icon-up icon-chevron-up"></i></span> 	
+                            	</h3>
+                            {%- endif -%}
+                             <div class="textwidget widget_footer">
+                               {%- if block.settings.content != blank-%}
+                               <div class="contentHtml">
+                               		{{block.settings.content}}
+                               </div>
+                               {%endif%}
+                               {%- if block.settings.content2 != blank-%}
+                               <div class="contentHtml">
+                               		{{block.settings.content2}}
+                               </div>
+                               {%endif%}
+                               
+                               {%if block.settings.use_social%}
+                               	{%- if block.settings.title_social != blank-%}
+                                <p class="title_social">
+                                  {{block.settings.title_social}}
+                                </p>
+                               {%endif%}
+                                {% assign type_social = block.settings.type_social | plus: 0 %}
+                                {%- if type_social == 1 -%}
+                                  {% render 'social_link' %}
+                                {%- else -%}
+                                  {% render 'social-sharing' %}
+                                {%- endif -%}
+                              {% endif %}
+                               {%if block.settings.use_app%}
+                               	{%- if block.settings.title_app != blank-%}
+                                 <p class="h3 title_app widget-title">
+                                   {{block.settings.title_app}}
+                                 </p>
+                                {%- endif -%}
+                               <div class="app">
+                                 	{% assign no-img = "https://via.placeholder.com/160x45.png/f5f5f5" %}
+                                 	{% assign image_1 = block.settings.image_1 %}
+									{% assign ratio1 = image_1.aspect_ratio |default:1.0 %}
+                    				{% assign pd_top_1 = 1 | divided_by: ratio1 | times: 100 %}
+                                 	<a href="{%if block.settings.url_app1 %}{{block.settings.url_app1}}{%else%}#{%endif%}" >
+                                      	<div class="lazyload laber_bg_lz pr_lazy_img" data-bgset="{% if image_1 != blank %}{{ image_1 | img_url: '160x45' }}{% else %}{{no-img}}{% endif %}" data-ratio="{{ratio1}}" data-sizes="auto" style="padding-top:{% if image_1 != blank %} {{pd_top_1}}%{% else %} 45px{% endif %};" ></div>
+                                    </a>
+                                 	{% assign image_2 = block.settings.image_2 %}
+									{% assign ratio2 = image_2.aspect_ratio |default:1.0 %}
+                    				{% assign pd_top_2 = 1 | divided_by: ratio2 | times: 100 %}
+                                 	<a href="{%if block.settings.url_app2 %}{{block.settings.url_app2}}{%else%}#{%endif%}" >	
+              							<div class="lazyload laber_bg_lz pr_lazy_img" data-bgset="{% if image_2 != blank %}{{ image_2 | img_url: '160x45' }}{% else %}{{no-img}}{% endif %}" data-ratio="{{ratio1}}" data-sizes="auto" style="padding-top:{% if image_2 != blank %} {{pd_top_2}}%{% else %} 45px{% endif %};" ></div>
+                                    </a>	
+                               </div>
+                               {% endif %}
+                              </div>
+                              
+                               
+                             
+                              
+                          </aside>
+						</div>
+                    {%- when 'menu' -%}
+                          <div class="footer-iteam col-lg-{{block.settings.cl}} col-md-{{block.settings.cl_tb}} col-{{block.settings.cl_mb}}  text_{{block.settings.txt_align}}" {{ block.shopify_attributes }}>
+                            <aside id="block_{{block.id}}" class="widget widget_nav_menu">
+                             {%- if block.settings.title != blank -%}
+                            	<h3 class="widget-title "><span class="txt_title">{{block.settings.title}}</span>
+                                  	<span class="icon_mobile">
+                                      	<i class="laber-icon-down icon-chevron-down"></i>
+                                      	<i class="laber-icon-up icon-chevron-up"></i>
+                                  	</span>
+                            	</h3>{%- endif -%}
+                             <div class="menu_footer widget_footer">
+                              {%- assign menu = block.settings.menu -%}
+                              {%- if menu != blank -%}
+                                <ul class="menu">
+                                  {%- for link in linklists[menu].links -%}
+                                   <li class="menu-item{% if link.active %}active{% endif %}">
+                                     <a href="{{ link.url }}">{{ link.title | split: '[' | first }}
+                                     
+                                     {% if link.object.all_products_count %}
+                                    	 <span class="n_products">({{ link.object.all_products_count }})</span>
+                                     {%endif%}
+                                     </a>
+                                  	</li>
+                                   {%- endfor -%}
+                                </ul>
+                                {%- else -%}
+                                 <ul class="menu">
+                                   <li class="menu-item">
+                                     <a href="#">Fruits &amp; Vegetables
+                                     </a>
+                                   </li><li class="menu-item">
+                                   <a href="#">Dairy Products
+                                   </a>
+                                   </li><li class="menu-item">
+                                   <a href="#">Package Foods
+                                   </a>
+                                   </li><li class="menu-item">
+                                   <a href="#">Beverage
+                                   </a>
+                                   </li><li class="menu-item">
+                                   <a href="#">Health &amp; Wellness
+                                   </a>
+                                   </li>
+                                 </ul>
+                                {%- endif -%}
+                             </div>
+                          </aside>
+                            </div>
+                     
+                  {%- endcase -%}
+              {%- endfor -%}
+        </div>
+        </div>
+      </div>
+      <div class="clearfix"><div class="line" style="border-color:{{section.settings.bg_line}}"></div></div>
+      {% assign col_footer = section.settings.Col_footer | plus:0 %}	
+      <div class="footer-note {%if col_footer == 1 %}col_1{%endif%}">
+        <div class="container">
+          <div class="row">
+            {%- assign menu = section.settings.menu -%}
+              {%- if menu != blank -%}
+              <div class="menufooter col-lg-6 col-md-6 col-12">
+                <ul class="menu">
+                  {%- for link in linklists[menu].links -%}
+                   <li class="menu-item{% if link.active %}active{% endif %}">
+                     <a href="{{ link.url }}">{{ link.title | split: '[' | first }}
+                     
+                     {% if link.object.all_products_count %}
+                         <span class="n_products">({{ link.object.all_products_count }})</span>
+                     {%endif%}
+                     </a>
+                    </li>
+                   {%- endfor -%}
+                </ul>
+              
+              </div>
+              {%endif%}
+            
+            {% if section.settings.copyright_text!= blank %}
+            <div class="coppy-right col-lg-6 col-md-6 col-12">
+              	{{section.settings.copyright_text}}
+            </div>
+            {% endif %}
+            
+            
+
+          </div>
+      	</div>
+      </div>
+  </div>
+<!--/Footer-->

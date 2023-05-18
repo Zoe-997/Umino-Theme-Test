@@ -1,0 +1,605 @@
+{%- liquid
+    assign limit = section.settings.limit
+    assign blog = blogs[section.settings.blog]
+    assign show_au = section.settings.show_au
+    assign show_dt = section.settings.show_dt
+    assign sid = section.id 
+        assign sett_equal = section.settings.use_eq_height
+    assign image_ratio = section.settings.image_ratio
+   
+    assign layout =section.settings.layout 
+    
+     assign arrows =  section.settings.arrows
+  assign dots =  section.settings.dots
+    
+
+    -%}
+{% paginate blog.articles by limit %}   
+{%- if section.settings.hidden %}{% break %}{% endif -%}	
+<section id="laber_{{sid}}" class="laber_blog_style1_{{sid}}">
+    <div class="container {%if layout == 'full-width' %}{{layout}}{%endif%}">
+      {% if section.settings.title != blank or section.settings.sub_title!= blank %}
+		<div class="wrap_title {{ section.settings.text_size }} {{section.settings.style_title}}">
+          
+		  {% if section.settings.sub_title!= blank %}
+		  <h4 class="section-subtitle">{{section.settings.sub_title}}</h4>
+		  {% endif %}
+          
+          {% if section.settings.title != blank %}
+		  <h3 class="section-title">{{section.settings.title}}</h3>  
+		  {% endif %}
+          
+          
+          {% if section.settings.content!= blank %}
+		  <div class="content">{{section.settings.content}}</div>
+		  {% endif %}
+          
+		</div>
+      {% endif %}
+    {% include 'grid-slider', settings:section.settings %} 
+    <div class="content_section slick-carousel">
+    <div class="grid-slider collection-slider {%if sett_equal%}{{image_ratio}} {%endif%}" {{gridSlider}} data-append-Arrows=".arrows_{{sid}}" data-append-Dots=".dots_{{sid}}" > 
+        {%- if blog != blank -%}
+            {%- for article in blog.articles -%}
+        		{%- assign art_url = article.url -%}
+                  <article class="post-item post_laber_loop">  
+                    <div class="item">
+                      <div class="image-blog" style="border-radius:{{section.settings.br_radius_img}}">
+                        <a href="{{ article.url }}" title="{{ article.title }}">
+                          <div class="pr_lazy_img laber_bg_lz lazyload item__position" data-bgset="{{ article.image.src | img_url: '1x1' }}" data-ratio="{{article.image.aspect_ratio}}" data-sizes="auto" style="padding-top:{{ 1 | divided_by: article.image.aspect_ratio | times: 100}}%;" ></div>
+                        </a>
+                      </div> 
+                    <div class="post-info" style="background-color:{{section.settings.bg_content}};padding:{{section.settings.pd_content}}">
+                         {%if section.settings.show-cate-blog%} <div class="blog"><a href="{{blog.url}}">{{blog.title}}</a></div>{% endif %}  
+                        {%if section.settings.show-name-blog%}
+                        <div class="head head-article">
+                          <div class="title_blog">
+                            <h3>
+                              <a href="{{ article.url}}" class="post-title">{{ article.title }}</a>
+                            </h3>  
+                          </div>
+                        </div>
+                        {%endif%}
+                        {%if section.settings.show-description%}
+                        <div class="main-info-post">
+                            {% if article.excerpt.size > 0 %}
+                            {{ article.excerpt | strip_html | truncatewords: 23}}         
+                            {% else %}
+                            <div class="des"><p>{{ article.content | strip_html | truncatewords: 23}}</p></div>
+                            {% endif %}   
+                        </div>
+                        {%if section.settings.show-post-info%}	
+                        <div class="meta-post">
+                          <div class="icon-svg"><svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><defs><style>.cls-1{fill:none;}</style></defs><title></title><g data-name="Layer 2" id="Layer_2"><path d="M24,30H8a5,5,0,0,1-5-5,1,1,0,0,1,.06-.35A13.4,13.4,0,0,1,15.54,16h.92a13.4,13.4,0,0,1,12.48,8.65A1,1,0,0,1,29,25,5,5,0,0,1,24,30ZM5,25.17A3,3,0,0,0,8,28H24a3,3,0,0,0,3-2.83A11.39,11.39,0,0,0,16.46,18h-.92A11.39,11.39,0,0,0,5,25.17Z"></path><path d="M16,15a6,6,0,1,1,6-6A6,6,0,0,1,16,15ZM16,5a4,4,0,1,0,4,4A4,4,0,0,0,16,5Z"></path><path d="M24,30H8a5,5,0,0,1-5-5,1,1,0,0,1,.06-.35A13.4,13.4,0,0,1,15.54,16h.92a13.4,13.4,0,0,1,12.48,8.65A1,1,0,0,1,29,25,5,5,0,0,1,24,30ZM5,25.17A3,3,0,0,0,8,28H24a3,3,0,0,0,3-2.83A11.39,11.39,0,0,0,16.46,18h-.92A11.39,11.39,0,0,0,5,25.17Z"></path></g><g id="frame"><rect class="cls-1" height="32" width="32"></rect></g></svg></div>
+                          <div class="item-meta author">{{article.author}}</div>
+                          <div class="item-meta inner-date">
+                            <span class="month">{{ article.created_at | date: "%B" }}</span>,
+                            <span class="day">{{ article.created_at | date: "%d" }}</span>
+                            <span class="year">{{ article.created_at | date: "%Y" }}</span>
+                          </div>
+                        </div>
+                        {%endif%}  
+                        {%endif%}
+                        {%if section.settings.show-read_more%}
+                        <div class="read_more">
+                          <a href="{{ article.url }}" title="{{ article.title }}">
+                            {{'blogs.article.read_more' | t}}
+                          </a>
+                        </div>
+                        {%endif%}
+                      </div>
+                      
+                    </div>
+                  </article>	
+        	{%- endfor -%}
+          {%- else -%}
+             {%- for i in (1..5) -%}
+               <article class="post-item post_laber_loop">
+                 <div class="item">
+                   <div class="image-blog">
+                     {% assign no-img = "https://via.placeholder.com/570x430.png/efefef?text=570x430" %}
+                     <div class="pr_lazy_img laber_bg_lz lazyload item__position" data-bgset="{{ no-img }}" data-sizes="auto" style="padding-top:75.4385%;" ></div>
+                   </div> 
+                   <div class="post-info">
+                     <div class="meta-post">
+                       <div class="icon-svg"><svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><defs><style>.cls-1{fill:none;}</style></defs><title></title><g data-name="Layer 2" id="Layer_2"><path d="M24,30H8a5,5,0,0,1-5-5,1,1,0,0,1,.06-.35A13.4,13.4,0,0,1,15.54,16h.92a13.4,13.4,0,0,1,12.48,8.65A1,1,0,0,1,29,25,5,5,0,0,1,24,30ZM5,25.17A3,3,0,0,0,8,28H24a3,3,0,0,0,3-2.83A11.39,11.39,0,0,0,16.46,18h-.92A11.39,11.39,0,0,0,5,25.17Z"></path><path d="M16,15a6,6,0,1,1,6-6A6,6,0,0,1,16,15ZM16,5a4,4,0,1,0,4,4A4,4,0,0,0,16,5Z"></path><path d="M24,30H8a5,5,0,0,1-5-5,1,1,0,0,1,.06-.35A13.4,13.4,0,0,1,15.54,16h.92a13.4,13.4,0,0,1,12.48,8.65A1,1,0,0,1,29,25,5,5,0,0,1,24,30ZM5,25.17A3,3,0,0,0,8,28H24a3,3,0,0,0,3-2.83A11.39,11.39,0,0,0,16.46,18h-.92A11.39,11.39,0,0,0,5,25.17Z"></path></g><g id="frame"><rect class="cls-1" height="32" width="32"></rect></g></svg></div>
+                       <div class="item-meta author">Admin</div>
+                       <div class="item-meta inner-date">
+                         <span class="month">2022</span>,
+                         <span class="day">05</span>
+                         <span class="year">Feb</span>
+                       </div>
+                     </div>
+                     <div class="head head-article">
+                       <div class="title_blog">
+                         <h3>
+                           <a href="{{ routes.root_url }}" class="post-title">Avocado Grilled Salmon, Rich In Nutrients For The Body</a>
+                         </h3>  
+                       </div>
+                     </div>
+                     <div class="main-info-post">
+                       <div>                       
+                         <div class="des">These are the people who make your life easier. Egestas is tristique vestibulum...</div>                      
+                       </div>      
+                     </div>
+                     <div class="read_more">
+                       <a href="{{ article.url }}" title="{{ article.title }}">
+                         Continue reading
+                       </a>
+                     </div>
+                   </div>
+                 </div>
+               </article>
+             {%- endfor -%}
+          {%- endif -%}
+      </div>
+      {%if dots %}
+              <div class="laber_append_dots dots_{{sid}}"></div>
+              {%endif%}
+              {%if arrows%}	
+              <div class="laber_append_arrows arrows_{{sid}}"></div>	
+              {% endif %}
+      </div>
+    </div>
+</section>
+ {% endpaginate %} 
+
+{%- render 'section_style' -%} 
+
+{%- schema -%}
+  {
+    "name": "Blog posts",
+    "class": "blog-style2 type_carousel zoom_img",
+    "settings": [
+      {
+      "type": "checkbox",
+      "id": "hidden",
+      "label": "Hidden Section?",
+      "default": false
+      },
+      {
+        "type": "header",
+        "content": "== Title Settings"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading",
+        "default": "Tips & tricks"
+      },
+      {
+        "type": "text",
+        "id": "sub_title",
+        "label": "Sub Text"
+      },   
+	  {
+        "type": "textarea",
+        "id": "content",
+        "label": "Content",
+        "default": "Commodo sociosqu venenatis cras dolor sagittis integer luctus maecenas."
+      },
+      {
+        "type": "select",
+        "id": "text_size",
+        "default": "medium",
+        "options": [
+          {
+            "value": "small",
+            "label": "small"
+         },
+         {
+            "value": "medium",
+            "label": "Medium"
+         },
+         {
+            "value": "large",
+            "label": "Large"
+          }
+        ],
+        "label": "Text size"
+      },
+	  {
+        "type": "select",
+        "id": "style_title",
+        "default": "style_1",
+        "options": [
+         {
+            "value": "style_1",
+            "label": "Center"
+         },
+         {
+            "value": "style_2",
+            "label": "Left"
+          }
+        ],
+        "label": "Text alignment"
+      },
+      {
+        "type": "header",
+        "content": "== General Settings"
+      },     
+      {
+        "id": "blog",
+        "type": "blog",
+        "label": "Blog"
+      },
+	  {
+        "type": "text",
+        "id": "br_radius_img",
+        "label": "Border Radius images",
+		"default": "10px 10px 10px 10px"
+      },
+	  {
+        "type": "color",
+        "id": "bg_content",
+        "label": "Background content",
+        "default": "#fff"
+      },	
+	  {
+        "type": "text",
+        "id": "pd_content",
+        "label": "Padding",
+		"default": "0 0 0 0"
+      }, 
+      {
+      "type": "checkbox",
+      "id": "show-cate-blog",
+      "label": "Show Categoty blog",
+      "default": false
+      },
+      {
+      "type": "checkbox",
+      "id": "show-post-info",
+      "label": "Show post info",
+      "default": false
+      },
+	  {
+      "type": "checkbox",
+      "id": "show-name-blog",
+      "label": "Show Name blog",
+      "default": false
+      },
+      {
+      "type": "checkbox",
+      "id": "show-description",
+      "label": "Short description",
+      "default": false
+      },
+      {
+      "type": "checkbox",
+      "id": "show-read_more",
+      "label": "Short Read More",
+      "default": false
+      },
+	  	{
+        "type": "header",
+        "content": "---- Slider Show Collection ----",
+        "info": "Refer to the attribute values [here](httpss://kenwheeler.github.io/slick)"
+    }, 	
+    {
+        "type": "checkbox",
+        "id": "use-slider",
+        "label": "Use slider?",
+        "default": true
+    },
+    {  
+        "type": "range",  
+        "id": "slides-To-Scroll",  
+        "label": "Slide to scroll",  
+        "info": "The number of items slide to scroll",
+        "min": 1,
+        "max": 8,
+        "step": 1,
+        "unit": "pds",
+        "default": 1
+    },   
+    {  
+        "type": "range",  
+        "id": "visible",  
+        "label": "Columns in Visible",
+		"info": "Item(s) in screen ( Size >= 1920 )",
+        "min": 1,
+        "max": 8,
+        "step": 1,
+        "unit": "pds",
+        "default": 5 
+    },
+    {  
+        "type": "range",  
+        "id": "widescreen",  
+        "label": "Columns in Widescreen",
+		"info": "Item(s) in screen ( 1366 <= Size < 1920 )",
+        "min": 1,
+        "max": 8,
+        "step": 1,
+        "unit": "pds",
+        "default": 4 
+    },  
+    {  
+        "type": "range",  
+        "id": "desktop",  
+        "label": "Columns in Desktop",
+		"info":  "Item(s) in screen ( 1200 <= Size < 1480 )",
+        "min": 1,
+        "max": 8,
+        "step": 1,
+        "unit": "pds",
+        "default": 4  
+    },	  
+    {  
+        "type": "range",  
+        "id": "laptop",  
+        "label": "Columns in Laptop",
+		"info": "Item(s) in screen ( 992 <= Size < 1200 )",
+        "min": 1,
+        "max": 8,
+        "step": 1,
+        "unit": "pds",
+        "default": 4
+    },	  
+    {  
+        "type": "range",  
+        "id": "notebook",  
+        "label": "Columns in Notebook",
+		"info": "Item(s) in screen ( 768 <= Size < 992 )",
+        "min": 1,
+        "max": 8,
+        "step": 1,
+        "unit": "pds",
+        "default": 3  
+    },  
+    {  
+        "type": "range",  
+        "id": "tablet",  
+        "label": "Columns in Tablet",
+		"info": "Item(s) in screen ( 576 <= Size < 768 )",
+        "min": 1,
+        "max": 8,
+        "step": 1,
+        "unit": "pds",
+        "default": 3 
+    },
+    {  
+        "type": "range",  
+        "id": "landscape",  
+        "label": "Columns in Landscape",
+		"info": "Item(s) in screen ( 480 <= Size < 576 )",
+        "min": 1,
+        "max": 6,
+        "step": 1,
+        "unit": "pds",
+        "default": 2 
+    }, 
+    {  
+        "type": "range",  
+        "id": "portrait",  
+        "label": "Columns in Portrait",
+		"info": "Item(s) in screen ( 360 < Size < 480 )",
+        "min": 1,
+        "max": 6,
+        "step": 1,
+        "unit": "pds",
+        "default": 2 
+    },
+    {  
+        "type": "range",  
+        "id": "mobile",  
+        "label": "Columns in Mobile",
+		"info": "Item(s) in screen ( Size < = 360 )",
+        "min": 1,
+        "max": 4,
+        "step": 1,
+        "unit": "pds",
+        "default": 1 
+    },
+    {  
+        "type": "range",  
+        "id": "rows",  
+        "label": "Rows Slider",  
+        "min": 1,
+        "max": 3,
+        "step": 1,
+        "unit": "pds",
+        "default": 1
+    },
+    {
+        "type": "checkbox",
+        "id": "autoplay",
+        "label": "Autoplay",
+        "default": true
+    },
+    {	
+        "type": "text",
+        "id": "speed",
+        "label": "Speed",
+        "default": "300",
+        "info": "Autoplay Speed in milliseconds"
+    },
+    {	
+        "type": "text",
+        "id": "autoplay-Speed",
+        "label": "Auto Play Speed",
+        "default": "3000",
+        "info": "Autoplay Speed in milliseconds"
+    },
+    {	
+        "type": "checkbox",
+        "id": "arrows",
+        "label": "Arrows",
+        "default": true
+    },
+    {	
+        "type": "checkbox",
+        "id": "fade",
+        "label": "Fade",
+        "default": false,
+        "info": "Only use for 1 column"
+    },
+    {	
+        "type": "checkbox",
+        "id": "center-Mode",
+        "label": "Center Mode",
+        "default": false
+    },
+    {	
+        "type": "checkbox",
+        "id": "adaptive-Height",
+        "label": "Adaptive Height",
+        "default": false
+    },
+    {	
+        "type": "checkbox",
+        "id": "dots",
+        "label": "Dots",
+        "default": false 
+    },
+    {	
+        "type": "checkbox",
+        "id": "infinite",
+        "label": "Infinite",
+        "default": false
+    },
+    {  
+        "type": "range",  
+        "id": "padding",  
+        "label": "padding",
+		"info": "Distance between items",
+        "min": 0,
+        "max": 15,
+        "step": 5,
+        "unit": "px",
+        "default": 10 
+    },
+    {	
+        "type": "checkbox",
+        "id": "vertical",
+        "label": "Vertical",
+        "default": false
+    },	
+      {
+        "type": "header",
+        "content": "== Design Options"
+      },
+      {
+        "type": "select",
+        "id": "layout",
+        "options": [
+         {
+            "value": "container",
+            "label": "Container"
+         },
+         {
+            "value": "full-width",
+            "label": "Full Width"
+          }
+        ],
+        "label": "Layout"
+      },
+       {
+        "type": "checkbox",
+        "id": "use_eq_height",
+        "label": "Use equal height images?",
+        "default": false
+      },
+      {
+        "type": "select",
+        "id": "image_ratio",
+        "label": "Aspect Ratio",
+        "default": "ratio3_2",
+        "info": "Aspect Ratio Custom will settings in General panel.",
+        "options": [
+          {
+            "group": "Landscape",
+            "value": "ratio2_1",
+            "label": "2:1"
+          },
+          {
+            "group": "Landscape",
+            "value": "ratio16_9",
+            "label": "16:9"
+          },
+          {
+            "group": "Landscape",
+            "value": "ratio8_5",
+            "label": "8:5"
+          },
+          {
+            "group": "Landscape",
+            "value": "ratio3_2",
+            "label": "3:2"
+          },
+          {
+            "group": "Landscape",
+            "value": "ratio4_3",
+            "label": "4:3"
+          },
+          {
+            "group": "Landscape",
+            "value": "ratio_laber",
+            "label": "Ratio ASOS"
+          },
+          {
+            "group": "Squared",
+            "value": "ratio1_1",
+            "label": "1:1"
+          },
+          {
+            "group": "Portrait",
+            "value": "ratio2_3",
+            "label": "2:3"
+          },
+          {
+            "group": "Portrait",
+            "value": "ratio1_2",
+            "label": "1:2"
+          },
+		   {
+            "group": "Custom",
+            "value": "ratio_custom_1",
+            "label": "Custom 1(128%)"
+          }
+        ]
+      }, 
+      {
+        "type": "color",
+        "id": "cl_bg",
+        "label": "Background color",
+        "default": "#fff"
+      },
+	        {
+        "type": "text",
+        "id": "mg",
+        "label": "Margin",
+        "info":"Margin top, margin right, margin bottom, margin left. If you not use to blank"
+      },
+      {
+        "type": "text",
+        "id": "pd",
+        "label": "Padding",
+        "info":"Padding top, padding right, padding bottom, padding left. If you not use to blank"
+      },
+     {
+        "type": "header",
+        "content": "== Design Mobile Options"
+      },
+      {
+        "type": "text",
+        "id": "mg_mb",
+        "label": "Margin"
+      },
+      {
+        "type": "text",
+        "id": "pd_mb",
+        "label": "Padding"
+      } 
+		
+		
+    ],
+    "presets": [
+      {
+        "name": "Blog posts",
+        "category": "Blog "
+      }
+    ]
+  }
+{% endschema %}

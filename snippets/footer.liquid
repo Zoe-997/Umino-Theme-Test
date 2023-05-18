@@ -1,0 +1,16 @@
+<footer id="footer">
+  {% assign import_footer= settings.select_footer | plus: 0%}
+  {% case import_footer %}     
+  {% when 1 %}    
+  {% section 'footer1' %}
+  {% when 2 %}	
+  {% section 'footer2' %}
+  {% when 3 %}
+  {% section 'footer3' %}
+  {% when 4 %}
+  {% section 'benefit' %}	
+  {% section 'footer4' %}
+  {% when 5 %}
+  {% section 'footer5' %}
+  {% endcase %}   
+</footer>

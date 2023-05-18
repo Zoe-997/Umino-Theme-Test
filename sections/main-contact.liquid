@@ -1,0 +1,266 @@
+{% liquid
+  assign sid = section.id 
+%}  
+<section id="laber_{{sid}}"> 
+    <!-- Map Element -->
+      {% if section.settings.use_contact_map %}
+        <div class="map">              
+          {{ section.settings.map_iframe }}              
+        </div>
+      {% endif %}
+    <!-- End Map Element -->  
+<div class="container {% if section.settings.layout == "full-width"%}{{section.settings.layout}}{% endif %}">
+<div class="main-content shop-page">
+  <div class="content-form">
+    <div class="row pr_center ">
+
+          {%- for block in section.blocks -%}
+          {%- case block.type -%}
+          {%- when 'Contact' -%} 
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+            <div class="contact-info">
+              {% if block.settings.title %}<h3>{{ block.settings.title }}</h3>{% endif %}
+              {% if block.settings.content %}<p class="content">{{ block.settings.content }}</p>{% endif %}
+              {% if block.settings.address %}<p><i class="icon-home"></i>{{ block.settings.address }}</p>{% endif %}
+              {% if block.settings.work_time %}<p><i class="icon-clock"></i>{{ block.settings.work_time }}</p>{% endif %}
+              {% if block.settings.phone %}<p><i class="icon-phone-call"></i>{{ block.settings.phone }}</p>{% endif %}
+              {% if block.settings.email %}<p><i class="icon-mail"></i>{{ block.settings.email }}</p>{% endif %}
+            </div>
+          </div>
+          {%- endcase -%}
+          {%- endfor -%}
+
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+        <div class="information-form">
+        <div class="contact-form">
+          {% form 'contact', class:'form-contact', id:'contact-form' %}	
+              {% if form.posted_successfully? %}
+              <div class="successForm feedback">
+                {{ 'contact.form.post_success' | t }}
+              </div>
+              {% endif %}
+              {% if form.errors %}
+              <div class="errorForm feedback">                
+                <p>Your contact form has {{ form.errors | size | pluralize: "an error", "a few errors" }}. To submit your form, make the following changes and try again:</p>
+                {% for field in form.errors %}
+                <p>The {{ field | capitalize | replace: 'Body', 'Message' }} field {{ form.errors.messages[field] }}.</p>
+                {% endfor %}
+              </div>
+              {% endif %}
+              <div class="main-title h3">{{section.settings.right_title_block}}</div>
+              <div class="content">{{section.settings.content}}</div>
+              {% assign name_attr = 'contact.form.name' | t | handle %}
+
+                  <input 
+                    placeholder="{{'contact.form.name' | t}} *" 
+                    class="input-info" 
+                    id="name" 
+                    required 
+                    name="contact[{{ name_attr }}]"  
+                    type="text" 
+                    value="{% if form[name_attr] %}{{ form[name_attr] }}{% elsif customer %}{{ customer.first_name }}{% endif %}"/>  
+         
+      
+                  <input 
+                    placeholder="{{ 'contact.form.email' | t }} *" 
+                    value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}" 
+                    required name="contact[email]" 
+                    class="input-info" 
+                    id="email" type="text"/>
+    
+                <input required
+                  type="tel" 
+                  id="ContactForm-phone" 
+                  class="input-info" 
+                  autocomplete="tel" 
+                  name="contact[{{ 'contact.form.phone' | t }}]" 
+                  pattern="[0-9\-]*" 
+                  value="{% if form.phone %}{{ form.phone }}{% elsif customer %}{{ customer.phone }}{% endif %}" 
+                  placeholder="{{ 'contact.form.phone' | t }} *">
+                <div class="field">
+                  
+                </div>	
+              <textarea placeholder="{{'contact.form.message' | t}} *" rows="8" class="input-info input-note" name="contact[body]" required id="message">{% if form.body %}{{ form.body }}{% endif %}</textarea>
+              <div class="group-button">                
+                <button class="button submit" type="submit">{{'contact.form.submit'|t}}</button>
+              </div>
+          {% endform %}
+        </div>
+          </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+  </div>
+</section>
+{%- render 'section_style' -%}
+{% schema %}
+  {
+    "name": "Contact",
+    "class":"cms_section contact-page",
+    "blocks": [
+    {
+	"type": "Contact",
+    "name": "Contact Info",
+    "limit": 1,  
+    "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title contact",
+		  "default":"CONTACT INFORMATION"
+        },
+        {
+          "type": "textarea",
+          "id": "content",
+          "label": "Content"
+        },
+        {
+          "type": "textarea",
+          "id": "address",
+          "label": "Address",
+          "default": "Your email address will not be published. Required fields are marked *"
+        },
+        {
+        "type": "textarea",
+        "id": "work_time",
+        "label": "Work time",
+        "default": "Monday – Friday: 9:00-20:00 <br> Saturady: 11:00 – 15:00"
+        },
+        {
+        "type": "text",
+        "id": "phone",
+        "label": "Phone number",
+		"default":"(+100) 666-456-7890"
+        },
+        {
+        "type": "text",
+        "id": "email",
+        "label": "Email",
+		"default":"aloshopify@alothemes.com"
+        }
+      ]
+    }
+    ],
+    "settings": [
+        {
+          "type": "text",
+          "id": "right_title_block",
+          "label": "Title of block",
+          "default": "Get in touch"
+        },
+        {
+        "type": "textarea",
+        "id": "content",
+        "label": "Content",
+        "default": "Commodo sociosqu venenatis cras dolor sagittis integer luctus maecenas."
+        },
+        {
+          "type": "paragraph",
+          "content": "Note 1 => TO EDIT TITLE: Your Name. Step 1: Go to admin and then click 'Online Store'. Step 2: Click button '...' . Step 3: Click 'Edit Language'. Step 4: Click 'Tab Contact'. Step 5: Find 'First Name'"
+        },
+        {
+          "type": "paragraph",
+          "content": "Note 2 => TO EDIT TITLE: Email Address. Step 1: Go to admin and then click 'Online Store'. Step 2: Click button '...' . Step 3: Click 'Edit Language'. Step 4: Click 'Tab Contact'. Step 5: Find 'Email'"
+        },
+        {
+          "type": "paragraph",
+          "content": "Note 3 =>  TO EDIT TITLE: Phone Number. Step 1: Go to admin and then click 'Online Store'. Step 2: Click button '...' . Step 3: Click 'Edit Language'. Step 4: Click 'Tab Contact'. Step 5: Find 'Phone Number'"
+        },
+        {
+          "type": "paragraph",
+          "content": "Note 4 => TO EDIT TITLE: Your Message. Step 1: Go to admin and then click 'Online Store'. Step 2: Click button '...' . Step 3: Click 'Edit Language'. Step 4: Click 'Tab Contact'. Step 5: Find 'Your Message'"
+        },
+        {
+          "type": "paragraph",
+          "content": "------- Map -------"
+        },
+        {
+          "type": "checkbox",
+          "id": "use_contact_map",
+          "label": "Show Google Map",
+		  "default": true
+        },
+        {
+          "type": "textarea",
+          "id": "map_iframe",
+          "label": "Link Googlemap",
+          "default": "<iframe width=\"2000\" height=\"400\" style=\"border:0\" src=\"https:\/\/www.google.com\/maps\/embed\/v1\/search?q=1200+Beverly+Street,+Mountain+View,+CA,+United+States&key=AIzaSyCeVrTUW_JTL2UKUT0-85wiwusOJZ48yMM\" allowfullscreen=\"\"><\/iframe>",
+          "info": "* Edit width = 960px ; height = 890px"
+        },
+        {
+          "type": "paragraph",
+          "content": "* GUIDE TO EMBED GOOGLE MAP. Step 1: go to this link https:\/\/developers.google.com\/maps\/documentation\/embed\/start . Step 2: fill your address, press Enter and make following their instruction. Step 3: copy iframe code to above text area."
+        },
+        {
+        "type": "header",
+        "content": "== setting content"
+      },
+      {
+        "type": "select",
+        "id": "layout",
+        "default": "container",
+        "options": [
+         {
+            "value": "container",
+            "label": "Container"
+         },
+         {
+            "value": "full-width",
+            "label": "Full Width"
+          }
+        ],
+        "label": "Layout"
+      },
+      {
+      "type": "color",
+      "id": "cl_bg",
+      "label": "Background color",
+      "default": "#fff"
+      },
+	  {
+        "type": "header",
+        "content": "== setting content"
+      },
+	  {
+        "type": "header",
+        "content": "== Setting PC",
+		"info":"Margin"
+      },	
+      {
+        "type": "text",
+        "id": "mg",
+        "label": "Margin",
+        "info":"Margin top, margin right, margin bottom, margin left. If you not use to blank"
+      },
+      {
+        "type": "text",
+        "id": "pd",
+        "label": "Padding",
+        "info":"Padding top, padding right, padding bottom, padding left. If you not use to blank"
+      },
+     {
+        "type": "header",
+        "content": "== Design Mobile Options"
+      },
+      {
+        "type": "text",
+        "id": "mg_mb",
+        "label": "Margin"
+      },
+      {
+        "type": "text",
+        "id": "pd_mb",
+        "label": "Padding"
+      }
+
+	]	
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

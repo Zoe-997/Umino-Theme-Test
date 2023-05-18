@@ -1,0 +1,108 @@
+{%- assign id = product.id -%}
+{%- liquid
+	assign on_sale = false
+	assign image = product.images[0] | default:settings.placeholder_img
+	if product.compare_at_price_min > product.price_min
+	  assign on_sale = true 
+	endif -%}
+{%- assign hide_reviews_counter = settings.product_collection_hide_reviews_counter -%}
+{%- assign product_reviews_count = 0 -%}
+{%- if product.metafields.spr.reviews -%}
+
+  {%- capture review_data -%}{{ product.metafields.spr.reviews }}{%- endcapture -%}
+
+  {%- if review_data contains '"votes"' -%}
+    {%- assign keyword = '"votes"' -%}
+  {%- else  -%}
+    {%- assign keyword = '"reviewCount"' -%}
+  {%- endif -%}
+
+  {%- assign rd_a1 = review_data | split: keyword -%}
+  {%- assign rd_a2 = rd_a1[1] | split: ":" -%}
+  {%- assign rd_a3 = rd_a2[1] | split: '"' -%}
+  {%- assign product_reviews_count = rd_a3[1] | plus: 1 | minus: 1 -%}
+
+{%- endif -%}
+<div class="product-item">
+  <div class="product-inner">
+<div class="row">
+	<div class="thumb col">
+	    {%- if image != blank %}
+        	
+	    <a class="db pr oh" href="{{product.url | within: c}}">
+          <div data-image-effect class="pr_lazy_img main-img lazyload" data-id="{{image.id}}" data-bgset="{{ image | img_url: '1x1' }}" data-parent-fit="width" data-wiis data-ratio="{{image.aspect_ratio}}" data-sizes="auto" style="padding-top:{{ 1 | divided_by: image.aspect_ratio | times: 100}}%;"></div>	
+         </a>
+	    {%- endif -%}
+	</div>
+	<div class="info col">
+        {% if product_reviews_count > 0%}
+        <div class="product-collection__reviews">
+          {% render 'product-get-review' with id: id hide_counter: hide_reviews_counter %}
+        </div>
+        {% endif %}
+      	<h4 class="name_product">
+		 <a class="product-name" href="{{product.url | within: c}}">{{ product.title }}</a>
+        </h4>
+		{%- liquid
+		assign variant_unit = product.variants.first
+		assign pid = product.id
+		assign hd_up = 'group-' |append:pid
+		assign nav_up = linklists[hd_up].links | where:'type','product_link'
+		assign nav_up_size = nav_up.size -%}
+		<div class="product-collection__price ">
+          <div class="price {% if product.compare_at_price > product.price %}price--sale{%endif%}">
+		{%- if nav_up_size == 0 and variant_unit.unit_price_measurement -%}
+		   {%- if variant_unit.compare_at_price > variant_unit.price -%}
+      		<div class="compare">{{ variant_unit.compare_at_price  | money }}</div>
+      		<div class="current">{{ variant_unit.price | money }}</div>
+      			{%- else -%}{{ variant_unit.price | money }}{%- endif -%}
+		   {%- capture unit_price_base_unit -%}
+		    <span class="unit_base">
+		      {%- if variant_unit.unit_price_measurement -%}
+		        {%- if variant_unit.unit_price_measurement.reference_value != 1 -%}
+		          {{- variant_unit.unit_price_measurement.reference_value -}}
+		        {%- endif -%}
+		        {{ variant_unit.unit_price_measurement.reference_unit }}
+		      {%- endif -%}
+		    </span>
+		   {%- endcapture -%}
+		   <div class="price__unit"><span class="unit_price">{{ variant_unit.unit_price | money }}</span><span>/</span>{{- unit_price_base_unit -}}</div>
+
+		{%- elsif inc_price == '1' -%}
+		  {%- if nav_up_size > 0 -%}{{ product.price | money }}{%- if product.compare_at_price != blank -%} – {{ product.compare_at_price | money }}{%- endif -%}
+		  {%- else -%}
+		    {%- if product.price_varies -%}{{ product.price_min | money }} – {{ product.price_max | money }}
+		    {%- elsif product.compare_at_price > product.price -%}
+      			<span class="compare">{{ variant_unit.compare_at_price  | money }}</span>
+      			<span class="current">{{ variant_unit.price | money }}</span>
+      			{%comment%}
+            	{%- assign save = product.compare_at_price | minus: product.price | times: 100.0 | divided_by: product.compare_at_price | ceil -%}
+            	<span class="onsale label">{{ save_js | replace:'saved_amount',save }}</span>
+            	{%endcomment%}
+		    {%- else -%}{{ product.price | money }}
+		    {%- endif -%}
+		  {%- endif -%}
+
+		{%- else -%}
+
+		  {%- if nav_up_size > 0 -%}
+            	<span class="cb fwn">{{ 'products.product.from' | t }}</span> {{ product.price | money }}
+		  {%- else -%}
+		    {%- if product.price_varies -%}
+            	<span class="cb fwn">{{ 'products.product.from' | t }}</span> {{ product.price_min | money }}
+		    {%- elsif product.compare_at_price > product.price -%}
+      			<span class="compare">{{ variant_unit.compare_at_price  | money }}</span>
+      			<span class="current">{{ variant_unit.price | money }}</span>
+            	{%comment%}
+            	{%- assign save = product.compare_at_price | minus: product.price | times: 100.0 | divided_by: product.compare_at_price | ceil -%}
+            	<span class="onsale label">{{ save_js | replace:'saved_amount',save }}</span>
+            	{%endcomment%}
+		    {%- else -%}
+            	{{ product.price | money }}
+		    {%- endif -%}
+		  {%- endif -%}
+		{%- endif -%}
+          </div>
+      </div>
+	</div>
+    </div></div></div>

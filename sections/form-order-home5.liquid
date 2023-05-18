@@ -1,0 +1,225 @@
+{% liquid
+  assign sid = section.id 
+ %}
+   
+{%- for i in (1..1) -%}
+{% assign image = section.settings.background_appointment %}  
+
+{%- if section.settings.hidden %}{% break %}{% endif -%}
+{% assign image = section.settings.background_form %}
+<section class="{% if image != blank %}lazyload{% endif %}" style="margin:{{section.settings.mg_top}}px {{section.settings.mg_right}}px {{section.settings.mg_bottom}}px {{section.settings.mg_left}}px; background-color:{{section.settings.cl_bg}}; background-position: center center;" {% if image != blank %} data-bg="{{ image | img_url: '1920x' }}" data-ratio="{{image.aspect_ratio}}" {% endif %}>    
+  <div class="nt_se_{{sid}}">
+    {% if section.settings.title != blank %}
+        <div class="wrap_title ">          
+          {% if section.settings.title != blank %}
+          	<h3 class="section-title">{{section.settings.title}}</h3>  
+          {% endif %}
+        </div>
+    {% endif %}    
+    <div class="cms-wrap-form">
+      <div class="container form">        
+        <form action="/contact" method="post">
+          {% assign name_attr = section.settings.name_label_sevice | handle %}
+          <input placeholder="{{section.settings.name_label_sevice}} " class="input-info odd" id="name" required name="contact[{{ name_attr }}]"  type="text" value="{% if form[name_attr] %}{{ form[name_attr] }}{% elsif customer %}{{ customer.first_name }}{% endif %}"/>                            
+          {% assign name_attr = section.settings.phone_label_sevice | handle %}
+          <input placeholder="{{section.settings.phone_label_sevice}}" value="{% if form[name_attr] %}{{ form[name_attr] }} {% endif %}" required name="contact[{{ name_attr }}]" class="input-info even" id="phone" type="text"/>
+          {% assign name_attr = section.settings.address_label_sevice | handle %}
+          <input placeholder="{{section.settings.address_label_sevice}}" value="{% if form[name_attr] %}{{ form[name_attr] }} {% endif %}" required name="contact[{{ name_attr }}]" class="input-info odd" id="address" type="text"/>
+          
+          <div data-service class="wrap_service even">
+            {% assign name_attr = section.settings.product_label_sevice | handle %} 
+           
+            <input  onfocus="this.blur();" placeholder="{{section.settings.product_label_sevice }}" value="{% if form[name_attr] %}{{ form[name_attr] }} {% endif %}" required name="contact[{{ name_attr }}]" class="input-info" id="product" type="text"/>
+            {% if section.blocks.size > 0%}
+            <span>
+              <i class="fa fa-angle-down" aria-hidden="true"></i>
+            </span>
+            <div data-display-content class="content_drop">
+              <ul>
+                {%- for block in section.blocks -%}
+                    {% if block.type == 'product' %} 
+                		{% assign pr =  all_products[block.settings.product_item] %}
+                        <li data-product="{{pr.handle}}">{{pr.title}}</li>
+                    {% endif %}
+                {% endfor %}
+              </ul>
+            </div>
+            {% endif %}
+          </div>
+          {% assign name_attr = section.settings.message_label_sevice | handle %}  
+          <textarea  placeholder="{{section.settings.message_label_sevice }}" required name="contact[{{ name_attr }}]" class="" id="service"></textarea>
+                    
+          <button class="button submit" type="submit"><span>{{section.settings.button_label_sevice}}</span></button>
+              
+        </form>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+{%- endfor -%}
+<script type="text/javascript">
+  jQuery(document).ready(function($) {
+    
+    var index = 0;
+    $("div[data-service] span").on('click',function(){
+      index++;
+      if(index % 2 != 0){
+        var parent = $(this).closest("div");
+        parent.find("div[data-display-content]").show();
+      }else{
+        var parent = $(this).closest("div");
+        parent.find("div[data-display-content]").hide();
+      }
+    })  
+    $("div[data-display-content] li").on('click',function(){
+      index = 0;
+      $("#product").val($(this).data("product"));
+      $(this).closest("div").hide();      
+    })
+  })  
+</script>
+
+{%- schema -%}
+  {
+    "name": "Form",
+    "class": "cms_section type_form_services contact-section2",
+	"max_blocks": 20,	
+    "settings": [
+	  {
+        "type": "header",
+        "content": "== Title Settings"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading",
+        "default": "Don’t Wait Any Longer!<br>Give 55% Off Now!"
+      },          
+	  {
+        "type": "header",
+        "content": "== Design Options"
+      },
+      {
+        "type": "checkbox",
+        "id": "hidden",
+        "label": "Hidden Section?",
+        "default": false
+      },          
+      {
+        "type": "color",
+        "id": "cl_bg",
+        "label": "Background color",
+        "default": "#e1e1e1"
+      },
+      {
+        "type": "image_picker",
+        "id": "background_form",
+        "label": "Background image",
+        "info" : "Dimension: 1920 x 735"
+      },
+      {
+        "type": "range",
+        "id": "mg_top",
+        "label": "Margin top",
+        "default": 0,
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "mg_right",
+        "label": "Margin right",
+        "default": 0,
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "mg_bottom",
+        "label": "Margin bottom",
+        "default": 0,
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "mg_left",
+        "label": "Margin left",
+        "default": 0,
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "px"
+      },
+      {
+        "type": "header",
+        "content": "==Form setting"
+      },    
+      {
+        "type": "text",
+        "id": "name_label_sevice",
+        "label": "Label of name",
+        "default": "Name"
+      },
+      {
+        "type": "text",
+        "id": "phone_label_sevice",
+        "label": "Label of phone",
+        "default": "Phone"
+      },
+      {
+        "type": "text",
+        "id": "address_label_sevice",
+        "label": "Label of address",
+        "default": "Address"
+      },
+      {
+        "type": "text",
+        "id": "product_label_sevice",
+        "label": "Label of product",
+        "default": "Choose a product"
+      },
+      {
+        "type": "text",
+        "id": "message_label_sevice",
+        "label": "Label of message",
+        "default": "Message"
+      },
+      {
+        "type": "text",
+        "id": "button_label_sevice",
+        "label": "Submit button",
+        "default": "Send order now"
+      }           
+           
+    ],
+	"blocks": [		
+		{
+          "type": "product",
+          "name": "product of form",
+          "settings": [
+            {
+               "type": "product",
+               "id": "product_item",
+               "label": "Select product"
+             }
+
+          ]
+    	}
+    ],
+    "presets": [
+      {
+        "name": "6. Form (style 2)",
+        "category": "Introduce"
+      }
+    ]
+  }
+{% endschema %}

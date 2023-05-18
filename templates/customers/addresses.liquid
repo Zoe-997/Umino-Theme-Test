@@ -1,0 +1,190 @@
+<script src="{{ 'customer.js' | asset_url }}" defer></script>
+{% section 'breadcrumb' %}
+<div class="main-content shop-page login-page">
+  <div class="container">
+    {% paginate customer.addresses by 5 %}
+
+    <div class="main-container shop-page" style="margin-bottom:30px;" data-customer-addresses >
+      <div class="container" data-address >
+        <div class="row pr_center">
+          {% comment %}
+            Add address form, hidden by default
+          {% endcomment %}
+          <div id="AddressNewForm" class="form-vertical content-form col-xs-12 col-sm-12 col-md-6 col-lg-6 mb-4">
+            {% form 'customer_address', customer.new_address %}
+              <h2 class="main-title">{{ 'customer.addresses.add_new' | t }}</h2>
+                  <div class="flex flex-column">
+                    <label for="AddressFirstNameNew">{{ 'customer.addresses.first_name' | t }}</label>
+                    <input required  class="input-info col" type="text" id="AddressFirstNameNew" name="address[first_name]" value="{{ form.first_name }}">
+                  </div>
+                  <div class="flex flex-column">
+                    <label for="AddressLastNameNew">{{ 'customer.addresses.last_name' | t }}</label>
+                    <input required  class="input-info col" type="text" id="AddressLastNameNew" name="address[last_name]" value="{{ form.last_name }}">
+                  </div>
+                  <div class="flex flex-column">
+                    <label for="AddressCompanyNew">{{ 'customer.addresses.company' | t }}</label>
+                    <input required  class="input-info col" type="text" id="AddressCompanyNew" name="address[company]" value="{% if form.company %}{{ form.company }}{% else %}KFC Store ID {% endif %}">
+                  </div>
+                  <div class="flex flex-column">
+                    <label for="AddressAddress1New">{{ 'customer.addresses.address1' | t }}</label>
+                    <input required class="input-info col" type="text" id="AddressAddress1New" name="address[address1]" value="{{ form.address1 }}">
+                  </div>
+                  <div class="flex flex-column">
+                    <label for="AddressAddress2New">{{ 'customer.addresses.address2' | t }}</label>
+                    <input required  class="input-info col" type="text" id="AddressAddress2New" name="address[address2]" value="{{ form.address2 }}">
+                  </div>
+                  <div class="flex flex-column">
+                    <label for="AddressCityNew">{{ 'customer.addresses.city' | t }}</label>
+                    <input required class="input-info col" type="text" id="AddressCityNew" name="address[city]" value="{{ form.city }}">
+                  </div>
+                  <div class="flex flex-column">
+                    <label for="AddressCountryNew">{{ 'customer.addresses.country' | t }}</label>
+                    <select class="input-info"
+                    id="AddressCountryNew"
+                    name="address[country]"
+                    data-default="{{ form.country }}"
+                    autocomplete="country"
+                    >
+                    {{ all_country_option_tags }}
+                    </select>
+                  </div>
+                  <div class="flex flex-column d-none" id="AddressProvinceContainerNew">
+                    <label for="AddressProvinceNew">{{ 'customer.addresses.province' | t }}</label>
+                    <select class="input-info" id="AddressProvinceNew" name="address[province]" data-default="{{ form.province }}"></select>
+                  </div>
+      			      <div class="flex flex-column">	
+                    <label for="AddressZipNew">{{ 'customer.addresses.zip' | t }}</label>
+                    <input required  class="input-info col" type="text" id="AddressZipNew" name="address[zip]" value="{{ form.zip }}" autocapitalize="characters">
+                  </div>
+                  <div class="flex flex-column">
+                    <label for="AddressPhoneNew">{{ 'customer.addresses.phone' | t }}</label>
+                    <input required  class="input-info col" type="tel" id="AddressPhoneNew" name="address[phone]" value="{{ form.phone }}">
+                  </div>
+                	<div class="flex check" style="align-items: center;">
+                    {{ form.set_as_default_checkbox }}
+                    <label for="address_default_address_new">{{ 'customer.addresses.set_default' | t }}</label>
+                  </div>
+                  <div class="group-button">
+                    <input type="submit" class="button submit" value="{{ 'customer.addresses.add' | t }}">
+                  </div>
+
+            {% endform %}
+           
+          </div>
+
+          {% comment %}
+            List all customer addresses with a unique edit form.
+            Also add pagination in case they have a large number of addresses
+          {% endcomment %}
+          <div class="address content-form col-xs-12 col-sm-12 col-md-6 col-lg-6">
+          {% for address in customer.addresses %}
+            
+              <div id="edit_{{ address.id }}" class="default_address">
+                {% if address == customer.default_address %}
+                  <h2 class="main-title">{{ 'customer.addresses.default' | t }}</h2>
+                {% endif %}
+
+                {{ address | format_address }}
+
+                <div class="group-button flex">
+                  <button type="button"  class="btn btn--small address-edit-toggle" 
+                      id="EditFormButton_{{ address.id }}"
+                      aria-label="{{ 'customer.addresses.edit_address' | t }} {{ forloop.index }}"
+                      aria-controls="EditAddress_{{ address.id }}"
+                      aria-expanded="false"
+                      data-address-id="{{ address.id }}"
+                    >
+                      <i class="icon-edit"></i> {{ 'customer.addresses.edit' | t }}
+                  </button>
+                  <button type="button" class="btn btn--secondary btn--small address-delete" data-target="{{ address.url }}" data-form-id="{{ address.id }}" data-confirm-message="{{ 'customer.addresses.delete_confirm' | t }}"><i class="icon-trash-2"></i> {{ 'customer.addresses.delete' | t }}</button>
+                </div>
+              </div>
+              <div id="EditAddress_{{ address.id }}" class="form-vertical hidden">
+              {% form 'customer_address', address %}
+
+                <h2 class="main-title">{{ 'customer.addresses.edit_address' | t }}</h2>
+                  <div class="flex flex-column">
+                    <label for="AddressFirstName_{{ form.id }}">{{ 'customer.addresses.first_name' | t }}</label>
+                    <input style="width:100%;" class="input-info" type="text" id="AddressFirstName_{{ form.id }}" name="address[first_name]" value="{{ form.first_name }}">
+                  </div>
+                  <div class="flex flex-column">
+                    <label for="AddressLastName_{{ form.id }}">{{ 'customer.addresses.last_name' | t }}</label>
+                    <input style="width:100%;" class="input-info" type="text" id="AddressLastName_{{ form.id }}" name="address[last_name]" value="{{ form.last_name }}">
+                  </div>
+  				        <div class="flex flex-column">
+                    <label for="AddressCompany_{{ form.id }}">{{ 'customer.addresses.company' | t }}</label>
+                    <input style="width:100%;" class="input-info" type="text" id="AddressCompany_{{ form.id }}" name="address[company]" value="{% if form.company %}{{ form.company }}{% else %}KFC Store ID {% endif %}">
+                  </div>
+                  <div class="flex flex-column">
+                    <label for="AddressAddress1_{{ form.id }}">{{ 'customer.addresses.address1' | t }}</label>
+                    <input style="width:100%;" class="input-info" type="text" id="AddressAddress1_{{ form.id }}" name="address[address1]" value="{{ form.address1 }}">
+                  </div>
+                  <div class="flex flex-column">
+                    <label for="AddressAddress2_{{ form.id }}">{{ 'customer.addresses.address2' | t }}</label>
+                    <input style="width:100%;" class="input-info" type="text" id="AddressAddress2_{{ form.id }}" name="address[address2]" value="{{ form.address2 }}">
+                  </div>
+                  <div class="flex flex-column">
+                    <label for="AddressCity_{{ form.id }}">{{ 'customer.addresses.city' | t }}</label>
+                    <input style="width:100%;" class="input-info" type="text" id="AddressCity_{{ form.id }}" name="address[city]" value="{{ form.city }}">
+                  </div>
+                  <div class="flex flex-column">
+                    <label for="AddressCountry_{{ form.id }}">{{ 'customer.addresses.country' | t }}</label>
+                    <select class="input-info" id="AddressCountry_{{ form.id }}" class="address-country-option" data-form-id="{{ form.id }}" name="address[country]" data-default="{{ form.country }}">{{ country_option_tags }}</select>
+                  </div>
+                  <div class="flex flex-column d-none" id="AddressProvinceContainer_{{ form.id }}">
+                    <label for="AddressProvince_{{ form.id }}">{{ 'customer.addresses.province' | t }}</label>
+                    <select class="input-info" id="AddressProvince_{{ form.id }}" name="address[province]" data-default="{{ form.province }}"></select>
+                  </div>
+                  <div class="flex flex-column">
+                    <label for="AddressZip_{{ form.id }}">{{ 'customer.addresses.zip' | t }}</label>
+                    <input style="width:100%;" class="input-info" type="text" id="AddressZip_{{ form.id }}" name="address[zip]" value="{{ form.zip }}" autocapitalize="characters">
+                  </div>
+                  <div class="flex flex-column">
+                    <label for="AddressPhone_{{ form.id }}">{{ 'customer.addresses.phone' | t }}</label>
+                    <input style="width:100%;" class="input-info" type="tel" id="AddressPhone_{{ form.id }}" name="address[phone]" value="{{ form.phone }}">
+                  </div>
+                  <div class="flex" style="align-items: center;">
+                    {{ form.set_as_default_checkbox }}
+                    <label for="address_default_address_{{ form.id }}">{{ 'customer.addresses.set_default' | t }}</label>
+  				        </div>
+                  <div class="group-button">
+                    <div class="mb-2"><input type="submit" class="button submit" value="{{ 'customer.addresses.update' | t }}"></div>       	
+                    <h3  class="tabtrigger hidden_form_vertical" data-form-id="{{ form.id }}">
+                      {{ 'customer.addresses.cancel' | t }}
+                    </h3>
+                  </div>
+                      <script type="text/javascript">
+                        (function($) {
+                          'use strict';
+                          jQuery(document).ready(function($) {     
+                            $("#edit_{{ address.id }} .address-edit-toggle").click(function() { 
+                              $("#EditAddress_{{ address.id }}").removeClass('hidden');
+                              $("#edit_{{ address.id }}").addClass('hidden');
+                            });
+                  
+                            $(".hidden_form_vertical").click(function(){
+                              $("#EditAddress_{{ address.id }}").addClass('hidden');
+                              $("#edit_{{ address.id }}").removeClass('hidden');
+                            })
+                          });
+                        })(jQuery);
+                      </script>
+                {% endform %}
+              </div>
+              
+            {% endfor %}
+          </div>
+          {% if paginate.pages > 1 %}
+            {% include 'pagination' %}
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    {% endpaginate %}
+    <script>
+      window.onload = () => {
+        typeof CustomerAddresses !== 'undefined' && new CustomerAddresses();
+      }
+    </script>
+  </div>
+</div>

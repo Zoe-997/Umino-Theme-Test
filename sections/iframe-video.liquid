@@ -1,0 +1,255 @@
+{{ 'video-section.css' | asset_url | stylesheet_tag }}
+{% liquid
+assign id = section.id 
+%}
+<section id="laber_{{id}}">
+<div  class="video-section">
+  <div class="container {% unless section.settings.full_width %} full-width{% endunless %}">
+    {% if section.settings.title!= blank %}
+    	<div class="wrap_title ">
+          
+		  {% if section.settings.sub_title!= blank %}
+		  <span class="section-subtitle h4">{{section.settings.sub_title}}</span>
+		  {% endif %}
+          
+          {% if section.settings.title != blank %}
+		  <h3 class="section-title h3">{{section.settings.title}}</h3>  
+		  {% endif %}
+          
+          
+          {% if section.settings.content!= blank %}
+		  <div class="content">{{section.settings.content}}</div>
+		  {% endif %}
+          
+		</div>
+    {% endif %}
+        <noscript>
+          <div class="video-section__media"
+               {% if section.settings.cover_image != blank %} style="padding-bottom: {{ 1 | divided_by: section.settings.cover_image.aspect_ratio | times: 100 }}%;"{% endif %}
+               >
+            <a href="{{ section.settings.video_url }}" class="video-section__poster media media--transparent media--landscape{% if section.settings.cover_image == blank %} video-section__placeholder{% endif %}">
+              {%- if section.settings.cover_image != blank -%}
+              <img
+                   srcset="{%- if section.settings.cover_image.width >= 375 -%}{{ section.settings.cover_image | img_url: '375x' }} 375w,{%- endif -%}
+                           {%- if section.settings.cover_image.width >= 750 -%}{{ section.settings.cover_image | img_url: '750x' }} 750w,{%- endif -%}
+                           {%- if section.settings.cover_image.width >= 1100 -%}{{ section.settings.cover_image | img_url: '1100x' }} 1100w,{%- endif -%}
+                           {%- if section.settings.cover_image.width >= 1500 -%}{{ section.settings.cover_image | img_url: '1500x' }} 1500w,{%- endif -%}
+                           {%- if section.settings.cover_image.width >= 1780 -%}{{ section.settings.cover_image | img_url: '1780x' }} 1780w,{%- endif -%}
+                           {%- if section.settings.cover_image.width >= 2000 -%}{{ section.settings.cover_image | img_url: '2000x' }} 2000w,{%- endif -%}
+                           {%- if section.settings.cover_image.width >= 3000 -%}{{ section.settings.cover_image | img_url: '3000x' }} 3000w,{%- endif -%}
+                           {%- if section.settings.cover_image.width >= 3840 -%}{{ section.settings.cover_image | img_url: '3840x' }} 3840w,{%- endif -%}
+                           {{ section.settings.cover_image | img_url: 'master' }} {{ section.settings.cover_image.width }}w"
+                   src="{{ section.settings.cover_image | img_url: '1920x' }}"
+                   sizes="{% if section.settings.full_width %}100vw{% else %}(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 }}px, (min-width: 750px) calc(100vw - 10rem), 100vw{% endif %}"
+                   alt="{{ 'sections.video.load_video' | t: description: section.settings.title | escape }}"
+                   loading="lazy"
+                   width="{{ section.settings.cover_image.width }}"
+                   height="{{ section.settings.cover_image.height }}"
+                   >
+              {%- else -%}
+              {{ 'collection-2' | placeholder_svg_tag: 'placeholder-svg placeholder' }}
+              {%- endif -%}
+            </a>
+          </div>
+        </noscript>
+        <deferred-media class="video-section__media deferred-media no-js-hidden" data-media-id="{{ section.settings.video_url.id }}"
+                        {% if section.settings.cover_image != blank %} style="padding-bottom: {{ 1 | divided_by: section.settings.cover_image.aspect_ratio | times: 100 }}%;"{% endif %}
+                        >
+          <button
+                  id="Deferred-Poster-Modal-{{ section.settings.video_url.id }}"
+                  class="video-section__poster media deferred-media__poster media--landscape"
+                  type="button"
+                  >
+            {%- if section.settings.cover_image != blank -%}
+            <img
+                 srcset="{%- if section.settings.cover_image.width >= 375 -%}{{ section.settings.cover_image | img_url: '375x' }} 375w,{%- endif -%}
+                         {%- if section.settings.cover_image.width >= 750 -%}{{ section.settings.cover_image | img_url: '750x' }} 750w,{%- endif -%}
+                         {%- if section.settings.cover_image.width >= 1100 -%}{{ section.settings.cover_image | img_url: '1100x' }} 1100w,{%- endif -%}
+                         {%- if section.settings.cover_image.width >= 1500 -%}{{ section.settings.cover_image | img_url: '1500x' }} 1500w,{%- endif -%}
+                         {%- if section.settings.cover_image.width >= 1780 -%}{{ section.settings.cover_image | img_url: '1780x' }} 1780w,{%- endif -%}
+                         {%- if section.settings.cover_image.width >= 2000 -%}{{ section.settings.cover_image | img_url: '2000x' }} 2000w,{%- endif -%}
+                         {%- if section.settings.cover_image.width >= 3000 -%}{{ section.settings.cover_image | img_url: '3000x' }} 3000w,{%- endif -%}
+                         {%- if section.settings.cover_image.width >= 3840 -%}{{ section.settings.cover_image | img_url: '3840x' }} 3840w,{%- endif -%}
+                         {{ section.settings.cover_image | img_url: 'master' }} {{ section.settings.cover_image.width }}w"
+                 src="{{ section.settings.cover_image | img_url: '1920x' }}"
+                 sizes="{% if section.settings.full_width %}100vw{% else %}(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 }}px, (min-width: 750px) calc(100vw - 10rem), 100vw{% endif %}"
+                 alt="{{ 'sections.video.load_video' | t: description: section.settings.title | escape }}"
+                 loading="lazy"
+                 width="{{ section.settings.cover_image.width }}"
+                 height="{{ section.settings.cover_image.height }}"
+                 >
+            {%- else -%}
+            {{ 'collection-2' | placeholder_svg_tag: 'placeholder-svg placeholder' }}
+            {%- endif -%}
+            <span class="deferred-media__poster-button motion-reduce">
+              {%- render 'icon-play' -%}
+            </span>
+          </button>
+          <template>
+            {%- if section.settings.video_url.type == 'youtube' -%}
+            <iframe src="https://www.youtube.com/embed/{{ section.settings.video_url.id }}?enablejsapi=1" class="js-youtube" allow="autoplay; encrypted-media" allowfullscreen title="{{ section.settings.title | escape }}"></iframe>
+            {%- else -%}
+            <iframe src="https://player.vimeo.com/video/{{ section.settings.video_url.id }}" class="js-vimeo" allow="autoplay; encrypted-media" allowfullscreen title="{{ section.settings.title | escape }}"></iframe>
+            {%- endif -%}
+          </template>
+        </deferred-media>
+        <div class="content-video">
+
+
+          <div class="row">
+            {%- if section.blocks.size > 0 -%}  
+            {%- for block in section.blocks -%}
+				<div class="col-sm-12 col-md-6 col-lg-3">
+                    {% if block.settings.number != blank %}
+                    <p class="number">{{block.settings.number}}</h3>  
+                    {%endif%}
+                    {% if block.settings.title != blank %}
+                    <h3 class="h3">{{ block.settings.title | escape }}</h4>
+                    {% endif %}
+
+                    {% if block.settings.text != blank %}
+                    <div class="rte-setting">{{ block.settings.text }}</div>
+                    {% endif %}
+                  </div>
+            {%- endfor -%} 
+            {% endif %}
+
+          </div>
+        </div>
+    </div>
+</div>
+</section>
+{%- render 'section_style' -%}
+{% javascript %}
+	const postervideo = document.querySelector('[id^="Deferred-Poster-"]');
+    postervideo.addEventListener('click', function(){
+        if (!this.getAttribute('loaded')) {
+          const content = document.createElement('div');
+          content.appendChild(this.nextElementSibling.content.firstElementChild.cloneNode(true));
+          this.parentElement.setAttribute('loaded', true);
+          this.parentElement.appendChild(content.querySelector('video, model-viewer, iframe')).focus();
+        }
+	});
+{% endjavascript %}
+{% schema %}
+{
+  "name": "Video",
+  "tag": "section",
+  "class": "spaced-section iframe-video",
+  "max_blocks": 4,	
+  "settings": [
+	{
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "Make section full width",
+      "default": false
+    },
+    {
+    "type": "text",
+    "id": "title",
+    "label": "Heading",
+	"default":"help center For Your"
+    },
+    {
+    "type": "text",
+    "id": "sub_title",
+    "label": "Sub title",
+	"default":"Explore The FAQ"	
+    }, 
+    {
+    "type": "textarea",
+    "id": "content",
+    "label": "Content",
+    "default": "Various versions have evolved over the years sometimes by accident, sometimes on purpose.."
+    },	
+    {
+      "type": "image_picker",
+      "id": "cover_image",
+      "label": "Cover image"
+    },
+    {
+      "type": "video_url",
+      "id": "video_url",
+      "accept": [
+        "youtube",
+        "vimeo"
+      ],
+      "default": "https:\/\/www.youtube.com\/watch?v=_9VUPq3SxOc",
+      "label": "URL",
+      "placeholder": "Paste a link",
+      "info": "Video plays in the page."
+    },
+    {
+      "type": "text",
+      "id": "description",
+      "label": "Video alt text",
+      "info": "Describe the video to make it accessible for customers using screen readers."
+    },
+      {
+        "type": "color",
+        "id": "cl_bg",
+        "label": "Background color",
+        "default": "#fff"
+      },
+	  {
+        "type": "header",
+        "content": "== Setting PC",
+		"info":"Margin"
+      },	
+      {
+        "type": "text",
+        "id": "mg",
+        "label": "Margin",
+        "info":"Margin top, margin right, margin bottom, margin left. If you not use to blank"
+      },
+      {
+        "type": "text",
+        "id": "pd",
+        "label": "Padding",
+        "info":"Padding top, padding right, padding bottom, padding left. If you not use to blank"
+      },
+     {
+        "type": "header",
+        "content": "== Design Mobile Options"
+      },
+      {
+        "type": "text",
+        "id": "mg_mb",
+        "label": "Margin"
+      },
+      {
+        "type": "text",
+        "id": "pd_mb",
+        "label": "Padding"
+      }
+    
+  ],
+	"blocks": [{
+    "type": "text_block",
+    "name": "Column",
+    "settings": [
+		{
+          "type": "text",
+          "id": "number",
+          "label": "Number",
+          "default": "5465+"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Heading",
+          "default": "Active Clients"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text",
+          "default": "<p>Sed ut perspiciatis unde omnis <br>iste natus sit accusantium doloremque.</p>"
+        }
+
+
+
+      ]
+    }]
+}
+  {% endschema %}

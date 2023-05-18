@@ -1,0 +1,108 @@
+{%- assign productionMode = settings.production_mode -%}
+{%- capture styleCss -%}
+/*shop-page-account*/
+  .shop-page-account h1.page-title{
+    color: var(--color-main);
+    font-size: 38px;
+    font-weight: 500;
+    text-transform: uppercase;
+    text-align: center;
+    margin: 0 0 30px 0;
+    line-height: 1;
+    border-bottom: 2px solid #ebebeb;
+    padding-bottom: 15px;
+  }
+.wrapper_tabcontent.customer h3{
+height: 45px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-start;
+    text-transform: uppercase;
+    color: #fff;
+    background-color: var(--color-main);
+    margin-bottom: 10px;
+    font-size: 13px;
+    font-weight: 600;
+    width: 100%;
+    border-radius: 3px;
+    border: 1px solid var(--color-main);
+    padding: 0 15px;
+}
+.wrapper_tabcontent.customer .btn{
+height: 45px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-start;
+    text-transform: uppercase;
+    color: var(--color-main);
+    background-color: #f6f6f6;
+    margin-bottom: 10px;
+    font-size: 13px;
+    font-weight: 600;
+    width: 100%;
+    border-radius: 3px;
+    border: 1px solid #ebebeb;
+      padding: 0 15px;
+}
+.wrapper_tabcontent.customer .btn:hover {
+    border-color: var(--color-btn-hover);
+    background-color: var(--color-btn-hover);
+    color: var(--color-btn-text_hover);
+}
+.wrapper_tabcontent.customer h3 i,
+.wrapper_tabcontent.customer .btn i{
+	font-size: 17px;
+    margin-right: 10px;
+}
+.account-content{}
+.account-content p.title-customer{
+  line-height: 45px;
+  font-size: 14px;
+  text-transform: capitalize;
+}
+.account-content p.title-customer span{
+    font-weight: 700;
+    text-transform: capitalize;
+    color: var(--color-main);
+}
+.account-content p.title-customer a{color: var(--color-hover);text-decoration: underline;}
+
+.order-history{margin-bottom: 65px;}
+.account_details h3,
+.order-history h3{
+  color: var(--color-main);
+    margin: 0;
+    display: flex;
+    position: relative;
+    text-align: center;
+    letter-spacing: -.03em;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 45px;
+    margin-bottom: 10px;
+}
+.order-history p.none{
+  display: flex;
+  align-items: center;
+  height: 45px;
+  margin-bottom: 10px;
+}
+.order-history p.none a{
+  display: flex;
+  align-items: center;
+  text-decoration: underline;
+  margin-right: 10px;
+}
+.order-history p.none a svg{
+	margin-right: 10px;
+}
+.table .h3{
+	color: var(--color-main);
+}
+{%- endcapture -%}
+{%- if productionMode -%}
+    {%- assign paragraphs = styleCss | newline_to_br | split: '<br />' -%}
+    {%- for paragraph in paragraphs %}{{- paragraph | strip -}}{% endfor -%}
+{%- else -%}
+    {{styleCss}}
+{%- endif -%}

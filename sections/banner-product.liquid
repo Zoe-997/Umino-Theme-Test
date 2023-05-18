@@ -1,0 +1,164 @@
+{% liquid
+  assign sid = section.id 
+  assign layout = section.settings.layout
+  assign collection = section.settings.collection %}
+   
+{%- for i in (1..1) -%}
+  
+<section id="laber_{{sid}}">       
+  <div class="container {%if layout == 'full-width' %}{{layout}}{%endif%}">
+    <div class="cms-wrap-purchase">
+      <div class="cms-content-section">
+        <div class="cms-cont container">
+          <div class="row">
+            <div class="cms-content col-lg-6 col-md-6 col-sm-12">
+              {% assign image_mobile = section.settings.banner2_img %}
+              {% assign ratio_mobile = image_mobile.aspect_ratio |default:1.0 %}
+              {% assign pd_top_mobile = 1 | divided_by: ratio_mobile | times: 100 %}	
+              {% assign no-img-mobile = "https://via.placeholder.com/428x353.png/F2F3F5/fff?text=No Image" %}
+              
+              <div class="cms-bg-second background-banner-mobile">
+                <div class="lazyload laber_bg_lz pr_lazy_img" data-bgset="{% if image_mobile != blank %}{{ image_mobile | img_url: '1x1' }}{% else %}{{ no-img-mobile}}{% endif %}" data-ratio="{{ratio_mobile}}" data-sizes="auto" style="padding-top:{% if image_mobile != blank %} {{pd_top_mobile}}%{% else %} 82.4766%{% endif %};" ></div> 
+              </div>
+            </div>  
+            <div class="cms-content col-lg-6 col-md-6 col-sm-12">
+              <div class="cms-wrap-inner">
+                
+                  {% if section.settings.sub_title!= blank %}
+                 	 <h4 class="section-subtitle">{{section.settings.sub_title}}</h4>
+                  {% endif %}
+                  {% if section.settings.title != blank %}
+                  <h3 class="section-title">
+                	{{section.settings.title}}
+                  </h3>
+                
+                  {% endif %}
+                  {% if section.settings.description != blank %}	
+                  <div class="description">{{section.settings.description}}</div>
+                  {% endif %}
+                {%- assign product = all_products[section.settings.product] -%}
+                {%- if product != blank -%}
+                <div class="laber-minicart">
+                  <a class="view-more" href="{{product.url}}">{{section.settings.button_label}}</a>
+                </div>
+                {%- else -%}
+                <div class="laber-minicart">
+                  <a class="view-more" href="#">View More</a>
+                </div>
+                {% endif %}  
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+	</div>
+    
+  </div>
+</section>
+{%- render 'section_style' -%}
+{%- endfor -%}
+{%- schema -%}
+  {
+    "name": "Banner product",
+    "class": "laber_section cms_section type_banner_product",
+    "settings": [
+	  {
+        "type": "header",
+        "content": "== General Settings"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading of section"
+      },
+      {
+        "type": "text",
+        "id": "sub_title",
+        "label": "Sub Text of section"
+      },
+	  {
+        "type": "textarea",
+        "id": "description",
+        "label": "Description"
+      },
+	  {
+        "type": "header",
+        "content": "== Product settings"
+      },
+      {
+        "type": "product",
+        "id": "product",
+        "label": "Choose product",
+        "info": "Choose product to change default data"
+      },	 
+      {
+        "type": "text",
+        "id": "button_label",
+        "label": "Submit button",
+        "default": "More infor"
+      }, 
+      {
+        "type": "header",
+        "content": "== Banner 1 Settings"
+      },
+	  {
+        "type": "image_picker",
+        "id": "banner2_img",
+        "label": "Banner Left",
+		"info":"Dimension: 1400x548"
+      },	
+      {
+        "type": "header",
+        "content": "== Design Options"
+      },      
+      {
+        "type": "select",
+        "id": "layout",
+        "default": "full-width",
+        "options": [
+         {
+            "value": "container",
+            "label": "Container"
+         },
+         {
+            "value": "full-width",
+            "label": "Full Width"
+          }
+        ],
+        "label": "Layout"
+      },      
+     {
+        "type": "color",
+        "id": "cl_bg",
+        "label": "Background color",
+        "default": "#fff"
+      },
+      {
+        "type": "text",
+        "id": "mg",
+        "label": "Margin",
+        "info":"Margin top, margin right, margin bottom, margin left. If you not use to blank"
+      },
+      {
+        "type": "text",
+        "id": "pd",
+        "label": "Padding",
+        "info":"Padding top, padding right, padding bottom, padding left. If you not use to blank"
+      },
+     {
+        "type": "header",
+        "content": "== Design Mobile Options"
+      },
+      {
+        "type": "text",
+        "id": "mg_mb",
+        "label": "Margin"
+      },
+      {
+        "type": "text",
+        "id": "pd_mb",
+        "label": "Padding"
+      }
+    ]
+  }
+{% endschema %}

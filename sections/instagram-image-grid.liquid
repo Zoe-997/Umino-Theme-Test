@@ -1,0 +1,307 @@
+{%- liquid
+  assign sid = section.id
+  assign layout = section.settings.layout
+  
+  assign section_blocks = section.blocks
+  assign se_size = section_blocks.size
+  
+  assign arr_img = section_blocks | where: "type", "img"
+  assign open_link = section.settings.open_link
+  
+-%}
+
+{%- assign ratio = image.aspect_ratio -%}
+
+{%- for i in (1..1) -%}
+  
+  {%- if section.settings.hidden %}{% break %}{% endif -%}
+    <section id="laber_{{ sid }}" class="laber_grid_instagram_{{sid}} pad-{{ section.settings.pad }}">
+    	<div class="{{layout}}">
+        {% if section.settings.title != blank or section.settings.sub_title!= blank %}
+		<div class="wrap_title {{ section.settings.text_size }} {{section.settings.style_title}}">
+          
+		  {% if section.settings.sub_title!= blank %}
+		  	<span class="section-subtitle">{{section.settings.sub_title}}</span>
+		  {% endif %}
+          
+          {% if section.settings.title != blank %}
+		  <h3 class="section-title">{{section.settings.title}}</h3>  
+		  {% endif %}
+          
+          
+          {% if section.settings.content!= blank %}
+		  <div class="content">{{section.settings.content}}</div>
+		  {% endif %}
+          
+		</div>
+        {% endif %}
+
+          <div class="grid_instagram row" >
+            {%- case se_size -%}
+            
+              {%- when 1 -%}
+            		{%- render 'instagram-item',block:section_blocks[0], cimg:'https://placehold.jp/50/a8dacc/fff/1880x820.png?text=500x500',ratio_demo:'100' ,ccol:'col-12 pad',for_i:1 -%}
+              {%- when 2 -%}
+            		{%- render 'instagram-item',block:section_blocks[0], cimg:'https://placehold.jp/50/56cfe1/fff/500x500.png?text=500x500',ratio_demo:'100' ,ccol:'col-6 pad',for_i:1 -%}
+           			{%- render 'instagram-item',block:section_blocks[1], cimg:'https://placehold.jp/50/f99077/fff/500x500.png?text=500x500',ratio_demo:'100' ,ccol:'col-6 pad',for_i:2 -%}
+              {%- when 3 -%}
+            		{%- render 'instagram-item',block:section_blocks[0], cimg:'https://placehold.jp/50/a8dacc/fff/500x245.png?text=500x245',ratio_demo:'49' ,ccol:'col-4 pad',for_i:1 -%}
+           			{%- render 'instagram-item',block:section_blocks[1], cimg:'https://placehold.jp/50/56cfe1/fff/500x245.png?text=500x245',ratio_demo:'49' ,ccol:'col-4  pad',for_i:2 -%}
+                	{%- render 'instagram-item',block:section_blocks[2], cimg:'https://placehold.jp/50/f99077/fff/500x500.png?text=500x500',ratio_demo:'100' ,ccol:'col-4 pad',for_i:3 -%}
+              {%- when 4 -%}
+
+                {%- render 'instagram-item',block:section_blocks[0], cimg:'https://placehold.jp/30/a8dacc/fff/225x225.png?text=225x225',ratio_demo:'100' ,ccol:'col-3 pad',for_i:1 -%}
+                {%- render 'instagram-item',block:section_blocks[1], cimg:'https://placehold.jp/30/56cfe1/fff/225x225.png?text=225x225',ratio_demo:'100' ,ccol:'col-3 pad',for_i:2 -%}
+                {%- render 'instagram-item',block:section_blocks[2], cimg:'https://placehold.jp/30/f99077/fff/225x225.png?text=225x225',ratio_demo:'100' ,ccol:'col-3 pad',for_i:3 -%}
+                {%- render 'instagram-item',block:section_blocks[3], cimg:'https://placehold.jp/30/c8b09b/fff/225x225.png?text=225x225',ratio_demo:'100' ,ccol:'col-3 pad',for_i:4 -%}
+             
+              {%- when 5 -%}
+                <div class="col-md-3 col-12 pad">
+                  <div class="row">
+                    {%- render 'instagram-item',block:section_blocks[0], cimg:'https://placehold.jp/30/a8dacc/fff/250x250.png?text=250x250',ratio_demo:'100' ,ccol:'col-12 pad',for_i:1 -%}
+                    {%- render 'instagram-item',block:section_blocks[1], cimg:'https://placehold.jp/30/56cfe1/fff/250x250.png?text=250x250',ratio_demo:'100' ,ccol:'col-12 pad',for_i:2 -%}
+                  </div></div>
+                {%- render 'instagram-item',block:section_blocks[2], cimg:'https://placehold.jp/30/f99077/fff/500x500.png?text=500x500',ratio_demo:'100' ,ccol:'col-6 pad',for_i:3 -%}
+                <div class="col-md-3 col-12 pad">
+                  <div class="row">
+                    {%- render 'instagram-item',block:section_blocks[3], cimg:'https://placehold.jp/30/c8b09b/fff/250x250.png?text=250x250',ratio_demo:'100' ,ccol:'col-12 pad',for_i:4 -%}
+                    {%- render 'instagram-item',block:section_blocks[4], cimg:'https://placehold.jp/30/c8b09b/fff/250x250.png?text=250x250',ratio_demo:'100' ,ccol:'col-12 pad',for_i:5 -%}
+                  </div></div>
+              {%- when 6 -%}
+              <div class="col-md-3 col-12 pad">
+                <div class="row">
+                  {%- render 'instagram-item',block:section_blocks[0], cimg:'https://placehold.jp/30/a8dacc/fff/250x250.png?text=250x250',ratio_demo:'100' ,ccol:'col-12 pad',for_i:1 -%}
+                  {%- render 'instagram-item',block:section_blocks[1], cimg:'https://placehold.jp/30/56cfe1/fff/250x250.png?text=250x250',ratio_demo:'100' ,ccol:'col-12 pad',for_i:2 -%}
+                </div></div>
+              <div class="col-md-6 col-12 pad">
+                <div class="row">
+                  {%- render 'instagram-item',block:section_blocks[2], cimg:'https://placehold.jp/30/f99077/fff/500x245.png?text=500x245',ratio_demo:'49' ,ccol:'col-12 pad',for_i:3 -%}
+                  {%- render 'instagram-item',block:section_blocks[3], cimg:'https://placehold.jp/30/a5d0d9/fff/500x245.png?text=500x245',ratio_demo:'49' ,ccol:'col-12 pad',for_i:4 -%}
+                </div></div>
+              <div class="col-md-3 col-12 pad">
+                <div class="row">
+                  {%- render 'instagram-item',block:section_blocks[4], cimg:'https://placehold.jp/30/c8b09b/fff/250x250.png?text=250x250',ratio_demo:'100' ,ccol:'col-12 pad',for_i:5 -%}
+                  {%- render 'instagram-item',block:section_blocks[5], cimg:'https://placehold.jp/30/a1a19f/fff/250x250.png?text=250x250',ratio_demo:'100' ,ccol:'col-12 pad',for_i:6 -%}
+                </div></div>
+              {%- when 7 -%}
+                  <div class="column-left pad">
+                    <div class="row">
+                      {%- render 'instagram-item',block:section_blocks[0], cimg:'https://placehold.jp/30/f99077/fff/462x462.png?text=462x462',ratio_demo:'100' ,ccol:'col-12 pad',for_i:1 -%}
+                      
+                    </div>
+                  </div>                  
+                  <div class="column-right pad">
+                    <div class="row">
+                      {%- render 'instagram-item',block:section_blocks[1], cimg:'https://placehold.jp/30/a8dacc/fff/225x225.png?text=225x225',ratio_demo:'100' ,ccol:'col-xs-6 col-sm-4 col-md-4 pad',for_i:2 -%}
+                      {%- render 'instagram-item',block:section_blocks[2], cimg:'https://placehold.jp/30/56cfe1/fff/225x225.png?text=225x225',ratio_demo:'100' ,ccol:'col-xs-6 col-sm-4 col-md-4 pad',for_i:3 -%}
+                      {%- render 'instagram-item',block:section_blocks[3], cimg:'https://placehold.jp/30/a5d0d9/fff/225x225.png?text=225x225',ratio_demo:'100' ,ccol:'col-xs-6 col-sm-4 col-md-4 pad',for_i:4 -%}
+                      {%- render 'instagram-item',block:section_blocks[4], cimg:'https://placehold.jp/30/c8b09b/fff/225x225.png?text=225x225',ratio_demo:'100' ,ccol:'col-xs-6 col-sm-4 col-md-4 pad',for_i:5 -%}
+                      {%- render 'instagram-item',block:section_blocks[5], cimg:'https://placehold.jp/30/a1a19f/fff/225x225.png?text=225x225',ratio_demo:'100' ,ccol:'col-xs-6 col-sm-4 col-md-4 pad',for_i:6 -%}
+                      {%- render 'instagram-item',block:section_blocks[6], cimg:'https://placehold.jp/30/a8dacc/fff/225x225.png?text=225x225',ratio_demo:'100' ,ccol:'col-xs-6 col-sm-4 col-md-4 pad',for_i:7 -%}
+                    </div></div>	
+            {%- endcase -%}
+           
+            
+          </div>
+      </div>
+    </section>
+{%- endfor -%}
+{%- render 'section_style' -%}
+{%- schema -%}
+  {
+    "name": "Instagram grid",
+    "class": "grid-instagram type_instagram zoom_img",
+    "max_blocks": 7,
+    "settings": [
+      {
+        "type": "header",
+        "content": "== Design Options"
+      },
+      {
+        "type": "checkbox",
+        "id": "hidden",
+        "label": "Hidden Section?",
+        "default": false
+      },
+            {
+        "type": "header",
+        "content": "== General Settings"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading"
+      },
+      {
+        "type": "text",
+        "id": "sub_title",
+        "label": "Sub Text"
+      },
+	  {
+        "type": "textarea",
+        "id": "content",
+        "label": "Content",
+        "default": "Commodo sociosqu venenatis cras dolor sagittis integer luctus maecenas."
+      },
+            {
+        "type": "select",
+        "id": "text_size",
+        "default": "medium",
+        "options": [
+          {
+            "value": "small",
+            "label": "small"
+         },
+         {
+            "value": "medium",
+            "label": "Medium"
+         },
+         {
+            "value": "large",
+            "label": "Large"
+          }
+        ],
+        "label": "Text size"
+      },
+      {
+        "type": "select",
+        "id": "style_title",
+        "default": "style_1",
+        "options": [
+         {
+            "value": "style_1",
+            "label": "Center"
+         },
+         {
+            "value": "style_2",
+            "label": "Left"
+          }
+        ],
+        "label": "Text alignment"
+      },
+      {
+        "type": "select",
+        "id": "layout",
+        "default": "full-width",
+        "options": [
+         {
+            "value": "container",
+            "label": "Container"
+         },
+         {
+            "value": "full-width",
+            "label": "Full Width"
+          }
+        ],
+        "label": "Layout"
+      },
+            {
+          "type": "range",
+          "id": "pad",
+          "label": "Padding",
+          "default": 5,
+          "min": 0,
+          "max": 15,
+          "step": 5,
+          "unit": "px"
+          },        
+
+      {
+        "type": "select",
+        "id": "open_link",
+        "options": [
+          {
+            "value": "_self",
+            "label": "Current window (_self)"
+          },
+         {
+            "value": "_blank",
+            "label": "New window (_blank)"
+          }
+        ],
+        "label": "Open link in",
+        "default": "_self"
+      },  
+      {
+		"type": "image_picker",
+		"id": "bg_image",
+		"label": "Background image",
+		"info": "1920 x 662px .jpg recommended"
+      },
+	 {
+        "type": "color",
+        "id": "cl_bg",
+        "label": "Background color",
+        "default": "#fff"
+      },
+      	{
+        "type": "text",
+        "id": "mg",
+        "label": "Margin",
+        "info":"Margin top, margin right, margin bottom, margin left. If you not use to blank"
+      },
+      {
+        "type": "text",
+        "id": "pd",
+        "label": "Padding",
+        "info":"Padding top, padding right, padding bottom, padding left. If you not use to blank"
+      },
+     {
+        "type": "header",
+        "content": "== Design Mobile Options"
+      },
+      {
+        "type": "text",
+        "id": "mg_mb",
+        "label": "Margin"
+      },
+      {
+        "type": "text",
+        "id": "pd_mb",
+        "label": "Padding"
+      }
+      
+    ],
+    "blocks": [
+      {
+        "type": "img",
+        "name": "== Image Parent",
+        "limit": 12,
+        "settings": [
+          {
+            "type": "image_picker","id": "image","label": "Choose image","info": "320 x 320px .jpg recommended"
+          },
+          {
+            "type": "url","id": "url","label": "Link (optional)"
+          },
+          {
+          "type": "range",
+          "id": "mg_bottom",
+          "label": "Margin bottom",
+          "default": 20,
+          "min": 0,
+          "max": 100,
+          "step": 5,
+          "unit": "px"
+          }
+        ]
+      }
+
+    ],
+    "presets": [
+      {
+        "name": "Instagram Grid",
+        "category": "Social media",
+        "blocks": [
+          {"type": "img"},
+          {"type": "img"},
+          {"type": "img"},
+          {"type": "img"},
+          {"type": "img"},
+		  {"type": "img"},
+          {"type": "img"}
+        ]
+      }
+    ]
+  }
+{% endschema %}

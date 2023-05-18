@@ -1,0 +1,85 @@
+{%- capture google-font -%}
+{%assign bd_google_font = settings.bd_google_font%}
+{%- assign bd_font_weight = settings.bd_font_weight -%}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family={{bd_google_font}}:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+{%  assign bd_font = bd_google_font | replace: "+", " " %}  
+{%assign h1_use_fonts = settings.h1_use_fonts %}
+{%assign h1_google_font = settings.h1_google_font%}
+{%if h1_use_fonts %}
+  <link href="https://fonts.googleapis.com/css2?family={{h1_google_font}}:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+  {%- assign h1_font = h1_google_font | replace: "+", " " -%}
+  {%- assign h1_font_weight = settings.h1_font_weight -%}
+{%endif%}
+{%assign h2_use_fonts = settings.h2_use_fonts %}
+{%assign h2_google_font = settings.h2_google_font%}
+{%if h2_use_fonts %}
+  <link href="https://fonts.googleapis.com/css2?family={{h2_google_font}}:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+  {%- assign h2_font = h2_google_font | replace: "+", " " -%}
+  {%- assign h2_font_weight = settings.h2_font_weight -%}
+{%endif%}
+{%assign h3_use_fonts = settings.h3_use_fonts %}
+{%assign h3_google_font = settings.h3_google_font%}
+{%if h3_use_fonts %}
+  <link href="https://fonts.googleapis.com/css2?family={{h3_google_font}}:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+  {%- assign h3_font = h3_google_font | replace: "+", " " -%}
+  {%- assign h3_font_weight = settings.h3_font_weight -%}
+{%endif%}
+{%assign h4_use_fonts = settings.h4_use_fonts %}
+{%assign h4_google_font = settings.h4_google_font%}
+{%if h4_use_fonts %}
+  <link href="https://fonts.googleapis.com/css2?family={{h4_google_font}}:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+  {%- assign h4_font = h4_google_font | replace: "+", " " -%}
+  {%- assign h4_font_weight = settings.h4_font_weight -%}
+{%endif%}
+{%assign h5_use_fonts = settings.h5_use_fonts %}
+{%assign h5_google_font = settings.h5_google_font%}
+{%if h5_use_fonts %}
+  <link href="https://fonts.googleapis.com/css2?family={{h5_google_font}}:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+  {%- assign h5_font = h5_google_font | replace: "+", " " -%}
+  {%- assign h5_font_weight = settings.h5_font_weight -%}
+{%endif%}
+{%assign h6_use_fonts = settings.h6_use_fonts %}
+{%assign h6_google_font = settings.h6_google_font%}
+{%if h6_use_fonts %}
+  <link href="https://fonts.googleapis.com/css2?family={{h6_google_font}}:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+  {%- assign h6_font = h6_google_font | replace: "+", " " -%}
+  {%- assign h6_font_weight = settings.h6_font_weight -%}
+{%endif%}
+{%style%}
+body{
+	font-family: {{bd_font}}, sans-serif;;
+	font-weight: {{bd_font_weight}};
+}
+input,
+button{
+  	font-family: {{bd_font}};
+  }
+h1,.h1{
+	font-family: {%if h1_font != blank %}{{h1_font}}, sans-serif;{%else%}{{bd_font}}, sans-serif;{%endif%};
+	font-weight: {{h1_font_weight}};
+}
+h2,.h2{
+	font-family: {%if h2_font != blank %}{{h2_font}}, sans-serif;{%else%}{{bd_font}}, sans-serif;{%endif%};
+	font-weight: {{h2_font_weight}};
+}
+h3,.h3{
+	font-family: {%if h3_font != blank %}{{h3_font}}, sans-serif;{%else%}{{bd_font}}, sans-serif;{%endif%};
+	font-weight: {{h3_font_weight}};
+}
+h4,.h4{
+	font-family: {%if h4_font != blank %}{{h4_font}}, sans-serif;{%else%}{{bd_font}}, sans-serif;{%endif%};
+	font-weight: {{h4_font_weight}};
+}
+h5,.h5{
+	font-family: {%if h5_font != blank%}{{h5_font}}, sans-serif;{%else%}{{bd_font}}, sans-serif;{%endif%};
+	font-weight: {{h5_font_weight}};
+}
+h6,.h6{
+	font-family: {%if h6_font != blank%}{{h6_font}}, sans-serif;{%else%}{{bd_font}}, sans-serif;{%endif%};
+	font-weight: {{h6_font_weight}};
+}
+{%endstyle%}
+{%- endcapture -%}
+{{ google-font | strip_newlines | remove:"  "}}

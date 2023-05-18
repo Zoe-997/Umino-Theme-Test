@@ -1,0 +1,132 @@
+{%- unless template == 'index' -%}
+  <div class="breadcrumbs">
+    <div class="container">
+      <div class="outline-breadcrum">
+        <div class="wrap-breadcrum h_{{section.settings.h_position}} v_{{section.settings.v_position}}">
+          <div class="breadcrum text_{{section.settings.txt_align}}">
+ 		  {% if section.settings.show_title_page%}	
+          {%- if template contains 'collections' -%}
+          		{% assign name = 'Shop' %}  
+          {%- elsif template contains 'page' -%}
+          		{% assign name = page.title%}
+          {%- elsif template contains 'product' -%}
+              {%- if collection.url -%}
+          			{% assign name = collection.title %}              		
+              {%- endif -%}             
+          {%- elsif template contains 'collection' and collection.handle -%}
+              {% assign name = collection.title%} 
+          {%- elsif template == 'blog' -%}
+          		{% assign name = blog.title%}               
+          {%- elsif template == 'article' -%}              
+          	  {% assign name = article.title%}       
+          {%- else -%}
+          		{% assign name = template%}  
+          		{% if name contains '/' %}
+          			{% assign arr = name | split: '/' | last %}
+          		    {% assign name =  arr %}
+          		{% endif %}
+          {%- endif -%}
+          <h3 class="h3"> {{ name }} </h3>
+		  {%endif%}	
+          
+          <ul class="list-unstyled ">
+            <li><a href="{{ routes.root_url }}" >{{ 'layout.breadcrumbs.home' | t }}</a></li>
+            {%- if template contains 'page' -%}
+            <li><span>{{ page.title }}</span></li>
+            {%- elsif template contains 'collections' -%}  
+            <li><span>{{ 'layout.breadcrumbs.shop' | t }}</span></li>
+            {%- elsif template contains 'product' -%}
+            {%- if collection.url -%}
+            <li><a href="{{ collection.url }}">{{ collection.title }}</a></li>
+            {%- endif -%}
+            <li><span>{{ product.title }}</span></li>
+            {%- elsif template contains 'collection' and collection.handle -%}
+            {%- if current_tags -%}
+            {%- assign exceptions_filters = 'custom-filter|only_available=|page=' | split: '|' -%}
+            {%- assign correct_filters = 'page=|tag=|vendor=|type=|title=|price=' | split: '|' -%}
+            {%- assign filtered_current_tags = '' -%}
+            {%- for tag in current_tags -%}
+            {%- assign changed_tag = tag -%}
+            {%- for filter in exceptions_filters -%}
+            {%- if changed_tag contains filter -%}
+            {%- assign changed_tag = null -%}
+            {%- break -%}
+            {%- endif -%}
+            {%- endfor -%}
+            {%- for filter in correct_filters -%}
+            {%- if changed_tag contains filter -%}
+            {%- assign changed_tag = changed_tag | remove: filter -%}
+            {%- break -%}
+            {%- endif -%}
+            {%- endfor -%}
+            {%- if changed_tag != null -%}
+            {% capture filtered_current_tags %}{{ filtered_current_tags }}{% if filtered_current_tags != '' %}|{% endif %}{{ changed_tag }}{% endcapture %}
+            {%- endif -%}
+            {%- endfor -%}
+            {% capture url %}/collections/{{ collection.handle }}{% endcapture %}
+            <li>{{ collection.title | link_to: url }}</li>
+            {%- if filtered_current_tags != '' -%}
+            {%- assign filtered_current_tags = filtered_current_tags | split: '|' -%}
+            <li><span>{{ filtered_current_tags | join: ' + ' }}</span></li>
+            {%- endif -%}
+            {%- else -%}
+            <li><span>{{ collection.title }}</span></li>
+            {%- endif -%}
+            {%- elsif template == 'blog' -%}
+            {%- if current_tags -%}
+            <li>{{ template | link_to: "/blogs/news" }}</li>
+            <li><span>{{ current_tags | join: ' + '}}</span></li>
+            {%- else -%}
+            <li>{{ 'layout.breadcrumbs.blog' | t | link_to: "/blogs/news" }}</li>
+            <li><span>{{ blog.title }}</span></li>
+            {%- endif -%}
+            {%- elsif template == 'article' -%}
+            <li>{{ blog.title | link_to: blog.url }}</li>
+            <li><span>{{ article.title }}</span></li>
+            {%- elsif template == 'customers/login' -%}
+            	<li><span>{{ 'layout.breadcrumbs.login' | t }}</span></li>
+            {%- elsif template == 'customers/register' -%}
+            	<li><span>{{ 'layout.breadcrumbs.register' | t }}</span></li>
+            {%- else -%}
+                {% if template contains '/' %}
+                    {% assign arr = name | split: '/' | last %}
+                    {% assign name =  arr %}
+            	{% else %}
+            		{% assign name =  template %}
+                {% endif %}
+                <li><span>{{ name }}</span></li>
+            {%- endif -%}
+          </ul>
+          {%comment%}
+            {% if section.settings.show_n_p %}
+            {%- assign next_pr = collection.next_product -%}
+            {%- assign prev_pr = collection.previous_product -%}	
+
+            {%- if prev_pr or next_pr -%}
+            <div class="next_previous_product">
+
+              {%- if prev_pr -%}
+              <a href="{{prev_pr.url}}" class="prev_pr">
+                <i class="icon-chevron-left"></i><span class="prod_name">{{prev_pr.title}}</span>
+              </a>
+              {%- endif -%}
+
+              <a href="{{collection.url}}" class="back_to ">
+                <i class="icon-menu"></i><span class="text">{{'products.product.back_to' | t:title:collection.title}}</span>
+              </a>
+
+              {%- if next_pr -%}
+              <a href="{{next_pr.url}}" class="pl__5 pr__5 fs__18 cd chp ttip_nt tooltip_bottom_left">
+                <i class="icon-chevron-right"></i><span class="prod_name">{{next_pr.title}}</span>
+              </a>
+              {%- endif -%}
+            </div>
+            {%endif%}
+            {%- endif -%}
+            {%endcomment%}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{%- endunless -%}

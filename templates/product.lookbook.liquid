@@ -1,0 +1,95 @@
+{% include 'product-res-variables' %}
+{%- liquid
+  layout none
+   assign sett_equal = false
+   assign show_vendor = false
+   assign inc_price = settings.price_format
+   assign use_rating = settings.use_pr_rating 
+   assign inc_rating = settings.app_review 
+   assign show_color = settings.show_pr_color 
+   assign show_cl_type = settings.show_color_type
+   assign show_size = settings.show_pr_size 
+   -%}
+{%- assign show_label_in_stock = settings.product_collection_show_label_in_stock -%}
+{%- assign show_label_out_stock = settings.product_collection_show_label_out_stock -%}
+{%- assign show_label_sale = settings.product_collection_show_label_sale -%}
+{%- assign show_label_new =  settings.product_collection_show_label_new -%}
+{%- assign show_label_hot =  settings.product_collection_show_label_hot -%}
+{%- assign show_button_add_to_cart = settings.product_collection_show_button_add_to_cart -%}
+{%- assign show_button_quick_view = settings.product_collection_show_button_quick_view -%}
+{%- assign style_product = settings.content_style_product -%}
+
+<div class="pin__popup pa">
+  <div class="product-item">
+    <div class="product-collection" {% include 'product-get-attributes' %} >
+	
+    <div class="product-image">
+      <a href="{{ product.url | within: collection }}" class="image_product">
+      {% if current_img_url != blank%}  
+      <div data-image-effect class="pr_lazy_img main-img lazyload laber_bg_lz laber_img_1 " data-id="{{image.id}}" data-bgset="{{ image | img_url: '1x1' }}" data-parent-fit="width" data-wiis data-ratio="{{ratio}}" data-sizes="auto" style="padding-top:{{ 1 | divided_by: ratio | times: 100}}%;"></div>
+      {%endif%}
+      {% if img_hover_url != blank%}    
+        <div data-image-hover class="pr_lazy_img main-img lazyload laber_bg_lz laber_img_2 " data-id="{{image.id}}" data-bgset="{{ hover_image | img_url: '1x1' }}" data-parent-fit="width" data-wiis data-ratio="{{ratio}}" data-sizes="auto" style="padding-top:{{ 1 | divided_by: ratio | times: 100}}%;"></div>
+      {%endif%}
+      </a>
+      {%- if show_label_in_stock or show_label_out_stock or show_label_sale or show_label_new or show_label_hot -%}
+      {%- assign label_present = true -%}
+      {%- else -%}
+      {%- assign label_present = false -%}
+      {%- endif -%}
+      {%- if label_present -%}
+      <div class="product-image__overlay-top-left ">
+        {% include 'product-get-label' with product: product %}
+      </div>
+      {%- endif -%}
+      {%- if show_button_add_to_cart  or show_button_quick_view -%}
+      <div class="product-image__overlay-bottom">
+        <div class="group-button">
+          <div class="inner"> 
+            {% if show_button_add_to_cart%}
+            {% if product.available %}
+            <button type="submit" class="add-to-cart js_add_to_cart_button"  data-pid="{{ product.variants.first.id }}" data-js-product-button-add-to-cart>
+              <span class="icon">
+                <i class="laber-icon icon-shopping-bag" aria-hidden="true"></i>
+                <i aria-hidden="true" class="laber-loading fa fa-spinner fa-spin fa-3x fa-fw"></i>
+              </span>
+              <span class="text">{{'products.product.add_to_cart' | t  }}</span>
+            </button>
+            {% else %}
+            <a  class="add-to-cart js-btn-sold-out" onclick="location.href='{{ product.url | within: collection }}'">
+              <span class="icon">
+                <i class="icon-alert-circle" aria-hidden="true"></i>
+              </span>
+              <span class="text">{{'products.product.sold_out' | t  }}</span></a>
+            {% endif %}
+            {% endif %}
+            
+            {% if show_button_quick_view %}
+              <a href="{{ product.url | within: collection }}" data-pid="{{ product.variants.first.id }}" class="js_quick_view button-quick-view">
+                <i class="laber-icon icon-search"></i>
+                <i aria-hidden="true" class="laber-loading fa fa-spinner fa-spin fa-3x fa-fw"></i>
+                <span class="text">
+                {{settings.collection_page_quickview}}
+                </span>
+                  </a>
+            {% endif %}  
+          </div>
+        </div>
+      </div>
+      {%- endif -%}
+    </div>    
+  </div>
+    <div class="product-collection__content style_{{style_product}}"> 
+      <div class="product-collection__title">
+        <h4>
+          <a href="{{ product.url | within: collection }}" class="product-name">{{ product.title }}</a>
+        </h4>
+      </div>
+      <div class="frm-price-color">
+      <div class="product-collection__price ">
+        {% render 'product-get-price' with price: price compare_at_price: product.compare_at_price %}
+      </div>
+      </div>
+    </div>
+</div>  
+</div>

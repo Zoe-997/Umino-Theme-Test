@@ -1,0 +1,94 @@
+{%if forloop.first %}
+  <div class="{%if layout >= 4 %} list {% endif %} post-item {% if layout == 4%} full {% endif %}col-sm-12 col-md-{{cl_first}} {% if layout != 1 and layout != 4 and index == 1 %} even {% endif %}">    
+   <div class="item">
+    <div class="image-blog">
+    <a href="{{ article.url }}" title="{{ article.title }}">
+      <div class="pr_lazy_img lazyload laber_bg_lz item__position" data-bgset="{{ article.image.src | img_url: '1x1' }}" data-ratio="{{article.image.aspect_ratio}}" data-sizes="auto" style="padding-top:{{ 1 | divided_by: article.image.aspect_ratio | times: 100}}%;" ></div>
+    </a>
+    </div>
+     <div class="post-info">  
+       
+       <div class="blog"><a href="{{blog.url}}">{{blog.title}}</a></div>  
+       <div class="head head-article">
+         <div class="title_blog">
+           
+           <h3>
+             <a href="{{ article.url}}" class="post-title">{{ article.title }}</a>
+           </h3>  
+         </div>
+       </div>
+       <div class="main-info-post">
+         {% if article.excerpt.size > 0 %}
+         {{ article.excerpt | strip_html | truncatewords: numb_text_first}}         
+         {% else %}
+         <div class="des"><p>{{ article.content | strip_html | truncatewords: numb_text_first}}</p></div>
+         {% endif %}   
+       </div>
+       <ul class="meta-post">
+        <div class="icon-svg"><svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><defs><style>.cls-1{fill:none;}</style></defs><title></title><g data-name="Layer 2" id="Layer_2"><path d="M24,30H8a5,5,0,0,1-5-5,1,1,0,0,1,.06-.35A13.4,13.4,0,0,1,15.54,16h.92a13.4,13.4,0,0,1,12.48,8.65A1,1,0,0,1,29,25,5,5,0,0,1,24,30ZM5,25.17A3,3,0,0,0,8,28H24a3,3,0,0,0,3-2.83A11.39,11.39,0,0,0,16.46,18h-.92A11.39,11.39,0,0,0,5,25.17Z"></path><path d="M16,15a6,6,0,1,1,6-6A6,6,0,0,1,16,15ZM16,5a4,4,0,1,0,4,4A4,4,0,0,0,16,5Z"></path><path d="M24,30H8a5,5,0,0,1-5-5,1,1,0,0,1,.06-.35A13.4,13.4,0,0,1,15.54,16h.92a13.4,13.4,0,0,1,12.48,8.65A1,1,0,0,1,29,25,5,5,0,0,1,24,30ZM5,25.17A3,3,0,0,0,8,28H24a3,3,0,0,0,3-2.83A11.39,11.39,0,0,0,16.46,18h-.92A11.39,11.39,0,0,0,5,25.17Z"></path></g><g id="frame"><rect class="cls-1" height="32" width="32"></rect></g></svg></div>
+         <li class="author">{{article.author}}</li>
+         <li class="inner-date">
+           <span class="month">{{ article.created_at | date: "%B" }}</span>,
+           <span class="day">{{ article.created_at | date: "%d" }}</span>
+           <span class="year">{{ article.created_at | date: "%Y" }}</span>
+         </li>
+       </ul>
+             {% comment %}
+       <div class="read_more">
+         <a href="{{ article.url }}" title="{{ article.title }}">
+           {{'blogs.article.read_more' | t}}
+         </a>
+       </div>
+  {% endcomment %}
+     </div>
+    
+     </div>
+  </div>
+{% else%}
+  {% assign index = forloop.index | modulo: 2 %}
+  <div class="{%if layout >= 4 %} list {% endif %} post-item {% if layout == 4%} full {% endif %}col-sm-12 col-md-{{cl}} {% if layout != 1 and layout != 4 and index == 1 %} even {% endif %}">
+    <div class="item">
+    <div class="image-blog">
+    <a href="{{ article.url }}">
+      <div class="pr_lazy_img lazyload laber_bg_lz item__position" data-bgset="{{ article.image.src | img_url: '1x1' }}" data-ratio="{{article.image.aspect_ratio}}" data-sizes="auto" style="padding-top:{{ 1 | divided_by: article.image.aspect_ratio | times: 100}}%;" ></div>
+    </a>
+    </div>
+           <div class="post-info">  
+
+       <div class="blog"><a href="{{blog.url}}">{{blog.title}}</a></div>        
+       <div class="head head-article">
+         <div class="title_blog">
+           <h3>
+             <a href="{{ article.url}}" class="post-title">{{ article.title }}</a>
+           </h3>  
+         </div>
+       </div>
+       <div class="main-info-post">
+         {% if article.excerpt.size > 0 %}
+         {{ article.excerpt | strip_html | truncatewords: numb_text}}         
+         {% else %}
+         <div class="des"><p>{{ article.content | strip_html | truncatewords: numb_text}}</p></div>
+         {% endif %}   
+       </div>
+              <ul class="meta-post">
+<div class="icon-svg"><svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><defs><style>.cls-1{fill:none;}</style></defs><title></title><g data-name="Layer 2" id="Layer_2"><path d="M24,30H8a5,5,0,0,1-5-5,1,1,0,0,1,.06-.35A13.4,13.4,0,0,1,15.54,16h.92a13.4,13.4,0,0,1,12.48,8.65A1,1,0,0,1,29,25,5,5,0,0,1,24,30ZM5,25.17A3,3,0,0,0,8,28H24a3,3,0,0,0,3-2.83A11.39,11.39,0,0,0,16.46,18h-.92A11.39,11.39,0,0,0,5,25.17Z"></path><path d="M16,15a6,6,0,1,1,6-6A6,6,0,0,1,16,15ZM16,5a4,4,0,1,0,4,4A4,4,0,0,0,16,5Z"></path><path d="M24,30H8a5,5,0,0,1-5-5,1,1,0,0,1,.06-.35A13.4,13.4,0,0,1,15.54,16h.92a13.4,13.4,0,0,1,12.48,8.65A1,1,0,0,1,29,25,5,5,0,0,1,24,30ZM5,25.17A3,3,0,0,0,8,28H24a3,3,0,0,0,3-2.83A11.39,11.39,0,0,0,16.46,18h-.92A11.39,11.39,0,0,0,5,25.17Z"></path></g><g id="frame"><rect class="cls-1" height="32" width="32"></rect></g></svg></div>
+        
+         
+         <li class="author">{{article.author}}</li>
+         <li class="inner-date">
+           <span class="month">{{ article.created_at | date: "%B" }}</span>,
+           <span class="day">{{ article.created_at | date: "%d" }}</span>
+           <span class="year">{{ article.created_at | date: "%Y" }}</span>
+         </li>
+       </ul> 
+             {% comment %}
+       <div class="read_more">
+         <a href="{{ article.url }}" title="{{ article.title }}">
+           {{'blogs.article.read_more' | t}}
+         </a>
+       </div>
+  {% endcomment %}
+     </div>
+    </div>
+  </div>
+{% endif %}

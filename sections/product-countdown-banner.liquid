@@ -1,0 +1,257 @@
+{% liquid
+
+  assign sid = section.id 
+  assign sett_equal = section.settings.use_eq_height 
+  assign ck = section.settings.use_eq_height
+  
+  assign url = section.settings.button_link
+%}
+   
+{%- for i in (1..1) -%}
+<section id="laber_{{sid}}" class="laber_product-countdown-banner_{{sid}}">
+  <div class="laber_countdown_banner">
+    <div class="container wrap-infor  h_{{section.settings.h_position}} v_{{section.settings.v_position}} text_{{section.settings.txt_align}}">    
+      {%- assign image = section.settings.image -%}
+      {%- assign url = section.settings.url -%}
+      {%- assign url2 = section.settings.url2 -%}
+        <div class="product_count_down col-xs-12 col-sm-12 col-md-7" >
+          <div class="content-countdown">
+              <div class="product-inner">
+                	{% if section.settings.title != blank or section.settings.sub_title!= blank %}
+                    <div class="wrap_title ">
+                      {% if section.settings.title2 != blank %}
+                      <h4 class="title2">{{section.settings.title2}}</h4>  
+                      {% endif %}
+                      {% if section.settings.title != blank %}
+                      <h3 class="title1">{{section.settings.title}}</h3>  
+                      {% endif %}
+                      {% if section.settings.sub_title!= blank %}
+                      <span class="subtitle">{{section.settings.sub_title}}</span>
+                      {% endif %}
+                    </div>
+                    {% endif %}    
+                	{% if section.settings.title_countdown != blank %}
+               		 <p class="title_countdown h3">{{section.settings.title_countdown}}</p>
+                	{% endif %}
+                    {%- if section.settings.year_count_down != blank and section.settings.month_count_down != blank and section.settings.day_count_down != blank -%}
+                    <div class="cms-countdown" data-y="{{section.settings.year_count_down}}" data-m="{{section.settings.month_count_down}}" data-d="{{section.settings.day_count_down}}" data-h="00" data-i="00" data-s="00"></div>                    	
+                    {%- endif -%}
+                	
+                    <div class="laber_button">
+                      	{% if section.settings.btn != blank %}
+                    	<a class="button" href="{%- if url != blank -%}{{url}}{%- else -%}#{% endif %} " onMouseOver="this.style.backgroundColor='{{section.settings.bg_cl_hover}}'; this.style.color='{{section.settings.cl_btn_hover}}'" onMouseOut="this.style.backgroundColor='{{section.settings.bg_cl}}'; this.style.color='{{section.settings.cl_btn}}'"  style="color:{{section.settings.cl_btn}}; background-color:{{section.settings.bg_cl}};">{{ section.settings.btn}}</a>
+                    	{%endif%}
+                	</div>      
+              </div>                   
+          </div>
+      </div>
+    </div>
+  </div>
+</section>
+{%- endfor -%}
+{%- render 'section_style' -%} 
+{%- schema -%}
+  {
+    "name": "Bannner countdown",
+    "class": "cms_section type_product_countdown_banner",	
+    "settings": [
+      {
+        "type": "header",
+        "content": "== Product Settings"
+      },
+      {
+      "type": "image_picker",
+      "id": "bg_image",
+      "label": "Background image",
+	  "info": "1920x700.jpg recommended"
+      },
+	  {
+        "type": "color",
+        "id": "cl_bg",
+        "label": "Background color",
+        "default": "#fff"
+      },	
+      {
+        "type": "text",
+        "id": "title_countdown",
+        "label": "Title countdown",
+        "default": "hurry up! Offer End In:"
+      },
+      {
+      "type": "text",
+      "id": "year_count_down",
+      "label": "Year of countdown",
+      "default": "2021"
+      },
+      {
+      "type": "text",
+      "id": "month_count_down",
+      "label": "Month of countdown",
+      "default": "12"
+      },
+      {
+      "type": "text",
+      "id": "day_count_down",
+      "label": "Day of countdown",
+      "default": "30"
+      }, 
+      {
+        "type": "text",
+        "id": "btn",
+        "label": "Button Text",
+        "default": "Shop Now"
+      },
+	  {
+        "type": "url",
+        "id": "button_link",
+        "label": "Button link"
+      },
+	  {
+        "type": "header",
+        "content": "== Style Button"
+      },	
+      {
+        "type": "color",
+        "id": "cl_btn",
+        "label": "Button color ",
+        "default": "#fff"
+      },
+      {
+        "type": "color",
+        "id": "cl_btn_hover",
+        "label": "Button color (hover)",
+        "default": "#fff"
+      },
+      {
+        "type": "color",
+        "id": "bg_cl",
+        "label": "Button background color",
+		"default":"#1a73e8"
+      },
+      {
+        "type": "color",
+        "id": "bg_cl_hover",
+        "label": "Button background color (hover)",
+		"default":"#343e45"
+      }, 
+      {
+        "type": "header",
+        "content": "== General Settings"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading",
+        "default": "Special Offers"
+      },
+      {
+      "type": "text",
+      "id": "title2",
+      "label": "Heading2",
+      "default": "Hurry Up! 25% Off"
+      },
+      {
+        "type": "textarea",
+        "id": "sub_title",
+        "label": "Sub Text",
+		"default":"Class aptent taciti sociosqu ad litora torquent per conubia"
+      }, 
+	  {
+        "type": "header",
+        "content": "== Setting Sections"
+      },	
+{
+        "type": "select",
+        "id": "h_position",
+        "label": "Horizontal Position",
+        "default": "left",
+        "options": [
+            {
+            "value": "left",
+            "label": "Left"
+            },
+            {
+            "value": "center",
+            "label": "Center"
+            },
+            {
+            "value": "right",
+            "label": "Right"
+            }
+          ]
+        },
+        {
+        "type": "select",
+        "id": "v_position",
+        "label": "Vertical Position",
+        "default": "top",
+        "options": [
+            {
+            "value": "top",
+            "label": "Top"
+            },
+            {
+            "value": "middle",
+            "label": "Middle"
+            },
+            {
+            "value": "bottom",
+            "label": "Bottom"
+            }
+          ]
+        },
+		{
+            "type": "select",
+            "id": "txt_align",
+            "label": "Text Align",
+            "default": "left",
+            "options": [
+              {
+                "value": "left",
+                "label": "Left"
+              },
+              {
+                "value": "center",
+                "label": "Center"
+              },
+              {
+                "value": "right",
+                "label": "Right"
+              }
+            ]
+          },
+      {
+        "type": "text",
+        "id": "mg",
+        "label": "Margin",
+        "info":"Margin top, margin right, margin bottom, margin left. If you not use to blank"
+      },
+      {
+        "type": "text",
+        "id": "pd",
+        "label": "Padding",
+        "info":"Padding top, padding right, padding bottom, padding left. If you not use to blank"
+      },
+     {
+        "type": "header",
+        "content": "== Design Mobile Options"
+      },
+      {
+        "type": "text",
+        "id": "mg_mb",
+        "label": "Margin"
+      },
+      {
+        "type": "text",
+        "id": "pd_mb",
+        "label": "Padding"
+      }
+    ],	
+    "presets": [
+      {
+        "name": "Bannner countdown",
+        "category": "Products"
+      }
+    ]
+  }
+{% endschema %}

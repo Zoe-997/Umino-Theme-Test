@@ -1,0 +1,56 @@
+{%- liquid
+	assign on_sale = false
+	assign image = product.images[0]
+    assign image2 = product.images[1]
+	if product.compare_at_price_min > product.price_min
+	  assign on_sale = true 
+	endif -%}
+{%- assign ratio = image.aspect_ratio -%}
+{%- assign ratio2 = image2.aspect_ratio -%}
+<div class="item">  
+  <div class="product-item">
+      <div class="product-image">
+          {%- if image != blank %}{% assign img_url = image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+          	<a href="{{product.url | within: c}}" class="image_product">
+            	<div data-image-effect class="pr_lazy_img main-img lazyload laber_bg_lz  " data-id="{{image.id}}" data-bgset="{{ image | img_url: '1x1' }}" data-parent-fit="width" data-wiis data-ratio="{{ratio}}" data-sizes="auto" style="padding-top:{{ 1 | divided_by: ratio | times: 100}}%;"></div>
+        		<div data-image-effect class="pr_lazy_img main-img lazyload laber_bg_lz laber_img_2" data-id="{{image2.id}}" data-bgset="{{ image2 | img_url: '1x1' }}" data-parent-fit="width" data-wiis data-ratio="{{ratio2}}" data-sizes="auto" style="padding-top:{{ 1 | divided_by: ratio2 | times: 100}}%;"></div>
+        	</a>
+        {%- endif -%}
+        {%comment%}
+        {%if product.compare_at_price > product.price %}
+        <div class="product-image__overlay-top-left ">
+        {%- if settings.label_sale_style == '1' -%}
+        <span class="label label--sale">{{ on_sale_txt }}</span>
+        {%- else-%}
+        {%- assign save = product.compare_at_price | minus: product.price | times: 100.0 | divided_by: product.compare_at_price | ceil -%}
+        <span class="label label--sale">{{ save_js | replace:'saved_amount',save }}</span>
+        {% endif -%}
+        </div>  
+        {%endif%}
+        {%endcomment%}
+      </div>
+      <div class="product-content">
+           <a class="product-title " href="{{product.url | within: c}}">{{ product.title }}</a>
+        <div class="product-price">
+          
+         {%- if product.price_varies -%}
+         	 {{ product.price_min | money }}–{{ product.price_max | money }}
+          
+          {%- elsif on_sale -%}
+          		<span class="current">{{ product.price | money }}</span>
+          		<span class="compare">
+                  	{{ product.compare_at_price  | money }}
+          		</span> 
+          			
+          		
+          
+          		
+          		
+          {%- else -%}
+          {{ product.price | money }}
+          {%- endif -%}
+          
+        </div>
+      </div>
+    </div>
+</div>

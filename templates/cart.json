@@ -1,0 +1,79 @@
+{
+  "sections": {
+    "breadcrumb": {
+      "type": "breadcrumb",
+      "settings": {
+        "show_title_page": true,
+        "h_position": "center",
+        "v_position": "middle",
+        "txt_align": "center",
+        "bg_breadcrumb_blog": "shopify:\/\/shop_images\/bg_breadcrumb.jpg",
+        "bg": "#f7f7f9",
+        "b_height": 200,
+        "mg_bottom": 0,
+        "mobile_bg": "#f7f7f9",
+        "mobile_ht": 120,
+        "mobile_mg_bottom": 0
+      }
+    },
+    "main": {
+      "type": "main-cart",
+      "settings": {
+        "show_order_note": true,
+        "show_coupon": true,
+        "cl_bg": "#ffffff",
+        "mg": "",
+        "pd": "80px,0,80px,0",
+        "mg_mb": "",
+        "pd_mb": "50px,0,50px,0"
+      }
+    },
+    "2b2e3aa9-c81e-496e-bb9d-88ca73e288dc": {
+      "type": "collection-carousel-product",
+      "settings": {
+        "title": "New arrivals",
+        "sub_title": "",
+        "content": "Commodo sociosqu venenatis cras dolor sagittis integer luctus maecenas.",
+        "style_title": "style_1",
+        "collection": "accessories",
+        "max_count": 8,
+        "use-slider": true,
+        "slides-To-Scroll": 1,
+        "visible": 5,
+        "widescreen": 5,
+        "desktop": 4,
+        "laptop": 4,
+        "notebook": 3,
+        "tablet": 3,
+        "landscape": 2,
+        "portrait": 2,
+        "mobile": 1,
+        "rows": 1,
+        "autoplay": false,
+        "speed": "300",
+        "autoplay-Speed": "3000",
+        "arrows": true,
+        "fade": false,
+        "center-Mode": false,
+        "adaptive-Height": false,
+        "dots": false,
+        "infinite": false,
+        "padding": 10,
+        "vertical": false,
+        "show_view_all": false,
+        "use_eq_height": true,
+        "image_ratio": "ratio_nt",
+        "cl_bg": "#fff",
+        "mg": ",,80px,",
+        "pd": "",
+        "mg_mb": ",,30px,",
+        "pd_mb": ""
+      }
+    }
+  },
+  "order": [
+    "breadcrumb",
+    "main",
+    "2b2e3aa9-c81e-496e-bb9d-88ca73e288dc"
+  ]
+}

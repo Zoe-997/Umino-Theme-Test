@@ -1,0 +1,7 @@
+{%- liquid
+  layout none
+	capture html
+		section 'vertical_menu'
+	endcapture
+	assign arr =  html | split:'[cmshero]' 
+	echo arr[1] -%}

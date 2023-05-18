@@ -1,0 +1,24 @@
+{% if settings.instagram_use_chk %}
+    {{ 'instafeed.min.js' | asset_url | script_tag }}
+	<div id="instafeed" class="list">      
+      
+    </div>   
+    {% assign instafeed_img = '{{image}}' %}
+    {% assign instafeed_link = '{{link}}' %}
+    <script>
+      jQuery(document).ready(function(){
+        var feed = new Instafeed({
+          get: 'user',
+          userId: '{{settings.sidebar_user_id}}',
+          accessToken: '{{settings.sidebar_accessToken}}',
+          sortBy: 'most-recent',
+          limit: {{settings.sidebar_limit}},
+          template: '<a class="banner-effect1" href="{{instafeed_link}}"><img src="{{instafeed_img}}" alt=""></a>'
+        });
+        feed.run();
+      });
+      $(window).load(function() {
+        $('#instafeed a:empty').remove()
+      });
+    </script>
+{% endif %}

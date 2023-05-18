@@ -1,0 +1,11 @@
+{%- assign rtlClasses = '' -%}
+{%- if settings.rtl -%}
+  {%- assign classesRtl = 'rtl' -%}
+{%- endif -%}
+{%- assign rtlCountries = settings.rtl_code | downcase | split:' ' -%}    
+{%- for code in rtlCountries -%}
+    {%- assign code = code | strip -%}
+    {% if shop.locale == code %}
+        {%- assign rtlClasses = 'rtl' -%}
+    {%- endif -%} 
+{%- endfor -%}

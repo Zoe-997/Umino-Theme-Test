@@ -1,0 +1,19 @@
+{%- liquid
+  	assign icon = block.settings.icon  
+ 	assign img_size = '40x'  -%}
+
+{%- if block.settings.icons_op == '2' and icon != blank %}
+	<i class="fa {{icon}}"></i>
+{%- elsif block.settings.icons_op == '1' and block.settings.image != blank %}
+    <span class="icon">
+      <img class="img_cat" src="{{block.settings.image | img_url:img_size }}" alt="{{block.settings.image.alt}}">
+    </span>
+{% endif -%}
+
+{{block.settings.title }}
+
+{% if block.settings.lb != blank %}
+    <span class="lbl_heading_cat" style="background-color: {{block.settings.lb_cl}}">
+    	{{block.settings.lb}}
+    </span>
+{% endif -%}

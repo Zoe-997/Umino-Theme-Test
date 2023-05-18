@@ -1,0 +1,245 @@
+{%assign sid = section.id %}
+<section id="laber_{{sid}}" class="laber_blog_style2_{{sid}}">
+<div class="main-content shop-page shoppingcart-content">
+  <div class="container wrap-cart">    
+    {% if cart.item_count > 0 %} 
+    	<form action="/cart" method="post" novalidate class="cart">
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 left">
+            
+            <div class="cart-content">
+              {% include 'free-shipping' %} 
+              <table class="shopping-cart-content">
+                <tr class="title"> 
+                  <td class="delete-item"><div></div></td>
+                  <td class="product-name"><div class="h3">{{'cart.label.product'|t}}</div></td>
+                  <td class="price"><div class="h3">{{'cart.label.price'|t}}</div></td>
+                  <td class="quantity-item"><div class="h3">{{'cart.label.quantity'|t}}</div></td>	
+                  <td class="total"><div class="h3">{{'cart.label.total'|t}}</div></td>
+                  
+                </tr>
+                {% for item in cart.items %}
+                
+                <tr class="each-item" id="item-id-{{ item.id }}">     
+                  <td class="delete-item" data-title="Remove">
+                    <a href="{{ routes.cart_change_url }}?line={{ forloop.index }}&amp;quantity=0">
+                    	<i class="icondelete icon-x"></i>
+                      	<div class="laber-loading">
+                      		<div class="circle-loadding"><span></span></div>
+                      	</div>
+                  	</a>
+                  </td>
+                  <td class="product-name" data-title="{{'cart.label.product'|t}}">
+                    <div class="wrap_item_cart">
+                      <a class="product-thumb img" href="{{ item.url }}" title="{{ item.product.title }}">
+                      	<img class="lazyload" data-src="{{ item | img_url: 'grande' }}" width="100" alt="{{item.title}}" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
+                      </a>
+                      <div class="wrap_title_cart">
+                        {%comment%}<span>{{ item.product.collections[0].title }}</span>{%endcomment%}
+                        <a href="{{ item.url }}" title="{{ item.product.title }}" class="product-name">{{ item.product.title }}</a>
+                        {%- if item.product.has_only_default_variant == false or item.properties.size != 0 or item.selling_plan_allocation != nil -%}
+                          <dl>
+                            {%- if item.product.has_only_default_variant == false -%}
+                              {%- for option in item.options_with_values -%}
+                                <div class="product-option">
+                                  <dt>{{ option.name }}: </dt>
+                                  <dd>{{ option.value }}</dd>
+                                </div>
+                              {%- endfor -%}
+                            {%- endif -%}
+
+                            {%- for property in item.properties -%}
+                              {%- assign property_first_char = property.first | slice: 0 -%}
+                              {%- if property.last != blank and property_first_char != '_' -%}
+                                <div class="product-option">
+                                  <dt>{{ property.first }}: </dt>
+                                  <dd>
+                                    {%- if property.last contains '/uploads/' -%}
+                                      <a href="{{ property.last }}" class="link" target="_blank">
+                                        {{ property.last | split: '/' | last }}
+                                      </a>
+                                    {%- else -%}
+                                      {{ property.last }}
+                                    {%- endif -%}
+                                  </dd>
+                                </div>
+                              {%- endif -%}
+                            {%- endfor -%}
+                          </dl>
+                          <p class="product-option">{{ item.selling_plan_allocation.selling_plan.name }}</p>
+                        {%- endif -%}
+                      </div>
+                    </div>
+                  </td>
+                  <td class="price" data-title="{{'cart.label.price'|t}}">
+                    <div class="cart_price">          
+                    {%- assign item_compare_price = item.variant.compare_at_price | default:item.original_price |times:item.quantity -%}
+                    {%- assign compare_tt_price = compare_tt_price | plus:item_compare_price -%}
+                    {%- if item.original_price != item.final_price -%}{%- assign final_price = item.final_price -%}
+                    <ins>{{ item.final_price | money }}</ins> <del>{{ item.original_price | money }}</del>
+                    {%- elsif item.variant.compare_at_price > item.original_price  -%}{%- assign final_price = item.final_price -%}
+                    <ins>{{ item.final_price | money }}</ins> <del>{{ item.variant.compare_at_price | money }}</del>
+                    {%- else -%}{%- assign final_price = item.original_price -%}
+                    {{ item.original_price | money }}
+                    {%- endif -%}
+                    </div>
+                  </td>
+                  <td class="quantity-item" data-title="{{'cart.label.quantity'|t}}">
+                    <div class="quantity-cart">
+                      <div class="group-quantity-button js-quantity">
+                        <a class="minus js_minus" href="javascript:void(0);"><svg width="20" height="20" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><g><path d="M 9,18l 16,0 C 25.552,18, 26,17.552, 26,17C 26,16.448, 25.552,16, 25,16l-16,0 C 8.448,16, 8,16.448, 8,17 C 8,17.552, 8.448,18, 9,18z"></path></g></svg></a>
+                        <input id="updates_{{ item.id }}" data-min="1" data-max="{{item.product.variants.first.inventory_quantity}}" class="input-text qty js_qty" type="text" size="4" title="Qty" name="updates[]" value="{% if item.quantity < 10%}0{% endif %}{{ item.quantity }}">
+                        <a class="plus js_plus" href="javascript:void(0);">
+                        	<svg width="20" height="20" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" ><g><path d="M 9,18L 16,18 l0,7 C 16,25.552, 16.448,26, 17,26S 18,25.552, 18,25L 18,18 l 7,0 C 25.552,18, 26,17.552, 26,17 C 26,16.448, 25.552,16, 25,16L 18,16 L 18,9 C 18,8.448, 17.552,8, 17,8S 16,8.448, 16,9L 16,16 L 9,16 C 8.448,16, 8,16.448, 8,17C 8,17.552, 8.448,18, 9,18z"></path></g></svg>
+                        </a>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="total" data-title="{{'cart.label.total'|t}}">{{ item.line_price | money }}</td>
+                  
+                </tr>
+                {% endfor %}
+                <tr class="checkout-cart group-button">
+                  <td colspan="6" class="left">
+                    <div class="left">
+                      <a class="btn" href="{{ routes.root_url }}" class="continue-shopping submit">
+                        <span>{{'cart.general.continue_shopping' | t }}</span>
+                      </a>
+                    </div>
+                    <div class="right">
+                      <a href="javascript:void(0);" class="update clear-cart">
+                        <span class="icon_cart">
+                          <i class="icon-trash-2"></i>
+                        </span>
+                        <span>{{ 'cart.general.cancel' |t}}</span>
+                      </a>
+                      <button type="submit" class="submit update">
+                       
+                          <span>{{ 'cart.general.update' | t }}</span>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              </table>
+                       
+            </div>
+          </div>
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4">
+            {%if section.settings.show_coupon%}
+            <div class="coupon">
+            <h3 class="coupon-title">{{'cart.general.coupon' | t}}</h3>
+            <p>{{'cart.general.info_coupon' | t}}</p>
+            <input type="text" name="discount" id="couponcode" value="" placeholder="{{'cart.general.placeholder_coupon' | t}}">
+            </div>
+            {%endif%}
+            
+            {%if section.settings.show_order_note%}
+            <div class="add-order-note">
+              
+              <h3 class="title">{{'cart.general.order_note_title' | t}}</h3>
+              <textarea name="note" id="CartSpecialInstructions" class="cart-note__input" placeholder="{{'cart.general.order_note_text'| t}}"></textarea>
+            </div>
+            {%endif%}
+          </div>
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4">
+            {%if settings.shipping_calculator =='Enabled'%}
+              {% include 'shipping-calculator' %}
+            {%endif%}
+          </div>
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 right">
+              
+            <div class="content cart-total">
+              <h5 class="title h3">{{ 'cart.general.cart_total' | t }}</h5>
+              <div class="info-checkout">
+                <span class="text">{{'cart.general.subtotal' | t}} </span><span class="item subtotal">{{ cart.total_price | money }}</span>
+              </div>
+              <div class="info-checkout">
+                <span class="text">{{'cart.general.total' | t}} </span><span class="item total">{{ cart.total_price | money }}</span>
+              </div>
+			  <div class="cart__shipping_note note" data-shipping-note="">{{ 'cart.general.shipping_note' | t }}</div>	
+              <div class="group-button">
+                <button type="submit" data-confirm="ck_lumise" name="checkout" class="btn_checkout button submit">{{ 'cart.general.checkout' | t }}</button>
+
+              </div>
+            </div>
+          </div>  
+          
+        </div>
+    	</form>     
+    {% else %}	
+    <div class="row content-form">
+      <div class="container proceed-checkout">
+        <p class="main-title">{{ 'cart.general.empty' | t }}</p>
+        <div class="group-button">
+        	<a href="{{ routes.root_url }}" class="button submit">{{ 'cart.general.continue_shopping' | t }}</a>   
+        </div> 
+      </div>
+    </div>
+    {% endif %}
+  </div>
+</div>
+</section>
+{%- render 'section_style' -%} 
+{%style%}
+	body {
+		background-color: {{section.settings.cl_bg}};
+	}
+{%endstyle%}
+{% schema %}
+{
+  "name": "Cart",
+  "tag": "section",
+  "class": "spaced-section",
+    "settings": [ 
+      {
+      "type": "header",
+      "content": "Settings"
+      },
+      {
+      "type": "checkbox",
+      "id": "show_order_note",
+      "label": "Show Order Note",
+      "default": true
+      },
+      {
+      "type": "checkbox",
+      "id": "show_coupon",
+      "label": "Show Coupon",
+      "default": true
+      },
+      {
+        "type": "color",
+        "id": "cl_bg",
+        "label": "Background color",
+        "default": "#fff"
+      },
+	        {
+        "type": "text",
+        "id": "mg",
+        "label": "Margin",
+        "info":"Margin top, margin right, margin bottom, margin left. If you not use to blank"
+      },
+      {
+        "type": "text",
+        "id": "pd",
+        "label": "Padding",
+        "info":"Padding top, padding right, padding bottom, padding left. If you not use to blank"
+      },
+     {
+        "type": "header",
+        "content": "== Design Mobile Options"
+      },
+      {
+        "type": "text",
+        "id": "mg_mb",
+        "label": "Margin"
+      },
+      {
+        "type": "text",
+        "id": "pd_mb",
+        "label": "Padding"
+      } 
+	]
+
+}
+{% endschema %}

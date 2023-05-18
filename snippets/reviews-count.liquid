@@ -1,0 +1,17 @@
+{%- assign product_reviews_count = 0 -%}
+{%- if product.metafields.spr.reviews -%}
+
+  {%- capture review_data -%}{{ product.metafields.spr.reviews }}{%- endcapture -%}
+
+  {%- if review_data contains '"votes"' -%}
+    {%- assign keyword = '"votes"' -%}
+  {%- else  -%}
+    {%- assign keyword = '"reviewCount"' -%}
+  {%- endif -%}
+
+  {%- assign rd_a1 = review_data | split: keyword -%}
+  {%- assign rd_a2 = rd_a1[1] | split: ":" -%}
+  {%- assign rd_a3 = rd_a2[1] | split: '"' -%}
+  {%- assign product_reviews_count = rd_a3[1] | plus: 1 | minus: 1 -%}
+
+{%- endif -%}

@@ -1,0 +1,39 @@
+{%- comment -%}badge_Sale{%- endcomment-%}
+{%- liquid
+if settings.use_new_label 
+   assign nowTimestamp = 'now' | date: '%s' 
+   assign new_day_int = settings.new_day | default: 10 
+endif
+assign pr_tags = product.tags | downcase
+assign on_sale = false
+if settings.use_sale_label and product.compare_at_price > product.price 
+  unless pr_tags contains 'notsale'
+    assign on_sale = true 
+  endunless 
+endif 
+assign sold_out = true 
+if product.available or settings.use_sold_out_label == false 
+  assign sold_out = false 
+endif
+assign new_label = false
+unless settings.use_new_label == false or pr_tags contains "notnew"
+  assign dateStart = product.created_at | date: '%s'
+  assign diffSeconds = nowTimestamp | minus: dateStart 
+  assign diffDays = diffSeconds | divided_by: 3600 | divided_by: 24
+  if diffDays <= new_day_int 
+     assign new_label = true 
+  endif
+endunless
+assign prTags = product.tags | join:','
+assign hd_up = 'group-' |append:product.id-%}
+
+<span class="tc nt_labels pa pe_none cw">
+  {%- if on_sale and settings.use_sale_label and linklists[hd_up].links.size == 0 -%}
+  {%- if settings.label_sale_style == '1' -%}<span class="nt_label onsale">{{ 'products.product.on_sale' | t }}</span>{%- else-%}{%- assign save = product.compare_at_price | minus: product.price | times: 100.0 | divided_by: product.compare_at_price | ceil -%}<span class="onsale nt_label">{{ 'products.product.save_js' | t: saved_amount:save }}</span>{%- endif -%}{%- endif -%}
+  {%- if new_label -%}<span class="nt_label new">{{ 'products.product.new' | t }}</span>{%- endif -%}
+  {%- assign badge_tags = product.tags | where: "badge_" -%}
+  {%- if badge_tags.size > 0 -%}
+      {%- for tag in badge_tags limit:3 -%}{%- assign badgeTag = tag | remove: "badge_" -%}<span class="nt_label {{badgeTag | handle}}">{{ badgeTag | capitalize}}</span>{%- endfor -%}
+  {%- endif -%}
+  {%- if sold_out -%}<span class="nt_label out-of-stock">{{ 'products.product.sold_out' | t }}</span>{%- endif -%}
+</span>

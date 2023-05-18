@@ -1,0 +1,7 @@
+<div class="spr{% if hide_counter %} spr--text-hide{% endif %}">
+    <span class="shopify-product-reviews-badge" data-id="{{ id }}">
+        {%- if settings.product_show_review_loading -%}
+            {{ 'products.product.reviews.loading' | t }}
+        {%- endif -%}
+    </span>
+</div>

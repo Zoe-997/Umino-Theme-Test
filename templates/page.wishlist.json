@@ -1,0 +1,49 @@
+{
+  "sections": {
+    "breadcrumb": {
+      "type": "breadcrumb",
+      "settings": {
+        "show_title_page": false,
+        "h_position": "left",
+        "v_position": "middle",
+        "txt_align": "center",
+        "bg": "#f2f2f6",
+        "b_height": 70,
+        "mg_bottom": 0,
+        "mobile_bg": "#f5f5f5",
+        "mobile_ht": 50,
+        "mobile_mg_bottom": 0
+      }
+    },
+    "main": {
+      "type": "wishlist",
+      "settings": {
+        "title": "Your favourite product",
+        "sub_title": "~ Wishlist Products ~",
+        "content": "Commodo sociosqu venenatis cras dolor sagittis integer luctus maecenas.",
+        "visible": 6,
+        "widescreen": 5,
+        "desktop": 4,
+        "laptop": 4,
+        "notebook": 3,
+        "tablet": 3,
+        "landscape": 2,
+        "portrait": 2,
+        "mobile": 1,
+        "padding": 10,
+        "use_eq_height": true,
+        "image_ratio": "ratio3_4",
+        "layout": false,
+        "cl_bg": "rgba(0,0,0,0)",
+        "mg": "",
+        "pd": "100px,0,100px,0",
+        "mg_mb": "",
+        "pd_mb": "50px,0,50px,0"
+      }
+    }
+  },
+  "order": [
+    "breadcrumb",
+    "main"
+  ]
+}

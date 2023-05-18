@@ -1,0 +1,244 @@
+{
+  "sections": {
+    "breadcrumb": {
+      "type": "breadcrumb",
+      "settings": {
+        "show_title_page": true,
+        "h_position": "center",
+        "v_position": "middle",
+        "txt_align": "center",
+        "bg_breadcrumb_blog": "shopify:\/\/shop_images\/bg_breadcrumb.jpg",
+        "bg": "#f7f7f9",
+        "b_height": 200,
+        "mg_bottom": 0,
+        "mobile_bg": "#f7f7f9",
+        "mobile_ht": 50,
+        "mobile_mg_bottom": 0
+      }
+    },
+    "main": {
+      "type": "main-about",
+      "blocks": {
+        "d205ec2d-202a-4f1a-b3de-9d19d37a0891": {
+          "type": "banner_img",
+          "settings": {
+            "image_sl": "shopify:\/\/shop_images\/bannner_03.jpg",
+            "link": "shopify:\/\/products\/proenza-schouler-white-label-5",
+            "width": "6",
+            "mg": "",
+            "pd": "",
+            "mg_mb": ",,30px,",
+            "pd_mb": ""
+          }
+        },
+        "bd5b7c04-af26-4be3-8c31-174bed898a73": {
+          "type": "content",
+          "settings": {
+            "title": "We Help Your<br> Digital Business Grow",
+            "sub_title": "About us Welcome to sofine",
+            "content": "<p>We provide digital experience services to startups and small businesses. We help our clients succeed by creating brand identities, digital experiences, and print materials. Sed trspiciatis unde omnis iste natus error sit voluptatem accusantium.<\/p>\n<ul>\n\t<li>\n<i class=\"icon-check\"><\/i> Track your daily activity.<\/li>\n\t<li>\n<i class=\"icon-check\"><\/i> Start a private group video call.<\/li>\n\t<li>\n<i class=\"icon-check\"><\/i> All the lorem ipsum generators on the Internet.<\/li>\n<\/ul>",
+            "width": "6",
+            "h_position": "right",
+            "v_position": "middle",
+            "txt_align": "left",
+            "mg": "",
+            "pd": ",,,50px",
+            "mg_mb": "",
+            "pd_mb": "0,0,0,0"
+          }
+        },
+        "239d35fe-d696-4a3d-8540-6b7bc9b433f5": {
+          "type": "video",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/1_3.jpg",
+            "use_border": true,
+            "video_url": "https:\/\/www.youtube.com\/watch?v=_9VUPq3SxOc",
+            "width": "12",
+            "mg": "",
+            "pd": "100px,0,0,0",
+            "mg_mb": "",
+            "pd_mb": "20px,0,0,0"
+          }
+        },
+        "7ec52b22-ede8-41d7-aaba-661dcaea9f0e": {
+          "type": "text",
+          "settings": {
+            "title": "Meet the team member",
+            "subheading": "Our Team",
+            "text": "",
+            "button_label": "",
+            "button_link": "",
+            "width": "12",
+            "h_position": "center",
+            "v_position": "middle",
+            "txt_align": "center",
+            "mg": "",
+            "pd": "100px,0,30px,0",
+            "mg_mb": "",
+            "pd_mb": ""
+          }
+        },
+        "8b611b4a-7287-416c-80cb-e2e80706a3a2": {
+          "type": "image_card",
+          "settings": {
+            "width": "3",
+            "h_position": "left",
+            "v_position": "top",
+            "txt_align": "left",
+            "image": "shopify:\/\/shop_images\/team_1.jpg",
+            "link": "shopify:\/\/products\/proenza-schouler-white-label-3",
+            "title": "George S.",
+            "subtitle": "Founder \/ Ceo",
+            "button_label": "",
+            "mg": ",,30px,",
+            "pd": "",
+            "mg_mb": ",,30px,",
+            "pd_mb": ""
+          }
+        },
+        "ec6b8243-afb8-4ffa-9806-3be22ef594e4": {
+          "type": "image_card",
+          "settings": {
+            "width": "3",
+            "h_position": "left",
+            "v_position": "top",
+            "txt_align": "left",
+            "image": "shopify:\/\/shop_images\/team_2.jpg",
+            "link": "shopify:\/\/products\/proenza-schouler-white-label-12",
+            "title": "George S.",
+            "subtitle": "Founder \/ Sales Manager",
+            "button_label": "",
+            "mg": ",,30px,",
+            "pd": "",
+            "mg_mb": ",,30px,",
+            "pd_mb": ""
+          }
+        },
+        "7b377389-9868-473a-9b42-9496a2461699": {
+          "type": "image_card",
+          "settings": {
+            "width": "3",
+            "h_position": "left",
+            "v_position": "top",
+            "txt_align": "left",
+            "image": "shopify:\/\/shop_images\/team_3.jpg",
+            "link": "shopify:\/\/products\/proenza-schouler-white-label-18",
+            "title": "George S.",
+            "subtitle": "Fashion Designer",
+            "button_label": "",
+            "mg": ",,30px,",
+            "pd": "",
+            "mg_mb": ",,30px,",
+            "pd_mb": ""
+          }
+        },
+        "65aed5c3-896c-4782-b42e-ae358781549b": {
+          "type": "image_card",
+          "settings": {
+            "width": "3",
+            "h_position": "left",
+            "v_position": "top",
+            "txt_align": "left",
+            "image": "shopify:\/\/shop_images\/team_4.jpg",
+            "link": "shopify:\/\/products\/proenza-schouler-white-label-21",
+            "title": "George S.",
+            "subtitle": "Founder \/ Ceo",
+            "button_label": "",
+            "mg": ",,30px,",
+            "pd": "",
+            "mg_mb": ",,30px,",
+            "pd_mb": ""
+          }
+        }
+      },
+      "block_order": [
+        "d205ec2d-202a-4f1a-b3de-9d19d37a0891",
+        "bd5b7c04-af26-4be3-8c31-174bed898a73",
+        "239d35fe-d696-4a3d-8540-6b7bc9b433f5",
+        "7ec52b22-ede8-41d7-aaba-661dcaea9f0e",
+        "8b611b4a-7287-416c-80cb-e2e80706a3a2",
+        "ec6b8243-afb8-4ffa-9806-3be22ef594e4",
+        "7b377389-9868-473a-9b42-9496a2461699",
+        "65aed5c3-896c-4782-b42e-ae358781549b"
+      ],
+      "settings": {
+        "hidden": false,
+        "show_border": true,
+        "layout": "container",
+        "cl_bg": "#ffffff",
+        "mg": "",
+        "pd": "80px,0,0,0",
+        "mg_mb": "",
+        "pd_mb": "50px,0,0,0"
+      }
+    },
+    "1663902863c3cfa3d8": {
+      "type": "benefit",
+      "blocks": {
+        "1279d925-219a-4f6d-a2d4-fb853a86819e": {
+          "type": "shipping",
+          "settings": {
+            "icon": "fa fa-truck",
+            "icon_img": "shopify:\/\/shop_images\/icon_1.png",
+            "title": "40,000+ Happy Customer",
+            "text": "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+          }
+        },
+        "a7348ac7-7b2e-4192-92e5-62e29b658e7c": {
+          "type": "shipping",
+          "settings": {
+            "icon": "fa fa-truck",
+            "icon_img": "shopify:\/\/shop_images\/icon_2.png",
+            "title": "12 Awards Won",
+            "text": "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
+          }
+        },
+        "fd18fa67-cd02-4fcc-89f2-f4f9a96489c0": {
+          "type": "shipping",
+          "settings": {
+            "icon": "fa fa-truck",
+            "icon_img": "shopify:\/\/shop_images\/icon_3.png",
+            "title": "16 Years of Experience",
+            "text": "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+          }
+        },
+        "90bb9935-600b-4038-a7ff-7d6947f78266": {
+          "type": "shipping",
+          "settings": {
+            "icon": "fa fa-truck",
+            "icon_img": "shopify:\/\/shop_images\/icon_4.png",
+            "title": "Support 24\/7",
+            "text": "Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+          }
+        }
+      },
+      "block_order": [
+        "1279d925-219a-4f6d-a2d4-fb853a86819e",
+        "a7348ac7-7b2e-4192-92e5-62e29b658e7c",
+        "fd18fa67-cd02-4fcc-89f2-f4f9a96489c0",
+        "90bb9935-600b-4038-a7ff-7d6947f78266"
+      ],
+      "settings": {
+        "hidden": false,
+        "title": "Featured Services",
+        "sub_title": "",
+        "content": "Nemo enim ipsam quia sit aut odit aut fugit",
+        "source": "2",
+        "col_pr": "3",
+        "col_pr_tb": "6",
+        "col_pr_mb": "12",
+        "layout": "container",
+        "cl_bg": "#ffffff",
+        "mg": "",
+        "pd": "100px,0,100px,0",
+        "mg_mb": "",
+        "pd_mb": "50px,0,50px,0"
+      }
+    }
+  },
+  "order": [
+    "breadcrumb",
+    "main",
+    "1663902863c3cfa3d8"
+  ]
+}

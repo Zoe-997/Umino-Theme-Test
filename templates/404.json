@@ -1,0 +1,37 @@
+{
+  "sections": {
+    "breadcrumb": {
+      "type": "breadcrumb",
+      "settings": {
+        "show_title_page": false,
+        "h_position": "left",
+        "v_position": "middle",
+        "txt_align": "center",
+        "bg": "#f7f7f9",
+        "b_height": 70,
+        "mg_bottom": 0,
+        "mobile_bg": "#f7f7f9",
+        "mobile_ht": 50,
+        "mobile_mg_bottom": 0
+      }
+    },
+    "main": {
+      "type": "content-404",
+      "settings": {
+        "bg_img_404": "shopify:\/\/shop_images\/img.png",
+        "title": "Opps! Page not found.",
+        "content": "Sorry for the inconvenience. Go to our homepage or check out our latest collections.",
+        "cl_bg": "#ffffff",
+        "pd_c": "",
+        "mg": "",
+        "pd": "80px,0,80px,0",
+        "mg_mb": "",
+        "pd_mb": "50px,0,50px,0"
+      }
+    }
+  },
+  "order": [
+    "breadcrumb",
+    "main"
+  ]
+}

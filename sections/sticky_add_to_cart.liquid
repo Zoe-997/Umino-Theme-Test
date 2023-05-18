@@ -1,0 +1,143 @@
+{%- liquid
+   assign currently = product.selected_or_first_available_variant
+   assign cu_pr = currently.price
+   assign cp_pr = currently.compare_at_price | default:cu_pr
+   assign image = currently.featured_image | default:product.featured_image
+   assign pr_variants = product.variants 
+   assign available_v = pr_variants | where: "available"
+   assign available_v_1 = available_v.first
+   assign cur_var_id = currently.id
+   assign default = product.has_only_default_variant
+   assign pid = product.id
+   assign hd_up = 'group-' |append:pid
+   assign nav_up = linklists[hd_up].links | where:'type','product_link'
+   assign nav_up_size = nav_up.size
+   assign variants_size = pr_variants.size 
+   assign selected_variant = product.selected_variant -%}
+{% include 'product-res-variables' %}
+{%- assign show_title = true | default: settings.product_footbar_show_title -%}
+{%- assign show_price = true | default: settings.product_footbar_show_price -%}
+{%- assign show_options = true | default: settings.product_footbar_show_options -%}
+{%- assign show_custom_options = true | default: settings.product_show_custom_options -%}
+{%- assign show_button_add_to_cart = true | default: settings.product_footbar_show_button_add_to_cart -%}
+{%- assign show_quantity = true | default: settings.product_footbar_show_quantity -%}
+{%- assign show_reviews = true | default: settings.product_footbar_show_reviews -%}
+{%  assign build_variant = "all" %}
+{% assign show_title_variant = true %}
+{%- for i in (1..1) -%}
+    <div class="js_sticky_atc_wrapper sticky_atc_wrapper"  {% include 'product-get-attributes' %}>
+       <div class="container">
+          <div class="row row-0">
+             <div class="col sticky_atc_content">
+               <div class="row">
+                 <div class="col-auto sticky_atc_thumb" data-js-product-image>
+                    {%- assign img_url = image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+                     <img data-image-lazy  alt="{{product.title | escape}}" data-src="{{ img_url }}" data-widths="[75, 150]" data-sizes="auto" class="js_fgr_img pr_lazy_img lazyload " src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="> 
+                 </div>
+                 <div class="col sticky_atc_info">
+                   {% if section.settings.product_footbar_show_title %}
+                    	<h2>{{product.title}}</h2>
+                   {% endif %}
+                   {% if section.settings.product_footbar_show_reviews %}
+                       <div class="star-rating">
+                         <span class="shopify-product-reviews-badge" data-id="{{ product.id }}"></span>                     
+                       </div> 
+                   {% endif %}
+                   {% if section.settings.product_footbar_show_price %}
+                       <div class="sticky_atc_price" data-js-product-price>
+                         {%- if nav_up_size == 0 -%}
+                         	{% if cp_pr > cu_pr %}<span class="current">{{cu_pr| money}}</span> <span class="compare">{{cp_pr| money}}</span> {% else %}{{cu_pr | money}}{% endif %}
+                         {%- else -%}
+                         	{% if cp_pr > cu_pr %}{{cu_pr| money}}-{{cp_pr| money}}{% else %}{{cu_pr | money}}{% endif %}
+                         {%- endif -%}
+                       </div>
+                   {% endif %}
+                     
+                 </div>
+               </div>
+             </div>
+            <div class="col sticky_variant_content">
+              <div class="wrap_variant">
+                 {%- if available_v.size < 2 -%}
+                 	<input class="js_sticky_sl" name="id" value="{{ available_v_1.id }}" type="hidden">
+                 {%- else -%}
+                   {% if section.settings.product_footbar_show_options %}
+                        <select name="id" class="hidden js_sticky_sl" data-select-sticky_atc> 
+                          {%- for variant in available_v -%}
+                          <option data-img="{{variant.image | default:product.featured_image | img_url: '1x1'}}" data-ogprice="{{variant.compare_at_price |default:variant.price}}" data-price="{{variant.price}}" value="{{ variant.id }}"{% if variant.id == cur_var_id %} selected="selected"{% endif %}>{{ variant.title | escape }}</option>
+                          {%- endfor -%}
+                        </select>                        
+                        {% include 'product-get-options' with options_type: 3 select_dropdown_position: 'top' options_show_title: true trigger: 'footbar' %}
+                   {% endif %}
+                 {%- endif -%} 
+               </div>
+            </div>
+             <div class="col-auto sticky_atc_btn variations_form">                  
+              {%- if nav_up_size == 0  and section.settings.product_footbar_show_quantity -%}
+              <div data-product-quantity class="js-quantity quantity">
+                <input type="text" class="input-text js_sticky_qty js_qty" data-step="1" data-min="1" data-max="{% if currently.inventory_management != null %}{{currently.inventory_quantity}}{% else %}9999{% endif %}" name="quantity" value="01" size="4" pattern="[0-9]*" inputmode="numeric">
+                <div class="qty"> 
+                  <a rel="nofollow" data-no-instant class="js_plus plus" href="#"> <i class="icon-plus"></i> </a> 
+                  <a rel="nofollow" data-no-instant class="js_minus minus" href="#"> <i class="icon-minus"></i> </a>
+                </div>
+              </div>
+              {%- endif -%}
+               {% if section.settings.product_footbar_show_button_add_to_cart %}
+               <button data-js-product-button-add-to-cart class="single_add_to_cart_button  {% if nav_up_size > 0 %} sticky_atc_a {% else %} sticky_atc_js{% endif %}{% if settings.pr_curent == '1' and variants_size > 1 and selected_variant == blank %} disabled{% endif %}" data-pid="{{ product.variants.first.id }}">
+                 <span class="txt_add_to_cart">{{'products.product.add_to_cart' | t}}</span>
+                 <span class="txt_out_stock d-none">{{'products.product.out_stock' | t}}</span></button>
+               {% endif %}
+             </div>
+          </div>
+       </div>
+    </div>
+{%- endfor -%}
+
+{%- schema -%}
+  {
+    "name": "Footbar on product page",
+    "settings": [
+       {
+         "type": "paragraph",
+         "content": "Display a footbar when scrolling passed the add-to-cart button."
+       },      
+      {
+        "type": "checkbox",
+        "id": "product_footbar_show_title",
+        "label": "Show the product title",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "product_footbar_show_price",
+        "label": "Show the product price",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "product_footbar_show_reviews",
+        "label": "Show product reviews",
+        "info": "You have to install product reviews app. At our demo, we use a free [Product Reviews](https:\/\/apps.shopify.com\/product-reviews) app",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "product_footbar_show_options",
+        "label": "Show options (variants)",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "product_footbar_show_quantity",
+        "label": "Show quantity",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "product_footbar_show_button_add_to_cart",
+        "label": "Show button 'Add to cart'",
+        "default": true
+      }
+    ]
+  }
+{% endschema %}

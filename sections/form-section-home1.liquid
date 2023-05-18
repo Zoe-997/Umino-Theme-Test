@@ -1,0 +1,243 @@
+{% liquid
+  assign sid = section.id 
+ %}
+   
+{%- for i in (1..1) -%}
+  
+<section style="margin:{{section.settings.mg_top}}px {{section.settings.mg_right}}px {{section.settings.mg_bottom}}px {{section.settings.mg_left}}px; background-color:{{section.settings.cl_bg}};">      
+  <div class="nt_se_{{sid}} {{section.settings.layout}}">    
+    {%- if section.settings.hidden %}{% break %}{% endif -%}
+
+    <div class="{% if section.settings.title != blank %} wrap_title {% endif %}">
+      {% if section.settings.sub_title != blank %}<span class="section-subtitle">{{section.settings.sub_title | downcase }}</span>{% endif %} 
+      {% if section.settings.title != blank %}<h3 class="section-title"><span > {{section.settings.title | downcase}}</span></h3>{% endif %} 
+    </div> 
+    {% assign image = section.settings.background_appointment %}
+    <div class="appointment {% if image != blank %}lazyload{% endif %}" {% if image != blank %} data-bg="{{ image | img_url: '1920x' }}" data-ratio="{{image.aspect_ratio}}" style="padding-top:{{ 1 | divided_by: image.aspect_ratio | times: 100}}%" {% endif %}>
+      <div class=" container form">
+        <h3 class="service-title"> {{section.settings.form_title_sevice}} </h3>
+        <form action="/contact" method="post">
+          {% assign name_attr = section.settings.name_label_sevice | handle %}
+          <input placeholder="{{section.settings.name_label_sevice}} " class="input-info" id="name" required name="contact[{{ name_attr }}]"  type="text" value="{% if form[name_attr] %}{{ form[name_attr] }}{% elsif customer %}{{ customer.first_name }}{% endif %}"/>                            
+          {% assign name_attr = section.settings.phone_label_sevice | handle %}
+          <input placeholder="{{section.settings.phone_label_sevice}}" value="{% if form[name_attr] %}{{ form[name_attr] }} {% endif %}" required name="contact[{{ name_attr }}]" class="input-info" id="phone" type="text"/>
+          <div data-service class="wrap_service">
+            {% assign name_attr = section.settings.services_label_sevice | handle %}
+            <input  onfocus="this.blur();" placeholder="{{section.settings.services_label_sevice }}" value="{% if form[name_attr] %}{{ form[name_attr] }} {% endif %}" required name="contact[{{ name_attr }}]" class="input-info" id="service" type="text"/>
+            <span>
+              <i class="fa fa-angle-down" aria-hidden="true"></i>
+            </span>
+            <div data-display-content class="content_drop">
+              <ul>
+                {%- for block in section.blocks -%}
+                {% if block.type == 'form' %} 
+                <li>{{block.settings.service_item}}</li>
+                {% endif %}
+                {% endfor %}
+              </ul>
+            </div>
+          </div>
+          <div data-date class="wrap_service">
+            {% assign name_attr = section.settings.date_label_sevice | handle %}
+            <input  onfocus="this.blur();" placeholder="{{section.settings.date_label_sevice }}" value="{% if form[name_attr] %}{{ form[name_attr] }} {% endif %}" name="contact[{{ name_attr }}]" class="input-info" id="date" type="text"/>
+            <span>
+              <i class="fa fa-angle-down" aria-hidden="true"></i>
+            </span>
+          </div>
+          <div class="group-button">                
+            <button class="button submit" type="submit">{{section.settings.button_label_sevice}}</button>
+          </div>        
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script type="text/javascript">
+  jQuery(document).ready(function($) {
+    $("<link/>", {
+      rel: "stylesheet",
+      type: "text/css",
+      href: "//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"
+    }).appendTo("head");
+    var index = 0;
+    $("div[data-service] span").on('click',function(){
+      index++;
+      if(index % 2 != 0){
+        var parent = $(this).closest("div");
+        parent.find("div[data-display-content]").show();
+      }else{
+        var parent = $(this).closest("div");
+        parent.find("div[data-display-content]").hide();
+      }
+    })  
+    $("div[data-display-content] li").on('click',function(){
+      index = 0;
+      $("#service").val($(this).text());
+      $(this).closest("div").hide();      
+    })
+    
+    $("#date").datepicker();
+    $("div[data-date] span").on('click',function(){
+      $("#date").datepicker("show");
+    })
+  })  
+</script>
+
+{%- endfor -%}
+
+{%- schema -%}
+  {
+    "name": "Form",
+    "class": "cms_section type_form_services services-page",
+	"max_blocks": 20,	
+    "settings": [
+	  {
+        "type": "header",
+        "content": "== Design Options"
+      },
+      {
+        "type": "checkbox",
+        "id": "hidden",
+        "label": "Hidden Section?",
+        "default": false
+      },      
+      {
+        "type": "select",
+        "id": "layout",
+        "default": "nt_full",
+        "options": [
+         {
+            "value": "container",
+            "label": "Container"
+         },
+         {
+            "value": "nt_full",
+            "label": "Full Width"
+          }
+        ],
+        "label": "Layout"
+      },     
+      {
+        "type": "color",
+        "id": "cl_bg",
+        "label": "Background color",
+        "default": "#e5e5e5"
+      },
+      {
+        "type": "range",
+        "id": "mg_top",
+        "label": "Margin top",
+        "default": 0,
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "mg_right",
+        "label": "Margin right",
+        "default": 0,
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "mg_bottom",
+        "label": "Margin bottom",
+        "default": 0,
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "mg_left",
+        "label": "Margin left",
+        "default": 0,
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "px"
+      },
+      {
+        "type": "header",
+        "content": "==Form setting"
+      },
+      {
+        "type": "image_picker",
+        "id": "background_appointment",
+        "label": "Background image of form",
+        "info" : "Dimension: 1920 x 682"
+      },
+      {
+        "type": "text",
+        "id": "form_title_sevice",
+        "label": "Title of form",
+        "default": "Book service"
+      },
+      {
+        "type": "text",
+        "id": "name_label_sevice",
+        "label": "Label of name",
+        "default": "Your name"
+      },
+      {
+        "type": "text",
+        "id": "phone_label_sevice",
+        "label": "Label of phone",
+        "default": "Your phone"
+      },
+      {
+        "type": "text",
+        "id": "services_label_sevice",
+        "label": "Label of service",
+        "default": "Choose a services"
+      },
+      {
+        "type": "text",
+        "id": "date_label_sevice",
+        "label": "Label of date",
+        "default": "Choose a date"
+      },
+      {
+        "type": "text",
+        "id": "button_label_sevice",
+        "label": "Sbumit button",
+        "default": "Appointment"
+      }           
+           
+    ],
+	"blocks": [		
+		{
+          "type": "form",
+          "name": "Service of form",
+          "settings": [
+            {
+               "type": "text",
+               "id": "service_item",
+               "label": "Name",
+               "default": "Body treatment"
+             }
+
+          ]
+    	}
+    ],
+    "presets": [
+      {
+        "name": "1. Form",
+        "category": "Introduce",
+		"blocks": [
+          { "type": "form" },
+          { "type": "form" },
+          { "type": "form" }         
+        ]
+      }
+    ]
+  }
+{% endschema %}

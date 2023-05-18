@@ -1,0 +1,63 @@
+{% comment %}
+  Toggle between collection.liquid and collection.list.liquid with the
+  ?view= parameter.
+{% endcomment %}
+{% assign grid_list = settings.grid_list |plus:0 %}
+<div class="control-button col-auto align-left">  
+  	<a href="javascript:void(0)" data-col="2" class="grid-2-button js_cat_view  {%if grid_list == 2%}active{%endif%}" >
+      <span class="icon">
+      	<span>
+            <span></span><span></span>
+          </span>
+          <span>
+            <span></span><span></span>
+          </span>
+      </span>
+    </a>
+    <a href="javascript:void(0)" data-col="3" class="grid-3-button js_cat_view  {%if grid_list == 3%}active{%endif%}" >
+      <span class="icon">
+      	<span>
+            <span></span><span></span>
+          </span>
+          <span>
+            <span></span><span></span>
+          </span>
+      </span>
+    </a>
+    <a href="javascript:void(0)" data-col="4" class="grid-4-button js_cat_view {%if grid_list == 4%}active{%endif%} " >
+      <span class="icon">
+      	<span>
+            <span></span><span></span><span></span>
+          </span>
+          <span>
+            <span></span><span></span><span></span>
+          </span>
+          <span>
+            <span></span><span></span><span></span>
+          </span>
+      </span>
+    </a>
+  	<a href="javascript:void(0)" data-col="5" class="grid-5-button js_cat_view  {%if grid_list == 5%}active{%endif%}" >
+      <span class="icon">
+      	<span>
+            <span></span><span></span>
+          </span>
+          <span>
+            <span></span><span></span>
+          </span>
+      </span>
+    </a>
+    <a href="javascript:void(0)" data-col="1" class="list-button js_cat_view {% if grid_list == 1 %}active {% endif %}">
+      <span class="icon">
+      	<span>
+          <span></span><span></span>
+        </span>
+        <span>
+          <span></span><span></span>
+        </span>
+        <span>
+          <span></span><span></span>
+        </span>
+      </span>
+    </a>
+</div>

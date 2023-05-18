@@ -1,0 +1,99 @@
+{% assign id = section.id  %}
+{% assign show_full_width = section.settings.show_full_width %}
+<section id="laber_{{id}}">
+<div class="container {%if show_full_width%}full-width{%endif%}">
+<div class="collection-hero{% if section.settings.show_collection_image and collection.image %} collection-hero--with-image{% endif %}">
+  <div class="collection-hero__inner page-width">
+    <div class="collection-hero__text-wrapper">
+      {%- if section.settings.show_collection_image and collection.image -%}
+      {% assign image = collection.image %}
+      {%- assign ratio = image.aspect_ratio -%}
+      <div class="collection-hero__image-container media">
+        <div data-image-effect class="pr_lazy_img main-img lazyload laber_bg_lz laber_img_1 " data-id="{{image.id}}" data-bgset="{{ image | img_url: '1x1' }}" data-parent-fit="width" data-wiis data-ratio="{{ratio}}" data-sizes="auto" style="padding-top:{{ 1 | divided_by: ratio | times: 100}}%;"></div>
+      </div>
+
+      {%- endif -%}
+      
+       <h1 class="collection-hero__title">
+        {{- collection.title | escape -}}
+      </h1>
+      {%- if section.settings.show_collection_description -%}
+        <div class="collection-hero__description rte">{{ collection.description }}</div>
+      {%- endif -%}
+    </div>
+
+
+  </div>
+</div>
+</div>
+</section>
+{%- render 'section_style' -%}
+{% schema %}
+{
+  "name": "t:sections.main-collection-banner.name",
+  "class": "spaced-section spaced-section--full-width",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "t:sections.main-collection-banner.settings.paragraph.content"
+    },
+    {
+    "type": "checkbox",
+    "id": "show_full_width",
+    "default": false,
+    "label": "t:sections.main-collection-banner.settings.show_full_width.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_collection_description",
+      "default": true,
+      "label": "t:sections.main-collection-banner.settings.show_collection_description.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_collection_image",
+      "default": false,
+      "label": "t:sections.main-collection-banner.settings.show_collection_image.label",
+      "info": "t:sections.main-collection-banner.settings.show_collection_image.info"
+    },
+    {
+    "type": "color",
+    "id": "cl_bg",
+    "label": "Background color",
+    "default": "#fff"
+    },
+
+    {
+    "type": "header",
+    "content": "== Setting PC",
+    "info":"Margin"
+    },	
+    {
+    "type": "text",
+    "id": "mg",
+    "label": "Margin",
+    "info":"Margin top, margin right, margin bottom, margin left. If you not use to blank"
+    },
+    {
+    "type": "text",
+    "id": "pd",
+    "label": "Padding",
+    "info":"Padding top, padding right, padding bottom, padding left. If you not use to blank"
+    },
+    {
+    "type": "header",
+    "content": "== Design Mobile Options"
+    },
+    {
+    "type": "text",
+    "id": "mg_mb",
+    "label": "Margin"
+    },
+    {
+    "type": "text",
+    "id": "pd_mb",
+    "label": "Padding"
+    }
+  ]
+}
+{% endschema %}

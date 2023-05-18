@@ -1,0 +1,42 @@
+{% liquid 
+  assign collection = collections[block.settings.collection]
+  assign image = block.settings.image | default:collection.image
+  assign home_t = 'homepage.onboarding.collection_title' | t  | append:' #' | append:se_size 
+  assign ratio = image.aspect_ratio
+  assign col =  block.settings.col
+  assign num_p_qty =  block.settings.num_p_qty
+%}
+<div id="bk_{{block.id}}" class="cat_grid_item cat_space_item cat_grid_item_{{se_size}} col-md-{{col}} col-6" {{ block.shopify_attributes }}>
+  <div class="cat_grid_item__content">
+    <a href="{{ collection.url | default:'/admin/collections' }}" class="cat_grid_item__link">
+      {%- if image != blank -%}
+      <div data-image-effect class="pr_lazy_img main-img lazyload laber_bg_lz " data-id="{{image.id}}" data-bgset="{{ image | img_url: '1x1' }}" data-parent-fit="width" data-wiis data-ratio="{{ratio}}" data-sizes="auto" style="padding-top:{{ 1 | divided_by: ratio | times: 100}}%;"></div>
+      {%- else -%}
+      <div class="pr_lazy_img main-img lazyload laber_bg_lz {{block.settings.img_align}}" data-bgset="{{cimg}}" data-parent-fit="width"  data-sizes="auto" style="padding-top:{{demo_ratio}}%;"></div>
+      {%- endif -%}
+    </a>
+  </div>
+  <div class="cat_grid_item__wrapper">
+    <div class="cat_grid_item__title">
+      {% if block.settings.title != blank%}
+      <a href="{{ collection.url | default:'/admin/collections' }}">
+        {{ block.settings.title | default:collection.title | default:home_t }}
+        {% if num_p_qty %}
+        {% if collection != blank %}
+        <span class="cat_grid_item__count ">
+          {{collection.all_products_count}} 
+          
+          {% if collection.all_products_count > 1 %} 
+          {{'homepage.section.items' | t}} 
+          {% else %}
+          {{'homepage.section.item' | t}} 
+          {% endif %}
+        </span>
+        {% endif %}
+        {% endif %}
+      </a>
+      {%endif%}
+    </div>
+
+  </div>
+</div>

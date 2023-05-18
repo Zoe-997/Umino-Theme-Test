@@ -1,0 +1,133 @@
+
+<!-- /templates/404.liquid -->
+{% liquid
+  assign sid = section.id 
+  assign no-img = "https://placehold.jp/20/bc8e6a/fff/478x442.png?text=478x442"
+  %}
+<section id="laber_{{sid}}">
+<div class="site-content-inner">
+  <div class="page-404">
+    <div class="banner-header">
+      <div class="container wrap-content">
+        <div class="page-404-content">
+
+          {% assign image = section.settings.bg_img_404 %} 
+          {% assign ratio = image.aspect_ratio |default:1.0 %}
+          {% assign pd_top = 1 | divided_by: ratio | times: 100 %}
+              <div class="images col-lg-4 col-md-6 col-12">
+              	<div class="lazyload laber_bg_lz pr_lazy_img" data-bgset="{% if image != blank %}{{ image | img_url: '1x1' }}{% else %}{{ no-img}}{% endif %}" data-ratio="{{ratio}}" data-sizes="auto" style="padding-top:{% if image != blank %} {{pd_top}}%{% else %}92.8571%{% endif %};" ></div> 
+          	</div>
+          
+          <h1 class="oops-404 h3">
+            {{section.settings.title}}
+          </h1>
+          
+          <p>{{section.settings.content}}</p>
+          <div class="wrap-help col-lg-4 col-md-6 col-12">
+            {%comment%}
+            <form id="searchForm404" method="get" class="search-404" action="/search" role="search">
+              <div class="search-block">
+                <div class="search-inner">
+                  
+                  <input type="text" class="search-info" placeholder="{{"general.404.key_word_search" | t}}" name="q" {% if search.performed %} value="{{ search.terms | escape | downcase }}"{% endif %}>
+                  <input type="hidden" name="type" value="page" />
+                  
+                  <button type="submit" class="search-button">
+                    <i class="icon-search"></i>
+                  </button>
+                 
+                </div>
+              </div>
+            </form>
+            {%endcomment%}
+          	<a class="back-homepage" href="{{ routes.root_url }}">{{"general.404.link" | t}} </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+{%- render 'section_style' -%}
+{% schema %}
+  {
+    "name": "404",
+    "settings": [
+        {
+          "type": "header",
+          "content": "404 Setting"
+        },
+        {
+          "type": "image_picker",
+          "id": "bg_img_404",
+		  "info":"Image size 478x442", 	
+          "label": "Backdground image"
+        },
+        {
+        "type": "text",
+        "id": "title",
+        "label": "Title",
+        "default": "Opps! Page not found."
+        },
+        {
+          "type": "textarea",
+          "id": "content",
+          "label": "Content",
+          "default": "Sorry for the inconvenience. Go to our homepage or check out our latest collections."
+        },
+	  {
+        "type": "header",
+        "content": "== setting content"
+      },
+	  {
+      "type": "color",
+      "id": "cl_bg",
+      "label": "Background color",
+      "default": "#fff"
+      },
+      {
+        "type": "text",
+        "id": "pd_c",
+        "label": "Padding",
+        "info":"Padding top, Padding right, Padding bottom, Padding left. If you not use to blank"
+      },
+	  {
+        "type": "header",
+        "content": "== Setting PC",
+		"info":"Margin"
+      },	
+      {
+        "type": "text",
+        "id": "mg",
+        "label": "Margin",
+        "info":"Margin top, margin right, margin bottom, margin left. If you not use to blank"
+      },
+      {
+        "type": "text",
+        "id": "pd",
+        "label": "Padding",
+        "info":"Padding top, padding right, padding bottom, padding left. If you not use to blank"
+      },
+     {
+        "type": "header",
+        "content": "== Design Mobile Options"
+      },
+      {
+        "type": "text",
+        "id": "mg_mb",
+        "label": "Margin"
+      },
+      {
+        "type": "text",
+        "id": "pd_mb",
+        "label": "Padding"
+      }
+	]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

@@ -1,0 +1,223 @@
+<!--Footer-->
+    <div class="main-footer">
+        <div class="container">
+        	<div class="row">
+          {%- for block in section.blocks -%}
+                  {%- case block.type -%}
+                  {%- when 'mail' -%} 
+                  <div class="footer-iteam col-lg-{{block.settings.cl}} col-md-{{block.settings.cl_tb}} col-{{block.settings.cl_mb}} h_{{block.settings.h_position}} v_{{block.settings.v_position}} text_{{block.settings.txt_align}}" {{ block.shopify_attributes }}> 
+                    <aside id="block_{{block.id}}" class="  widget_mail">
+                      
+                      <div class="labernewsletter flex h_{{block.settings.h_position}} v_{{block.settings.v_position}} text_{{block.settings.txt_align}}">	
+                        <div class="newsletter-content" style="border-color:{{block.settings.cl_border}}">	
+                          
+                          {%- if block.settings.title != blank -%}
+                          <h3 class="widget-title{% if image != blank %} dn_md{% endif %}">
+                            <span class="txt_title">{{block.settings.title}}</span>
+                          </h3>
+                          {%- endif -%}
+                          {% if block.settings.sub_title %}
+                          <div class="sub-email" style="color:{{block.settings.cl_text}}">
+                            {{block.settings.sub_title}}
+                          </div>
+                          {% endif %}
+                          
+                          <div class="textwidget widget_footer">
+                            
+                            
+                            <div class="footer-mail">                                   	
+                              {%- form 'customer', class:'newsletter-form-footer' -%}
+                              <input type="hidden" name="contact[tags]" value="newsletter">
+                              <div class="mc4wp-form-fields">
+                                <div class="signup-newsletter-form  {{class}}">
+                                  
+                                  <div class="col_email">
+                                  <div class="icon">
+                                  	<svg width="18" height="14" viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                      <path d="M9.10791 1H14.3079C15.8543 1 17.1079 2.2536 17.1079 3.8V10.2C17.1079 11.7464 15.8543 13 14.3079 13H3.90791C2.36151 13 1.10791 11.7464 1.10791 10.2V3.8C1.10791 2.2536 2.36151 1 3.90791 1H5.10791" stroke="#ACAFB7" stroke-width="1.5" stroke-linecap="round"/>
+                                      <path d="M5.10791 5L8.50791 7.55019C8.86348 7.81688 9.3524 7.81688 9.70797 7.55019L13.108 5" stroke="#ACAFB7" stroke-width="1.5" stroke-linecap="round"/>
+                                      </svg>
+                                  </div>
+                                  <input type="email" name="contact[email]" placeholder="{{ 'general.newsletter_form.email_placeholder' | t }}"  value="{% if customer %}{{ customer.email }}{% endif %}" class="{{class_ip}} input-text" required="required"></div>
+                                  <div class="col_btn">
+                                    <button type="submit" class="submit-btn truncate{% if settings.checkbox_mail %} mail_agree pr{% endif %}">
+                                      <span> 
+                                        {{ 'general.newsletter_form.submit' | t }} 
+                                      </span>
+                                    </button>
+                                  </div>
+                                </div>
+                                {%- if settings.checkbox_mail -%}{%- render 'conditions_mail',html:'p',margin:'mt__15',stt_link:settings.link_mail,sid:sid -%}{%- endif -%}
+                              </div>
+                              <div class="mc4wp-response">
+                                {%- if form.posted_successfully? -%}<div class="shopify-message"><i class="las la-check"></i>{{ 'general.newsletter_form.confirmation' | t }}</div>{%- elsif form.errors -%}<div class="shopify-error"><i class="las la-exclamation-triangle"></i>{{ form.errors | default_errors }}</div>{%- endif -%}
+                              </div>
+                              {%- endform -%}								
+                            </div>
+                          </div>
+                        </div>
+                      </div>	
+
+                    </aside>
+                  </div>
+                    {% style %}
+                        #block_{{block.id}}.widget_mail .widget_footer .signup-newsletter-form .submit-btn{background: {{ block.settings.cl_sub }};border-color: {{ block.settings.cl_sub }};}
+                        #block_{{block.id}}.widget_mail .widget_footer .signup-newsletter-form .submit-btn:hover{background: {{ block.settings.cl_sub_hover }};border-color: {{ block.settings.cl_sub_hover }};}
+                      {% endstyle %}  
+				  {%- when 'text' -%}
+                          <div class="footer-iteam col-lg-{{block.settings.cl}} col-md-{{block.settings.cl_tb}} col-{{block.settings.cl_mb}}" {{ block.shopify_attributes }}>
+                        <aside id="block_{{block.id}}" class="widget widget_text">
+                             {%- if block.settings.title != blank -%}
+                            	<h3 class="widget-title"><span class="txt_title">{{block.settings.title}}</span>
+                                  <span class="icon_mobile"><i class="laber-icon-down icon-chevron-down"></i>
+                                      	<i class="laber-icon-up icon-chevron-up"></i></span>
+                            	</h3>{%- endif -%}
+                             <div class="textwidget widget_footer">{{block.settings.content}}</div>
+                          </aside>
+						</div>
+                   {%- when 'contact_information' -%}
+                        <div class="footer-iteam contact_information col-lg-{{block.settings.cl}} col-md-{{block.settings.cl_tb}} col-{{block.settings.cl_mb}}" {{ block.shopify_attributes }}>
+                        <aside id="block_{{block.id}}" class="widget widget_text">
+                             {%- if block.settings.title != blank -%}
+                            	<h3 class="widget-title"><span class="txt_title">{{block.settings.title}}</span>
+                                  <span class="icon_mobile"><i class="laber-icon-down icon-chevron-down"></i>
+                                      	<i class="laber-icon-up icon-chevron-up"></i></span>
+                            	</h3>{%- endif -%}
+                             <div class="textwidget widget_footer">
+                               <div class="information">
+                                   {%- if block.settings.show_phone -%}
+                                 		<a href="tel:{{shop.phone}}">{{shop.phone}}</a>
+                                   {%endif%}
+                                 
+                                   {%- if block.settings.show_email -%}
+                                 		<a href="mailto:{{shop.email}}">{{shop.email}}</a>
+                                   {%endif%}
+                               </div>	
+                          	 </div>
+                          </aside>
+						</div>
+                   {%- when 'logo-footer' -%}
+                      <div class="footer-iteam col-lg-{{block.settings.cl}} col-md-{{block.settings.cl_tb}} col-{{block.settings.cl_mb}} flex h_{{block.settings.h_position}} text_{{block.settings.txt_align}}" {{ block.shopify_attributes }}>
+                      <aside id="block_{{block.id}}" class="widget widget_text ">
+                      
+                    {% if block.settings.use_logo_footer %}
+                      <div class="logo-footer">
+                        {% if block.settings.logo_footer != blank %}
+                          <a href="{{ routes.root_url }}" class="site-header__logo-image">
+                          {% capture image_size %}{{ block.settings.logo_max_width | escape }}{% endcapture %}
+                          <img                                          
+                          src="{{ block.settings.logo_footer | img_url: image_size, scale: 2 }}"                      
+                          alt="{{ logo_alt | escape }}"
+                          style="max-width: {{ image_size }}px; width:auto; height:auto;">
+                          </a>
+                        {% else %}
+                          <a class="site-title" href="{{ routes.root_url }}" itemprop="url"><span class="logo-default">{{ shop.name }}</span></a>
+                        {% endif %}
+                     </div>
+                    {% endif %}
+                      {%if block.settings.use_social%}
+                               	{%- if block.settings.title_social != blank-%}
+                                  <h3 class="widget-title"><span class="txt_title">{{block.settings.title_social}}</span>
+                                 <span class="icon_mobile"><i class="laber-icon-down icon-chevron-down"></i>
+                                      	<i class="laber-icon-up icon-chevron-up"></i></span> 	
+                            	</h3>
+                               {%endif%}
+                                {% assign type_social = block.settings.type_social | plus: 0 %}
+                                {%- if type_social == 1 -%}
+                                  {% render 'social_link' %}
+                                {%- else -%}
+                                  {% render 'social-sharing' %}
+                                {%- endif -%}
+                              {% endif %}
+                        </aside>
+                        </div>
+                  {%- when 'html' -%}
+                          <div class="footer-iteam col-lg-{{block.settings.cl}} col-md-{{block.settings.cl_tb}} col-{{block.settings.cl_mb}} flex h_{{block.settings.h_position}} text_{{block.settings.txt_align}}" {{ block.shopify_attributes }}>
+                            <aside id="block_{{block.id}}" class="widget widget_text ">
+                             {%- if block.settings.title != blank -%}
+                            	<h3 class="widget-title"><span class="txt_title">{{block.settings.title}}</span>
+                                 <span class="icon_mobile"><i class="laber-icon-down icon-chevron-down"></i>
+                                      	<i class="laber-icon-up icon-chevron-up"></i></span> 	
+                            	</h3>
+                            {%- endif -%}
+                             <div class="textwidget widget_footer">
+                               {%- if block.settings.content != blank-%}
+                               <div class="contentHtml">
+                               		{{block.settings.content}}
+                               </div>
+                               {%endif%}
+                               {%if block.settings.use_social%}
+                               	{%- if block.settings.title_social != blank-%}
+                                <p class="title_social">
+                                  {{block.settings.title_social}}
+                                </p>
+                               {%endif%}
+                                {% assign type_social = block.settings.type_social | plus: 0 %}
+                                {%- if type_social == 1 -%}
+                                  {% render 'social_link' %}
+                                {%- else -%}
+                                  {% render 'social-sharing' %}
+                                {%- endif -%}
+                              {% endif %}
+                              </div>
+                          </aside>
+						</div>
+                       {%- when 'image' -%}
+                          <div class="footer-iteam col-lg-{{block.settings.cl}} col-md-{{block.settings.cl_tb}} col-{{block.settings.cl_mb}} flex h_{{block.settings.h_position}} text_{{block.settings.txt_align}}" {{ block.shopify_attributes }}>
+                            <aside id="block_{{block.id}}" class="widget widget_text ">
+                             {%- if block.settings.title != blank -%}
+                            	<h3 class="widget-title"><span class="txt_title">{{block.settings.title}}</span>
+                                 <span class="icon_mobile"><i class="laber-icon-down icon-chevron-down"></i>
+                                      	<i class="laber-icon-up icon-chevron-up"></i></span> 	
+                            	</h3>
+                            {%- endif -%}
+                             <div class="textwidget widget_footer">
+                                    <div class="image-footer">
+                                    {% if block.settings.image != blank %}
+                                    {% capture image_size %}{{ block.settings.max_width | escape }}{% endcapture %}
+                                    <img alt="{{ section.settings.image.alt | escape }}"                                         
+                                    src="{{ block.settings.image | img_url: image_size, scale: 2 }}"                      
+                                    style="max-width: {{ image_size }}px;">
+                                    {% endif %}
+                                    </div>
+                              </div>
+                          </aside>
+						</div>
+                    {%- when 'menu' -%}
+                          <div class="footer-iteam col-lg-{{block.settings.cl}} col-md-{{block.settings.cl_tb}} col-{{block.settings.cl_mb}} h_{{block.settings.h_position}} v_{{block.settings.v_position}} text_{{block.settings.txt_align}}" {{ block.shopify_attributes }}>
+                            <aside id="block_{{block.id}}" class="widget widget_nav_menu">
+                             {%- if block.settings.title != blank -%}
+                            	<h3 class="widget-title "><span class="txt_title">{{block.settings.title}}</span>
+                                  	<span class="icon_mobile">
+                                      	<i class="laber-icon-down icon-chevron-down"></i>
+                                      	<i class="laber-icon-up icon-chevron-up"></i>
+                                  	</span>
+                            	</h3>{%- endif -%}
+                             <div class="menu_footer widget_footer">
+                              {%- assign menu = block.settings.menu -%}
+                              {%- if menu != blank -%}
+                                <ul class="menu">
+                                  {%- for link in linklists[menu].links -%}
+                                   <li class="menu-item{% if link.active %}active{% endif %}">
+                                     <a href="{{ link.url }}">{{ link.title | split: '[' | first }}
+                                     
+                                     {% if link.object.all_products_count %}
+                                    	 <span class="n_products">({{ link.object.all_products_count }})</span>
+                                     {%endif%}
+                                     </a>
+                                  	</li>
+                                   {%- endfor -%}
+                                </ul>
+                                {%- else -%}
+                                  You have not selected the footer menu
+                                {%- endif -%}
+                             </div>
+                          </aside>
+                            </div>
+                     
+                  {%- endcase -%}
+              {%- endfor -%}
+        </div>
+        </div>
+      </div>
+<!--/Footer-->

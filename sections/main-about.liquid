@@ -1,0 +1,951 @@
+{% liquid
+  assign sid = section.id 
+  assign blocks = section.blocks
+  assign no-img = "https://placehold.jp/50/ccc/222/535x348.png?text=535x348"
+  assign no-img1 = "https://placehold.jp/20/83b792/222/178x183.png?text=178x183"
+  assign no-img2 = "https://placehold.jp/20/83b792/222/215x213.png?text=215x213"
+%}
+   
+{%- for i in (1..1) -%}
+{%- if section.settings.hidden %}{% break %}{% endif -%}
+{% assign bg = section.settings.large_banner %}   
+{% assign bg_color = section.settings.bg_color %}
+
+<section id="laber_{{sid}}">       
+  <div class="container {% if section.settings.layout == "full-width"%}{{section.settings.layout}}{% endif %}">
+    <div class="section_content ">      
+      <div class="part" >
+        <div class="row flex-wrap">
+          
+            {% for block in blocks %}                        		
+              {%- case block.type -%}
+                  {% when 'image_card' %} 
+                  <div class="col-xs-12 col-sm-12 col-md-{{ block.settings.width }} col-lg-{{ block.settings.width }}">
+                     <div id="bk_{{ block.id }}" class="flex h_{{block.settings.h_position}} v_{{block.settings.v_position}} text_{{block.settings.txt_align}} h-full">
+                       <div class="image_card w-full">
+                         {% assign image = block.settings.image %}
+                      {% if block.settings.link !=blank %}<a class="gl" href="{{ block.settings.link }}" title="">{% endif %}
+                      {% if image != blank %} 
+                        {% render 'responsive-image', image: image, image_class: 'w-full h-full' %}
+                      {% else %}
+                        <div class="image-card__img ">
+                            {% capture current %}{% cycle 1, 2, 3, 4, 5 %}{% endcapture %}
+                            {{ 'collection-' | append: current | placeholder_svg_tag: 'placeholder-svg w-full h-full' }}
+                        </div>
+                      {% endif %}
+                      {% if block.settings.link !=blank %}</a>{% endif %}
+                      {% if block.settings.title != blank %} <h2 class="about-title">{{ block.settings.title }}</h2>{% endif %}
+                      {% if block.settings.subtitle != blank %} <p class="about-subtitle">{{ block.settings.subtitle }}</p>{% endif %}
+                      {% if block.settings.button_label != blank %}
+                       <div class="about-btn">
+                         <a href="{{ block.settings.button_link }}" title="{{ block.settings.button_label }}">{{ block.settings.button_label }}</a>
+                       </div>
+                       {% endif %}  
+                       </div>
+                     </div>
+                    {% render 'block-style', block: block %}
+                  </div>
+                 {% when 'text' %} 
+                   <div class="col-xs-12 col-sm-12 col-md-{{ block.settings.width }} col-lg-{{ block.settings.width }}">
+                     <div id="bk_{{ block.id }}" class="flex h_{{block.settings.h_position}} v_{{block.settings.v_position}} text_{{block.settings.txt_align}} h-full">
+                         <div class="content-text">
+                            {% if block.settings.subheading != blank %} <p class="about-subtitle">{{ block.settings.subheading }}</p>{% endif %}
+                            {% if block.settings.title != blank %} <h2 class="about-title">{{ block.settings.title }}</h2>{% endif %}
+                            
+                            {% if block.settings.text != blank %}
+                             <div class="content">
+                               {{ block.settings.text }}
+                             </div>
+                             {% endif %} 
+                            {% if block.settings.button_label != blank %}
+                             <div class="about-btn">
+                               <a href="{{ block.settings.button_link }}" title="{{ block.settings.button_label }}">{{ block.settings.button_label }}</a>
+                             </div>
+                             {% endif %}  
+                         </div>
+                     </div>
+                     {% render 'block-style', block: block %}
+                   </div>
+             	 {% when 'banner_img' %}
+                  <div class="col-xs-12 col-sm-12 col-md-{{ block.settings.width }} col-lg-{{ block.settings.width }}">
+                    <div id="bk_{{ block.id }}" class="banner_img">
+                    {% assign image = block.settings.image_sl %}
+                      {% if block.settings.link !=blank %}<a class="gl" href="{{ block.settings.link }}" title="">{% endif %}
+                      {% if image != blank %} 
+                        {% render 'responsive-image', image: image, image_class: 'w-full h-full' %}
+                      {% else %}
+                        <div class="image-card__img ">
+                            {% capture current %}{% cycle 1, 2, 3, 4, 5 %}{% endcapture %}
+                            {{ 'collection-' | append: current | placeholder_svg_tag: 'placeholder-svg w-full h-full' }}
+                        </div>
+                      {% endif %}
+                      {% if block.settings.link !=blank %}</a>{% endif %}
+                    </div>
+                    {% render 'block-style', block: block %}
+                  </div>
+                {%- when 'video' -%}{%- assign image = block.settings.image -%}
+                  <div class="col-xs-12 col-sm-12 col-md-{{ block.settings.width }} col-lg-{{ block.settings.width }}">
+                    <div id="bk_{{ block.id }}" class="banner_img">
+                      <div class="about_us_img border_{{block.settings.use_border}}" {{ block.shopify_attributes }}>
+                        {%- if image != blank -%} 
+                        {%- assign img_url = image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+                        <img class="lazyload" src="data:image/svg+xml,%3Csvg%20viewBox%3D%220%200%20{{image.width}}%20{{image.height}}%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3C%2Fsvg%3E" data-src="{{ img_url }}" data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]" data-sizes="auto" alt="{{image.alt | escape}}">
+                        {%- else -%}
+                        <div class="image-card__img ">
+                            {% capture current %}{% cycle 1, 2, 3, 4, 5 %}{% endcapture %}
+                            {{ 'collection-' | append: current | placeholder_svg_tag: 'placeholder-svg w-full h-full' }}
+                        </div>
+                        {%- endif -%}
+                        <span class="fr_br_1"></span><span class="fr_br_2"></span><span class="fr_br_3"></span><span class="fr_br_4"></span>
+                        {%- if block.settings.video_url != blank -%}
+                        <div class="overlay_video">
+                        <a data_js_mfp_video class="video-control__play" href="{{block.settings.video_url}}" target="_blank">
+                         <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-play" viewBox="0 0 20 40"><path fill-rule="evenodd" clip-rule="evenodd" d="M23.6 16.8L7 1.5C5.6.3 4 .2 2.9.7 1.6 1.4.8 2.7.7 3.8v31.7c0 1.8 1.1 3.3 3.1 3.3 1.5 0 2.5-.5 3.4-1.4l16.4-15.7c1.5-1.4 1.5-3.6 0-4.9z"></path></svg>
+                        </a>
+                        </div>
+                        {%- endif -%}
+                      </div>
+                    </div>
+                    {% render 'block-style', block: block %}
+                  </div>
+          		{% when 'content' %}
+          			{% assign title = block.settings.title %}
+                    {% assign sub_title = block.settings.sub_title %}
+          			{% assign content = block.settings.content %}
+          			<div class="col-xs-12 col-sm-12 col-md-{{ block.settings.width }} col-lg-{{ block.settings.width }}">
+                      <div id="bk_{{ block.id }}" class="flex h_{{block.settings.h_position}} v_{{block.settings.v_position}} text_{{block.settings.txt_align}} h-full">
+                      <div class="content_about_us">
+                        {%if sub_title !=blank%}<p class="sub_title">{{sub_title}}</p>{%endif%}
+                        {%if title !=blank%}<p class="title h3">{{title}}</p>{%endif%}
+                      	{%if content !=blank%}<div class="content">{{content}}</div>{%endif%}
+                      </div>
+                      </div>
+                      {% render 'block-style', block: block %}
+          			</div>
+              {%endcase%}	
+            {%endfor%}
+        </div>
+      </div>      
+    </div>
+  </div>
+</section>
+{%- endfor -%}
+{%- render 'section_style' -%}
+{%- schema -%}
+  {
+    "name": "About us",
+    "class": "laber_section cms_section type_about",	
+    "settings": [
+	  {
+        "type": "header",
+        "content": "== Design Options"
+      },
+      {
+        "type": "checkbox",
+        "id": "hidden",
+        "label": "Hidden Section?",
+        "default": false
+      },    
+      {
+      "type": "checkbox",
+      "id": "show_border",
+      "label": "Show border bottom",
+      "default": true
+      },
+        {
+        "type": "header",
+        "content": "== setting content"
+      },
+      {
+        "type": "select",
+        "id": "layout",
+        "default": "container",
+        "options": [
+         {
+            "value": "container",
+            "label": "Container"
+         },
+         {
+            "value": "full-width",
+            "label": "Full Width"
+          }
+        ],
+        "label": "Layout"
+      },
+      {
+      "type": "color",
+      "id": "cl_bg",
+      "label": "Background color",
+      "default": "#fff"
+      },
+	  {
+        "type": "header",
+        "content": "== Setting PC",
+		"info":"Margin"
+      },	
+      {
+        "type": "text",
+        "id": "mg",
+        "label": "Margin",
+        "info":"Margin top, margin right, margin bottom, margin left. If you not use to blank"
+      },
+      {
+        "type": "text",
+        "id": "pd",
+        "label": "Padding",
+        "info":"Padding top, padding right, padding bottom, padding left. If you not use to blank"
+      },
+     {
+        "type": "header",
+        "content": "== Design Mobile Options"
+      },
+      {
+        "type": "text",
+        "id": "mg_mb",
+        "label": "Margin"
+      },
+      {
+        "type": "text",
+        "id": "pd_mb",
+        "label": "Padding"
+      }
+	
+    ],
+	"blocks": [
+      {
+      "type": "text",
+      "name": {
+        "en": "Text"
+      },
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "title",
+          "label": {
+            "en": "Heading"
+          },
+          "default": {
+            "en": "Talk about your brand"
+          }
+        },
+        {
+          "type": "textarea",
+          "id": "subheading",
+          "label": "Subheading"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": {
+            "en": "Text"
+          },
+          "default": {
+            "en": "<p>Use this text to share information about your brand with your customers. Describe a product, share announcements, or welcome customers to your store.</p>"
+          }
+        },
+        {
+            "type": "header",
+            "content": "Button settings"
+        },
+        {
+            "type": "text",
+            "id": "button_label",
+            "label": "Button label"
+        },
+        {
+            "type": "url",
+            "id": "button_link",
+            "label": "Button link"
+        },
+        {
+          "type": "select",
+          "id": "width",
+          "label":"Container width",
+          "default": "6",
+          "options": [
+            {
+              "value": "2",
+              "label": "16%"
+            },
+            {
+              "value": "3",
+              "label": "25%"
+            },
+            {
+              "value": "4",
+              "label": "33%"
+            },
+            {
+              "value": "5",
+              "label": "41%"
+            },
+            {
+              "value": "6",
+              "label": "50%"
+            },
+            {
+              "value": "7",
+              "label": "59%"
+            },
+            {
+              "value": "8",
+              "label": "66%"
+            },
+            {
+              "value": "9",
+              "label": "75%"
+            },
+            {
+              "value": "10",
+              "label": "83%"
+            },
+            {
+              "value": "12",
+              "label": "100%"
+            }
+          ]
+        },
+        {
+            "type": "select",
+            "id": "h_position",
+            "label": "Horizontal Position",
+            "default": "center",
+            "options": [
+              {
+                "value": "left",
+                "label": "Left"
+              },
+              {
+                "value": "center",
+                "label": "Center"
+              },
+              {
+                "value": "right",
+                "label": "Right"
+              }
+            ]
+          },
+			{
+            "type": "select",
+            "id": "v_position",
+            "label": "Vertical Position",
+            "default": "middle",
+            "options": [
+              {
+              "value": "top",
+              "label": "Top"
+              },
+              {
+              "value": "middle",
+              "label": "Middle"
+              },
+              {
+              "value": "bottom",
+              "label": "Bottom"
+              }
+            ]
+          },
+          {
+            "type": "select",
+            "id": "txt_align",
+            "label": "Text alignment",
+            "default": "center",
+            "options": [
+              {
+                "value": "left",
+                "label": "Left"
+              },
+              {
+                "value": "center",
+                "label": "Center"
+              },
+              {
+                "value": "right",
+                "label": "Right"
+              }
+            ]
+          },    
+        
+        {
+        "type": "header",
+        "content": "== Setting PC",
+        "info":"Margin"
+        },	
+        {
+        "type": "text",
+        "id": "mg",
+        "label": "Margin",
+        "info":"Margin top, margin right, margin bottom, margin left. If you not use to blank"
+        },
+        {
+        "type": "text",
+        "id": "pd",
+        "label": "Padding",
+        "info":"Padding top, padding right, padding bottom, padding left. If you not use to blank"
+        },
+        {
+        "type": "header",
+        "content": "== Design Mobile Options"
+        },
+        {
+        "type": "text",
+        "id": "mg_mb",
+        "label": "Margin"
+        },
+        {
+        "type": "text",
+        "id": "pd_mb",
+        "label": "Padding"
+        }
+      ]
+    },
+		{
+    "type": "banner_img",
+    "name": "Banner images",
+    "settings": [
+        {
+          "type": "image_picker",
+          "id": "image_sl",
+          "label": "Image",
+          "info": "535px x 183px.jpg recommended"	
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Image link"
+        },
+      {
+          "type": "select",
+          "id": "width",
+          "label":"Container width",
+          "default": "6",
+          "options": [
+            {
+              "value": "2",
+              "label": "16%"
+            },
+            {
+              "value": "3",
+              "label": "25%"
+            },
+            {
+              "value": "4",
+              "label": "33%"
+            },
+            {
+              "value": "5",
+              "label": "41%"
+            },
+            {
+              "value": "6",
+              "label": "50%"
+            },
+            {
+              "value": "7",
+              "label": "59%"
+            },
+            {
+              "value": "8",
+              "label": "66%"
+            },
+            {
+              "value": "9",
+              "label": "75%"
+            },
+            {
+              "value": "10",
+              "label": "83%"
+            },
+            {
+              "value": "12",
+              "label": "100%"
+            }
+          ]
+        },
+      	  {
+        "type": "header",
+        "content": "== Setting PC",
+		"info":"Margin"
+      },	
+      {
+        "type": "text",
+        "id": "mg",
+        "label": "Margin",
+        "info":"Margin top, margin right, margin bottom, margin left. If you not use to blank"
+      },
+      {
+        "type": "text",
+        "id": "pd",
+        "label": "Padding",
+        "info":"Padding top, padding right, padding bottom, padding left. If you not use to blank"
+      },
+     {
+        "type": "header",
+        "content": "== Design Mobile Options"
+      },
+      {
+        "type": "text",
+        "id": "mg_mb",
+        "label": "Margin"
+      },
+      {
+        "type": "text",
+        "id": "pd_mb",
+        "label": "Padding"
+      }
+
+        ]
+      },
+      {
+    "type": "video",
+    "name": "Video popup",
+    "settings": [
+      {
+      "type":"image_picker","id":"image","label":"Image"
+      },
+      {
+      "type": "checkbox","id": "use_border","label": "Use border?","default": true
+      },
+      {
+       "id": "video_url","type": "video_url","label": "Video URL","accept": ["youtube", "vimeo"],"default": "https://www.youtube.com/watch?v=_9VUPq3SxOc","info": "Accepts YouTube,vimeo links"
+      },
+      {
+          "type": "select",
+          "id": "width",
+          "label":"Container width",
+          "default": "6",
+          "options": [
+            {
+              "value": "2",
+              "label": "16%"
+            },
+            {
+              "value": "3",
+              "label": "25%"
+            },
+            {
+              "value": "4",
+              "label": "33%"
+            },
+            {
+              "value": "5",
+              "label": "41%"
+            },
+            {
+              "value": "6",
+              "label": "50%"
+            },
+            {
+              "value": "7",
+              "label": "59%"
+            },
+            {
+              "value": "8",
+              "label": "66%"
+            },
+            {
+              "value": "9",
+              "label": "75%"
+            },
+            {
+              "value": "10",
+              "label": "83%"
+            },
+            {
+              "value": "12",
+              "label": "100%"
+            }
+          ]
+        },
+      	  {
+        "type": "header",
+        "content": "== Setting PC",
+		"info":"Margin"
+      },	
+      {
+        "type": "text",
+        "id": "mg",
+        "label": "Margin",
+        "info":"Margin top, margin right, margin bottom, margin left. If you not use to blank"
+      },
+      {
+        "type": "text",
+        "id": "pd",
+        "label": "Padding",
+        "info":"Padding top, padding right, padding bottom, padding left. If you not use to blank"
+      },
+     {
+        "type": "header",
+        "content": "== Design Mobile Options"
+      },
+      {
+        "type": "text",
+        "id": "mg_mb",
+        "label": "Margin"
+      },
+      {
+        "type": "text",
+        "id": "pd_mb",
+        "label": "Padding"
+      }
+
+        ]
+      },
+      {
+      "type": "content",
+      "name": "Content About us",
+      "settings": [
+        {
+        "type": "text",
+        "id": "title",
+        "label": "Title",
+        "default": "We Help Your<br> Digital Business Grow"
+        },
+        {
+        "type": "text",
+        "id": "sub_title",
+        "label": "Sub title",
+		"default": "<span>About us</span> Welcome to Orfarm"
+        },
+        {
+        "type": "textarea",
+        "id": "content",
+        "label": "Content",
+        "default": "We provide digital experience services to startups and small businesses. We help our clients succeed by creating brand identities, digital experiences, and print materials. Sed trspiciatis unde omnis iste natus error sit voluptatem accusantium."
+        },
+        {
+          "type": "select",
+          "id": "width",
+          "label":"Container width",
+          "default": "6",
+          "options": [
+            {
+              "value": "2",
+              "label": "16%"
+            },
+            {
+              "value": "3",
+              "label": "25%"
+            },
+            {
+              "value": "4",
+              "label": "33%"
+            },
+            {
+              "value": "5",
+              "label": "41%"
+            },
+            {
+              "value": "6",
+              "label": "50%"
+            },
+            {
+              "value": "7",
+              "label": "59%"
+            },
+            {
+              "value": "8",
+              "label": "66%"
+            },
+            {
+              "value": "9",
+              "label": "75%"
+            },
+            {
+              "value": "10",
+              "label": "83%"
+            },
+            {
+              "value": "12",
+              "label": "100%"
+            }
+          ]
+        },
+        {
+            "type": "select",
+            "id": "h_position",
+            "label": "Horizontal Position",
+            "default": "center",
+            "options": [
+              {
+                "value": "left",
+                "label": "Left"
+              },
+              {
+                "value": "center",
+                "label": "Center"
+              },
+              {
+                "value": "right",
+                "label": "Right"
+              }
+            ]
+          },
+			{
+            "type": "select",
+            "id": "v_position",
+            "label": "Vertical Position",
+            "default": "middle",
+            "options": [
+              {
+              "value": "top",
+              "label": "Top"
+              },
+              {
+              "value": "middle",
+              "label": "Middle"
+              },
+              {
+              "value": "bottom",
+              "label": "Bottom"
+              }
+            ]
+          },
+          {
+            "type": "select",
+            "id": "txt_align",
+            "label": "Text alignment",
+            "default": "center",
+            "options": [
+              {
+                "value": "left",
+                "label": "Left"
+              },
+              {
+                "value": "center",
+                "label": "Center"
+              },
+              {
+                "value": "right",
+                "label": "Right"
+              }
+            ]
+          },    
+        	  {
+        "type": "header",
+        "content": "== Setting PC",
+		"info":"Margin"
+      },	
+      {
+        "type": "text",
+        "id": "mg",
+        "label": "Margin",
+        "info":"Margin top, margin right, margin bottom, margin left. If you not use to blank"
+      },
+      {
+        "type": "text",
+        "id": "pd",
+        "label": "Padding",
+        "info":"Padding top, padding right, padding bottom, padding left. If you not use to blank"
+      },
+     {
+        "type": "header",
+        "content": "== Design Mobile Options"
+      },
+      {
+        "type": "text",
+        "id": "mg_mb",
+        "label": "Margin"
+      },
+      {
+        "type": "text",
+        "id": "pd_mb",
+        "label": "Padding"
+      }
+      ]
+	 },
+      {
+      "type": "image_card",
+      "name": {
+        "en": "Image card"
+      },
+      "settings": [
+          {
+          "type": "select",
+          "id": "width",
+          "label":"Container width",
+          "default": "6",
+          "options": [
+            {
+              "value": "2",
+              "label": "16%"
+            },
+            {
+              "value": "3",
+              "label": "25%"
+            },
+            {
+              "value": "4",
+              "label": "33%"
+            },
+            {
+              "value": "5",
+              "label": "41%"
+            },
+            {
+              "value": "6",
+              "label": "50%"
+            },
+            {
+              "value": "7",
+              "label": "59%"
+            },
+            {
+              "value": "8",
+              "label": "66%"
+            },
+            {
+              "value": "9",
+              "label": "75%"
+            },
+            {
+              "value": "10",
+              "label": "83%"
+            },
+            {
+              "value": "12",
+              "label": "100%"
+            }
+          ]
+        },
+        {
+            "type": "select",
+            "id": "h_position",
+            "label": "Horizontal Position",
+            "default": "center",
+            "options": [
+              {
+                "value": "left",
+                "label": "Left"
+              },
+              {
+                "value": "center",
+                "label": "Center"
+              },
+              {
+                "value": "right",
+                "label": "Right"
+              }
+            ]
+          },
+			{
+            "type": "select",
+            "id": "v_position",
+            "label": "Vertical Position",
+            "default": "middle",
+            "options": [
+              {
+              "value": "top",
+              "label": "Top"
+              },
+              {
+              "value": "middle",
+              "label": "Middle"
+              },
+              {
+              "value": "bottom",
+              "label": "Bottom"
+              }
+            ]
+          },
+          {
+            "type": "select",
+            "id": "txt_align",
+            "label": "Text alignment",
+            "default": "center",
+            "options": [
+              {
+                "value": "left",
+                "label": "Left"
+              },
+              {
+                "value": "center",
+                "label": "Center"
+              },
+              {
+                "value": "right",
+                "label": "Right"
+              }
+            ]
+          },    
+        {
+            "type": "header",
+            "content": "Content"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": {
+            "en": "Image"
+          }
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": {
+            "en": "Image link"
+          }
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": {
+            "en": "Heading"
+          }
+        },
+        {
+          "type": "textarea",
+          "id": "subtitle",
+          "label": "Sub heading"
+        },
+        {
+            "type": "header",
+            "content": "Button settings"
+        },
+        {
+            "type": "text",
+            "id": "button_label",
+            "label": "Button label"
+        },
+        	  {
+        "type": "header",
+        "content": "== Setting PC",
+		"info":"Margin"
+      },	
+      {
+        "type": "text",
+        "id": "mg",
+        "label": "Margin",
+        "info":"Margin top, margin right, margin bottom, margin left. If you not use to blank"
+      },
+      {
+        "type": "text",
+        "id": "pd",
+        "label": "Padding",
+        "info":"Padding top, padding right, padding bottom, padding left. If you not use to blank"
+      },
+     {
+        "type": "header",
+        "content": "== Design Mobile Options"
+      },
+      {
+        "type": "text",
+        "id": "mg_mb",
+        "label": "Margin"
+      },
+      {
+        "type": "text",
+        "id": "pd_mb",
+        "label": "Padding"
+      }
+      ]
+    }
+	],
+    "presets": [
+      {
+        "name": "About us (style 1)",
+        "category": "Introduce"
+      }
+    ]
+  }
+{% endschema %}

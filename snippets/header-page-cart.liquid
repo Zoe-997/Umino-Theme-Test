@@ -1,0 +1,42 @@
+
+<div class="minicart ">
+  <div class="cart-block  box-has-content">
+    <a href="{{ routes.cart_url }}" class="cart-icon"><i class="fa fa-shopping-basket" aria-hidden="true"></i><span class="count cartCount">{{ cart.item_count }}</span></a>
+    <span class="total-price"><span class="text">{{'cart.general.title' |t}}: </span>{{ cart.total_price | money }}</span>
+  </div>
+  
+    {% if cart.item_count > 0 %}
+    <div class="cart-inner minicart-content">
+        <h5 class="title">You have <span class="count-item">{{ cart.item_count }}</span> item(s) in your cart</h5>
+        <ul class="list-item">
+          {% for item in cart.items%}
+            <li class="product-item">
+              <a href="{{ item.product.url }}" class="thumb"><img src="{{ item | img_url: 'small' }}" alt=""></a>
+              <div class="info">
+                <a href="{{ item.product.url }}" class="product-name">{{ item.title }}</a>
+                <div class="product-item-qty">
+                  <span class="number price">
+                    <span class="qty">{{ item.quantity }}</span> x <span >{{ item.price | money }}</span>
+                  </span>
+                </div>
+              </div>
+            </li>
+          {% endfor %}
+        </ul>
+        <div class="subtotal">
+          <span class="text">{{ 'cart.label.total' | t }} : </span>
+          <span class="total-price cartCost">{{ cart.total_price | money }}</span>
+        </div>
+        <div class="group-button-checkout">
+          <a href="{{ routes.cart_url }}">{{ 'cart.general.title' | t }}</a>
+          <a href="{{ routes.root_url }}checkout">{{ 'cart.general.checkout' | t }}</a>
+        </div>
+     </div>
+    {% else %}
+    
+          <div class="cart-inner minicart-content cart-empty">
+            <h5 class="title">You have <span class="count-item">0</span> item(s) in your cart</h5>
+          </div> 
+  	
+    {% endif %}
+</div>

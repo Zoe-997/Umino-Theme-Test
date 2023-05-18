@@ -1,0 +1,17 @@
+{%- assign productionMode = settings.production_mode -%}
+{%- if productionMode -%}
+    {%- assign paragraphs = htmlContent | newline_to_br | split: '<br />' -%}
+    {%- for paragraph in paragraphs -%}
+      {%- assign paragraphClean = paragraph | strip -%}
+      {%- if paragraphClean == paragraph -%}
+          {{- paragraphClean -}}
+      {%- else -%}
+          {{- paragraphClean | append: " " -}}
+      {%- endif -%}
+    {%- endfor -%}
+{%- else -%}
+    {{htmlContent}}
+{%- endif -%}
+{% comment %}
+    Use in section: {%- render 'minify-code', htmlContent: htmlContent -%}
+{% endcomment %}

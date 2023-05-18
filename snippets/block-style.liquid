@@ -1,0 +1,48 @@
+{%- liquid
+  assign cl_bg = block.settings.cl_bg
+  assign mg = block.settings.mg
+  assign pd = block.settings.pd
+  assign mg_mb = block.settings.mg_mb
+  assign pd_mb = block.settings.pd_mb
+  assign sid = block.id
+ -%}
+{%- capture style -%}
+	#bk_{{sid}} {
+	   {%- if mg != blank %}
+       {% assign arr_mg = mg | remove:' ' | split:',' -%}
+		   	margin-top: {{arr_mg[0]}} ;
+			margin-right: {{arr_mg[1]}} ;
+			margin-bottom: {{arr_mg[2]}} ;
+			margin-left: {{arr_mg[3]}} ;
+	   {%- endif -%}
+
+	   {%- if pd != blank %}{% assign arr_pd = pd | remove:' ' | split:',' -%}
+	       padding-top: {{arr_pd[0]}} ;
+		   padding-right: {{arr_pd[1]}} ;
+           padding-bottom: {{arr_pd[2]}} ;
+           padding-left: {{arr_pd[3]}} ;
+	   {%- endif -%}
+
+	  }
+	{%- if mg_mb != blank or pd_mb != blank -%} 
+	@media only screen and (max-width: 1024px) {
+		#bk_{{sid}} {
+	
+		   {%- if mg_mb != blank %}{% assign arr_mg = mg_mb | remove:' ' | split:',' -%}
+              margin-top: {{arr_mg[0]}};
+              margin-right: {{arr_mg[1]}};
+              margin-bottom: {{arr_mg[2]}};
+              margin-left: {{arr_mg[3]}};
+		   {%- endif -%}
+
+		   {%- if pd_mb != blank %}{% assign arr_pd = pd_mb | remove:' ' | split:',' -%}
+              padding-top: {{arr_pd[0]}};
+              padding-right: {{arr_pd[1]}};
+              padding-bottom: {{arr_pd[2]}};
+              padding-left: {{arr_pd[3]}};
+		   {%- endif -%}
+		}
+	}
+	{%- endif -%}
+{%- endcapture -%}
+{%- style -%}{{ style | strip_newlines | remove:"  "}}{%- endstyle -%}

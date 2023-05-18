@@ -1,0 +1,58 @@
+<div  class="aloSearch header-search"> 
+  <div class="laber_mini_cart">
+    <div class="mini_cart_wrap laber_search">
+      <form action="{{ routes.search_url }}" method="post" class="search_header mini_search_frm pr js_frm_search" role="search">
+        <input type="hidden" name="type" value="product">
+        <input type="hidden" name="options[unavailable_products]" value="last">
+        <input type="hidden" name="options[prefix]" value="none">
+
+        <div class="row">
+          {%comment%}
+          {% if section.settings.show_all_categories%}
+          <div class="frm_search_cat col-auto">
+            <select name="product_type">
+              <option value="*">{{ 'general.search.all_cat' | t }}</option>
+              {%- for product_type in shop.types -%}{%- if product_type == blank %}{% continue-%}{% endif -%}<option value="{{product_type}}"{% if search_pr_type == product_type %} selected="selected"{% endif %}>{{product_type}}</option>{%- endfor -%}
+            </select>
+          </div>
+          {% endif %}
+          {%endcomment%}
+          <div class="frm_search_input col">
+            <input class="search_header__input js_iput_search" autocomplete="off" type="text" name="q" placeholder="{{ 'general.search.placeholder' | t }}">
+          </div>
+          <div class="col-auto btn_search">
+            <button class="search_header__submit js_btn_search{% if settings.ajax_search %} pe_none{% endif %}" type="submit">
+              <i class="icon-search"></i>  <span>{{ 'general.search.btn' | t }}</span>
+            </button> 
+          </div>
+        </div>  
+
+        {%comment%}<div class="ld_bar_search"></div>{%endcomment%}
+      </form> 
+      <div class="mini_cart_content fixcl-scroll widget">
+        <div class="fixcl-scroll-content product_list_widget">
+          <div class="skeleton_wrap skeleton_js d-none">
+            <div class="loading_search">
+              <div class="circle-loadding"><span></span></div>
+            </div>
+          </div>
+          <div class="js_prs_search">
+            <div class="row">
+              {%- if collection != blank  -%}
+              {%- for product in collection.products limit:limit -%}
+              {%- render 'product_ajax_js',product:product,on_sale_txt:on_sale_txt,save_js:save_js -%}
+              {%- endfor -%}
+
+              {%- if collection.all_products_count > limit -%}
+
+              <a href="{{ routes.root_url }}collections/all" class="btn fwsb detail_link">{{ 'general.search.view_all' | t }} <i class="lnr lnr-arrow-right"></i></a>
+
+              {%- endif -%}
+              {%- endif -%}
+            </div> 
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,37 @@
+{%- assign product = all_products[current_handle] -%}
+<div class="compare__item col">
+    {% include 'product-compare' with select_current_variant_by_id: current_variant_id %}
+</div>
+{% capture handles %}{{ handles }}{% if handles %}|||{% endif %}{{ product.handle }}{% endcapture %}
+
+{% capture compare_descriptions %}{{ compare_descriptions }}{% if compare_descriptions %}|||{% endif %}{% if product.description != blank %}{{ product.description | strip_html | truncate: 100 }}{% else %}{{ 'compare_page.empty_section' | t }}{% endif %}{% endcapture %}
+
+
+{% capture compare_collections %}{{ compare_collections }}{% if compare_collections %}|||{% endif %}{% if product.collections.size > 0 %}{% render 'product-get-collections' with product: product %}{% else %}{{ 'compare_page.empty_section' | t }}{% endif %}{% endcapture %}
+
+{% capture compare_availabilities %}{{ compare_availabilities }}{% if compare_availabilities %}|||{% endif %}{% if current_variant.available %}<span class="in-stock">{{ 'compare_page.in_stock' | t }}</span>{% else %}<span class="out-stock">{{ 'compare_page.out_stock' | t }}</span>{% endif %}{% endcapture %}
+
+{% capture compare_product_types %}{{ compare_product_types }}{% if compare_product_types %}|||{% endif %}{% if product.type != blank %}{{ product.type }}{% else %}{{ 'compare_page.empty_section' | t }}{% endif %}{% endcapture %}
+
+{% capture compare_vendors %}{{ compare_vendors }}{% if compare_vendors %}|||{% endif %}{% if product.vendor != blank %}{{ product.vendor }}{% else %}{{ 'compare_page.empty_section' | t }}{% endif %}{% endcapture %}
+
+{% capture compare_skus %}{{ compare_skus }}{% if compare_skus %}|||{% endif %}{% if current_variant.sku != blank %}{{ current_variant.sku }}{% else %}{{ 'compare_page.empty_section' | t }}{% endif %}{% endcapture %}
+
+{% capture compare_barcodes %}{{ compare_barcodes }}{% if compare_barcodes %}|||{% endif %}{% if current_variant.barcode != blank %}{{ current_variant.barcode }}{% else %}{{ 'compare_page.empty_section' | t }}{% endif %}{% endcapture %}
+
+{%- if current_variant.option1 and current_variant.option1 != 'Default Title' -%}
+{%- unless compare_options contains product.options[0] -%}
+{% capture compare_options %}{{ compare_options }}{%- if compare_options %}|||{% endif -%}{{ product.options[0] }}{% endcapture %}
+{%- endunless -%}
+{%- endif -%}
+{%- if current_variant.option2 and current_variant.option2 != 'Default Title' -%}
+{%- unless compare_options contains product.options[1] -%}
+{% capture compare_options %}{{ compare_options }}{%- if compare_options %}|||{% endif -%}{{ product.options[1] }}{% endcapture %}
+{%- endunless -%}
+{%- endif -%}
+{%- if current_variant.option3 and current_variant.option3 != 'Default Title' -%}
+{%- unless compare_options contains product.options[2] -%}
+{% capture compare_options %}{{ compare_options }}{%- if compare_options %}|||{% endif -%}{{ product.options[2] }}{% endcapture %}
+{%- endunless -%}
+{%- endif -%}
+{% capture compare_variants %}{{ compare_variants }}{% if compare_variants %}|||{% endif %}{{ product.options[0] }}={{ current_variant.option1 }}+{{ product.options[1] }}={{ current_variant.option2 }}+{{ product.options[2] }}={{ current_variant.option3 }}{% endcapture %}

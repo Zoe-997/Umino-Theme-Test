@@ -1,0 +1,433 @@
+{% liquid
+	assign sid = section.id 
+	assign faq_title_page = section.settings.faq_title_page
+    assign faq_title = section.settings.faq_title
+    assign faq_desc = section.settings.faq_desc
+    assign show_content = section.settings.show_content
+    assign show_menu = section.settings.show_menu
+    assign menu_page = linklists[section.settings.menu_page]
+%}
+<section id="laber_{{sid}}">
+<div class="main-content page-faqs">
+  <div class="container vc_column_container">
+    {%if faq_title_page !=blank%}
+    <div class="content">
+    <div class="head">
+      <div class="title">
+        {{faq_title_page}}
+      </div>
+    </div>
+    </div>
+    {%endif%}
+    <div class="content">
+    <div class="row">
+      <div class="{%if show_menu %}col-xs-12 col-sm-12  col-lg-9 content-offset-right{%else%}col-sm-12 {%endif%}">
+        {%if show_content %}
+        <div class="faq_content">
+          {%if faq_title !=blank%}<h3>{{faq_title}}</h3>{%endif%}
+            {%if faq_desc !=blank%}
+              <div class="faq_desc">
+                    {{faq_desc}}	
+              </div>
+            
+          {%endif%}
+          </div>
+        {%endif%}
+          {%- if section.blocks.size > 0 -%}         
+            {%- for block in section.blocks -%}
+        		<div id="faqs_{{block.id}}" class="faqs_block">
+        		<div class="title_faqs h3">{{block.settings.title}}</div>
+        		{%if block.settings.faq_name !=blank and block.settings.faq_name !=faq_desc2  %}
+				<div class="js-item-faq item first {% if forloop.first %} active {% endif %}" id="block_{{block.id}}">
+                  <div class="heading">
+					<div class="heading-title">
+                      <a href="javascript:void(0);">
+                        <span>
+							{{block.settings.faq_name}}
+                        </span>
+                        <span class="faqs-icon">
+                        	<i class="icon-plus"></i>
+                        </span>
+                      </a>
+                    </div>
+                  </div>
+				  <div class="content-faqs">
+					<div class="element">
+                      <p>
+                        {{block.settings.faq_desc}}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+        		{%endif%}
+        		{%if block.settings.faq_name2 !=blank and block.settings.faq_name2 !=blank  %}
+        		<div class="js-item-faq item ">
+                  <div class="heading">
+					<div class="heading-title">
+                      <a href="javascript:void(0);">
+                        <span>
+							{{block.settings.faq_name2}}
+                        </span>
+                        <span class="faqs-icon">
+                        	<i class="icon-plus"></i>
+                        </span>
+                      </a>
+                    </div>
+                  </div>
+				  <div class="content-faqs">
+					<div class="element">
+                      <p>
+                        {{block.settings.faq_desc2}}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+        		{%endif%}
+        
+        		{%if block.settings.faq_name3 !=blank and block.settings.faq_name3 !=blank  %}
+        		<div class="js-item-faq item">
+                  <div class="heading">
+					<div class="heading-title">
+                      <a href="javascript:void(0);">
+                        <span>
+							{{block.settings.faq_name3}}
+                        </span>
+                        <span class="faqs-icon">
+                        	<i class="icon-plus"></i>
+                        </span>
+                      </a>
+                    </div>
+                  </div>
+				  <div class="content-faqs">
+					<div class="element">
+                      <p>
+                        {{block.settings.faq_desc3}}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+        		{%endif%}
+        
+        		{%if block.settings.faq_name4 !=blank and block.settings.faq_name4 !=blank  %}
+        		<div class="js-item-faq item">
+                  <div class="heading">
+					<div class="heading-title">
+                      <a href="javascript:void(0);">
+                        <span>
+							{{block.settings.faq_name4}}
+                        </span>
+                        <span class="faqs-icon">
+                        	<i class="icon-plus"></i>
+                        </span>
+                      </a>
+                    </div>
+                  </div>
+				  <div class="content-faqs">
+					<div class="element">
+                      <p>
+                        {{block.settings.faq_desc4}}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+        		{%endif%}
+        
+        		{%if block.settings.faq_name5 !=blank and block.settings.faq_name5 !=blank  %}
+        		<div class="js-item-faq item">
+                  <div class="heading">
+					<div class="heading-title">
+                      <a href="javascript:void(0);">
+                        <span>
+							{{block.settings.faq_name5}}
+                        </span>
+                        <span class="faqs-icon">
+                        	<i class="icon-plus"></i>
+                        </span>
+                      </a>
+                    </div>
+                  </div>
+				  <div class="content-faqs">
+					<div class="element">
+                      <p>
+                        {{block.settings.faq_desc5}}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+        		{%endif%}
+        		</div>
+            {%- endfor -%}
+          {% else %}
+            {%- for i in (1..6) -%}
+                {% assign desc1 = "Click on a Product Photo or Product Name to see more detailed information. To place your order, choose the specification you want and enter the quantity, and click ‘Buy Now’. Please enter the required information such as Delivery Address, Quantity Type etc. Before clicking /“Place Order/”, please check your Order Details carefully. If you want to add a new Delivery Address, click /” Add a new address/”. If you want to edit a current Delivery Address, click ‘Edit this address’. After confirming your Order, you will be automatically taken to the Payment page." %}
+                {% assign desc2 = "Click on a Product Photo or Product Name to see more detailed information. To place your order, choose the specification you want and enter the quantity, and click ‘Buy Now’. Please enter the required information such as Delivery Address, Quantity Type etc. Before clicking /“Place Order/”, please check your Order Details carefully. If you want to add a new Delivery Address, click /” Add a new address/”. If you want to edit a current Delivery Address, click ‘Edit this address’. After confirming your Order, you will be automatically taken to the Payment page." %}
+                {% assign desc3 = "Click on a Product Photo or Product Name to see more detailed information. To place your order, choose the specification you want and enter the quantity, and click ‘Buy Now’. Please enter the required information such as Delivery Address, Quantity Type etc. Before clicking /“Place Order/”, please check your Order Details carefully. If you want to add a new Delivery Address, click /” Add a new address/”. If you want to edit a current Delivery Address, click ‘Edit this address’. After confirming your Order, you will be automatically taken to the Payment page." %}
+                {% assign desc4 = "Click on a Product Photo or Product Name to see more detailed information. To place your order, choose the specification you want and enter the quantity, and click ‘Buy Now’. Please enter the required information such as Delivery Address, Quantity Type etc. Before clicking /“Place Order/”, please check your Order Details carefully. If you want to add a new Delivery Address, click /” Add a new address/”. If you want to edit a current Delivery Address, click ‘Edit this address’. After confirming your Order, you will be automatically taken to the Payment page." %}
+          		{% assign desc5 = "Click on a Product Photo or Product Name to see more detailed information. To place your order, choose the specification you want and enter the quantity, and click ‘Buy Now’. Please enter the required information such as Delivery Address, Quantity Type etc. Before clicking /“Place Order/”, please check your Order Details carefully. If you want to add a new Delivery Address, click /” Add a new address/”. If you want to edit a current Delivery Address, click ‘Edit this address’. After confirming your Order, you will be automatically taken to the Payment page." %}
+          		{% assign desc6 = "Click on a Product Photo or Product Name to see more detailed information. To place your order, choose the specification you want and enter the quantity, and click ‘Buy Now’. Please enter the required information such as Delivery Address, Quantity Type etc. Before clicking /“Place Order/”, please check your Order Details carefully. If you want to add a new Delivery Address, click /” Add a new address/”. If you want to edit a current Delivery Address, click ‘Edit this address’. After confirming your Order, you will be automatically taken to the Payment page." %}
+          
+          		{%- capture current_title -%}{%- cycle "How do I place an order?", "What payment methods are accepted?", "What do you do with my information?", "What happen if there is a pricing error?","Do you ship internationally?","How to track my order?" -%}{%- endcapture -%}
+                {%- capture current_desc -%}{%- cycle desc1, desc2, desc3, desc4, desc5,desc6  -%}{%- endcapture -%}
+                <div class="js-item-faq item {% if forloop.first %} active {% endif %}" id="block_{{i}}">
+                  <div class="heading">
+					<div class="heading-title">
+                      <a href="javascript:void(0);">
+                        <span>
+							{{current_title}}
+                        </span>
+                        <span class="faqs-icon">
+                        	<i class="icon-plus"></i>
+                        </span>
+                      </a>
+                    </div>
+                  </div>
+                  <div class="content-faqs">
+					<div class="element">
+                      <p>
+                        {{current_desc}}
+                      </p>
+                    </div>
+                  </div>
+                  
+                </div>
+            {%- endfor -%}
+          {% endif %}
+        </div>
+      {%if show_menu %}
+        <div id="js-stickySidebar" class="col-xs-12 col-sm-12 col-md-3 sidebar js-sidebar-mobile-content sidebar-moible  ps-container">
+            <ul class="nav-accordion">
+              {%- for link in menu_page.links -%}
+                <li class="level1"><a href="{{ link.url }}">{{ link.title }}</a>
+                  {% if link.links != blank %}
+                    <ul class="submenu">
+                      {% for child_link in link.links %}  
+                      <li class="level2"><a href= "{{ child_link.url }}">{{ child_link.title }}</a>
+                        {% if child_link.links != blank %}
+                        <ul class="submenu2">
+                          {% for grandchild_link in child_link.links %}  
+                          <li class="level3"><a href= "{{ grandchild_link.url }}">{{ grandchild_link.title }}</a></li>
+                          {% endfor %}
+                        </ul>
+                        {% endif %}   
+                      </li>
+                      {% endfor %}
+                    </ul> 
+                  {% endif %} 
+                </li>
+              {% endfor %}
+            </ul>
+        </div>
+      {%endif%}
+      </div>
+    </div> 
+  </div>
+</div>
+</section>
+{%- render 'section_style' -%}
+{%style%}
+body {
+    background-color: {{section.settings.cl_bg}};
+}
+{%endstyle%}
+<script type="text/javascript">
+  $(document).on('click', '.js-item-faq .heading-title', function (e) {
+    var faq = $(this).closest('.js-item-faq').toggleClass('active');
+    faq.siblings().removeClass('active');
+  }); 
+</script>
+{% schema %}
+  {
+    "name": "FAQ",
+    "max_blocks": 30,
+    "settings": [
+        {
+          "type": "paragraph",
+          "content": "'Add Question' to clear default data"
+        }, 
+		{
+          "type": "header",
+          "content": "== General Setting"
+        },
+        {
+          "type": "text",
+          "id": "faq_title_page",
+          "label": "Title page",
+          "default": "FAQ"
+        },
+		{
+          "type": "header",
+          "content": "== Content FAQ"
+        },
+		{
+          "type": "checkbox",
+          "id": "show_content",
+          "label": "Show content",
+          "default": true
+        },
+		{
+          "type": "text",
+          "id": "faq_title",
+          "label": "Title",
+          "default": "How can we help you?"
+        },
+        {
+        "type": "textarea",
+        "id": "faq_desc",
+        "label": "Description"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_menu",
+          "label": "Show menu",
+          "default": true
+        },
+		{
+          "type": "link_list",
+          "id": "menu_page",
+          "label": "Menu"
+        },
+        {
+        "type": "color",
+        "id": "cl_bg",
+        "label": "Background color",
+        "default": "#fff"
+        },
+        {
+        "type": "header",
+        "content": "== setting content"
+        },
+        {
+        "type": "text",
+        "id": "pd_c",
+        "label": "Padding",
+        "info":"Padding top, Padding right, Padding bottom, Padding left. If you not use to blank"
+        },
+        {
+        "type": "header",
+        "content": "== Setting PC",
+        "info":"Margin"
+        },	
+        {
+        "type": "text",
+        "id": "mg",
+        "label": "Margin",
+        "info":"Margin top, margin right, margin bottom, margin left. If you not use to blank"
+        },
+        {
+        "type": "text",
+        "id": "pd",
+        "label": "Padding",
+        "info":"Padding top, padding right, padding bottom, padding left. If you not use to blank"
+        },
+        {
+        "type": "header",
+        "content": "== Design Mobile Options"
+        },
+        {
+        "type": "text",
+        "id": "mg_mb",
+        "label": "Margin"
+        },
+        {
+        "type": "text",
+        "id": "pd_mb",
+        "label": "Padding"
+        }
+		
+	],
+    "blocks": [{
+      "type": "faq",
+      "name": "Question",
+      "settings": [
+          {
+          "type": "text",
+          "id": "title",
+          "label": "Title faqs",
+          "default": "Shopping information"
+          },
+          {
+          "type": "header",
+          "content": "==  FAQ 1"
+          },	
+          {
+            "type": "text",
+            "id": "faq_name",
+            "label": "Question",
+            "default": "How do I place an order?"
+          },
+          {
+            "type": "textarea",
+            "id": "faq_desc",
+            "label": "Description"
+		  },
+		  {
+          "type": "header",
+          "content": "==  FAQ 2"
+          },	
+          {
+          "type": "text",
+          "id": "faq_name2",
+          "label": "Question 2",
+          "default": "How do I place an order?"
+          },
+          {
+          "type": "textarea",
+          "id": "faq_desc2",
+          "label": "Description 2"
+		  },
+		  {
+          "type": "header",
+          "content": "==  FAQ 3"
+          },	
+          {
+          "type": "text",
+          "id": "faq_name3",
+          "label": "Question 3",
+          "default": "How do I place an order?"
+          },
+          {
+          "type": "textarea",
+          "id": "faq_desc3",
+          "label": "Description 3"
+		  },
+		  {
+          "type": "header",
+          "content": "==  FAQ 4"
+          },	
+          {
+          "type": "text",
+          "id": "faq_name4",
+          "label": "Question 4",
+          "default": "How do I place an order?"
+          },
+          {
+          "type": "textarea",
+          "id": "faq_desc4",
+          "label": "Description 4"
+		  },
+		  {
+          "type": "header",
+          "content": "==  FAQ 5"
+          },	
+          {
+          "type": "text",
+          "id": "faq_name5",
+          "label": "Question 5",
+          "default": "How do I place an order?"
+          },
+          {
+          "type": "textarea",
+          "id": "faq_desc5",
+          "label": "Description 5"
+		  } 
+
+        ]
+    }]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

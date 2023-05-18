@@ -1,0 +1,44 @@
+<div id="tab_product" class="cms-tab nav-tab-style2">
+  <ul class="nav list-nav">
+    {% if product.description !="" and settings.product_page_description_tab_title != blank %}
+    	<li class="active"><a data-animated="fadeIn" data-toggle="pill" href="#tab1">{{settings.product_page_description_tab_title}}</a></li>
+    {% endif %}
+    {% if  product.metafields.spr.Additional !="" and settings.product_page_information_tab_title != blank %}
+    	<li><a data-animated="zoomInUp" data-toggle="pill" href="#tab2">{{settings.product_page_information_tab_title}}</a></li>
+    {% endif %}
+    {% if settings.product_page_review_tab_title != blank %}
+    	{% include 'reviews-count' %}
+    	<li><a data-animated="rotateInDownLeft" data-toggle="pill" href="#tab3">{{settings.product_page_review_tab_title}} ( {{ product_reviews_count }} ) </a></li>
+    {% endif %}
+  </ul>						
+  <div class="tab-content">
+    {% if product.description !="" %}
+    <div id="tab1" class="tab-panel active ">
+      <div class="description">
+       {{ product.description }}
+      </div>
+    </div>
+    {% endif %}
+    {% if  product.metafields.spr.Additional !="" %}
+    <div id="tab2" class="tab-panel">
+      <div class="additional">
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+            {{ product.metafields.spr.Additional }}
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endif %}  
+    <div id="tab3" class="tab-panel">
+      <div class="custom-review">
+        <div class="row">
+          <div id="shopify-product-reviews" class="col-xs-12 col-sm-12 col-md-12 col-lg-12" data-id="{{product.id}}">
+            {{ product.metafields.spr.reviews }}
+          </div>          
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

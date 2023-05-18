@@ -1,0 +1,5 @@
+{%- for collection in product.collections limit: 1 -%}
+	<a class="collection_item" href="{{ collection.url }}">
+      {{ collection.title }}{% if forloop.last != true %},{% endif %}
+	</a>{% if forloop.last != true %} {% endif %}
+{%- endfor -%}

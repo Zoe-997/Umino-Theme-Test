@@ -1,0 +1,407 @@
+{% liquid
+  assign sid = section.id 
+%}
+{%- for i in (1..1) -%}
+ <section class="laber_se_{{sid}}" >
+  <div class="container {% if section.settings.layout == "full-width"%}{{section.settings.layout}}{% endif %}">
+    <div class="{% if section.settings.title != blank %} wrap_title {% endif %}">
+      <h3 class="section-title"><span > {{section.settings.title}}</span></h3>        
+      <span class="section-subtitle">{{section.settings.sub_title}}</span>
+    </div> 
+    <div class="row">
+      	{%- for block in section.blocks -%}         
+          {%- case block.type -%}
+           {%- when 'collection' -%}
+               <div class="col-lg-{{block.settings.cl}} col-md-{{block.settings.cl_tb}} col-sm-{{block.settings.cl_mb}} col-xs-12">
+                  {%- if block.settings.title != blank %}<h5 class="widget-title">{{ block.settings.title }}</h5>{% endif -%}
+                  {%- if block.settings.collection == blank -%}
+                     <p class="mg__0 mb__30">{{ 'homepage.onboarding.no_content' | t }}</p>
+                  {%- else -%}
+                      <div class="product_list_widget">
+                         {%- for product in collections[block.settings.collection].products limit: block.settings.limit -%}
+                             {% include 'product-column' with product: product %}
+                         {%- endfor -%}
+                      </div>
+                  {%- endif -%}
+               </div>
+           {%- endcase -%}
+        {%- endfor -%}
+    </div>
+  </div>
+</section>
+{%- endfor -%}
+
+{% style%}
+{% assign cl_bg = section.settings.cl_bg %}
+{% assign mg_top = section.settings.mg_top %}
+{% assign mg_bottom = section.settings.mg_bottom %}
+{% assign pd_top = section.settings.pad_top %}
+{% assign pd_bottom = section.settings.pad_bottom %}
+{% assign mobile_mg_top = section.settings.mobile_mg_top %}
+{% assign mobile_mg_bottom = section.settings.mobile_mg_bottom %}
+{% assign mobile_pd_top = section.settings.mobile_pd_top %}
+{% assign mobile_pd_bottom = section.settings.mobile_pd_bottom %}
+
+	.laber_se_{{sid}}{
+      {% if mg_top !=0 %}margin-top:{{mg_top}}px;{%endif%} 
+      {% if mg_bottom !=0 %}margin-bottom:{{mg_bottom}}px;{%endif%} 
+      {% if pd_top !=0 %}padding-top:{{pd_top}}px;{%endif%} 
+      {% if pd_bottom !=0 %}padding-bottom:{{pd_bottom}}px;{%endif%} 
+      background-color:{{cl_bg}};
+	}
+    @media (max-width: 767px) {
+      .laber_se_{{sid}}{
+        {% if mobile_mg_top !=0 %}margin-top:{{mobile_mg_top}}px;{%endif%} 
+        {% if mobile_mg_bottom !=0 %}margin-bottom:{{mobile_mg_bottom}}px;{%endif%} 
+        {% if mobile_pd_top !=0 %}padding-top:{{mobile_pd_top}}px;{%endif%} 
+        {% if mobile_pd_bottom !=0 %}padding-bottom:{{mobile_pd_bottom}}px;{%endif%} 
+      }
+    }
+{% endstyle%} 
+{%- schema -%}
+  {
+    "name": "Section group",
+    "class": "cms_section type_section_group laberProducts-column laber_group_column",
+	"max_blocks": 6,
+    "settings": [
+      {
+        "type": "header",
+        "content": "== Title Settings"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading",
+        "default": "Products Column"
+      },
+      {
+        "type": "textarea",
+        "id": "sub_title",
+        "label": "Sub Text"
+      },   
+      {
+        "type": "header",
+        "content": "== Design Options"
+      },     
+      {
+        "type": "select",
+        "id": "layout",
+        "default": "container",
+        "options": [
+         {
+            "value": "container",
+            "label": "Container"
+         },
+         {
+            "value": "full-width",
+            "label": "Full Width"
+          }
+        ],
+        "label": "Layout"
+      },
+       {
+        "type": "color",
+        "id": "cl_bg",
+        "label": "Background color",
+        "default": "#fff"
+     	 },
+        {
+          "type": "range",
+          "id": "mg_top",
+          "label": "Margin Top",
+          "default": 0,
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "px"
+        },
+        {
+          "type": "range",
+          "id": "mg_bottom",
+          "label": "Margin bottom",
+          "default": 100,
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "px"
+        },
+        {
+          "type": "range",
+          "id": "pad_top",
+          "label": "Padding Top",
+          "default": 0,
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "px"
+        },
+        {
+          "type": "range",
+          "id": "pad_bottom",
+          "label": "Padding bottom",
+          "default": 0,
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "px"
+        },
+        {
+          "type": "header",
+          "content": "== Setting mobile",
+          "info":"Padding and Margin"
+        },
+       {
+          "type": "range",
+          "id": "mobile_mg_top",
+          "label": "Margin top",
+          "default": 0,
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "px"
+        },
+        {
+          "type": "range",
+          "id": "mobile_mg_bottom",
+          "label": "Margin bottom",
+          "default": 0,
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "px"
+        },
+        {
+          "type": "range",
+          "id": "mobile_pd_top",
+          "label": "Padding top",
+          "default": 0,
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "px"
+        },
+        {
+          "type": "range",
+          "id": "mobile_pd_bottom",
+          "label": "Padding bottom",
+          "default": 0,
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "px"
+        }
+    ],
+	"blocks": [
+      {
+        "type": "collection",
+        "name": "Featured Products",
+        "settings": [
+         {
+          "type":"text",
+          "id":"title",
+          "label":"Title",
+          "default":"Featured Products"
+          },
+          {
+           "type": "collection",
+           "id": "collection",
+           "label": "Collection to use"
+         },
+          {
+            "type": "range",
+            "id": "limit",
+            "min": 1,
+            "max": 20,
+            "step": 1,
+            "label": "Number of products to show",
+            "default": 3
+          },
+         {
+           "type": "header",
+           "content": "== Width settings"
+        },        
+        {
+        "type": "select",
+        "id": "cl",
+        "default": "3",
+        "options": [
+        {
+        "value": "1",
+        "label": "1/12 (8.333333%)"
+        },
+        {
+        "value": "2",
+        "label": "2/12 (16.666667%)"
+        },
+        {
+        "value": "3",
+        "label": "3/12 (25%)"
+        },
+        {
+        "value": "4",
+        "label": "4/12 (33.333333%)"
+        },
+		{
+        "value": "5",
+        "label": "5/12 (41.666667%)"
+        },
+        {
+        "value": "6",
+        "label": "6/12 (50%)"
+        },
+        {
+        "value": "7",
+        "label": "7/12 (58.333333%)"
+        },
+        {
+        "value": "8",
+        "label": "8/12 (66.666667%)"
+        },
+        {
+        "value": "9",
+        "label": "9/12 (75%)"
+        },
+        {
+        "value": "10",
+        "label": "10/12 (83.333333%)"
+        },
+        {
+        "value": "11",
+        "label": "11/12 (91.666667%)"
+        },
+        {
+        "value": "12",
+        "label": "12/12 (100%)"
+        }
+        ],
+        "label": "Width bannner col PC:"
+        },
+          {
+        "type": "select",
+        "id": "cl_tb",
+        "default": "6",
+        "options": [
+        {
+        "value": "1",
+        "label": "1/12 (8.333333%)"
+        },
+        {
+        "value": "2",
+        "label": "2/12 (16.666667%)"
+        },
+        {
+        "value": "3",
+        "label": "3/12 (25%)"
+        },
+        {
+        "value": "4",
+        "label": "4/12 (33.333333%)"
+        },
+		{
+        "value": "5",
+        "label": "5/12 (41.666667%)"
+        },
+        {
+        "value": "6",
+        "label": "6/12 (50%)"
+        },
+        {
+        "value": "7",
+        "label": "7/12 (58.333333%)"
+        },
+        {
+        "value": "8",
+        "label": "8/12 (66.666667%)"
+        },
+        {
+        "value": "9",
+        "label": "9/12 (75%)"
+        },
+        {
+        "value": "10",
+        "label": "10/12 (83.333333%)"
+        },
+        {
+        "value": "11",
+        "label": "11/12 (91.666667%)"
+        },
+        {
+        "value": "12",
+        "label": "12/12 (100%)"
+        }
+        ],
+        "label": "Width bannner col tablet:"
+        },
+		{
+        "type": "select",
+        "id": "cl_mb",
+        "default": "12",
+        "options": [
+        {
+        "value": "1",
+        "label": "1/12 (8.333333%)"
+        },
+        {
+        "value": "2",
+        "label": "2/12 (16.666667%)"
+        },
+        {
+        "value": "3",
+        "label": "3/12 (25%)"
+        },
+        {
+        "value": "4",
+        "label": "4/12 (33.333333%)"
+        },
+		{
+        "value": "5",
+        "label": "5/12 (41.666667%)"
+        },
+        {
+        "value": "6",
+        "label": "6/12 (50%)"
+        },
+        {
+        "value": "7",
+        "label": "7/12 (58.333333%)"
+        },
+        {
+        "value": "8",
+        "label": "8/12 (66.666667%)"
+        },
+        {
+        "value": "9",
+        "label": "9/12 (75%)"
+        },
+        {
+        "value": "10",
+        "label": "10/12 (83.333333%)"
+        },
+        {
+        "value": "11",
+        "label": "11/12 (91.666667%)"
+        },
+        {
+        "value": "12",
+        "label": "12/12 (100%)"
+        }
+        ],
+        "label": "Width bannner col mobile:"
+        }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Products Collection Column",
+        "category": "Collections",
+		"blocks": [
+          {"type": "collection"},
+		  {"type": "collection"},
+		  {"type": "collection"},
+		  {"type": "collection"}
+        ]
+      }
+    ]
+  }
+{% endschema %}

@@ -1,0 +1,627 @@
+{% if section.settings.home_page_only == false or template.name == 'index' %}
+  {% if section.settings.header_use_top_header %}
+  <div class="topbar {% if section.settings.hide_top_header_mobile %}hide-mobile{% endif %}" >
+    <div class="{{section.settings.layout}}">
+      <div class="row">
+        <div class="announcement-bar">
+          
+          {%- for block in section.blocks -%}
+          {%- case block.type -%}
+          	{%- when 'contac_header' -%} 
+          		{% assign col = block.settings.col %}
+          		{% assign text_align = block.settings.text_align %}
+          		<div class="{{text_align}} col-lg-{{col}} col-12 col-md-12 flex hide-mobile">
+                    <div class="top_contac">
+                      <ul>
+                        {%- if block.settings.show_phone -%}
+                              <li><a href="tel:{{shop.phone}}"><i class="icon-phone-call"></i> {{shop.phone}}</a></li>
+                         {%endif%}
+                         {%- if block.settings.show_email -%}
+                              <li><a href="mailto:{{shop.email}}"><i class="icon-mail"></i> {{shop.email}}</a></li>
+                         {%endif%}
+                      </ul>
+                    </div>
+                  </div>
+          	{%- when 'message' -%} 
+          		{% assign col = block.settings.col %}
+          		{% assign text_align = block.settings.text_align %}
+                  	<div class="wrapper-bar-message {{text_align}} col-lg-{{col}} col-12 col-md-12 flex">
+                        <p class="announcement-bar__message">
+                          {{ block.settings.message_text }} 
+                              {%- if  block.settings.text_link != blank -%}
+                                <a id="b_{{block.id}}"  class="buttons" href="{{block.settings.btn_link}}" target="{{block.settings.open_link}}"
+                                   {{ block.shopify_attributes }}>{{block.settings.text_link}}</a>
+                              {%- endif -%}
+                          {%style%}
+                          	.announcement-bar__message a{
+                          		color:{{block.settings.color_link}};
+                                  background-color:{{block.settings.bg_color_link}};
+                          	}
+                              .announcement-bar__message a:hover{
+                                  color:{{block.settings.color_link_hover}};
+                                  background-color:{{block.settings.bg_color_link_hover}};
+                              }  
+                          {%endstyle%}
+                        </p>
+                      </div>
+          	{%- when 'top_header_3' -%} 
+          		{% assign col = block.settings.col %}
+          		{% assign text_align = block.settings.text_align %}
+          		<div class="{{text_align}} col-lg-{{col}} col-md-6 col-sm-12 flex hide-mobile">
+                    	{% if block.settings.menu_topbar != blank%}
+                    	<ul class="topbar-menu">
+                          {% assign handle = block.settings.menu_topbar %}     
+                          {% for link in linklists[handle].links %}
+                              <li><a href="{{link.url}}"> {{ link.title }} </a></li>
+                          {% endfor %}
+                      </ul>
+                    	{%endif%}
+                      <ul class="menu-language parent-list">
+                        {%if block.settings.header_use_language%}
+                          {% render 'language' %} 
+                        {% endif %}
+                        {%if block.settings.header_use_currency%}
+                          {% render 'currency' %}
+                        {% endif %}
+                        
+                      </ul> 
+                      {% assign type_social = block.settings.type_social | plus: 0 %}
+                      {%if block.settings.header_use_social%}
+                        	
+                          {%- if type_social == 1 -%}
+                            {% include 'social_link' %}
+                          {%- else -%}
+                              {% include 'social-sharing' %}
+                          {%- endif -%}
+                      {% endif %}
+                    	
+                    </div>
+          	{%- when 'top_header_4' -%} 	
+          		{% assign col = block.settings.col %}
+          		{% assign text_align = block.settings.text_align %}
+          		<div class="{{text_align}} flex col-lg-{{col}} col-md-6 col-sm-12 hide-mobile">
+                      <ul class="topbar-menu">
+                          {% assign handle = block.settings.menu_topbar %}     
+                          {% for link in linklists[handle].links %}
+                              <li><a href="{{link.url}}"> {{ link.title }} </a></li>
+                          {% endfor %}
+                      </ul>
+          		   </div>	
+          
+          {%- endcase -%}
+          {%- endfor -%}
+          
+          
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endif %}
+{% endif %}
+{% style%}
+:root {
+  --bg-top-header:{{section.settings.bg_top_header}};
+  --color-text-top-header:{{section.settings.cl_text}};
+  --color-text-top-header-hover:{{section.settings.cl_text_h}};
+}
+{%endstyle%}
+
+{% schema %}
+  {
+    "name": "Top header",
+    "class":"cms-top-header",
+    "settings": [
+		{
+          "type": "header",
+          "content": "General settings"
+        },
+        {
+          "type": "checkbox",
+          "id": "header_use_top_header",
+          "label": "Show top header",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "hide_top_header_mobile",
+          "label": "Hide header (mobile)",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "home_page_only",
+          "label": "Home page only",
+          "default": true
+        },    
+		{
+          "type": "select",
+          "id": "layout",
+          "default": "full-width",
+          "options": [
+           {
+              "value": "container",
+              "label": "Container"
+           },
+           {
+              "value": "full-width",
+              "label": "Full Width"
+            }
+          ],
+          "label": "Layout"
+        },
+		{
+          "type": "header",
+          "content": "Design"
+        },
+        {
+          "type": "color",
+          "id": "bg_top_header",
+          "label": "Background color",
+          "default": "#f5f5f5"
+        },
+		{
+          "type": "color",
+          "id": "cl_text",
+          "label": "Color text",
+          "default": "#777"
+        },
+		{
+          "type": "color",
+          "id": "cl_text_h",
+          "label": "Color hover",
+          "default": "#343e45"
+        }
+	],
+	"blocks": [
+		{
+          "type": "contac_header",
+          "name": "Top contac header",
+          "limit": 1,
+          "settings": [
+              {
+          "type": "checkbox",
+          "id": "show_phone",
+          "label": "Show Phone",
+          "default": true
+          },
+          {
+          "type": "checkbox",
+          "id": "show_email",
+          "label": "Show Email",
+          "default": true
+          },	    
+				{
+                "type": "select",
+                "id": "text_align",
+                "default": "topbar-left",
+                "options": [ 
+                {
+                  "value": "topbar-left",
+                  "label": "Left"
+                },
+                {
+                  "value": "topbar-center",
+                  "label": "center"
+                },
+                {
+                  "value": "topbar-right",
+                  "label": "Right"
+                }
+                ],
+                  "label": "text align:"
+              },
+              {
+                "type": "select",
+                "id": "col",
+                "default": "4",
+                "options": [
+                {
+                  "value": "1",
+                  "label": "1/12 (8.333333%)"
+                },
+                {
+                  "value": "2",
+                  "label": "2/12 (16.666667%)"
+                },
+                {
+                  "value": "3",
+                  "label": "3/12 (25%)"
+                },
+                {
+                  "value": "4",
+                  "label": "4/12 (33.333333%)"
+                },
+                {
+                  "value": "6",
+                  "label": "6/12 (50%)"
+                },
+                {
+                  "value": "7",
+                  "label": "7/12 (58.333333%)"
+                },
+                {
+                  "value": "8",
+                  "label": "8/12 (66.666667%)"
+                },
+                {
+                  "value": "9",
+                  "label": "9/12 (75%)"
+                },
+                {
+                  "value": "10",
+                  "label": "10/12 (83.333333%)"
+                },
+                {
+                  "value": "11",
+                  "label": "11/12 (91.666667%)"
+                },
+                {
+                  "value": "12",
+                  "label": "12/12 (100%)"
+                }
+                ],
+                  "label": "Width col:"
+              }
+          ]
+        },
+		{
+          "type": "message",
+          "name": "Left Header Top",
+          "limit": 1,
+          "settings": [
+              {
+                "type": "text",
+                "id": "message_text",
+                "label": "Announcement text",
+                "default": "Free Delivery over £40 to most of UK*"
+              },
+              {
+                "type": "text",
+                "id": "text_link",
+                "label": "Link",
+                "default": "Shop Now"
+              },
+              {
+                "type": "url",
+                "id": "btn_link",
+                "label": "Button link",
+  			  "info": "Note: if you want to display this button then you need to fill button link"
+              }, 
+             {
+                "type": "select",
+                "id": "open_link",
+                "options": [
+                  {
+                    "value": "_self",
+                    "label": "Current window (_self)"
+                  },
+                 {
+                    "value": "_blank",
+                    "label": "New window (_blank)"
+                  }
+                ],
+                "label": "Open link in",
+                "default": "_blank"
+              },
+			  {
+                "type": "select",
+                "id": "text_align",
+                "default": "topbar-left",
+                "options": [ 
+                {
+                  "value": "topbar-left",
+                  "label": "Left"
+                },
+                {
+                  "value": "topbar-center",
+                  "label": "center"
+                },
+                {
+                  "value": "topbar-right",
+                  "label": "Right"
+                }
+                ],
+                  "label": "text align:"
+              },	
+              {
+                "type": "select",
+                "id": "col",
+                "default": "4",
+                "options": [
+                {
+                  "value": "1",
+                  "label": "1/12 (8.333333%)"
+                },
+                {
+                  "value": "2",
+                  "label": "2/12 (16.666667%)"
+                },
+                {
+                  "value": "3",
+                  "label": "3/12 (25%)"
+                },
+                {
+                  "value": "4",
+                  "label": "4/12 (33.333333%)"
+                },
+                {
+                  "value": "6",
+                  "label": "6/12 (50%)"
+                },
+                {
+                  "value": "7",
+                  "label": "7/12 (58.333333%)"
+                },
+                {
+                  "value": "8",
+                  "label": "8/12 (66.666667%)"
+                },
+                {
+                  "value": "9",
+                  "label": "9/12 (75%)"
+                },
+                {
+                  "value": "10",
+                  "label": "10/12 (83.333333%)"
+                },
+                {
+                  "value": "11",
+                  "label": "11/12 (91.666667%)"
+                },
+                {
+                  "value": "12",
+                  "label": "12/12 (100%)"
+                }
+                ],
+                  "label": "Width col:"
+              },
+              {
+              "type": "color",
+              "id": "color_link",
+              "label": "color",
+              "default": "#1a1a1a"
+              },
+              {
+              "type": "color",
+              "id": "bg_color_link",
+              "label": "Background color",
+              "default": "#fff"
+              },
+             {
+              "type": "color",
+              "id": "color_link_hover",
+              "label": "color (Hover)",
+              "default": "#1a1a1a"
+              },
+              {
+              "type": "color",
+              "id": "bg_color_link_hover",
+              "label": "Background color (Hover)",
+              "default": "#fff"
+              }
+          ]
+        },
+		{
+          "type": "top_header_3",
+          "name": "Right Header Top",
+          "limit": 1,
+          "settings": [
+				{
+                "type": "header",
+                "content": "Top Menu"
+              },
+				{
+                "type": "link_list",
+                "id": "menu_topbar",
+                "label": "Add topbar menu"
+              },
+				{
+                "type": "header",
+                "content": "Currency and Language settings"
+              },
+               {
+                "type": "checkbox",
+                "id": "header_use_currency",
+                "label": "Display currency on top bar",
+                "default": true
+              },
+              {
+                "type": "checkbox",
+                "id": "header_use_language",
+                "label": "Display language on top bar",
+                "default": true
+              },
+
+              {
+                "type": "header",
+                "content": "Social settings"
+              },
+              {
+                "type": "checkbox",
+                "id": "header_use_social",
+                "label": "Display social on top bar",
+                "default": true,
+                "info":"Note: you can edit social at 'Theme settings' -> 'Social media'"
+              },
+			  {
+               "type": "select",
+               "id": "type_social",
+               "label": "Show sharing Or link:",
+               "options": [
+                 {
+                   "value": "1",
+                   "label": "Social link"
+                 },
+                 {
+                   "value": "2",
+                   "label": "Social sharing"
+                 }
+               ],
+               "default": "2"
+              },
+			  
+				{
+                "type": "select",
+                "id": "text_align",
+                "default": "topbar-left",
+                "options": [ 
+                {
+                  "value": "topbar-left",
+                  "label": "Left"
+                },
+                {
+                  "value": "topbar-center",
+                  "label": "center"
+                },
+                {
+                  "value": "topbar-right",
+                  "label": "Right"
+                }
+                ],
+                  "label": "text align:"
+              },	
+              {
+                "type": "select",
+                "id": "col",
+                "default": "4",
+                "options": [
+                {
+                  "value": "1",
+                  "label": "1/12 (8.333333%)"
+                },
+                {
+                  "value": "2",
+                  "label": "2/12 (16.666667%)"
+                },
+                {
+                  "value": "3",
+                  "label": "3/12 (25%)"
+                },
+                {
+                  "value": "4",
+                  "label": "4/12 (33.333333%)"
+                },
+                {
+                  "value": "6",
+                  "label": "6/12 (50%)"
+                },
+                {
+                  "value": "7",
+                  "label": "7/12 (58.333333%)"
+                },
+                {
+                  "value": "8",
+                  "label": "8/12 (66.666667%)"
+                },
+                {
+                  "value": "9",
+                  "label": "9/12 (75%)"
+                },
+                {
+                  "value": "10",
+                  "label": "10/12 (83.333333%)"
+                },
+                {
+                  "value": "11",
+                  "label": "11/12 (91.666667%)"
+                },
+                {
+                  "value": "12",
+                  "label": "12/12 (100%)"
+                }
+                ],
+                  "label": "Width col:"
+              }
+          ]
+        },
+		{
+          "type": "top_header_4",
+          "name": "Topbar menu",
+          "limit": 1,
+          "settings": [
+              {
+                "type": "link_list",
+                "id": "menu_topbar",
+                "label": "Add topbar menu"
+              },
+				{
+                "type": "select",
+                "id": "text_align",
+                "default": "topbar-left",
+                "options": [ 
+                {
+                  "value": "topbar-left",
+                  "label": "Left"
+                },
+                {
+                  "value": "topbar-center",
+                  "label": "center"
+                },
+                {
+                  "value": "topbar-right",
+                  "label": "Right"
+                }
+                ],
+                  "label": "text align:"
+              },
+              {
+                "type": "select",
+                "id": "col",
+                "default": "4",
+                "options": [
+                {
+                  "value": "1",
+                  "label": "1/12 (8.333333%)"
+                },
+                {
+                  "value": "2",
+                  "label": "2/12 (16.666667%)"
+                },
+                {
+                  "value": "3",
+                  "label": "3/12 (25%)"
+                },
+                {
+                  "value": "4",
+                  "label": "4/12 (33.333333%)"
+                },
+                {
+                  "value": "6",
+                  "label": "6/12 (50%)"
+                },
+                {
+                  "value": "7",
+                  "label": "7/12 (58.333333%)"
+                },
+                {
+                  "value": "8",
+                  "label": "8/12 (66.666667%)"
+                },
+                {
+                  "value": "9",
+                  "label": "9/12 (75%)"
+                },
+                {
+                  "value": "10",
+                  "label": "10/12 (83.333333%)"
+                },
+                {
+                  "value": "11",
+                  "label": "11/12 (91.666667%)"
+                },
+                {
+                  "value": "12",
+                  "label": "12/12 (100%)"
+                }
+                ],
+                  "label": "Width col:"
+              }
+          ]
+        }
+		
+	]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}

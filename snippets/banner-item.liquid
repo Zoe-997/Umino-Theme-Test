@@ -1,0 +1,79 @@
+{%- liquid
+  assign collection = collections[block.settings.collection]
+  assign image = block.settings.image
+  assign home_t = 'homepage.onboarding.collection_title' | t  | append:' #' | append:for_i 
+  assign ratio = image.aspect_ratio 
+  
+  assign hidden_content = block.settings.hidden_content
+  assign c_style = block.settings.c_style | plus:0
+  assign url = block.settings.link_img 
+-%} 
+<div id="b_{{block.id}}" class="laber_banner {{ccol}} banner_{{ for_i }}" style="margin-bottom:{{ block.settings.mg_bottom }}px;">
+  <div class="cms-box">
+    {% if c_style == 1 %}
+      <div class="cms-content content_style1" {%if hidden_content %}style="display:none;"{%endif%}>
+        <div class="content_banner">
+          {%if block.settings.title != blank%}   
+          <h2 class="title" style="color:{{block.settings.cl_title}}">{{block.settings.title}}</h2>
+          {%endif%}
+          {%if block.settings.content != blank%} 
+          <p class="content" style="color:{{block.settings.cl_content}}">{{block.settings.content}}</p>
+          {%endif%}
+          {%if block.settings.btn != blank%} 
+          <a title="{{ block.settings.btn }}" class="btn-banner" href="{% if url != blank %}{{url}}{%else%}#{%endif%}"  {{ block.shopify_attributes }} 
+            style="background-color:{{ block.settings.bg_btn }};color:{{ block.settings.cl_btn }};"
+            onpointerenter="this.setAttribute('style', 'color: {{ block.settings.cl_btn_hover }}; background: {{ block.settings.bg_btn_hover }}')" 
+            onpointerleave="this.setAttribute('style', 'color: {{ block.settings.cl_btn }}; background: {{ block.settings.bg_btn }}')"
+            >
+              {{ block.settings.btn }}
+          </a>
+          {%endif%}
+          
+        </div>
+      </div>
+    {% endif %}  
+    <div class="cms-img">
+      {%- if block.settings.image -%} 
+      	<a title="{{ block.settings.btn }}" href="{% if url != blank %}{{url}}{%else%}#{%endif%}"  {{ block.shopify_attributes }}>
+      	<div data-image-effect class="pr_lazy_img main-img lazyload laber_bg_lz " data-id="{{image.id}}" data-bgset="{{ image | img_url: '1x1' }}" data-parent-fit="width" data-wiis data-ratio="{{ratio}}" data-sizes="auto" style="padding-top:{{ 1 | divided_by: ratio | times: 100}}%;"></div>
+       </a>
+      {% else %}
+      	<div class="pr_lazy_img main-img lazyload laber_bg_lz {{block.settings.img_align}}" data-bgset="{{cimg}}" data-parent-fit="width"  data-sizes="auto" style="padding-top:{{ ratio_demo }}%;"></div>
+      {%- endif -%}
+      {% if c_style == 2 %}
+          {%if block.settings.btn != blank%} 
+          <a class="btn-banner" href="{% if url != blank %}{{url}}{%else%}#{%endif%}"  {{ block.shopify_attributes }} 
+          style="background-color:{{ block.settings.bg_btn }};color:{{ block.settings.cl_btn }};"
+          onpointerenter="this.setAttribute('style', 'color: {{ block.settings.cl_btn_hover }}; background: {{ block.settings.bg_btn_hover }}')" 
+          onpointerleave="this.setAttribute('style', 'color: {{ block.settings.cl_btn }}; background: {{ block.settings.bg_btn }}')"
+          >
+          {{ block.settings.btn }}
+          </a>
+          {%endif%}
+        {%endif%}
+    </div>
+    {% if c_style == 2 %}
+    {%if block.settings.title != blank%}    
+    <div class="cms-content content_style2" {%if hidden_content %}style="display:none;"{%endif%}>
+      <div class="content_banner">
+        {%if block.settings.title != blank%}   
+        <h2 class="title" style="color:{{block.settings.cl_title}}">{{block.settings.title}}</h2>
+        {%endif%}
+        {%if block.settings.content != blank%} 
+        <p class="content" style="color:{{block.settings.cl_content}}">{{block.settings.content}}</p>
+        {%endif%}        
+      </div>
+    </div>
+    {%endif%}  
+    {% endif %}
+  </div>
+</div>
+{% style %}
+  @media only screen and (min-width : 767px){
+    {% if block.settings.width_item != blank %}
+    #b_{{block.id}}{
+      max-width:{{block.settings.width_item}}
+    }
+    {% endif %}
+  }
+{% endstyle %}

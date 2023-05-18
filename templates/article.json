@@ -1,0 +1,38 @@
+{
+  "sections": {
+    "breadcrumb": {
+      "type": "breadcrumb",
+      "settings": {
+        "show_title_page": false,
+        "h_position": "left",
+        "v_position": "middle",
+        "txt_align": "center",
+        "bg": "#f7f7f9",
+        "b_height": 70,
+        "mg_bottom": 30,
+        "mobile_bg": "#f7f7f9",
+        "mobile_ht": 70,
+        "mobile_mg_bottom": 15
+      }
+    },
+    "content-article": {
+      "type": "content-article",
+      "settings": {
+        "title_show_sidebar": "Show Sidebar",
+        "comment_use_chk": true,
+        "show_tags": true,
+        "limit_tags": "4",
+        "show_social": true,
+        "cl_bg": "#ffffff",
+        "mg": "",
+        "pd": "",
+        "mg_mb": "",
+        "pd_mb": ""
+      }
+    }
+  },
+  "order": [
+    "breadcrumb",
+    "content-article"
+  ]
+}

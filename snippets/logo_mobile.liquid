@@ -1,0 +1,16 @@
+<div class="header-logo hide-desktop flex-1">
+    {% if settings.logo_page_mobile != blank %}
+        <a href="{{ routes.root_url }}" class="site-header__logo-image" title="{{ settings.logo.alt | default: shop.name }}">
+          {% capture image_size %}{{ settings.logo_max_width | escape }}x{% endcapture %}
+          {%- assign logo_height = settings.logo_max_width | divided_by: settings.logo_page_mobile.aspect_ratio -%}
+          <img                                          
+             src="{{ settings.logo_page_mobile | img_url: image_size, scale: 2 }}"                      
+             alt="{{ settings.logo.alt | default: shop.name }}"
+             height="{{ logo_height }}"
+             width="{{ settings.logo_max_width }}"
+             style="max-width: {{ settings.logo_max_width }}px; width:auto; height:auto;">
+        </a>
+      {% else %}
+      <a class="site-title" href="{{ routes.root_url }}" itemprop="url"><span class="logo-default">{{ settings.logo_text  }}</span></a>
+      {% endif %}
+</div>

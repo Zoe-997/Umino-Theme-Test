@@ -1,0 +1,117 @@
+{%- if section.settings.hidden %}{% break %}{% endif -%}	
+{% assign se_blocks = section.blocks %}
+<div class="apus-footer-mobile">    
+  <ul>
+  {%- for block in section.blocks -%}
+    {%- case block.type -%}
+      {%- when 'home' -%}
+        <li>
+        <a href="{{ routes.root_url }}">
+          <i class="icon-home1"></i>
+          <span>{{'homepage.title' | t}}</span>
+        </a>
+      </li>
+     {%- when 'collections' -%}   
+      <li>
+        <a href="{{ block.settings.btn_link}}">
+          <i class="icon-menu"></i>
+          <span>{{'homepage.shop' | t}}</span>
+        </a>
+      </li>
+      {%- when 'cart' -%}       
+      <li class="cart_mobile">
+        <a class="footer-mini-cart mini-cart push_side header-icon" href="{{ routes.cart_add_url }}" data-id="#js_cart_popup">
+          <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><defs><style>.cls-1{fill:none;}</style></defs><title></title><g data-name="Layer 2" id="Layer_2"><path d="M23.52,29h-15a5.48,5.48,0,0,1-5.31-6.83L6.25,9.76a1,1,0,0,1,1-.76H24a1,1,0,0,1,1,.7l3.78,12.16a5.49,5.49,0,0,1-.83,4.91A5.41,5.41,0,0,1,23.52,29ZM8,11,5.11,22.65A3.5,3.5,0,0,0,8.48,27h15a3.44,3.44,0,0,0,2.79-1.42,3.5,3.5,0,0,0,.53-3.13L23.28,11Z"></path><path d="M20,17a1,1,0,0,1-1-1V8a3,3,0,0,0-6,0v8a1,1,0,0,1-2,0V8A5,5,0,0,1,21,8v8A1,1,0,0,1,20,17Z"></path></g><g id="frame"><rect class="cls-1" height="32" width="32"></rect></g></svg>
+                                                                                             
+          <span class="header__counter js-cart-count cart-count" data-js-cart-count="{{ cart.item_count }}">{{ cart.item_count }}</span> 
+          <span>{{'cart.general.title' | t}}</span>
+        </a> 
+      </li>
+       {%- when 'search' -%}       
+	  <li>
+        <a class="footer-search-btn push_side" href="javascript:void(0)" data-id="#search_pupop">
+         <i class="icon-search"></i>
+		  <span>{{'general.search.btn' | t}}</span>
+        </a>
+      </li>
+      {%- when 'account' -%}         
+      <li>
+          <a href="{{ routes.account_url }}">
+          <i class="icon-user"></i>
+		  <span>{{'customer.account.title' | t}}</span>
+        </a> 
+      </li>
+      {%- when 'wishlist' -%}       
+      <li>
+          <a href="javascript:void(0);" class="push_side header-icon wishlist-icon" data-id="#wishlist_popup" title="{{'general.wishlist.title' | t}}">
+           <i class="icon-heart"></i>
+            <span class="header__counter count" data-js-wishlist-count="0">0</span>
+             <span>{{'general.wishlist.title' | t}}</span>                                                       
+          </a>                        
+      </li>
+    {%- endcase -%}
+  {%- endfor -%}    
+  </ul>
+</div>
+{%- render 'section_style' -%} 
+{%- schema -%}
+  {
+    "name": "Menu bottom",
+    "class": "menu-bottom",
+    "max_blocks": 10,
+    "settings": [
+    {
+    "type": "checkbox",
+    "id": "hidden",
+    "label": "Hidden Section?",
+    "default": false
+    }
+    ],
+    "blocks": [
+      {
+        "type": "home",
+        "name": "Home",
+        "limit":1
+      },
+      {
+        "type": "collections",
+        "name": "Collections",
+        "limit":1,
+        "settings": [
+        {
+        "id": "collection",
+        "type": "collection",
+        "label": "Collection"
+        },
+        {
+            "type": "url",
+            "id": "btn_link",
+            "label": "Link",
+            "info": "Note: if you want to display this button then you need to fill button link"
+          }
+        ]
+      },
+      {
+        "type": "cart",
+        "name": "Cart",
+        "limit":1
+      },
+      {
+        "type": "search",
+        "name": "Search",
+        "limit":1
+      },
+      {
+        "type": "account",
+        "name": "Account",
+        "limit":1
+      },
+      {
+        "type": "wishlist",
+        "name": "Wishlist",
+        "limit":1
+      }
+      
+    ]
+  }
+{% endschema %}

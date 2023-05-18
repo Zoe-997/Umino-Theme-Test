@@ -1,0 +1,75 @@
+{%comment%} /snippets/social-sharing.liquid {%endcomment%}
+{% assign _share_permalink = product.url |default:article.url |default:page.url %}
+{% assign _share_permalink2 = shop.url | append:_share_permalink %}
+{% assign permalinkURL = share_permalink |default:_share_permalink2 %}
+{% assign _share_title = share_title |default:product.title |default:article.title |default:page.title |default:shop.name %}
+{% assign permaTitle = _share_title | url_param_escape %}
+{% assign _share_image = share_image |default:product.featured_image |default:article.image |default:settings.share_image | default: page_image | default: settings.logo %}
+{% assign permaImage = _share_image | img_url: '1024x1024' %}
+
+<div class="laber-social-sharing socials clearfix">
+  <label>{{ 'general.social.title' | t }}</label>
+  <ul>
+    {% if settings.share_facebook %}
+    <li class="facebook">
+      <a data-no-instant rel="noopener noreferrer nofollow" title="{{ 'general.social.share_on_facebook' | t }}" href="https://www.facebook.com/sharer/sharer.php?u={{ permalinkURL }}" target="_blank" class="facebook ">
+        <span class="title">{{ 'general.social.share_on_facebook' | t }}</span>
+        <i class="fa fa-facebook"></i>
+      </a>
+    </li>
+    {% endif %}
+    {% if settings.share_twitter %}
+    <li class="twitter">
+      <a data-no-instant rel="noopener noreferrer nofollow" title="{{ 'general.social.share_on_twitter' | t }}" href="http://twitter.com/share?text={{ permaTitle }}&amp;url={{ permalinkURL }}" target="_blank" class="twitter ">
+        <span class="title">{{ 'general.social.share_on_twitter' | t }}</span>
+        <i class="fa fa-twitter"></i>
+      </a>
+    </li>
+    {% endif %}
+    {% if settings.share_email %}
+    <li class="email">
+      <a data-no-instant rel="noopener noreferrer nofollow" title="{{ 'general.social.share_on_email' | t }}" href="mailto:?subject=Check this {{ permalinkURL }}" target="_blank" class="email ">
+        <span class="title">{{ 'general.social.share_on_email' | t }}</span>
+        <i class="fa fa-envelope"></i>
+      </a>
+    </li>
+	{% endif %}
+    {%- if permaImage != blank -%}
+    	{% if settings.share_pinterest %}
+          <li class="pinterest">
+            <a data-no-instant rel="noopener noreferrer nofollow" title="{{ 'general.social.share_on_pinterest' | t }}" href="http://pinterest.com/pin/create/button/?url={{ permalinkURL }}&amp;media=http:{{permaImage}}&amp;description={{ permaTitle }}" target="_blank" class="pinterest">
+              <span class="title">{{ 'general.social.share_on_pinterest' | t }}</span>
+              <i class="fa fa-pinterest"></i>
+            </a>
+          </li>
+    	{% endif %}
+    	{% if settings.share_tumblr %}
+          <li class="tumblr">
+            <a data-no-instant rel="noopener noreferrer nofollow" title="{{ 'general.social.share_on_tumblr' | t }}" data-content="http:{{permaImage}}" href="//tumblr.com/widgets/share/tool?canonicalUrl={{ permalinkURL }}" target="_blank" class="tumblr">
+              <span class="title">{{ 'general.social.share_on_tumblr' | t }}</span>
+              <i class="fa fa-tumblr"></i>
+            </a>
+          </li>
+    	{% endif %}
+    {%- endif -%}
+    {% if settings.share_telegram %}
+    <li class="telegram">
+      <a data-no-instant rel="nofollow" title="{{ 'general.social.share_on_telegram' | t }}" target="_blank" class="telegram " href="https://telegram.me/share/url?url={{ permalinkURL }}"> 
+        <span class="title">{{ 'general.social.share_on_telegram' | t }}</span>
+        <i class="fa fa-telegram"></i>
+      </a>
+    </li>
+    {% endif %}
+    {% if settings.share_whatsapp %}
+    <li class="whatsapp">
+      <a data-no-instant rel="nofollow" title="{{ 'general.social.share_on_whatsapp' | t }}" target="_blank" class="whatsapp " href="https://wa.me/?text={{ permaTitle }}&#x20;{{ permalinkURL }}"> 
+        <span class="title">{{ 'general.social.share_on_whatsapp' | t }}</span>
+        <i class="fa fa-whatsapp"></i>
+      </a>
+    </li>
+    {% endif %}
+  </ul>
+
+
+</div>
+

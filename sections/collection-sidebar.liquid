@@ -1,0 +1,734 @@
+<div class="title_sidebar">
+  <h3>{{section.settings.title}}</h3> <div class="js-close-sidebar close-sidebar-btn"><i class="icon-x"></i></div>
+</div>
+<div class="content-sidebar sidebar-detail">
+  <input type="hidden" value="{{collection.handle}}" name="currency-collection-handle" id="currency_collection_handle"/>
+  {% assign index = 0 %}
+  
+  {%- for block in section.blocks -%}    
+    {%- case block.type -%}
+      {%- when 'collections' -%}
+          {% capture no_content_message %}{{ 'collections.sidebar.no_collections' | t }}{% endcapture %}
+          {%- capture navigation_content -%}
+              {%- assign menu = linklists[block.settings.menu] -%}
+              <div class="collectons_widget collections-menu" data-js-sidebar data-js-collections-menu>
+                <div data-all-product class="collections-menu__item">
+                  <div class="collections-menu__button">
+                    <label>                              
+                      <a href="{{ routes.root_url }}collections/all"  class="{% if collection.handle == 'all' %}active{% endif %} js_ajax_filter item-popup" ><i class="laberIcon icon-check"></i> {{ 'collections.sidebar.all_product' |t }}
+                      {% if block.settings.show_counter %}
+                          <span class="n_products">({{ collections['all'].all_products_count }})</span>
+                      {% endif %}
+                        </a>
+                    </label> 
+                    
+                  </div>
+                </div>
+                <ul class="nav-accordion">
+                {%- for link in menu.links -%}
+                    {%- if link.type == 'collection_link' or link.type == 'collections_link' -%}               
+                      {%- if link.object.handle == collection.handle or link.handle == collection.handle -%}
+                        {%- assign is_current_collection = true -%}
+                      {%- else -%}
+                        {%- assign is_current_collection = false -%}
+                      {%- endif -%}
+                    {%- endif -%}
+                    <li class="level1 collections-menu__item  {% if link.active %}active {% if link.child_active %}child-active{% endif %}{% endif %}" data-section-for-collection="{{ link.object.handle | default: link.handle }}">
+                        <a href="{{ link.url }}"  class="{% if is_current_collection %}active{% endif %} lv1 js_ajax_filter item-popup" ><i class="laberIcon icon-check"></i> {{ link.title }}
+                          {% if block.settings.show_counter and link.object.all_products_count != blank %}
+                              <span class="n_products">({{ link.object.all_products_count }})</span>
+                            {% endif %}
+                        </a> 
+                        
+                      
+                      {% if link.links != blank %}
+                        <ul class="submenu">
+                          {% for child_link in link.links %}  
+                          <li class="level2 {% if child_link.active %}active {% if child_link.child_active %}child-active{% endif %}{% endif %}">
+                              <a href= "{{ child_link.url }}" class="{% if child_link.active %}active {% if child_link.child_active %}child-active{% endif %}{% endif %} lv2 js_ajax_filter item-popup">
+                                    <i class="laberIcon icon-check" aria-hidden="true"></i>
+                                    {{ child_link.title }}
+                                    {% if block.settings.show_counter and child_link.object.all_products_count != blank %}
+                                    <span class="n_products">({{ child_link.object.all_products_count }})</span>
+                                    {%endif%}
+                              </a>
+                            {% if child_link.links != blank %}
+                                
+                              
+                              <ul class="submenu2">
+                                {% for grandchild_link in child_link.links %}  
+                                <li class="level3 {% if grandchild_link.active %}active {% if grandchild_link.child_active %}child-active{% endif %}{% endif %}">
+                                    <a href= "{{ grandchild_link.url }}" class="{% if grandchild_link.active %}active {% if grandchild_link.child_active %}child-active{% endif %}{% endif %} lv3 js_ajax_filter item-popup">
+                                        <i class="laberIcon icon-check" aria-hidden="true"></i>
+                                        {{ grandchild_link.title }}
+                                        {% if block.settings.show_counter and grandchild_link.object.all_products_count != blank %}
+                                        <span class="n_products">({{ grandchild_link.object.all_products_count }})</span>
+                                      {%endif%}
+                                    </a>
+                                </li>
+                                {% endfor %}
+                              </ul>
+                            {% endif %}   
+                          </li>
+                          {% endfor %}
+                        </ul> 
+                      {% endif %} 
+                    </li>
+                  {%- assign has_content = true -%}                   
+                {%- endfor -%}
+                </ul>
+                
+              </div>
+        {%- endcapture -%}
+      {%- when 'filters' -%}
+        
+          {%- case block.settings.type -%}
+              {%- when 'tags' -%}
+                {% capture no_content_message %}{{ 'collections.sidebar.no_tags' | t }}{% endcapture %}
+                {%- assign input_name = 'filter_by_tag' -%}
+                {%- assign current_type_filters = filter_by_tags -%}
+                {%- assign all_items = collection.all_tags -%}
+              {%- when 'size' -%}
+                {% capture no_content_message %}{{ 'collections.sidebar.no_tags' | t }}{% endcapture %}
+                {%- assign input_name = 'filter_by_tag' -%}
+                {%- assign current_type_filters = filter_by_tags -%}
+                {%- assign all_items = collection.all_tags -%}
+              {%- when 'colors' -%}
+                {% capture no_content_message %}{{ 'collections.sidebar.no_colors' | t }}{% endcapture %}
+                {%- assign input_name = 'filter_by_color' -%}
+                {%- assign current_type_filters = filter_by_tags -%}
+                {%- assign all_items = collection.all_tags -%}
+              {%- when 'vendors' -%}
+                {% capture no_content_message %}{{ 'collections.sidebar.no_vendors' | t }}{% endcapture %}
+                {% capture input_name %}filter_by_vendor{% endcapture %}
+                {%- assign current_type_filters = filter_by_vendors -%}
+                {%- assign all_items = collection.all_vendors -%}
+              {%- when 'types' -%}
+                {% capture no_content_message %}{{ 'collections.sidebar.no_product_types' | t }}{% endcapture %}
+                {% capture input_name %}filter_by_type{% endcapture %}
+                {%- assign current_type_filters = filter_by_types -%}
+                {%- assign all_items = collection.all_types -%}
+          {%- endcase -%}
+          {%- if collection.current_vendor or collection.current_type -%}
+              {%- continue -%}
+          {%- endif -%}
+          {%- assign all_items_handle = all_items | join: '___' | handleize | split: '___' -%}
+  
+          {%- capture navigation_content -%}
+         
+              {%- if block.settings.items contains '|' -%}
+                {%- assign filters = block.settings.items | split: '|' -%}
+              {%- else -%}
+                {%- assign filters = block.settings.items | split: ',' -%}
+              {%- endif -%}
+
+              {%- assign filter_index = filter_index | plus: 1 -%}
+              {% capture replace_attrs %} data-js-collection-replace="filter-{{ filter_index }}" data-js-collection-replace-only-full{% endcapture %}
+              <div class="collection-filters {% if block.settings.type == 'colors' %} color {% endif %} {% if block.settings.type == 'size' %} size {% endif %}" data-item="{{all_items}}"  data-filter="{{filters}}" data-current="{{current_tags}}" data-js-collection-filters{% if block.settings.type == 'colors' %} data-property="color"{% endif %}>
+                {%- if block.settings.multiple_filter_value -%}
+                    {%- assign refresh_filter = false -%}
+                {%- else -%}
+                    {%- assign current_tags_string = current_tags | join: ',' -%}
+                    {%- for filter in filters -%}
+                        {% assign comma_filter = filter | prepend: ',' %}
+                        {% assign current_tags_string = current_tags_string | remove: comma_filter | remove: filter %}
+                    {%- endfor -%}
+                    {%- assign refresh_tags =  current_tags_string | replace: " ", "-" | replace: ",", " " | strip | split: " " -%}
+                    {%- assign refresh_tags_string = '' -%}
+                    {%- for tag_in in refresh_tags -%}
+                        {%- assign refresh_tags_string = tag_in | handleize | append:'+'| prepend: refresh_tags_string  -%}
+                    {%- endfor -%}
+                  {%- assign refresh_filter = refresh_tags_string | strip | prepend:'/' | within: collection -%}
+                {%- endif -%}
+                  {%- capture filters_html -%}
+                    {%- assign filters_count = 0 -%}
+                    {%- for filter in filters -%}
+                      {%- assign filter_handle = filter | handleize -%}
+                      {% if refresh_filter %}
+                        {%- assign url_refresh_filter = filter_handle| prepend: refresh_filter -%}
+                      {% endif %}
+                      {%- if all_items contains filter and collection.all_tags contains filter-%}                     
+                            <div class="input-checkbox {% if block.settings.type == 'colors' %} input-checkbox-colors{% endif %}">
+                              <input type="checkbox" class="d-none" name="{{ input_name }}" value="{{ filter_handle }}"{% if current_type_filters contains filter_handle %} checked="checked"{% endif %}>
+                              {%- if block.settings.type != 'colors' -%}   
+                                {% if current_tags contains filter %}
+                                    {%- capture filter_html -%}
+                                    <span class="wrap-icon{% if block.settings.type == 'colors' %} rounded-circle {% else %} {% endif %} {% if block.settings.hide_icon %}d-none{% endif %}"{% if block.settings.type == 'colors' %} data-value="{% render 'product-get-options-strip-symbols' with value: filter %}"{% endif %} data-bg="none">
+                                      <i class="active {% if block.settings.type == 'colors' %} standard-color-arrow{% endif %}">
+                                        <span class="icon"></span>                                    
+                                      </i>
+                                    </span>
+                                    <span class="title_filter">
+                                        {{filter}}
+                                    </span>
+                                    {%- endcapture -%}
+                                    {{filter_html | link_to_remove_tag:filter | replace: 'title=', 'class="item-popup js_ajax_filter active" title=' }}
+                                {% else %}
+                                    {%- capture filter_html -%}
+                                    <span class="wrap-icon{% if block.settings.type == 'colors' %} rounded-circle {% else %} {% endif %} {% if block.settings.hide_icon %}d-none{% endif %}"{% if block.settings.type == 'colors' %} data-value="{% render 'product-get-options-strip-symbols' with value: filter %}"{% endif %} data-bg="none">
+                                      <i {% if block.settings.type == 'colors' %}class=" standard-color-arrow"{% endif %}>
+                                        <span class="icon"></span>
+                                      </i>
+                                    </span>
+                                    <span class="title_filter">
+                                        {{filter}}
+                                    </span>
+                                    {%- endcapture -%}
+                                    {% if refresh_filter %}
+                                        {{filter_html | link_to: url_refresh_filter | replace: 'title=', 'class="js_ajax_filter item-popup" title='}}
+                                    {% else %}
+                                        {{filter_html | link_to_add_tag: filter | replace: 'title=', 'class="js_ajax_filter item-popup" title='}}
+                                    {% endif%}
+                                {% endif%}
+                              {% else %}                            
+                                    {%- capture color_button -%}
+                                      <label {% if current_tags contains filter %} {% assign color_border = filter | downcase %} style="border-color:{% if color_border != "white" %}{{filter}}{% else %} #343e45 {% endif %}" {% endif %}>
+                                        <span class="{% if filter == 'White' %}laber_white {%endif%}{% if block.settings.type == 'colors' %} {{filter|strip  | downcase}} rounded-circle {% endif %} "{% if block.settings.type == 'colors' %} style="background-color:{{filter|strip  | downcase}}" {% endif %} data-js-tooltip data-tippy-content="{{filter}}">
+                                        </span>
+                                         <span class="lbl_color">{{filter}}</span>
+                                      </label>
+                                    {%- endcapture -%}
+                                    {% if current_tags contains filter %}                                
+                                        {{color_button | link_to_remove_tag:filter | replace: 'title=', 'class="item-popup js_ajax_filter active" title=' }}
+                                    {% else %}
+                                      {% if refresh_filter %}
+                                          {{color_button | link_to: url_refresh_filter | replace: 'title=', 'class="item-popup js_ajax_filter" title='}}
+                                      {% else %}
+                                            {{color_button | link_to_add_tag: filter | replace: 'title=', 'class="item-popup js_ajax_filter" title='}}
+                                      {% endif%}
+                                    {% endif%}
+                              {%- endif -%}
+                            </div>
+                            {%- assign has_content = true -%}                        
+                        {%- endif -%}
+                    {%- endfor -%}
+             {%- endcapture -%}
+             
+             {{ filters_html }}
+             
+          </div>
+      {%- endcapture -%}  
+    {%comment%}
+       {%- when 'filter_by_price' -%}
+            {%- capture navigation_content -%}
+        {% assign products = collection.products | sort: 'price' %}
+              <div class="widget widget_filter_price box-has-content">               
+                <div class="price-filter">
+                  <div data-range-price data-label-reasult="price:" data-min="{{products.first.price | divided_by: 100 }}" data-max="{{products.last.price | divided_by: 100 }}" data-unit="$" class="range-price" data-value-min="{{products.first.price | divided_by: 100 }}" data-value-max="{{ products.last.price | divided_by: 100 }}"></div>
+                  <div data-amount-price class="amount-range-price"><span data-from class="from">{{products.first.price | money}}</span> - <span data-to class="to">{{products.last.price | money}}</span></div>                  
+                  <input type="hidden" id="min_price" value="{{products.first.price | divided_by: 100 }}"/>
+                  <input type="hidden" id="max_price" value="{{ products.last.price | divided_by: 100 }}"/>
+                </div>
+              </div>
+            {%- endcapture -%}
+            {%- assign has_content = true -%}
+  {%endcomment%}
+      {%- when 'products' -%}
+            {% capture no_content_message %}{{ 'collections.sidebar.no_content' | t }}{% endcapture %}
+            {%- capture navigation_content -%}
+            {%- assign products = collections[block.settings.collection].products -%}
+            {%- assign limit = block.settings.max_count -%}
+            {%- if limit == 0 -%}
+            {%- assign limit = products.size -%}
+            {%- endif -%}
+            {%- if products.size > 0 -%}
+                <div class="collection-sidebar-offers laberProducts-column">
+                  {%- for product in products limit: limit -%}                
+                          {% include 'product-column' %}                
+                      {%- assign has_content = true -%}
+                  {%- endfor -%}
+                </div>
+            {%- endif -%}
+        {%- endcapture -%}
+      {%- when 'custom_html' -%}
+          {% capture no_content_message %}{{ 'collections.sidebar.no_content' | t }}{% endcapture %}
+          {%- capture navigation_content -%}
+              {% capture custom_html %}
+                {% include 'parse-page-html-content' with default_page: 'include-collections-sidebar' page_content: block.settings.page_content %}
+              {% endcapture %}
+              {%- if custom_html != blank -%}
+                  <div class="rte">
+                    {{ custom_html }}
+                  </div>
+                  {%- assign has_content = true -%}
+              {%- endif -%}
+          {%- endcapture -%}
+      
+      {%- when 'subscription' -%}
+          {% capture no_content_message %}{{ 'collections.sidebar.no_content' | t }}{% endcapture %}
+            {%- capture navigation_content -%}
+                {%- if block.settings.paragraph != blank -%}
+                    <p>{{ block.settings.paragraph }}</p>
+                {%- endif -%}
+                {%- if settings.subscription_method == 'shopify' -%}
+                        {% form 'customer', id: null, class: 'form-group--type-inline form-input-button form-input-button--type-02 d-flex flex-column flex-lg-row mb-15' %}
+                            {% render 'form-get-check-error-popup' %}
+                            <input type="hidden" name="contact[tags]" value="newsletter">
+                            <input type="email" name="contact[email]" class="mb-0 mr-lg-10{% if form.errors %} input--error{% endif %}" placeholder="{{ block.settings.placeholder }}" required="required">
+                            <input type="submit" class="btn mt-10 mt-lg-0" name="commit" value="{{ block.settings.button_text }}">
+                        {% endform %}
+                    {%- elsif settings.subscription_method == 'mailchimp' -%}
+                        <form action="{{ settings.subscription_mailchimp_form_action }}" method="post" class="form-group--type-inline form-input-button form-input-button--type-02 d-flex flex-column flex-lg-row mb-15" target="_blank">
+                          <input type="email" name="EMAIL" class="mb-0 mr-lg-10" placeholder="{{ block.settings.placeholder }}" required="required">
+                          <input type="submit" class="btn mt-10 mt-lg-0" value="{{ block.settings.button_text }}">
+                        </form>
+                {%- endif -%}
+                {%- assign has_content = true -%}
+          {%- endcapture -%}
+      {%- endcase -%}
+  
+  
+      {%- if navigation_content -%}
+          {%- if block.settings.default_state == 'open' or block.settings.default_state == 'close' -%}
+              {% capture accordion_attr %} data-js-accordion="all"{% endcapture %}
+              {% capture accordion_button_attr %} data-js-accordion-button{% endcapture %}
+              {% capture accordion_content_attr %} data-js-accordion-content{% endcapture %}
+          {%- endif -%}
+          <div class="{% if col %}col-{{col}}{%endif%}  layer-navigation {% if block.type == "filters" %} layer-navigation__filter {% endif %}" data-js-collection-nav-section="{{ block.type }}"{{ accordion_attr }}>
+            {%- unless block.settings.default_state == 'without_title' -%}
+                  {% if block.type != "filters" %}
+                    <div class="layer-navigation__head layer-filter ">
+                      <h3 class="name">{{ block.settings.title | defalut: 'FILTER' }} <i class="icon-chevron-down"></i></h3>
+                    </div>
+                {% else %}                  
+                <div class="layer-navigation__head layer-filter">
+                      <h3 class="name">{{ block.settings.title | defalut: 'FILTER' }} <i class="icon-chevron-down"></i></h3>
+                    </div>
+                {% endif %}
+                {%- else -%}
+                <div></div>
+            {%- endunless -%}
+            <div class="layer-navigation__accordion "{{ accordion_content_attr }}>
+              <div class="layer-navigation__content">
+                {%- capture section_result_html -%}
+                    {%- if has_content -%}
+                        {{ navigation_content }}
+                    {%- else -%}
+                        <p>{{ no_content_message }}</p>
+                    {%- endif -%}
+                {%- endcapture -%}
+                {%- if replace_attrs -%}
+                    <div{{ replace_attrs }}>
+                      {{ section_result_html }}
+                    </div>
+                {%- else -%}
+                    {{ section_result_html }}
+                {%- endif -%}
+              </div>
+            </div>
+            
+          </div>
+          {%- assign navigation_content = null -%}
+          {%- assign has_content = null -%}
+          {%- assign replace_attrs = null -%}
+                   
+      {%- endif -%}
+  {%- endfor -%}
+  
+</div>
+  {%- for block in section.blocks -%}    
+    {%- case block.type -%}
+      {%- when 'promobox' -%}
+
+      <div class="promobox_widget zoom_img">
+        <div class="wrap_widget">
+          {% assign no-img = "https://placehold.jp/30/f3f3f3/343e45/270x460.png?text=270x460" %}  
+          {% assign image = block.settings.image_promobox %}
+          {% assign url = block.settings.url %}
+          {%- assign ratio = image.aspect_ratio -%}
+          {% if image.id%}
+          {%if url %}<a href="{{url}}" title="{{title}}">{%endif%}
+          <div data-image-effect class="pr_lazy_img  lazyload laber_bg_lz " data-id="{{image.id}}" data-bgset="{{ image | img_url: '1x1' }}" data-parent-fit="width" data-wiis data-ratio="{{ratio}}" data-sizes="auto" style="padding-top:{{ 1 | divided_by: ratio | times: 100}}%;"></div>
+
+          {%if url %}</a>{%endif%}
+          {%else%}
+          <div data-image-effect class="pr_lazy_img  lazyload laber_bg_lz "  data-bgset="{{ no-img }}" data-parent-fit="width" data-wiis data-ratio="1" data-sizes="auto" style="padding-top: 100%;"></div> 
+          {%endif%}
+        </div>
+      </div>
+
+
+{%- endcase -%}
+{%- endfor -%}
+{%style%}
+.main-content-grid .content-sidebar {
+  {%if section.settings.pd != blank%}padding:{{section.settings.pd}};{%endif%}
+  {%if section.settings.cl_bg != blank%}background-color: {{section.settings.cl_bg}};{%endif%}
+}
+{%endstyle%}
+<script type="text/javascript">
+  $(document).ready(function() {   
+    if($("#currency_collection_handle").val() == "frontpage" && $(".js_products_holder .product-item").length == 0){  
+        var url = "/collections/all";
+        window.location.replace(url); 
+    };
+    $(".js-mobile-sidebar").on('click',function(e){
+      $(".js-mobile-sidebar-panel").addClass('active');
+      $(".js-sidebar-mobile-content").addClass('active');
+    });   
+    $(".js-close-sidebar").on('click',function(){
+      $(".js-mobile-sidebar-panel").removeClass('active'); 
+      $(".js-sidebar-mobile-content").removeClass('active');
+    });
+  })
+</script>
+{% schema %}
+  {
+    "name": "Sidebar filter",
+    "settings": [
+        {
+        "type": "paragraph",
+        "content": "Layout and visibility settings are in Theme settings -> Collection page"
+        },
+        {
+        "type": "text",
+        "id": "title",
+        "label": "Title",
+        "default": "FILTERS"
+        },
+        {
+        "type": "header",
+        "content": "== Design Options"
+        },
+        {
+        "type": "color",
+        "id": "cl_bg",
+        "label": "Background color",
+        "default": "#fff"
+        },
+        {
+        "type": "text",
+        "id": "pd",
+        "label": "Padding",
+        "info":"Padding top, padding right, padding bottom, padding left. If you not use to blank"
+        }   
+  ],
+  "blocks": [
+        {
+            "type": "collections",
+            "name": "Collections",
+            "limit": 1,
+            "settings": [
+                {
+                    "type": "header",
+                    "content": "Section settings"
+                },
+                {
+                    "type": "text",
+                    "id": "title",
+                    "label": "Title",
+                    "default": "COLLECTION"
+                },
+        {
+                    "type": "select",
+                    "id": "default_state",
+                    "label": "Default state",
+                    "default": "open",
+                    "options": [
+                        {
+                            "value": "open",
+                            "label": "Show title"
+                        },                       
+                        {
+                            "value": "without_title",
+                            "label": "Without title"
+                        }
+                    ]
+                },
+                {
+                    "type": "checkbox",
+                    "id": "show_counter",
+                    "label": "Show counter product",
+                    "default": true
+                },
+                {
+                    "type": "header",
+                    "content": "Content"
+                },
+                {
+                    "type": "link_list",
+                    "id": "menu",
+                    "label": "Menu"
+                }
+            ]
+        },   
+        {
+            "type": "filters",
+            "name": "Filters tags",
+            "settings": [
+                {
+                    "type": "header",
+                    "content": "Section settings"
+                },
+                {
+                    "type": "text",
+                    "id": "title",
+                    "label": "Title",
+                    "default": "FILTERS"
+                },
+                {
+                    "type": "select",
+                    "id": "default_state",
+                    "label": "Default state",
+                    "default": "open",
+                    "options": [
+                        {
+                            "value": "open",
+                            "label": "Show title"
+                        },                       
+                        {
+                            "value": "without_title",
+                            "label": "Without title"
+                        }
+                    ]
+                },               
+                {
+                    "type": "header",
+                    "content": "Content"
+                },
+                {
+                    "type": "select",
+                    "id": "type",
+                    "label": "Type of the filter",
+                    "default": "tags",
+                    "options": [
+                        {
+                            "value": "tags",
+                            "label": "Tags"
+                        },
+              {
+                            "value": "size",
+                            "label": "Size"
+                        },
+                        {
+                            "value": "colors",
+                            "label": "Colors"
+                        },
+                        {
+                            "value": "vendors",
+                            "label": "Vendors"
+                        },
+                        {
+                            "value": "types",
+                            "label": "Product types"
+                        }
+                    ]
+                },
+                {
+                    "type": "text",
+                    "id": "items",
+                    "label": "Items",
+                "default": "$0.00 - $25.00|$25.00 - $50.00|$50.00 - $75.00|$75.00 - $100.00",
+                    "info": "Separator is '|' or ','"
+                },
+              {
+                    "type": "checkbox",
+                    "id": "hide_icon",
+                    "label": "Hide icons",
+                    "default": false
+                },
+              {
+                    "type": "checkbox",
+                    "id": "multiple_filter_value",
+                    "label": "Multiple filter value",
+                    "default": false,
+                    "info": "Product variant with 2 colors black and white"
+                }
+            ]
+        },      
+        {
+            "type": "products",
+            "name": "Products",
+            "settings": [
+                {
+                    "type": "header",
+                    "content": "Section settings"
+                },
+                {
+                    "type": "text",
+                    "id": "title",
+                    "label": "Title",
+                    "default": "PRODUCTS"
+                },
+                {
+                    "type": "select",
+                    "id": "default_state",
+                    "label": "Default state",
+                    "default": "open",
+                    "options": [
+                        {
+                            "value": "open",
+                            "label": "Show title"
+                        },                       
+                        {
+                            "value": "without_title",
+                            "label": "Without title"
+                        }
+                    ]
+                },                
+                {
+                    "type": "header",
+                    "content": "Content"
+                },
+                {
+                    "type": "collection",
+                    "id": "collection",
+                    "label": "Collection"
+                },
+                {
+                    "type": "range",
+                    "id": "max_count",
+                    "min": 0,
+                    "max": 10,
+                    "step": 1,
+                    "unit": "pds",
+                    "label": "Max count",
+                    "info": "0 is infinite",
+                    "default": 3
+                }
+            ]
+        },
+        /*{
+            "type": "custom_html",
+            "name": "Custom HTML",
+            "settings": [
+                {
+                    "type": "header",
+                    "content": "Section settings"
+                },
+                {
+                    "type": "text",
+                    "id": "title",
+                    "label": "Title",
+                    "default": "CUSTOM BLOCK"
+                },
+                {
+                    "type": "select",
+                    "id": "default_state",
+                    "label": "Default state",
+                    "default": "open",
+                    "options": [
+                        {
+                            "value": "open",
+                            "label": "Show title"
+                        },                       
+                        {
+                            "value": "without_title",
+                            "label": "Without title"
+                        }
+                    ]
+                },               
+                {
+                    "type": "header",
+                    "content": "Content"
+                },
+                {
+                    "type": "page",
+                    "id": "page_content",
+                    "label": "Page content",
+                    "info": "Default page: 'Include Collections Sidebar'"
+                }
+            ]
+        },*/
+    /*{
+            "type": "subscription",
+            "name": "Subscription",
+            "settings": [
+                {
+                    "type": "header",
+                    "content": "Section settings"
+                },
+                {
+                    "type": "text",
+                    "id": "title",
+                    "label": "Title",
+                    "default": "SUBSCRIPTION"
+                },
+                {
+                    "type": "select",
+                    "id": "default_state",
+                    "label": "Default state",
+                    "default": "without_title",
+                    "options": [
+                        {
+                            "value": "open",
+                            "label": "Show title"
+                        },                        
+                        {
+                            "value": "without_title",
+                            "label": "Without title"
+                        }
+                    ]
+                },                
+                {
+                    "type": "header",
+                    "content": "Content"
+                },
+                {
+                    "type": "text",
+                    "id": "paragraph",
+                    "label": "Paragraph",
+                    "default": "Sign up for Eliah updates to receive information about new arrivals, future events and specials."
+                },
+                {
+                    "type": "text",
+                    "id": "placeholder",
+                    "label": "Placeholder",
+                    "default": "Enter your email address"
+                },
+                {
+                    "type": "text",
+                    "id": "button_text",
+                    "label": "Button text",
+                    "default": "SUBSCRIBE!"
+                }
+            ]
+        },*/
+        {
+            "type": "promobox",
+            "name": "Promo box (Banner)",
+            "settings": [
+                {
+                    "type": "header",
+                    "content": "Section settings"
+                },
+                 {
+                "type": "image_picker",
+                "id": "image_promobox",
+                "label": "Image",
+                "info": "Recommended size 325x325 pixels"
+                }, 
+                {
+                "type": "url",
+                "id": "url",
+                "label": "URL for banner"
+                }
+                           
+            ]
+        }
+        
+    ],
+    "default": {
+      "blocks": [       
+        {
+          "type": "collections",
+          "settings": {
+
+          }
+        },
+        {
+          "type": "filters",
+          "settings": {
+
+          }
+        }
+      ]
+    }
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

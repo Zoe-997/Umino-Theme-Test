@@ -1,0 +1,7 @@
+{%- if compare_at_price > price -%}
+	<span class="price price--sale" data-js-product-price>
+       <span class="current">{{ price | money }}</span> <span class="compare">{{ compare_at_price | money }}</span>
+	</span>
+{%- else -%}
+	<span class="price" data-js-product-price><span>{{ price | money }}</span></span>
+{%- endif -%}

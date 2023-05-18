@@ -1,0 +1,144 @@
+#laber_product_sidebar {}
+.laber_benefit{
+    background: #fff;
+    border: 1px solid #E6ECF0;
+    border-radius: 3px;
+    padding: 30px;
+    margin-bottom: 30px;
+}
+.laber_benefit .item-benefit{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 30px;
+    padding-bottom: 30px;
+    border-bottom: 1px dashed #E6ECF0;
+}
+.laber_benefit .item-benefit:last-child{
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+.laber_benefit .item-benefit .icon{
+  color:#B45353;
+  margin-bottom: 10px;
+  font-size: 24px;
+  line-height: 1;
+
+}
+.laber_benefit .item-benefit .icon.img{
+  width: 30px;
+  height: 30px;
+}
+.laber_benefit .item-benefit .content{
+}
+.laber_benefit .item-benefit .content .title{
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+
+#laber_product_sidebar .promobox{
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+    margin-bottom: 30px;
+}
+#laber_product_sidebar .promobox-content{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 30px;
+    text-align: left;
+}
+#laber_product_sidebar .promobox-content .title{
+  color: #fcde00;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 20px;
+  text-transform: uppercase;
+  margin-bottom: 15px;
+}
+#laber_product_sidebar .promobox-content .sub_title{
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 28px;
+  color: #fff;
+  text-transform: uppercase;
+  margin-bottom:30px;
+}
+#laber_product_sidebar .promobox-content .sub_title span{
+  display: block;
+  font-size: 24px;
+}
+#laber_product_sidebar .promobox-content .content{
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 23px;
+  color: #fff;
+}
+#laber_product_sidebar .laber-product{
+  background-color:#fff;
+  border-radius:10px;
+  margin-bottom:30px;
+  position:relative;
+}
+#laber_product_sidebar .laber-product h3{
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 25px;
+  color: var(--color-main);
+  margin-bottom: 25px;
+}
+
+#laber_product_sidebar .laber-product .product-item{
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px dashed #E6ECF0;
+    border-radius: 0;
+}
+#laber_product_sidebar .laber-product .product-item .product-collection{margin:0;}
+#laber_product_sidebar .laber-product .slick-slide > div:last-child .product-item{
+	margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+#laber_product_sidebar .laber-product .product-item:hover .product-collection{
+	box-shadow:0 0 0;
+}
+#laber_product_sidebar .laber-product .product-item .group-button .inner .add-to-cart{
+	display:flex;
+}
+#laber_product_sidebar .laber-product .product-bottom-content{
+	display:none;
+}
+
+#laber_product_sidebar .laber-product .laber_append_dots{
+  padding: 0;
+  justify-content: center;
+  padding-top: 30px;
+}
+#laber_product_sidebar .laber-product .laber_append_dots .slick-dots{
+  width: auto;
+}
+#laber_product_sidebar .laber-product .laber_append_arrows{
+    display: flex;
+    position: absolute;
+    top: 27px;
+    right: 10px;
+}
+#laber_product_sidebar .laber-product .slick-prev, 
+#laber_product_sidebar .laber-product .slick-next{
+  position: static;
+  width: 30px;
+  height: 30px;
+  margin-left: 5px;
+  -webkit-transform: translate(0, 0);
+  -ms-transform: translate(0, 0);
+  transform: translate(0, 0);
+  opacity: 1;
+}

@@ -1,0 +1,46 @@
+
+{% if show_label_sale %}
+    {%- if compare_at_price > price -%}
+    	{%- assign sale_percent = price | times: 100 | divided_by: compare_at_price | minus: 100 | times: -1 -%}
+    	<div class="label label--sale" data-js-product-label-sale>{{ 'products.product.label.sale' | t: percent: sale_percent }}</div>                        
+    {%- else -%}
+    	<div class="label label--sale d-none-important" data-js-product-label-sale></div>
+    {%- endif -%}   
+{% endif %}
+{%comment%}
+	<!--------------------------------------------------->
+{%endcomment%}
+{% if show_label_hot %} 
+    {% if product.tags contains "label_host" %}
+  		<div class="label label--hot" data-js-product-label-hot>
+             {{ 'products.product.label.hot' | t }}
+        </div>
+  {% endif %}	
+{% endif %}
+{%comment%}
+	<!--------------------------------------------------->
+{%endcomment%}
+{% if lhot !="true" %}
+  {% assign date_published = product.published_at | date:'%Y%m%d' %}
+  {% assign date_now = 'now' | date:'%Y%m%d' %}
+  {% assign date_difference = date_now | minus: date_published %}
+  {% assign limit_day = settings.product_page_new_product | plus: 0%}
+
+  {% if show_label_new and date_difference <  limit_day %}
+      <div class="{%- if show_label_sale and compare_at_price > price -%}d-none-important {%endif%}  label label--new" data-js-product-label-new>{{ 'products.product.label.new' | t }}</div> 
+  {% endif %}
+
+{%endif%}
+{%comment%}
+	<!--------------------------------------------------->
+{%endcomment%}
+{% if show_label_in_stock %}
+	{% if available == true %}
+		<div class="label label--in-stock" data-js-product-label-in-stock>{{ 'products.product.label.in_stock' | t }}</div>
+	{% endif %}
+{% endif %}
+{% if show_label_out_stock %}
+	{% if available == false %}
+		<div class="label label--out-stock" data-js-product-label-out-stock>{{ 'products.product.label.out_stock' | t }}</div>
+	{% endif %}
+{% endif %}

@@ -1,0 +1,351 @@
+{%- liquid
+  assign sid = section.id
+  assign col = section.settings.col_pr
+  assign col_tb = section.settings.col_pr_tb
+  assign source = section.settings.source
+  assign cl_mb = section.settings.col_pr_mb
+ %}
+ 
+{%- for i in (1..1) -%}
+  
+  {%- if section.settings.hidden %}{% break %}{% endif -%}
+  {% if section.settings.show_border_top %}<div class="line"></div>{% endif %}
+  <section id="laber_{{sid}}">
+          {% if section.settings.title != blank %}
+      <div class="wrap_title {{ section.settings.text_size }} {{section.settings.style_title}}">
+
+        {% if section.settings.sub_title!= blank %}
+        <h4 class="section-subtitle">{{section.settings.sub_title}}</h4>
+        {% endif %}
+
+        <h3 class="section-title">{{section.settings.title}}</h3>  
+
+        {% if section.settings.content!= blank %}
+        <div class="content">{{section.settings.content}}</div>
+        {% endif %}
+
+      </div>
+      {% endif %}
+      <div class="{{section.settings.layout}}">
+        <div class="row">
+          {%- if section.blocks.size > 0 -%}
+            {%- for block in section.blocks -%}
+                {%- case block.type -%}
+                {% when 'shipping' %}
+                <div class="col-sm-{{cl_mb}} col-md-{{col_tb}} col-lg-{{col}} bl_{{block.id}}">
+                  <div class="laber_shipping flex-wrap flex">                
+                    {%- if source == '1' -%}
+                    <div class="icon">
+                      <i class="{{block.settings.icon}}"></i>
+                    </div>
+                    {%- elsif source == '2' -%}
+                    {% assign image = block.settings.icon_img %} 
+                    <div class="icon icon_img">
+                      {% if image != blank %}
+                        {% render 'responsive-image', image: image, image_class: 'w-full h-full' %}
+                      {% else %}
+                      {% capture current %}{% cycle 1, 2, 3, 4, 5 %}{% endcapture %}
+                            {{ 'collection-' | append: current | placeholder_svg_tag: 'placeholder-svg w-full h-full' }}
+                       {% endif %} 
+                    </div>
+                    {%- endif -%}
+                    <div class="content">
+                      <h3 class="title">{{block.settings.title}}</h3>
+                      <p >{{block.settings.text}}</p>
+                    </div>
+                  </div>
+                </div>
+              {%endcase%}	
+            {%endfor%}            	
+          {%- endif -%}
+        </div>
+        
+      </div>
+
+    </section>
+{%- endfor -%}
+{%- render 'section_style' -%} 
+{%- schema -%}
+  {
+    "name": "Benefit",
+    "class": "type_shipping",
+    "max_blocks": 30,
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "hidden",
+        "label": "Hidden Section?",
+        "default": false
+      },
+      {	
+          "type": "checkbox",
+          "id": "show_border_top",
+          "label": "Show border top",
+          "default": false
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading",
+        "default": "Featured Services"
+      },
+      {
+        "type": "text",
+        "id": "sub_title",
+        "label": "Sub Text"
+      },  
+	  {
+        "type": "textarea",
+        "id": "content",
+        "label": "Content",
+        "default": "Nemo enim ipsam quia sit aut odit aut fugit"
+      },
+      {
+        "type": "select",
+        "id": "text_size",
+        "default": "medium",
+        "options": [
+          {
+            "value": "small",
+            "label": "small"
+         },
+         {
+            "value": "medium",
+            "label": "Medium"
+         },
+         {
+            "value": "large",
+            "label": "Large"
+          }
+        ],
+        "label": "Text size"
+      },
+      {
+        "type": "select",
+        "id": "style_title",
+        "default": "style_1",
+        "options": [
+         {
+            "value": "style_1",
+            "label": "Center"
+         },
+         {
+            "value": "style_2",
+            "label": "Left"
+          }
+        ],
+        "label": "Text alignment"
+      },
+      {
+        "type": "header",
+        "content": "== General Settings"
+      },
+      {
+        "type": "select",
+        "id": "source",
+        "label": "Show icon",
+        "default": "2",
+        "options": [
+          {
+            "value": "1",
+            "label": "icon font"
+          },
+          {
+            "value": "2",
+            "label": "icon image"
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "content": "[Get icons Pe icon](https://fontawesome.com/icons?d=gallery)"
+      },
+	  
+      {
+        "type": "select",
+        "id": "col_pr",
+        "label": "Shipping columns",
+        "default": "3",
+        "options": [
+          {
+            "value": "6",
+            "label": "2"
+          },
+          {
+            "value": "4",
+            "label": "3"
+          },
+          {
+            "value": "3",
+            "label": "4"
+          },
+          {
+            "value": "15",
+            "label": "5"
+          },
+          {
+            "value": "2",
+            "label": "6"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "col_pr_tb",
+        "label": "Shipping columns Tablet",
+        "default": "6",
+        "options": [
+          {
+            "value": "6",
+            "label": "2"
+          },
+          {
+            "value": "4",
+            "label": "3"
+          },
+          {
+            "value": "3",
+            "label": "4"
+          }
+        ]
+      },
+		{
+        "type": "select",
+        "id": "col_pr_mb",
+        "label": "Shipping columns mobile",
+        "default": "6",
+        "options": [
+          {
+            "value": "12",
+            "label": "1"
+          },
+		  {
+            "value": "6",
+            "label": "2"
+          }
+        ]
+      },  
+      {
+        "type": "header",
+        "content": "== Design Options"
+      },
+      
+      {
+        "type": "select",
+        "id": "layout",
+        "default": "container",
+        "options": [
+         {
+            "value": "container",
+            "label": "Container"
+         },
+         {
+            "value": "full-Width",
+            "label": "Full Width"
+          }
+        ],
+        "label": "Layout"
+      },
+	  {
+        "type": "image_picker",
+        "id": "bg_image",
+        "label": "Background image"
+      },	
+      {
+        "type": "color",
+        "id": "cl_bg",
+        "label": "Background color",
+        "default": "#fff"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_br_top",
+        "label": "Show border top",
+        "default": false
+      },
+      {
+        "type": "color",
+        "id": "cl_border",
+        "label": "Border color",
+        "default": "#e5e5e5"
+      },
+      {
+      "type": "text",
+      "id": "mg",
+      "label": "Margin",
+      "info":"Margin top, margin right, margin bottom, margin left. If you not use to blank"
+      },
+      {
+      "type": "text",
+      "id": "pd",
+      "label": "Padding",
+      "info":"Padding top, padding right, padding bottom, padding left. If you not use to blank"
+      },
+      {
+      "type": "header",
+      "content": "== Design Mobile Options"
+      },
+      {
+      "type": "text",
+      "id": "mg_mb",
+      "label": "Margin"
+      },
+      {
+      "type": "text",
+      "id": "pd_mb",
+      "label": "Padding"
+      }      
+    ],
+    "blocks": [
+      {
+        "type": "shipping",
+        "name": "Shipping",
+        "settings": [          
+          {
+            "type": "header",
+            "content": "== Icon Options"
+          },
+          {
+             "type": "text",
+             "id": "icon",
+             "label": "Icons name",
+             "default": "fa fa-truck"
+          },
+			{
+				"type": "image_picker",
+				"id": "icon_img",
+				"label": "icon image",
+				"info" : "Dimension: 52x52"
+			},	
+          {
+            "type": "header",
+            "content": "== Text Options"
+          },
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Heading",
+            "default": "Add a title"
+          },
+		  			
+          {
+             "type": "textarea",
+             "id": "text",
+             "label": "Text",
+             "default": "Use this text to describe."
+           }
+        ]
+      }
+    ],
+    
+    "presets": [
+      {
+        "name": "1. Benefit",
+        "category": "Text",
+        "blocks": [
+          
+        ]
+      }
+    ]
+  }
+{% endschema %}

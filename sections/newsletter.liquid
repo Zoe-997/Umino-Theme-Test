@@ -1,0 +1,231 @@
+{% liquid
+  assign sid = section.id 
+%}
+{%- for i in (1..1) -%} 
+  <section id="laber_{{sid}}" class="{{ section.settings.design }}"> 
+    <div class=" {%if section.settings.layout != 'full-width' %}container {%else%} {{section.settings.layout}}{%endif%} text_{{ section.settings.position }}">
+
+      <aside class="laber_mail">
+        {% if section.settings.title != blank or section.settings.sub_title!= blank %}
+  		<div class="wrap_title {{ section.settings.text_size }}">
+            {% if section.settings.title != blank %}
+  		  <h3 class="section-title">{{section.settings.title}}</h3>  
+  		  {% endif %}
+  		</div>
+        {% endif %}
+          <div class="newsletter">                                   	
+            {%- form 'customer', class:'newsletter-form-footer' -%}
+            <input type="hidden" name="contact[tags]" value="newsletter">
+            <div class="mc4wp-form-fields">
+              <div class="signup-newsletter-form  {{class}}">
+                <div class="col pd-0">
+                  <div class="i-email">
+                    <div class="icon">
+                      <svg width="18" height="14" viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M9.1084 1.00049H14.3084C15.8548 1.00049 17.1084 2.25409 17.1084 3.80049V10.2005C17.1084 11.7469 15.8548 13.0005 14.3084 13.0005H3.9084C2.362 13.0005 1.1084 11.7469 1.1084 10.2005V3.80049C1.1084 2.25409 2.362 1.00049 3.9084 1.00049H5.1084" stroke="#79819C" stroke-width="1.5" stroke-linecap="round"/>
+                        <path d="M5.1084 5.00049L8.5084 7.55068C8.86397 7.81737 9.35289 7.81737 9.70846 7.55068L13.1085 5.00049" stroke="#79819C" stroke-width="1.5" stroke-linecap="round"/>
+                      </svg>
+                    </div>
+                    <input type="email" name="contact[email]" placeholder="{{ 'general.newsletter_form.email_placeholder' | t }}"  value="{% if customer %}{{ customer.email }}{% endif %}" class="{{class_ip}} input-text" required="required">
+                  </div>
+                </div>
+                 <div class="col-auto pd-0">
+                  <button type="submit" class="submit-btn truncate{% if settings.checkbox_mail %} mail_agree pr{% endif %}">
+               
+                      {{ 'general.newsletter_form.submit' | t }} 
+                      <i class="icon-arrow-right"> </i>
+                 
+                  </button>
+                </div>
+              </div>
+            </div>
+            
+            {%- if form.posted_successfully? -%}
+              <div class="mc4wp-response">  
+                <div class="shopify-message"><i class="las la-check"></i>{{ 'general.newsletter_form.confirmation' | t }}</div>
+              </div>
+            {%- elsif form.errors -%}
+              <div class="mc4wp-response"> 
+                <div class="shopify-error"><i class="las la-exclamation-triangle"></i>{{ form.errors | default_errors }}</div>
+              </div>
+            {%- endif -%}
+            </div>
+            
+            {%- endform -%}								
+            {% if section.settings.content!= blank %}
+            <div class="content">{{section.settings.content}}</div>
+            {% endif %}	
+      </aside>
+    </div>
+</section>
+{%- endfor -%}
+{%style%}
+
+@media (min-width: 1024px){
+
+  #laber_{{sid}} .laber_mail{
+    width: {{section.settings.width_c}}%;
+  }
+  
+}
+{%endstyle%}
+{%- render 'section_style' -%}
+
+{%- schema -%}
+  {
+    "name": "Newsletter",
+    "class": "laber-newsletter",
+    "settings": [ 
+
+      {
+        "type": "header",
+        "content": "== Setting"
+      },
+	  {  
+      "type": "range",  
+      "id": "width_c",  
+      "label": "Width container",
+      "min": 0,
+      "max": 100,
+      "step": 10,
+      "unit": "%",
+      "default": 100 
+      },
+      {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Tips & tricks"
+      },
+	  {
+        "type": "textarea",
+        "id": "content",
+        "label": "Content",
+        "default": "Subscribe to the Gosto mailing list to receive updates on new arrivals <br> & other discount information."
+      },
+      {
+        "type": "select",
+        "id": "text_size",
+        "default": "medium",
+        "options": [
+          {
+            "value": "small",
+            "label": "small"
+         },
+         {
+            "value": "medium",
+            "label": "Medium"
+         },
+         {
+            "value": "large",
+            "label": "Large"
+          }
+        ],
+        "label": "Text size"
+      },
+      {
+        "type": "select",
+        "id": "position",
+        "options": [
+         {
+            "value": "left",
+            "label": "Left"
+         },
+         {
+            "value": "right",
+            "label": "Right"
+          },
+          {
+            "value": "center",
+            "label": "Center"
+          }
+        ],
+        "label": "Position"
+      },
+      {
+        "type": "select",
+        "id": "layout",
+        "options": [
+         {
+            "value": "container",
+            "label": "Container"
+         },
+         {
+            "value": "full-width",
+            "label": "Full Width"
+          }
+        ],
+        "label": "Layout"
+      },
+      {
+        "type": "select",
+        "id": "design",
+        "options": [
+         {
+            "value": "design-1",
+            "label": "Design 1"
+         },
+         {
+            "value": "design-2",
+            "label": "Design 2"
+          },
+          {
+            "value": "design-3",
+            "label": "Design 3"
+          }
+        ],
+        "label": "Design"
+      },
+      {
+      "type": "image_picker",
+      "id": "bg_image",
+      "label": "Background Image",			
+      "info": "1920px x 400px .jpg recommended"
+      },
+      {
+      "type": "color",
+      "id": "cl_bg",
+      "label": "Background color",
+      "default": "#fff"
+      },
+      {
+        "type": "text",
+        "id": "mg",
+        "label": "Margin",
+        "info":"Margin top, margin right, margin bottom, margin left. If you not use to blank",
+        "default": "30px,,,",
+        "placeholder": "30px,,30px,"
+      },
+      {
+        "type": "text",
+        "id": "pd",
+        "label": "Padding",
+        "info":"Padding top, padding right, padding bottom, padding left. If you not use to blank",
+        "placeholder": "30px,,30px,"
+      },
+     {
+        "type": "header",
+        "content": "== Design Mobile Options"
+      },
+      {
+        "type": "text",
+        "id": "mg_mb",
+        "label": "Margin",
+        "placeholder": "30px,,30px,"
+      },
+      {
+        "type": "text",
+        "id": "pd_mb",
+        "label": "Padding",
+        "placeholder": "30px,,30px,"
+      }  
+     
+    ],    
+    "presets": [
+      {
+        "name": "Newsletter",
+        "category": "Text"
+      }
+    ]
+  }
+{% endschema %}

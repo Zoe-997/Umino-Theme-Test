@@ -1,0 +1,30 @@
+{%- if customer and customer.metafields.compare -%}
+    {%- for item in customer.metafields.compare -%}
+        {%- assign compare_id = item[0] | abs -%}
+        {%- assign compare_handle = item[1] -%}
+        {%- if current_variant_id == compare_id and product.handle == compare_handle -%}
+            {%- assign present_in_compare = true -%}
+        {%- endif -%}
+    {%- endfor -%}
+{%- endif -%}
+<a href="{{ routes.account_url }}" class="compare-button btn btn--status js-store-lists-add-compare js-compare"
+    {% if present_in_compare %} data-button-status="added"{% endif %}
+   data-pid="{{product.handle}}"
+>	
+        <span class="icon-svg"><svg width="24" height="20" viewBox="0 0 24 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M1.40625 7.30225H13.4062" stroke="black" stroke-miterlimit="10"/>
+<path d="M13.4062 7.30225H22.5937" stroke="black" stroke-miterlimit="10"/>
+<path d="M12 8.9407e-08L12 7" stroke="black" stroke-miterlimit="10"/>
+<path d="M4.21875 7.30225L0.703125 15.7397C0.703125 17.293 1.96233 18.5522 3.51562 18.5522H4.92188C6.47517 18.5522 7.73438 17.293 7.73438 15.7397L4.21875 7.30225Z" stroke="black" stroke-miterlimit="10"/>
+<path d="M0.703125 15.7397H7.73438" stroke="black" stroke-miterlimit="10"/>
+<path d="M19.7812 7.30225L16.2656 15.7397C16.2656 17.293 17.5248 18.5522 19.0781 18.5522H20.4844C22.0377 18.5522 23.2969 17.293 23.2969 15.7397L19.7812 7.30225Z" stroke="black" stroke-miterlimit="10"/>
+<path d="M16.2656 15.7397H23.2969" stroke="black" stroke-miterlimit="10"/>
+</svg>
+</span>
+        <i class="icon-layers"></i>
+        <i class="icon-trash-2" data-button-content="added"></i>
+  <span class="text">{{'products.product.add_to_compare.title' | t }}</span>
+  <span class="added" data-button-content=added>{{'products.product.add_to_compare.added' | t }}</span>
+  
+</a>
+{%- assign present_in_compare = false -%}

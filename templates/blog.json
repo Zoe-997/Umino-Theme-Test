@@ -1,0 +1,95 @@
+{
+  "sections": {
+    "breadcrumb": {
+      "type": "breadcrumb",
+      "settings": {
+        "show_title_page": false,
+        "h_position": "left",
+        "v_position": "middle",
+        "txt_align": "center",
+        "bg": "#f2f2f6",
+        "b_height": 70,
+        "mg_bottom": 30,
+        "mobile_bg": "#f2f2f6",
+        "mobile_ht": 50,
+        "mobile_mg_bottom": 30
+      }
+    },
+    "content-blog": {
+      "type": "content-blog",
+      "blocks": {
+        "8a66c207-743a-41ec-be5d-df174cbb8165": {
+          "type": "search",
+          "settings": {
+            "title": "Search blog",
+            "place_holder_search_sidebar": "Search blog",
+            "icon_search": "<i class=\"icon-search\"><\/i>"
+          }
+        },
+        "25874748-239a-4eae-bea3-2557431f6333": {
+          "type": "social",
+          "settings": {
+            "title": "social"
+          }
+        },
+        "e1a07196-81dc-47f4-bbae-12c3aff675cc": {
+          "type": "category",
+          "settings": {
+            "title_category_sidebar": "Categories",
+            "pagination_limit_category": "6"
+          }
+        },
+        "50692e83-65d7-44a7-84c0-94a866229c8e": {
+          "type": "latestpost",
+          "settings": {
+            "title": "Recent Posts",
+            "blog": "shopping",
+            "limit_blog_latest": "4"
+          }
+        },
+        "2f685afa-c313-4354-b09b-1e8d761e3a84": {
+          "type": "tags",
+          "settings": {
+            "title": "Tags Cloud",
+            "limit_tags": "6"
+          }
+        },
+        "92988f23-6420-491b-9a3c-8c3ad7ead3fe": {
+          "type": "newsletter",
+          "settings": {
+            "title": "Newsletter",
+            "subtitle": "Subscribe to our newsletter and get our newest updates right on your inbox.",
+            "place_holder": "Your email",
+            "title_newsletter_checkbox": "I agree to the terms & conditions",
+            "title_newsletter_button": "Subscribe"
+          }
+        }
+      },
+      "block_order": [
+        "8a66c207-743a-41ec-be5d-df174cbb8165",
+        "25874748-239a-4eae-bea3-2557431f6333",
+        "e1a07196-81dc-47f4-bbae-12c3aff675cc",
+        "50692e83-65d7-44a7-84c0-94a866229c8e",
+        "2f685afa-c313-4354-b09b-1e8d761e3a84",
+        "92988f23-6420-491b-9a3c-8c3ad7ead3fe"
+      ],
+      "settings": {
+        "layout_blog": "1",
+        "use_eq_height": true,
+        "image_ratio": "ratio8_5",
+        "pagination_limit_blog": "5",
+        "cl_first": "4",
+        "numb_text_first": "25",
+        "cl": "4",
+        "numb_text": "25",
+        "cl_bg": "#ffffff",
+        "mg_bottom": 100,
+        "mobile_mg_bottom": 50
+      }
+    }
+  },
+  "order": [
+    "breadcrumb",
+    "content-blog"
+  ]
+}

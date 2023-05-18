@@ -1,0 +1,192 @@
+{
+  "sections": {
+    "breadcrumb": {
+      "type": "breadcrumb",
+      "disabled": true,
+      "settings": {
+        "show_title_page": true,
+        "h_position": "center",
+        "v_position": "middle",
+        "txt_align": "left",
+        "bg_breadcrumb_blog": "shopify:\/\/shop_images\/bg_breadcrumb.jpg",
+        "bg": "#f2f2f6",
+        "b_height": 150,
+        "mg_bottom": 0,
+        "mobile_bg": "#f7f7f9",
+        "mobile_ht": 50,
+        "mobile_mg_bottom": 0
+      }
+    },
+    "main": {
+      "type": "main-contact",
+      "blocks": {
+        "c30d9271-76e1-4b33-8e2c-4eb91a939fa7": {
+          "type": "Contact",
+          "settings": {
+            "title": "CONTACT INFORMATION",
+            "content": "We love to hear from you on our customer service, merchandise, website or any topics you want to share with us. \nYour comments and suggestions will be appreciated. \nPlease complete the form below.",
+            "address": "1418 Riverwood Drive, Suite 3245 Cottonwood<br>\nCA 96052, United States",
+            "work_time": "Monday – Friday: 9:00-20:00 <br> Saturady: 11:00 – 15:00",
+            "phone": "(+100) 666-456-7890",
+            "email": "aloshopify@alothemes.com"
+          }
+        }
+      },
+      "block_order": [
+        "c30d9271-76e1-4b33-8e2c-4eb91a939fa7"
+      ],
+      "settings": {
+        "right_title_block": "LEAVE A REPLY",
+        "content": "Your email address will not be published. Required fields are marked *",
+        "use_contact_map": true,
+        "map_iframe": "<iframe width=\"960\" height=\"500\" style=\"border:0\" src=\"https:\/\/www.google.com\/maps\/embed\/v1\/search?q=1200+Beverly+Street,+Mountain+View,+CA,+United+States&key=AIzaSyCeVrTUW_JTL2UKUT0-85wiwusOJZ48yMM\" allowfullscreen=\"\"><\/iframe>",
+        "layout": "container",
+        "cl_bg": "#fafafa",
+        "mg": "",
+        "pd": "",
+        "mg_mb": "",
+        "pd_mb": ",,60px,"
+      }
+    },
+    "1652931770532e3556": {
+      "type": "looking-for",
+      "disabled": true,
+      "blocks": {
+        "1652931770df4e28db-0": {
+          "type": "text_block",
+          "settings": {
+            "enable_image": true,
+            "title": "Rue Pelleport - Paris",
+            "text": "<p>Add: Heaven Stress, Beverly Hill, Melbourne<\/p><p>Phone: (+100) 123 456 7890E<\/p><p>mail: sofine@google.com<\/p>",
+            "btn": "",
+            "link_img": "",
+            "open_link": "_blank"
+          }
+        },
+        "1652931770df4e28db-1": {
+          "type": "text_block",
+          "settings": {
+            "enable_image": true,
+            "title": "Prospect - New York",
+            "text": "<p>Add: Heaven Stress, Beverly Hill, Melbourne<\/p><p>Phone: (+100) 123 456 7890E<\/p><p>mail: sofine@google.com<\/p>",
+            "btn": "",
+            "link_img": "",
+            "open_link": "_blank"
+          }
+        },
+        "1652931770df4e28db-2": {
+          "type": "text_block",
+          "settings": {
+            "enable_image": true,
+            "title": "Budapest - Hungary",
+            "text": "<p>Add: Heaven Stress, Beverly Hill, Melbourne<\/p><p>Phone: (+100) 123 456 7890E<\/p><p>mail: sofine@google.com<\/p>",
+            "btn": "",
+            "link_img": "",
+            "open_link": "_blank"
+          }
+        },
+        "aa791a0f-5016-49dd-9f3e-7567c4c0484a": {
+          "type": "text_block",
+          "settings": {
+            "enable_image": true,
+            "title": "Kastrup - Denmark",
+            "text": "<p>Add: Heaven Stress, Beverly Hill, Melbourne<\/p><p>Phone: (+100) 123 456 7890E<\/p><p>mail: sofine@google.com<\/p>",
+            "btn": "",
+            "link_img": "",
+            "open_link": "_blank"
+          }
+        }
+      },
+      "block_order": [
+        "1652931770df4e28db-0",
+        "1652931770df4e28db-1",
+        "1652931770df4e28db-2",
+        "aa791a0f-5016-49dd-9f3e-7567c4c0484a"
+      ],
+      "settings": {
+        "hidden": false,
+        "page": "Contact us",
+        "title": "Looking For Orfarm?",
+        "sub_title": "",
+        "content": "The liber tempor cum soluta nobis eleifend option congue doming quod mazim.",
+        "use-slider": true,
+        "slides-To-Scroll": 1,
+        "visible": 4,
+        "widescreen": 4,
+        "desktop": 4,
+        "laptop": 4,
+        "notebook": 3,
+        "tablet": 3,
+        "landscape": 2,
+        "portrait": 2,
+        "mobile": 1,
+        "rows": 1,
+        "autoplay": true,
+        "speed": "300",
+        "autoplay-Speed": "3000",
+        "arrows": true,
+        "fade": false,
+        "center-Mode": false,
+        "adaptive-Height": false,
+        "dots": false,
+        "infinite": false,
+        "padding": 15,
+        "vertical": false,
+        "layout": "container",
+        "cl_bg": "#ffffff",
+        "mg": "",
+        "pd": "40px,0,80px,0",
+        "mg_mb": "",
+        "pd_mb": "30px,0,50px,0"
+      }
+    },
+    "9c8d5148-af29-47c5-b1e5-df8cdd31ae08": {
+      "type": "collection-carousel-product",
+      "settings": {
+        "title": "New arrivals",
+        "sub_title": "",
+        "content": "Commodo sociosqu venenatis cras dolor sagittis integer luctus maecenas.",
+        "style_title": "style_1",
+        "collection": "backpacks",
+        "max_count": 8,
+        "use-slider": true,
+        "slides-To-Scroll": 1,
+        "visible": 5,
+        "widescreen": 5,
+        "desktop": 4,
+        "laptop": 4,
+        "notebook": 3,
+        "tablet": 3,
+        "landscape": 2,
+        "portrait": 2,
+        "mobile": 1,
+        "rows": 1,
+        "autoplay": false,
+        "speed": "300",
+        "autoplay-Speed": "3000",
+        "arrows": true,
+        "fade": false,
+        "center-Mode": false,
+        "adaptive-Height": false,
+        "dots": false,
+        "infinite": false,
+        "padding": 10,
+        "vertical": false,
+        "show_view_all": false,
+        "use_eq_height": true,
+        "image_ratio": "ratio_nt",
+        "cl_bg": "#fff",
+        "mg": "",
+        "pd": "100px,,80px,",
+        "mg_mb": "",
+        "pd_mb": "50px,,30px,"
+      }
+    }
+  },
+  "order": [
+    "breadcrumb",
+    "main",
+    "1652931770532e3556",
+    "9c8d5148-af29-47c5-b1e5-df8cdd31ae08"
+  ]
+}

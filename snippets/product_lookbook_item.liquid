@@ -1,0 +1,37 @@
+<div class="product-item">
+  <div class="product-inner">
+    <ul class="group-flash">
+      {% assign date_published = product.published_at | date:'%Y%m%d' %}
+      {% assign date_now = 'now' | date:'%Y%m%d' %}
+      {% assign date_difference = date_now | minus: date_published %}
+      {% assign limit_day = settings.product_page_new_product | plus: 0%}
+      {% if date_difference <  limit_day%}
+      <li><span class="new flash">{{settings.collection_page_new_title}}</span></li>       	   
+      {% endif %}      
+      {% if on_sale == true %}
+      {% if settings.collection_page_sale_title != blank %}
+      <li><span class="sale flash">{{settings.collection_page_sale_title}}</span></li>
+      {% endif %}
+      {% if settings.collection_page_sale_desc != blank %}
+      <li><span class="best flash">{{settings.collection_page_sale_desc}}</span></li>
+      {% endif %}
+      {% endif %}
+    </ul>
+    <div class="thumb">
+      <a href="{{ product.url | within: collection }}" data-pid="{{ product.variants.first.id }}" class="quickview-button quick-view"><span class="icon"><i class="fa fa-eye" aria-hidden="true"></i></span> {{settings.collection_page_quickview}}</a>
+      <a href="{{ product.url | within: collection }}" class="thumb-link"><img src="{{ product.featured_image.src | img_url: 'grande' }}" alt=""></a>
+    </div>
+    <div class="info">
+      <a href="{{ product.url | within: collection }}" class="product-name">{{ product.title }}</a>
+      <div class="price">
+        {% if on_sale %}
+        <span class="del">{{product.compare_at_price | money }}</span>
+        <span class="ins">{{product.variants[0].price | money }}</span>      
+        {% else %}
+        <span>{{product.variants[0].price | money }}</span>
+        {% endif %}
+      </div>
+    </div>
+    
+  </div>
+</div>  

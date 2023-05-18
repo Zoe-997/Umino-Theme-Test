@@ -1,0 +1,58 @@
+<script type="text/javascript">
+  $(document).ready(function() {
+      /* Init fotoraman */   
+      $script([jQuery('#cms_js').data('fotorama')], function () {
+          var slideMain = $("div[data-slide-main]"),
+              fotoramaElement = $('div[data-fotorama]'),
+              images = fotoramaElement.children().clone(),
+              startIndex = 0;         
+          $("[data-js-gallery]").click(function () {
+            if(!fotoramaElement.hasClass('init')){
+                fotoramaElement.children().each(function() {
+                    let lazy = $(this).data('src');
+                    if(lazy){
+                        $(this).attr('src', lazy);
+                    }
+                });
+                fotoramaElement.addClass('init');
+            }
+            var currentSlide = slideMain.find('.slick-current');
+            if(currentSlide.length){
+                var imageId  = currentSlide.data('image-id');
+                images.each(function( index ) {
+                    if($(this).data('image-id') == imageId){
+                        startIndex = index;
+                        return false;
+                    }
+                });
+            }
+            var fotorama = fotoramaElement.fotorama({allowfullscreen: true, nav: 'thumbs'}).data('fotorama');
+            fotorama.show({index: startIndex, time: 0});
+            fotorama.requestFullScreen();
+          });
+          $('div[data-fotorama]').on('click', function (e, fotorama) {
+            if ($(e.target).hasClass("fotorama__stage__frame")) {
+              $('div[data-fotorama]').data('fotorama').cancelFullScreen();
+              $('div[data-slide-nav]').find(".slick-track").css("transform","none");
+            }
+          });          
+      });
+      /* click on tab of product detail page */
+      $(document).on('click','.cms-tab a[data-toggle="pill"]',function(e){ 
+        e.preventDefault();
+        var tab_id = $(this).attr('href');
+        $(this).closest('ul').find("li").removeClass("active");
+        $(this).closest('li').addClass("active");
+        var class_st = $(tab_id).attr("class");
+        $("."+class_st).removeClass("active");
+        $(tab_id).addClass("active");
+      });   
+      
+      /* CLick slick arrow button */
+      $(document).on('click','div[data-slide-nav] .slick-arrow', function(){
+        if ($("div[data-slide-nav] .thumb_img.slick-active").length > 0){      
+          $("div[data-slide-nav] .thumb_img.slick-current").trigger('click');
+        }
+      });
+  }); 
+</script>

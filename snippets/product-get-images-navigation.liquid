@@ -1,0 +1,6 @@
+{%- if product.images.size > 1 -%}
+  <div class="product-images-navigation d-flex">
+    <span data-js-product-images-navigation="prev"{% if product.images.first.id == image.id %} data-disabled="disabled"{% endif %}><i class="las la-angle-left"></i></span>
+    <span data-js-product-images-navigation="next"{% if product.images.last.id == image.id %} data-disabled="disabled"{% endif %}><i class="las la-angle-right"></i></span>
+  </div>
+{%- endif -%}

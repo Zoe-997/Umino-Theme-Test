@@ -1,0 +1,152 @@
+{% capture configScreen %}
+    1921=>visible, 
+    1920=>widescreen, 
+    1480=>desktop, 
+    1200=>laptop, 
+    992=>notebook, 
+    768=>tablet, 
+    576=>landscape, 
+    481=>portrait, 
+    361=>mobile, 
+    1=>mobile-small 
+{% endcapture %}
+{%  assign selector = '#shopify-section-' | append: section.id | append:' #collection-product .product-item,#product-grid .product-item' %}
+{%  assign configScreen = configScreen | strip_newlines | replace: " ", "" | split: "," | reverse %}
+{%  assign padding_lr = settings['padding_lr'] %}
+{%  assign gridStyle = selector | append: '{ float: left }'  %}
+{%  assign i = 1  %}
+{%  assign tmp = 1  %}
+{% for cfg in configScreen %}
+    {% assign size = cfg | split: '=>' | first | strip %}
+    {% assign name = cfg  | split: '=>' | last | strip %}
+    {% assign col = settings[name] %}
+    {% if forloop.last == true %}
+        {% assign width = '100%' %}
+        {% capture gridStyle %}{{gridStyle}} @media (min-width: {{ tmp }}px) {  {{ selector }} { padding-left:{{ padding_lr }}px;padding-right:{{ padding_lr }}px; padding-bottom:{{padding_lr | plus: padding_lr}}px;  width: calc(100% / {{ col }}); } {{ selector }}:nth-child({{ col }}n+1){clear: left;}}{% endcapture %}
+    {% elsif i > 1 %}
+        {% capture gridStyle %}{{gridStyle}} @media (min-width: {{ tmp }}px) and (max-width: {{ size | minus: 1 }}px) { {{ selector }} {padding-left:{{ padding_lr }}px;padding-right:{{ padding_lr }}px; padding-bottom:{{padding_lr | plus: padding_lr}}px; width: calc(100% / {{ col }});} {{ selector }}:nth-child({{ col }}n+1){clear: left;}}{% endcapture %}
+    {% endif %}
+    {%  assign i = i | plus: 1  %}
+    {%  assign tmp = size  %}
+{% endfor %}
+{% capture gridStyle %}{{gridStyle}} {{gridStyle | replace: "#shopify-section", ".rtl #shopify-section" | replace: " left", " right" | replace: ":left", ":right"}}{% endcapture %}
+{% capture gridStyle %}<style id='grid-style'>{{gridStyle}} #collection-product,#product-grid {margin-left: -{{ padding_lr }}px; margin-right: -{{ padding_lr }}px;}</style>{% endcapture %}
+{{ gridStyle }}
+{% comment %}
+Use in section:  
+    {% render 'grid-style', settings:section.settings %}
+Use in block in section:  
+    {% render 'grid-style', settings:block.settings %}
+{% endcomment %}
+{% comment %}
+Add to settings_schema:
+    {
+        "type": "header",
+        "content": "---- Grid Show Collection ----"
+    },    
+    {  
+        "type": "range",  
+        "id": "visible",  
+        "label": "Columns in Visible",
+        "info": "Item(s) in screen ( Size >= 1920 )",
+        "min": 1,
+        "max": 8,
+        "step": 1,
+        "unit": "col",
+        "default": 5 
+    },
+    {  
+        "type": "range",  
+        "id": "widescreen",  
+        "label": "Columns in Widescreen",
+        "info": "Item(s) in screen ( 1366 <= Size < 1920 )",
+        "min": 1,
+        "max": 8,
+        "step": 1,
+        "unit": "col",
+        "default": 4 
+    },  
+    {  
+        "type": "range",  
+        "id": "desktop",  
+        "label": "Columns in Desktop",
+        "info":  "Item(s) in screen ( 1200 <= Size < 1480 )",
+        "min": 1,
+        "max": 8,
+        "step": 1,
+        "unit": "col",
+        "default": 4  
+    },    
+    {  
+        "type": "range",  
+        "id": "laptop",  
+        "label": "Columns in Laptop",
+        "info": "Item(s) in screen ( 992 <= Size < 1200 )",
+        "min": 1,
+        "max": 8,
+        "step": 1,
+        "unit": "col",
+        "default": 4
+    },    
+    {  
+        "type": "range",  
+        "id": "notebook",  
+        "label": "Columns in Notebook",
+        "info": "Item(s) in screen ( 768 <= Size < 992 )",
+        "min": 1,
+        "max": 8,
+        "step": 1,
+        "unit": "col",
+        "default": 3  
+    },  
+    {  
+        "type": "range",  
+        "id": "tablet",  
+        "label": "Columns in Tablet",
+        "info": "Item(s) in screen ( 576 <= Size < 768 )",
+        "min": 1,
+        "max": 8,
+        "step": 1,
+        "unit": "col",
+        "default": 3 
+    },
+    {  
+        "type": "range",  
+        "id": "landscape",  
+        "label": "Columns in Landscape",
+        "info": "Item(s) in screen ( 480 <= Size < 576 )",
+        "min": 1,
+        "max": 6,
+        "step": 1,
+        "unit": "col",
+        "default": 2 
+    }, 
+    {  
+        "type": "range",  
+        "id": "portrait",  
+        "label": "Columns in Portrait",
+        "info": "Item(s) in screen ( 360 < Size < 480 )",
+        "min": 1,
+        "max": 6,
+        "step": 1,
+        "unit": "col",
+        "default": 2 
+    },
+    {  
+        "type": "range",  
+        "id": "mobile",  
+        "label": "Columns in Mobile",
+        "info": "Item(s) in screen ( Size < = 360 )",
+        "min": 1,
+        "max": 4,
+        "step": 1,
+        "unit": "col",
+        "default": 1 
+    },
+    {
+        "type": "number",
+        "id": "padding_lr",
+        "label": "Padding left & right",
+        "default": 15
+    }
+{% endcomment %}

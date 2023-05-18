@@ -1,0 +1,8 @@
+{%- liquid
+  layout none
+  capture html
+	section 'vertical_menu'
+  endcapture
+  assign arr = html | split:'[v_menu]' 
+  echo arr[1] -%}
+

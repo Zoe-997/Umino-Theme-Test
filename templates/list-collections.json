@@ -1,0 +1,133 @@
+{
+  "sections": {
+    "breadcrumb": {
+      "type": "breadcrumb",
+      "settings": {
+        "show_title_page": true,
+        "h_position": "center",
+        "v_position": "middle",
+        "txt_align": "center",
+        "bg": "#f2f2f6",
+        "b_height": 110,
+        "mg_bottom": 30,
+        "mobile_bg": "#f2f2f6",
+        "mobile_ht": 100,
+        "mobile_mg_bottom": 30
+      }
+    },
+    "main": {
+      "type": "list-collections-template",
+      "blocks": {
+        "e17f4f3e-627e-4cca-9f27-c9b29bf35bca": {
+          "type": "collection",
+          "settings": {
+            "collection": "accessories",
+            "image": "shopify:\/\/shop_images\/1.jpg"
+          }
+        },
+        "ed0dab0d-765c-4c18-85fe-12d385e297c1": {
+          "type": "collection",
+          "settings": {
+            "collection": "backpacks",
+            "image": "shopify:\/\/shop_images\/3.jpg"
+          }
+        },
+        "fef32501-3514-4efb-b3c4-8cae7d0d192d": {
+          "type": "collection",
+          "settings": {
+            "collection": "men-s",
+            "image": "shopify:\/\/shop_images\/1_4.png"
+          }
+        },
+        "e35fe0aa-640c-426c-8cd8-7ad5cec60820": {
+          "type": "collection",
+          "settings": {
+            "collection": "shirts",
+            "image": "shopify:\/\/shop_images\/1_1_faa107cb-ab7b-4b56-863d-dce960abac3e.jpg"
+          }
+        },
+        "3c0c7ba6-d7f1-4ae6-9d8e-d009eb8bd509": {
+          "type": "collection",
+          "settings": {
+            "collection": "shoes",
+            "image": "shopify:\/\/shop_images\/1_2_69b80d6b-0d00-42ce-9478-0af5a963510f.jpg"
+          }
+        },
+        "917067d8-e6b5-414d-815a-7b8d6c57f53c": {
+          "type": "collection",
+          "settings": {
+            "collection": "sunglass",
+            "image": "shopify:\/\/shop_images\/1_3_bfeaa981-f821-4616-8304-d1d880bd2fb9.jpg"
+          }
+        },
+        "4e6270a2-b22e-493c-8310-9c317898a33d": {
+          "type": "collection",
+          "settings": {
+            "collection": "t-shirt",
+            "image": "shopify:\/\/shop_images\/1_3.png"
+          }
+        },
+        "18cb8370-51c0-4302-8ea0-cd552536dc90": {
+          "type": "collection",
+          "settings": {
+            "collection": "women-s",
+            "image": "shopify:\/\/shop_images\/1_2.png"
+          }
+        },
+        "0ea78a7d-5ff3-43f5-8dc4-1fe18e88c0bc": {
+          "type": "collection",
+          "settings": {
+            "collection": "sunglass",
+            "image": "shopify:\/\/shop_images\/4.jpg"
+          }
+        },
+        "bc330fdd-0bd5-4422-b2f4-b672dbbea2a4": {
+          "type": "collection",
+          "settings": {
+            "collection": "backpacks",
+            "image": "shopify:\/\/shop_images\/2.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "e17f4f3e-627e-4cca-9f27-c9b29bf35bca",
+        "ed0dab0d-765c-4c18-85fe-12d385e297c1",
+        "fef32501-3514-4efb-b3c4-8cae7d0d192d",
+        "e35fe0aa-640c-426c-8cd8-7ad5cec60820",
+        "3c0c7ba6-d7f1-4ae6-9d8e-d009eb8bd509",
+        "917067d8-e6b5-414d-815a-7b8d6c57f53c",
+        "4e6270a2-b22e-493c-8310-9c317898a33d",
+        "18cb8370-51c0-4302-8ea0-cd552536dc90",
+        "0ea78a7d-5ff3-43f5-8dc4-1fe18e88c0bc",
+        "bc330fdd-0bd5-4422-b2f4-b672dbbea2a4"
+      ],
+      "settings": {
+        "hoverz": true,
+        "display_type": "selected",
+        "sort": "alphabetical",
+        "use_eq_height": true,
+        "image_ratio": "ratio_laber",
+        "cl_bg": "rgba(0,0,0,0)",
+        "visible": 4,
+        "widescreen": 4,
+        "desktop": 3,
+        "laptop": 3,
+        "notebook": 3,
+        "tablet": 3,
+        "landscape": 2,
+        "portrait": 2,
+        "mobile": 1,
+        "padding_lr": 15,
+        "padding_tb": 15,
+        "mg": "0,0,60px,0",
+        "pd": "10px,,,",
+        "mg_mb": "",
+        "pd_mb": "10px,,,"
+      }
+    }
+  },
+  "order": [
+    "breadcrumb",
+    "main"
+  ]
+}

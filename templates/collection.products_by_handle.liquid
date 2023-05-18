@@ -1,0 +1,11 @@
+{% layout none %}
+{%- assign is_first = true -%}
+[
+{%- for handle in current_tags -%}
+    {%- assign product = all_products[handle] -%}
+    {%- if product != blank -%}
+        {% unless is_first %},{% endunless %}{{ product | json }}
+        {%- assign is_first = false -%}
+    {%- endif -%}
+{%- endfor -%}
+]

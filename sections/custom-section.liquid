@@ -1,0 +1,376 @@
+{%- liquid
+  assign sid = section.id
+  assign layout = section.settings.layout
+%}
+
+{%- for i in (1..1) -%} 
+  <div id="laber_{{sid}}" class="custom_section">
+    <div class="{{layout}}">
+    <div class="row ">
+    {%- if section.blocks.size > 0 -%}
+          {%- for block in section.blocks -%}
+            {%- case block.type -%}
+               {%- when 'image' -%}{%- assign image = block.settings.image -%}
+                  <div id="b_{{block.id}}" class=" col-lg-{{block.settings.cl}} col-md-{{block.settings.cl_tb}} col-{{block.settings.cl_mb}}">
+                    <div class="img_custom_section">
+                      {%- if image != blank -%} 
+                      {%- assign img_url = image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}        
+                      {% if block.settings.url %}<a href="{{block.settings.url}}" target="{{block.settings.open_link}}>{% endif %}
+                      <div class="laber_bg_lz lazyload pr_lazy_img" data-bgset="{{ image | img_url: '1x1' }}" data-ratio="{{image.aspect_ratio}}" data-sizes="auto" data-parent-fit="cover" style="padding-top:{{ 1 | divided_by: image.aspect_ratio | times: 100}}%"></div>
+                      {% if block.settings.url %}</a>a>{% endif %}  
+                      {%- else -%}
+                      <img class="laber_bg_lz lazyload pr_lazy_img"  data-src="https://placehold.jp/50/eceae6/fff/570x690.png?text=570x690" alt="">
+                      {%- endif -%}
+                    </div>
+                   </div>
+                {%- when 'text' -%}
+                  <div id="b_{{block.id}}" class="col-lg-{{block.settings.cl}} col-md-{{block.settings.cl_tb}} col-{{block.settings.cl_mb}}">
+                    <div class="text_custom_section">
+                    <div class=" wrap_title ">
+                      {% if block.settings.sub_title != blank %}
+                      	<p class="section-subtitle">{{block.settings.sub_title}}</p>
+                      {% endif %}  
+                      {% if block.settings.title != blank %}
+                      	<h3 class="section-title">{{block.settings.title}}</h3>
+                      {% endif %}
+                    </div>
+                    <div class="slt4_html">{{block.settings.text}}</div>
+                    <div class="btn">
+                        {%- if  block.settings.btn_text != blank -%}
+                        <a id="b_{{block.id}}"  class="buttons" href="{{block.settings.link_btn}}" target="{{block.settings.open_link}}"
+                           {{ block.shopify_attributes }}>{{block.settings.btn_text}}
+                      	</a>
+                        {%- endif -%}
+                    </div>
+                    </div>
+      			  </div>
+            {%- endcase -%}
+          {%- endfor -%} 
+       {%- endif -%}
+    </div>
+  </div>
+</div>
+{%- endfor -%}
+{%- render 'section_style' -%} 
+{%- schema -%}
+  {
+    "name": "Custom section",   
+    "class": "laber_section type_custom_section",    
+    "settings": [     	  
+      {
+        "type": "header",
+        "content": "== Design Options"
+      },
+      {
+        "type": "select",
+        "id": "layout",
+        "options": [
+         {
+            "value": "container",
+            "label": "Container"
+         },
+         {
+            "value": "full-width",
+            "label": "Full Width"
+          }
+        ],
+        "label": "Layout"
+      },
+      {
+      "type": "color",
+      "id": "cl_bg",
+      "label": "Background color",
+      "default": "#fff"
+      },
+      {
+        "type": "text",
+        "id": "mg",
+        "label": "Margin",
+        "info":"Margin top, margin right, margin bottom, margin left. If you not use to blank",
+        "default": "30px,,,",
+        "placeholder": "30px,,30px,"
+      },
+      {
+        "type": "text",
+        "id": "pd",
+        "label": "Padding",
+        "info":"Padding top, padding right, padding bottom, padding left. If you not use to blank",
+        "placeholder": "30px,,30px,"
+      },
+     {
+        "type": "header",
+        "content": "== Design Mobile Options"
+      },
+      {
+        "type": "text",
+        "id": "mg_mb",
+        "label": "Margin",
+        "placeholder": "30px,,30px,"
+      },
+      {
+        "type": "text",
+        "id": "pd_mb",
+        "label": "Padding",
+        "placeholder": "30px,,30px,"
+      }  
+     
+    ],  
+    "blocks": [
+      {
+        "type": "image",
+        "name": "Image",
+        "settings": [
+         {
+          "type":"image_picker","id":"image","label":"Image"
+          },
+          {
+          "type": "url",
+          "id": "url",
+          "label": "Link buttons",
+          "info": "The image becomes clickable."
+          },
+          {
+          "type": "select",
+          "id": "open_link",
+          "options": [
+          {
+          "value": "_self",
+          "label": "Current window (_self)"
+          },
+          {
+          "value": "_blank",
+          "label": "New window (_blank)"
+          }
+          ],
+          "label": "Open link in",
+          "default": "_blank"
+          },
+         {
+           "type": "select",
+           "id": "cl",
+           "label": "Container width",
+           "default": "6",
+           "options": [
+            {
+              "value": "12",
+              "label": "100%"
+            },
+            {
+              "value": "10",
+              "label": "83.33%"
+            },
+            {
+              "value": "8",
+              "label": "66%"
+            },
+            {
+              "value": "6",
+              "label": "50%"
+            },
+            {
+              "value": "4",
+              "label": "33%"
+            },
+            {
+              "value": "3",
+              "label": "25%"
+            },
+            {
+              "value": "15",
+              "label": "20%"
+            },
+            {
+              "value": "2",
+              "label": "16.66%"
+            }
+           ]
+         },
+          {
+            "type": "select",
+            "id": "cl_tb",
+            "label": "Container width tablet",
+            "default": "6",
+            "options": [
+            {
+              "value": "12",
+              "label": "100%"
+            },
+            {
+              "value": "10",
+              "label": "83.33%"
+            },
+            {
+              "value": "8",
+              "label": "66%"
+            },
+            {
+              "value": "6",
+              "label": "50%"
+            },
+            {
+              "value": "4",
+              "label": "33%"
+            },
+            {
+              "value": "3",
+              "label": "25%"
+            }
+            ]
+          },
+          {
+            "type": "select",
+            "id": "cl_mb",
+            "label": "Container width mobile",
+            "default": "12",
+            "options": [
+            {
+              "value": "12",
+              "label": "100%"
+            },
+            {
+              "value": "6",
+              "label": "50%"
+            }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "text",
+        "name": "Content",
+        "settings": [
+		 {
+            "type": "textarea","id": "title","label": "Heading","default":"Custom title"
+          },
+          {
+            "type": "textarea","id": "sub_title","label": "Sub Text","default":"wellcome to shopify theme"
+          },
+         {
+          "type":"richtext","id":"text","label":"Content","default":"<p>Use this text to share information about your brand with your customers. Describe a product, share announcements, or welcome customers to your store.</p>"
+          },
+		 {
+            "type": "text","id": "btn_text","label": "Buttons","default":"Discover now"
+          },
+          {
+          "type": "url",
+          "id": "link_btn",
+          "label": "Link buttons",
+          "info": "The image becomes clickable."
+          },
+          {
+          "type": "select",
+          "id": "open_link",
+          "options": [
+          {
+          "value": "_self",
+          "label": "Current window (_self)"
+          },
+          {
+          "value": "_blank",
+          "label": "New window (_blank)"
+          }
+          ],
+          "label": "Open link in",
+          "default": "_blank"
+          },
+         {
+           "type": "select",
+           "id": "cl",
+           "label": "Container width",
+           "default": "6",
+           "options": [
+            {
+              "value": "12",
+              "label": "100%"
+            },
+            {
+              "value": "10",
+              "label": "83.33%"
+            },
+            {
+              "value": "8",
+              "label": "66%"
+            },
+            {
+              "value": "6",
+              "label": "50%"
+            },
+            {
+              "value": "4",
+              "label": "33%"
+            },
+            {
+              "value": "3",
+              "label": "25%"
+            },
+            {
+              "value": "15",
+              "label": "20%"
+            },
+            {
+              "value": "2",
+              "label": "16.66%"
+            }
+           ]
+         },
+          {
+            "type": "select",
+            "id": "cl_tb",
+            "label": "Container width tablet",
+            "default": "6",
+            "options": [
+            {
+              "value": "12",
+              "label": "100%"
+            },
+            {
+              "value": "10",
+              "label": "83.33%"
+            },
+            {
+              "value": "8",
+              "label": "66%"
+            },
+            {
+              "value": "6",
+              "label": "50%"
+            },
+            {
+              "value": "4",
+              "label": "33%"
+            },
+            {
+              "value": "3",
+              "label": "25%"
+            }
+            ]
+          },
+          {
+            "type": "select",
+            "id": "cl_mb",
+            "label": "Container width mobile",
+            "default": "12",
+            "options": [
+            {
+              "value": "12",
+              "label": "100%"
+            },
+            {
+              "value": "6",
+              "label": "50%"
+            }
+            ]
+          }
+        ]
+      }
+      
+    ],
+    "presets": [
+      {
+        "name": "7. Custom section",
+        "category": "Text",
+        "blocks": [{"type": "image"},{"type": "text"}]
+      }
+    ]
+  }
+{% endschema %}

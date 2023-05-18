@@ -1,0 +1,231 @@
+<!-- Created by Andy 28/08/2017 -->
+
+<!-- /snippets/collection-sidebar.liquid -->
+
+
+<div data-filter class="js_filter col-xs-12 col-sm-5 col-md-4 col-lg-3 sidebar">
+  <h4 class="main-title">{{'collections.filters.shop_by' | t}}</h4>
+  
+  {% if settings.enable_use_filter_category%}
+      <div data-filter-ajax class="widget widget-categories">
+        <h5 class="widgettitle">{{settings.filter_category_title}}</h5>
+        {% if linklists.sidebar-category.links.size > 0 %}
+            {% assign index = 0 %}
+            <ul data-list-categories class="list-categories">
+              {% for link in linklists.sidebar-category.links %}
+                  {% assign index = index | plus: 1 %}              
+                  {% capture collection_title %}{{ link.title }}{% endcapture %}
+                  {% if collection_title == 'Home page' %}
+                    {% assign collection_title = 'collections.filters.all_tags' | t %}
+                  {% endif %}
+              
+                  {%- assign is_current_inner_collection = false -%}
+                  {%- if link.object.handle == collection.handle -%}
+                    {%- assign is_current_inner_collection = true -%}
+                    {%- assign has_current_inner_collection = true -%}
+                  {%- endif -%}
+                 
+                {% if is_current_inner_collection %}  
+                  <li data-current class="current">
+                    <input type="radio" id="ct{{index}}"/>
+                    <a data-handle-collection="{{link.object.handle}}" class="js_ajax_filter active" href="{{link.url}}?view=grid_left_sidebar" >
+                      <span class="label-text">{{collection_title}}</span>
+                    </a>                   
+                  </li>   
+              	{% else %}
+              	  <li>
+                    <input type="radio" id="ct{{index}}"/>
+                    <a data-handle-collection="{{link.object.handle}}" class="js_ajax_filter active" href="{{link.url}}?view=grid_left_sidebar" >
+                      <span class="label-text">{{collection_title}}</span>
+                    </a>                    
+                  </li>  
+              	{% endif %}
+              {% endfor %}
+            </ul>
+        {% else %}
+            <p style="text-align: justify;">Please <b class="note">{{ 'create a link list' | link_to: '/admin/links' }} </b> that contains links to all the collections you wish to Sidebar Category on this page. The title of that link list must be <strong>Sidebar Category</strong>. If you want your collections to be listed alphabetically, reorder them alphabetically on your <b class="note"> {{ 'Navigation page' | link_to: '/admin/links' }}</b>.</p>
+        {% endif %} 
+      </div>
+  {% endif %}
+  
+  {% if settings.enable_use_filter_brand %}      
+      <div data-filter-ajax class="widget widget-brand">
+        <h5 class="widgettitle">{{settings.filter_brand_title}}</h5>
+        <ul class="list-categories">
+          {% assign index = 0 %}
+
+          {% for tag in collection.all_vendors %}              
+              {% assign index = index | plus: 1 %}     
+              {% assign count = 0 %}
+              {% for product in collection.products %}
+                  {% if product.vendor == tag %}
+                        {% assign count = count | plus: 1 %}
+                  {% endif %}
+              {% endfor %}
+              {% if current_tags contains tag %}
+                <li class="current">
+                  <input type="checkbox" id="cbr{{index}}">
+                  {{'<span class="label-text current">' | append:tag |append: '</span>' | link_to_remove_tag: tag | replace: 'title=', 'class="js_ajax_filter active" title='}}
+                  {{'<span class="label-text">' | append:tag |append: '</span>' | link_to_add_tag:tag | replace: 'title=', 'class="js_ajax_filter" title='}}
+                </li>                    	
+              {% elsif collection.all_tags contains tag %}
+                <li>
+                  <input type="checkbox" id="cbr{{index}}">
+                  {{'<span class="label-text">' | append:tag |append: '</span>' | link_to_add_tag:tag | replace: 'title=', 'class="js_ajax_filter active" title='}}
+                  {{'<span class="label-text current">' | append:tag |append: '</span>' | link_to_remove_tag: tag | replace: 'title=', 'class="js_ajax_filter" title='}}
+                </li>                     
+              {% endif %}
+          {% endfor %}        
+        </ul>
+      </div>
+  {% endif %}
+  
+  {% if settings.enable_use_filter_price%}
+      <div class="widget widget_filter_price box-has-content">
+        <h3 class="widgettitle">{{ settings.filter_price_title | strip_html }}</h3>
+        <div class="price-filter">
+          <div data-range-price data-label-reasult="price:" data-min="0" data-max="{{settings.collection_max_price | divided_by: 100 | times: 1.25}}" data-unit="$" class="range-price" data-value-min="{{settings.collection_min_price | divided_by: 100}}" data-value-max="{{settings.collection_max_price | divided_by: 100}}"></div>
+          <div data-amount-price class="amount-range-price">Price: <span data-from class="from">{{settings.collection_min_price | money}}</span> - <span data-to class="to">{{settings.collection_max_price | money}}</span></div>
+          <a href="#" class="filter">Filter</a>
+        </div>
+      </div>
+  {% endif %}
+  
+  
+  {% if settings.enable_use_filter_size %}
+      <div id="filter_size" data-filter-ajax class="widget widget_filter_size">
+        <h3 class="widgettitle">{{ settings.filter_size_title | strip_html }}</h3>
+        <ul class="list-size">
+          {% assign list_size = settings.filter_size_name | split: ',' %}
+          {% for size in list_size %}		  
+
+              {% assign custom_tag = size | strip | downcase %}
+              {% assign check = false %}			
+
+              {% for ct in current_tags %}
+                  {% assign ct_down  =   ct | strip  | downcase %}
+
+                  {% if ct_down   ==  custom_tag %}
+                      {% assign check = true %}
+                      {% assign val_ct = ct %}
+                      {% break %}
+                  {% endif %}
+              {% endfor %}
+
+              {% assign val_size = size | strip | downcase %}	
+              {% if check %}
+                  <li class="current">
+                    {{ size | link_to_add_tag: val_size | replace: 'title=', 'class="js_ajax_filter " title=' }}
+                    {{ size | link_to_remove_tag: val_ct | replace: 'title=', 'class="js_ajax_filter active" title=' }}
+                  </li>
+          
+          	  {% else %}                 
+                  <li>
+                    {{ size | link_to_add_tag: val_size | replace: 'title=', 'class="js_ajax_filter active" title=' }}
+                    {{ size | link_to_remove_tag: val_ct | replace: 'title=', 'class="js_ajax_filter " title=' }}
+                  </li>
+              {% endif %}
+          {% endfor %}	     
+          
+         
+        </ul>
+      </div>
+  {% endif %}
+  {% if settings.enable_use_filter_color %}
+      {% assign index = 0 %}
+      <div data-filter-ajax class="widget widget_filter_color box-has-content">
+        <h3 class="widgettitle">{{ settings.filter_color_title | strip_html }}</h3>
+        <ul class="list-color">
+          {% assign list_color = settings.filter_color_name | split: ',' %}
+          {% for color in list_color%}
+              {% assign index = index | plus: 1 %}     
+              {% assign name_color = color | split:':' | first | strip | downcase %}
+              {% assign val_color = color | split:':' | last | strip | downcase %}
+              {% assign custom_tag = name_color | strip | downcase %}
+              {% assign check = false %}
+
+              {% for ct in current_tags %}
+                  {% assign ct_down  =   ct | strip  | downcase %}
+                  {% if ct_down == custom_tag %}
+                      {% assign check = true %}
+                      {% assign tag_color = ct %}	
+                      {% break %}
+                  {% endif %}
+              {% endfor %}
+			  
+          
+          	  {% assign count = 0 %}
+              {% for product in collection.products %}
+                  {% if product.tags contains tag_color %}
+                        {% assign count = count | plus: 1 %}
+                  {% endif %}
+              {% endfor %}
+          
+              {% if check %}          			
+                <li class="current">
+                  <input type="checkbox" id="cbc{{index}}">
+                  {{ '<span class="label-text current">' | append: name_color | append:'<span class="count" style="color: initial;">('| append: count | append:')</span></span>' | link_to_remove_tag: tag_color | replace: 'title=', 'class="js_ajax_filter active" title='}}
+                  {{ '<span class="label-text">' | append: name_color | append:'<span class="count" style="color: initial;">('| append: count | append:')</span></span>' | link_to_add_tag: name_color | replace: 'title=', 'class="js_ajax_filter" title='}}
+                </li>  
+              {% else %} 
+                <li>
+                  <input type="checkbox" id="cbc{{index}}">
+                  {{ '<span class="label-text">' | append: name_color | append:'<span class="count" style="color: initial;">('| append: count | append:')</span></span>' | link_to_add_tag: name_color | replace: 'title=', 'class="js_ajax_filter active" title='}}
+                  {{ '<span class="label-text current">' | append: name_color | append:'<span class="count" style="color: initial;">('| append: count | append:')</span></span>' | link_to_remove_tag: tag_color | replace: 'title=', 'class="js_ajax_filter" title='}}
+                </li>              		       
+              {% endif %}
+          {% endfor %}          
+        </ul>
+      </div>
+  {% endif %}
+  {% if settings.enable_use_new_product %}
+  <div class="widget widget-recent-post">
+    <h5 class="widgettitle">{{settings.filter_title_new_product}}</h5>
+    <ul class="list-recent-posts">
+      
+      {% assign handle = settings.filter_collection_new_product %}
+      {% if handle =='' or handle == blank %}
+      		{% assign handle = 'frontpage' %}
+      {% endif %}
+      
+      {% for product in collections[handle].products limit:settings.filter_collection_new_product_limit %}    
+          {% assign on_sale = false %}
+          {% assign sale_text = 'products.product.on_sale' | t %}
+          {% if product.compare_at_price > product.price %}
+          {% assign on_sale = true %}
+          {% endif %}
+
+          {% assign sold_out = true %}
+          {% assign sold_out_text = 'products.product.sold_out' | t %}
+          {% if product.available %}
+          {% assign sold_out = false %}
+          {% endif %}
+          <li class="product-item">
+            <div class="thumb">
+              <a href="{{ product.url | within: collection }}">
+                <img src="{{ product.featured_image.src | img_url: 'grande' }}" alt="">
+              </a>
+            </div>
+            <div class="info">          
+              <!-- Rate code -->
+              <div class="star-rating">
+                <span class="shopify-product-reviews-badge" data-id="{{ product.id }}"></span>
+              </div>
+              <!-- End rate-->
+              <a href="{{ product.url | within: collection }}" class="product-name">{{ product.title }}</a>
+              <div class="price">
+                {% if on_sale %}
+                    <span class="del">{{product.compare_at_price | money }}</span>
+                    <span class="ins">{{product.variants[0].price | money }}</span>      
+                {% else %}
+                    <span>{{product.variants[0].price | money }}</span>
+                {% endif %}
+              </div>
+            </div>
+          </li>
+      	{% endfor %}
+    </ul>
+  </div>
+  {% endif %}
+  
+</div>

@@ -1,0 +1,33 @@
+{%- assign img_url = image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+{%- comment -%} Limit image widths to valid options based on image.width {%- endcomment -%}
+{%- assign image_widths = '180,360,540,720,900,1080,1296,1512,1728,1944,2160,2376,2592,2808,3024' | split: ',' -%}
+{%- capture image_widths -%}
+  {%- for width in image_widths -%}
+    {%- comment -%} Check if image width is less or equal to width {%- endcomment -%}
+    {%- assign width_num = width | plus: 0 | round -%}
+    {%- if image.width >= width_num -%}{{ width_num }},{%- endif -%}
+  {%- endfor -%}
+  {{ image.width }}
+{%- endcapture -%}
+{%- assign image_widths = image_widths | strip -%}
+
+<div data-image-id="{{ image.id }}" class="alo-image">
+ {% if url %} <a href="{{url}}" title="">{% endif %}
+  <img
+      class="lazyload {{ image_class }}"
+      {% comment %}
+      src="{{ image | img_url: '100x' }}"
+      {% endcomment %}
+      data-src="{{ img_url }}"
+      data-widths="[{{ image_widths }}]"
+      data-aspectratio="{{ image.aspect_ratio }}"
+      data-sizes="auto"
+      alt="{{ alt | default: image.alt | escape }}"
+      {{ image_attributes }}
+      data-image
+  >
+ {% if url %} </a>{% endif %}
+  <noscript>
+    <img class="{{ image_class }}" src="{{ image | img_url: '2048x2048' }}" alt="{{ alt | default: image.alt | escape }}">
+  </noscript>
+</div>

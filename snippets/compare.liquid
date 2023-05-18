@@ -1,0 +1,191 @@
+{%- if template contains 'collection.' -%}
+    {%- assign items_length = current_tags | size -%}
+{%- else -%}
+    {%- assign namespace = template | remove: 'cart.' | remove: 'page.' -%}
+    {%- assign items = customer.metafields[namespace] -%}
+    {%- assign items_length = items | size -%}
+{%- endif -%}
+
+<div class="compare">
+    <div class="container">
+        <div class="compare__head">
+            <div class="compare__button-remove js-store-lists-clear-compare{% if items_length < 1 %} d-none-important{% endif %}" data-js-store-lists-has-items-compare>
+              <i class="icon-trash-2"></i>{{ 'compare_page.button_remove_all' | t }}
+           </div>
+        </div>
+      	<div class="compare_content">
+        <table class="table d-block{% if items_length < 1 %} d-none-important{% endif %}" data-js-store-lists-has-items-compare>
+            <tr>
+                <td class="compare__title border-right">
+                    <h3>{{ 'compare_page.products_title' | t }}</h3>
+                </td>
+                <td >
+                    <div class="compare__items">
+                        {%- if template contains 'collection.' -%}
+                            {%- for tag in current_tags -%}
+                                {%- assign item = tag | split: '=' -%}
+                                {%- assign current_handle = item[0] -%}
+                                {%- assign current_variant_id = item[1] | abs -%}
+                                {% include 'compare-get-product' %}
+                            {%- endfor -%}
+                        {%- else -%}
+                            {%- for item in items -%}
+                                {%- assign current_handle = item[1] -%}
+                                {%- assign current_variant_id = item[0] | abs -%}
+                                {% include 'compare-get-product' %}
+                            {%- endfor -%}
+                        {%- endif -%}
+                    </div>
+                </td>               
+            </tr>
+            {%- assign handles = handles | split: '|||' -%}
+            
+                {%- assign compare_descriptions = compare_descriptions | split: '|||' -%}
+                <tr>
+                    <td class="compare__title border-right">
+                        <h3>{{ 'compare_page.description_title' | t }}</h3>
+                    </td>
+                    <td>
+                        <div class="compare__items col">
+                            {%- for description in compare_descriptions -%}
+                                <div class="compare__item" data-js-store-lists-product-compare data-product-handle="{{ handles[forloop.index0] }}">
+                                    <p>{{ description }}</p>
+                                </div>
+                            {%- endfor -%}
+                        </div>
+                    </td>                    
+                </tr>
+           
+            
+                {%- assign compare_collections = compare_collections | split: '|||' -%}
+                <tr>
+                    <td class="compare__title border-right">
+                        <h3>{{ 'compare_page.collection_title' | t }}</h3>
+                    </td>
+                    <td>
+                        <div class="compare__items col">
+                            {%- for collection in compare_collections -%}
+                                <div class="compare__item col" data-js-store-lists-product-compare data-product-handle="{{ handles[forloop.index0] }}">
+                                    <p class="compare__collections">{{ collection }}</p>
+                                </div>
+                            {%- endfor -%}
+                        </div>
+                    </td>                    
+                </tr>
+           
+                {%- assign compare_availabilities = compare_availabilities | split: '|||' -%}
+                <tr>
+                    <td class="compare__title border-right">
+                        <h3 >{{ 'compare_page.availability_title' | t }}</h3>
+                    </td>
+                    <td>
+                        <div class="compare__items col">
+                            {%- for availability in compare_availabilities -%}
+                                <div class="compare__item " data-js-store-lists-product-compare data-product-handle="{{ handles[forloop.index0] }}">
+                                    <p >{{ availability }}</p>
+                                </div>
+                            {%- endfor -%}
+                        </div>
+                    </td>                    
+                </tr>
+                {%- assign compare_product_types = compare_product_types | split: '|||' -%}
+                <tr>
+                    <td class="compare__title border-right">
+                        <h3>{{ 'compare_page.product_type_title' | t }}</h3>
+                    </td>
+                    <td>
+                        <div class="compare__items col">
+                            {%- for product_type in compare_product_types -%}
+                                <div class="compare__item" data-js-store-lists-product-compare data-product-handle="{{ handles[forloop.index0] }}">
+                                    <p>{{ product_type }}</p>
+                                </div>
+                            {%- endfor -%}
+                        </div>
+                    </td>                   
+                </tr>
+           
+                {%- assign compare_vendors = compare_vendors | split: '|||' -%}
+                <tr>
+                    <td class="compare__title border-right">
+                        <h3>{{ 'compare_page.vendor_title' | t }}</h3>
+                    </td>
+                    <td>
+                        <div class="compare__items col">
+                            {%- for vendor in compare_vendors -%}
+                                <div class="compare__item" data-js-store-lists-product-compare data-product-handle="{{ handles[forloop.index0] }}">
+                                    <p>{{ vendor }}</p>
+                                </div>
+                            {%- endfor -%}
+                        </div>
+                    </td>                    
+                </tr>
+           
+                {%- assign compare_skus = compare_skus | split: '|||' -%}
+                <tr>
+                    <td class="compare__title border-right">
+                        <h3>{{ 'compare_page.sku_title' | t }}</h3>
+                    </td>
+                    <td>
+                        <div class="compare__items col">
+                            {%- for sku in compare_skus -%}
+                                <div class="compare__item col" data-js-store-lists-product-compare data-product-handle="{{ handles[forloop.index0] }}">
+                                    <p class="mb-0">{{ sku }}</p>
+                                </div>
+                            {%- endfor -%}
+                        </div>
+                    </td>                   
+                </tr>
+           
+                {%- assign compare_barcodes = compare_barcodes | split: '|||' -%}
+                <tr>
+                    <td class="compare__title border-right">
+                        <h3>{{ 'compare_page.barcode_title' | t }}</h3>
+                    </td>
+                    <td>
+                        <div class="compare__items col">
+                            {%- for barcode in compare_barcodes -%}
+                                <div class="compare__item" data-js-store-lists-product-compare data-product-handle="{{ handles[forloop.index0] }}">
+                                    <p>{{ barcode }}</p>
+                                </div>
+                            {%- endfor -%}
+                        </div>
+                    </td>                   
+                </tr>
+           
+                {%- assign compare_options = compare_options | split: '|||' -%}
+                {%- assign compare_variants = compare_variants | split: '|||' -%}
+                {%- for option in compare_options -%}
+                    <tr>
+                        <td class="compare__title border-right">
+                            <h3>{{ option}}</h3>
+                        </td>
+                        <td>
+                            <div class="compare__items col">
+                                {%- for variant in compare_variants -%}
+                                    <div class="compare__item" data-js-store-lists-product-compare data-product-handle="{{ handles[forloop.index0] }}">
+                                        {%- assign vrts = variant | split: '+' -%}
+                                        {%- assign present = false -%}
+                                        {%- for vrt in vrts -%}
+                                            {%- assign key_value = vrt | split: '=' -%}
+                                            {%- if key_value[0] == option and key_value[1] -%}
+                                                <p>{{ key_value[1] }}</p>
+                                                {%- assign present = true -%}
+                                            {%- endif -%}
+                                        {%- endfor -%}
+                                        {%- if present == false -%}
+                                            <p>{{ 'compare_page.empty_section' | t }}</p>
+                                        {%- endif -%}
+                                    </div>
+                                {%- endfor -%}
+                            </div>
+                        </td>                       
+                    </tr>
+                {%- endfor -%}
+            
+        </table>
+      </div> 
+        <div class="{% if items_length > 0 %} d-none{% endif %}" data-js-store-lists-dhas-items-compare>
+            <div class="shopify-info no-products"><i class="flash icon-alert-triangle" aria-hidden="true"></i> {{ 'compare_page.empty.paragraph' | t }}</div>
+        </div>
+    </div>
+</div>

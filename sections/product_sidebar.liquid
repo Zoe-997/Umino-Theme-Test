@@ -1,0 +1,753 @@
+{{ 'product_sidebar.css' | asset_url | stylesheet_tag }} 
+{% liquid
+	assign sid = section.id
+    assign blocks = section.blocks
+%}
+<section id="laber_{{sid}}" class="product-sidebar">     
+{%- if blocks.size > 0 -%}
+  {%- for block in blocks -%}
+  {%- case block.type -%}
+  {%- when 'benefit' -%}
+    <div class="laber_benefit">
+      {% if block.settings.show_benefit_1 %}
+      <div class="item-benefit">
+        {%- if block.settings.source == '1' -%}
+          <div class="icon">
+            <i class="{{block.settings.icon}}"></i>
+          </div>
+        {%- elsif block.settings.source == '2' -%}
+        <div class=" icon img">
+          {% assign image = block.settings.icon_img %}
+          {% if image != blank %} 
+              {% render 'responsive-image', image: image, image_class: 'w-full h-full' %}
+            {% else %}
+                  {% capture current %}{% cycle 1, 2, 3, 4, 5 %}{% endcapture %}
+                  {{ 'collection-' | append: current | placeholder_svg_tag: 'placeholder-svg w-full h-full' }}
+            {% endif %}
+        </div>
+        {%- else -%}
+        <div class="icon">
+          {{block.settings.text_svg}}
+        </div>
+        {%- endif -%}
+        <div class="content">
+          <p class="title">{{block.settings.title}}</p>
+        </div>
+      </div>
+      {%endif%}
+      
+      
+      {% if block.settings.show_benefit_2 %}
+      <div class="item-benefit">
+        {%- if block.settings.source == '1' -%}
+        <div class="icon">
+          <i class="{{block.settings.icon2}}"></i>
+        </div>
+        {%- elsif block.settings.source == '2' -%}
+        <div class=" icon img">
+         {% assign image = block.settings.icon_img2 %}
+          {% if image != blank %} 
+              {% render 'responsive-image', image: image, image_class: 'w-full h-full' %}
+            {% else %}
+                  {% capture current %}{% cycle 1, 2, 3, 4, 5 %}{% endcapture %}
+                  {{ 'collection-' | append: current | placeholder_svg_tag: 'placeholder-svg w-full h-full' }}
+            {% endif %}
+        </div>
+        {%- else -%}
+        <div class="icon">
+          {{block.settings.text_svg2}}
+        </div>
+        {%- endif -%}
+        <div class="content">
+          <p class="title">{{block.settings.title2}}</p>
+        </div>
+      </div>
+      {%endif%}
+      
+      
+      {% if block.settings.show_benefit_3 %}
+      <div class="item-benefit">
+        {%- if block.settings.source == '1' -%}
+        <div class="icon">
+          <i class="{{block.settings.icon3}}"></i>
+        </div>
+        {%- elsif block.settings.source == '2' -%}
+        <div class=" icon img">
+          {% assign image = block.settings.icon_img3 %}
+          {% if image != blank %} 
+              {% render 'responsive-image', image: image, image_class: 'w-full h-full' %}
+            {% else %}
+                  {% capture current %}{% cycle 1, 2, 3, 4, 5 %}{% endcapture %}
+                  {{ 'collection-' | append: current | placeholder_svg_tag: 'placeholder-svg w-full h-full' }}
+            {% endif %}
+        </div>
+        {%- else -%}
+        <div class="icon">
+          {{block.settings.text_svg3}}
+        </div>
+        {%- endif -%}
+        <div class="content">
+          <p class="title">{{block.settings.title3}}</p>
+        </div>
+      </div>
+      {%endif%}
+    </div>
+    {%- when 'promobox' -%}
+    
+    <div class="laber_promobox">
+      <div class="promobox">
+        {% assign no-img = "https://placehold.jp/30/222/fff/270x460.png?text=270x460" %}	
+        {% assign image = block.settings.image_promobox %}
+        {% assign url = block.settings.url %}
+        {%- assign ratio = image.aspect_ratio -%}
+        {% if image.id%}
+        {%if url %}<a href="{{url}}" title="{{title}}">{%endif%}
+        <div data-image-effect class="pr_lazy_img  lazyload laber_bg_lz " data-id="{{image.id}}" data-bgset="{{ image | img_url: '1x1' }}" data-parent-fit="width" data-wiis data-ratio="{{ratio}}" data-sizes="auto" style="padding-top:{{ 1 | divided_by: ratio | times: 100}}%;"></div>
+
+        {%if url %}</a>{%endif%}
+        {%else%}
+        	<div data-image-effect class="pr_lazy_img  lazyload laber_bg_lz "  data-bgset="{{ no-img }}" data-parent-fit="width" data-wiis data-ratio="1" data-sizes="auto" style="padding-top: 170.37%;"></div>	
+        {%endif%}
+        {% if block.settings.title != blank %}
+        <div class="promobox-content">
+          <div class="title">{{block.settings.title}}</div>
+          <div class="h3 sub_title">{{block.settings.sub_title}}</div>
+          <div class="content">{{block.settings.content}}</div>
+        </div>
+        {%endif%}
+      </div>
+    </div>
+  	
+        {%- when 'products' -%}
+			<div id="bl_{{block.id}}" class="laber-product">
+              {%if block.settings.title != blank%}	
+              	<h3>{{block.settings.title}}</h3>
+              {%endif%}
+              {% assign settings = block.settings %}
+              {%- assign dots = block.settings.dots -%}
+              {%- assign arrows = block.settings.arrows -%}
+              {%- assign sett_equal = block.settings.use_eq_height -%}
+              {%- assign image_ratio = block.settings.image_ratio -%}
+            {%- assign products = collections[block.settings.collection].products -%}
+            {%- assign limit = block.settings.max_count -%}
+            {%- if limit == 0 -%}
+            {%- assign limit = products.size -%}
+            {%- endif -%}
+            {%- if products.size > 0 -%}
+              {% include 'grid-slider', settings:settings %} 
+                <div class="collection-sidebar-offers">
+                  <div class="grid-slider collection-slider laber-slick-carousel {%if sett_equal%}{{image_ratio}} {%endif%}" {{gridSlider}} data-append-Arrows=".arrows_{{sid}}" data-append-Dots=".dots_{{sid}}" >
+                    {%- for product in products limit: limit -%}                
+                       {% include 'product-column' %}  
+                    {%- endfor -%}
+                  </div>
+                  {%if dots %}
+                  <div class="laber_append_dots dots_{{sid}}"></div>
+                  {%endif%}
+                  {%if arrows%}	
+                  <div class="laber_append_arrows arrows_{{sid}}"></div>	
+                  {% endif %}
+                </div>
+            {%- endif -%}
+  			</div>
+  			{%style%}
+  				
+                  #bl_{{block.id}}{
+                      {%if block.settings.pd != blank%}padding:{{block.settings.pd}};{%endif%}
+  				      {%if block.settings.cl_bg != blank%}background-color: {{block.settings.cl_bg}};{%endif%}
+                  }
+  				
+  			{%endstyle%}
+  
+  {%- endcase -%}
+  {%- endfor -%}
+{%- endif -%} 
+</section>
+{%- render 'section_style' -%}
+{% schema %}
+  {
+    "name": "Product Sidebar",
+	"class":"laber-product-sidebar laberProducts-column",
+		"settings": [
+			 {
+            "type": "header",
+            "content": "== Setting"
+            },
+            {
+            "type": "color",
+            "id": "cl_bg",
+            "label": "Background color",
+            "default": "#fff"
+            },
+
+            {
+            "type": "header",
+            "content": "== Setting PC",
+            "info":"Margin"
+            },	
+            {
+            "type": "text",
+            "id": "mg",
+            "label": "Margin",
+            "info":"Margin top, margin right, margin bottom, margin left. If you not use to blank"
+            },
+            {
+            "type": "text",
+            "id": "pd",
+            "label": "Padding",
+            "info":"Padding top, padding right, padding bottom, padding left. If you not use to blank"
+            },
+            {
+            "type": "text",
+            "id": "bd",
+            "label": "Border",
+            "info":"border top  border right border bottom  border left. If you not use to blank"
+            },
+            {
+            "type": "header",
+            "content": "== Design Mobile Options"
+            },
+            {
+            "type": "text",
+            "id": "mg_mb",
+            "label": "Margin"
+            },
+            {
+            "type": "text",
+            "id": "pd_mb",
+            "label": "Padding"
+            }
+		],
+      "blocks": [
+
+		{
+          "type": "benefit",
+          "name": "Benefit",
+		  "settings": [
+			{
+            "type": "header",
+            "content": "== General Settings"
+            },
+            {
+            "type": "select",
+            "id": "source",
+            "label": "Show icon",
+            "default": "2",
+            "options": [
+            {
+            "value": "1",
+            "label": "icon font"
+            },
+            {
+            "value": "2",
+            "label": "icon image"
+            },
+            {
+            "value": "3",
+            "label": "icon SVG"
+            }
+            ]
+            },
+            {
+            "type": "header",
+            "content": "== Benefit 1"
+            },
+			{
+            "type": "checkbox",
+            "id": "show_benefit_1",
+            "label": "Show Benefit 1",
+            "default": true
+            },
+            {
+            "type": "text",
+            "id": "icon",
+            "label": "Icons name",
+            "default": "fa fa-truck"
+            },
+            {
+            "type": "image_picker",
+            "id": "icon_img",
+            "label": "icon image",
+            "info" : "Dimension: 24x24"
+            },
+            {
+            "type": "textarea",
+            "id": "text_svg",
+            "label": "code icon SVG"
+            },	
+            {
+            "type": "header",
+            "content": "== Text Options"
+            },
+            {
+            "type": "text",
+            "id": "title",
+            "label": "Heading",
+            "default": "Add a title"
+            },
+			{
+            "type": "header",
+            "content": "== Benefit 2"
+            },
+			{
+            "type": "checkbox",
+            "id": "show_benefit_2",
+            "label": "Show Benefit 2",
+            "default": true
+            },
+            {
+            "type": "text",
+            "id": "icon2",
+            "label": "Icons name",
+            "default": "fa fa-truck"
+            },
+            {
+            "type": "image_picker",
+            "id": "icon_img2",
+            "label": "icon image",
+            "info" : "Dimension: 24x24"
+            },
+            {
+            "type": "textarea",
+            "id": "text_svg2",
+            "label": "code icon SVG"
+            },	
+            {
+            "type": "header",
+            "content": "== Text Options"
+            },
+            {
+            "type": "text",
+            "id": "title2",
+            "label": "Heading",
+            "default": "Add a title"
+            },
+			{
+            "type": "header",
+            "content": "== Benefit 3"
+            },
+			{
+            "type": "checkbox",
+            "id": "show_benefit_3",
+            "label": "Show Benefit 3",
+            "default": true
+            },
+            {
+            "type": "text",
+            "id": "icon3",
+            "label": "Icons name",
+            "default": "fa fa-truck"
+            },
+            {
+            "type": "image_picker",
+            "id": "icon_img3",
+            "label": "icon image",
+            "info" : "Dimension: 24x24"
+            },
+            {
+            "type": "textarea",
+            "id": "text_svg3",
+            "label": "code icon SVG"
+            },	
+            {
+            "type": "header",
+            "content": "== Text Options"
+            },
+            {
+            "type": "text",
+            "id": "title3",
+            "label": "Heading",
+            "default": "Add a title"
+            }
+		 ]
+        },
+          {
+          "type": "promobox",
+          "name": "Promo box (Banner)",
+          "settings": [
+              {
+              "type": "header",
+              "content": "Section settings"
+              },
+              {
+              "type": "text",
+              "id": "title",
+              "label": "Title",
+              "default": "Hot deals"
+              },  
+              {
+              "type": "text",
+              "id": "sub_title",
+              "label": "Sub Title",
+              "default": "Nuts & dried <br>weekend Promo"
+              },              
+              {
+                "type": "textarea",
+                "id": "content",
+                "label": "Content",
+                "default": "Everything You Need"
+              },	
+              {
+              "type": "header",
+              "content": "Content"
+              },
+              {
+              "type": "url",
+              "id": "url",
+              "label": "URL for banner"
+              },
+              {
+              "type": "header",
+              "content": "Image"
+              },
+              {
+              "type": "image_picker",
+              "id": "image_promobox",
+              "label": "Image",
+              "info": "Recommended size 325x325 pixels"
+              }             
+            ]
+          },
+		{
+            "type": "products",
+            "name": "Products",
+            "settings": [
+                {
+                    "type": "header",
+                    "content": "Section settings"
+                },
+                {
+                    "type": "text",
+                    "id": "title",
+                    "label": "Title",
+                    "default": "Recent Products"
+                },               
+                {
+                    "type": "header",
+                    "content": "Content"
+                },
+                {
+                    "type": "collection",
+                    "id": "collection",
+                    "label": "Collection"
+                },
+                {
+                    "type": "range",
+                    "id": "max_count",
+                    "min": 0,
+                    "max": 15,
+                    "step": 1,
+                    "unit": "pds",
+                    "label": "Max count",
+                    "info": "0 is infinite",
+                    "default": 3
+                },
+            {
+                "type": "header",
+                "content": "---- Slider Show Collection ----",
+                "info": "Refer to the attribute values [here](httpss://kenwheeler.github.io/slick)"
+            }, 	
+            {
+                "type": "checkbox",
+                "id": "use-slider",
+                "label": "Use slider?",
+                "default": true
+            },
+            {  
+                "type": "range",  
+                "id": "slides-To-Scroll",  
+                "label": "Slide to scroll",  
+                "info": "The number of items slide to scroll",
+                "min": 1,
+                "max": 8,
+                "step": 1,
+                "unit": "col",
+                "default": 1
+            },   
+            {  
+                "type": "range",  
+                "id": "visible",  
+                "label": "Columns in Visible",
+                "info": "Item(s) in screen ( Size >= 1920 )",
+                "min": 1,
+                "max": 8,
+                "step": 1,
+                "unit": "col",
+                "default": 5 
+            },
+            {  
+                "type": "range",  
+                "id": "widescreen",  
+                "label": "Columns in Widescreen",
+                "info": "Item(s) in screen ( 1366 <= Size < 1920 )",
+                "min": 1,
+                "max": 8,
+                "step": 1,
+                "unit": "col",
+                "default": 4 
+            },  
+            {  
+                "type": "range",  
+                "id": "desktop",  
+                "label": "Columns in Desktop",
+                "info":  "Item(s) in screen ( 1200 <= Size < 1480 )",
+                "min": 1,
+                "max": 8,
+                "step": 1,
+                "unit": "col",
+                "default": 4  
+            },	  
+            {  
+                "type": "range",  
+                "id": "laptop",  
+                "label": "Columns in Laptop",
+                "info": "Item(s) in screen ( 992 <= Size < 1200 )",
+                "min": 1,
+                "max": 8,
+                "step": 1,
+                "unit": "col",
+                "default": 4
+            },	  
+            {  
+                "type": "range",  
+                "id": "notebook",  
+                "label": "Columns in Notebook",
+                "info": "Item(s) in screen ( 768 <= Size < 992 )",
+                "min": 1,
+                "max": 8,
+                "step": 1,
+                "unit": "col",
+                "default": 3  
+            },  
+            {  
+                "type": "range",  
+                "id": "tablet",  
+                "label": "Columns in Tablet",
+                "info": "Item(s) in screen ( 576 <= Size < 768 )",
+                "min": 1,
+                "max": 8,
+                "step": 1,
+                "unit": "col",
+                "default": 3 
+            },
+            {  
+                "type": "range",  
+                "id": "landscape",  
+                "label": "Columns in Landscape",
+                "info": "Item(s) in screen ( 480 <= Size < 576 )",
+                "min": 1,
+                "max": 6,
+                "step": 1,
+                "unit": "col",
+                "default": 2 
+            }, 
+            {  
+                "type": "range",  
+                "id": "portrait",  
+                "label": "Columns in Portrait",
+                "info": "Item(s) in screen ( 360 < Size < 480 )",
+                "min": 1,
+                "max": 6,
+                "step": 1,
+                "unit": "col",
+                "default": 2 
+            },
+            {  
+                "type": "range",  
+                "id": "mobile",  
+                "label": "Columns in Mobile",
+                "info": "Item(s) in screen ( Size < = 360 )",
+                "min": 1,
+                "max": 4,
+                "step": 1,
+                "unit": "col",
+                "default": 1 
+            },
+            {  
+                "type": "range",  
+                "id": "rows",  
+                "label": "Rows Slider",  
+                "min": 1,
+                "max": 5,
+                "step": 1,
+                "unit": "col",
+                "default": 1
+            },
+            {
+                "type": "checkbox",
+                "id": "autoplay",
+                "label": "Autoplay",
+                "default": true
+            },
+            {	
+                "type": "text",
+                "id": "speed",
+                "label": "Speed",
+                "default": "300",
+                "info": "Autoplay Speed in milliseconds"
+            },
+            {	
+                "type": "text",
+                "id": "autoplay-Speed",
+                "label": "Auto Play Speed",
+                "default": "3000",
+                "info": "Autoplay Speed in milliseconds"
+            },
+            {	
+                "type": "checkbox",
+                "id": "arrows",
+                "label": "Arrows",
+                "default": true
+            },
+            {	
+                "type": "checkbox",
+                "id": "fade",
+                "label": "Fade",
+                "default": false,
+                "info": "Only use for 1 column"
+            },
+            {	
+                "type": "checkbox",
+                "id": "center-Mode",
+                "label": "Center Mode",
+                "default": false
+            },
+            {	
+                "type": "checkbox",
+                "id": "adaptive-Height",
+                "label": "Adaptive Height",
+                "default": false
+            },
+            {	
+                "type": "checkbox",
+                "id": "dots",
+                "label": "Dots",
+                "default": false 
+            },
+            {	
+                "type": "checkbox",
+                "id": "infinite",
+                "label": "Infinite",
+                "default": false
+            },
+            {  
+                "type": "range",  
+                "id": "padding",  
+                "label": "padding",
+                "info": "Distance between items",
+                "min": 0,
+                "max": 15,
+                "step": 5,
+                "unit": "px",
+                "default": 10 
+            },
+            {	
+                "type": "checkbox",
+                "id": "vertical",
+                "label": "Vertical",
+                "default": false
+            },
+              {
+                "type": "checkbox",
+                "id": "use_eq_height",
+                "label": "Use equal height images?",
+                "default": false
+              },
+              {
+                "type": "select",
+                "id": "image_ratio",
+                "label": "Aspect Ratio",
+                "default": "ratio3_2",
+                "info": "Aspect Ratio Custom will settings in General panel.",
+                "options": [
+                  {
+                    "group": "Landscape",
+                    "value": "ratio2_1",
+                    "label": "2:1"
+                  },
+                  {
+                    "group": "Landscape",
+                    "value": "ratio16_9",
+                    "label": "16:9"
+                  },
+                  {
+                    "group": "Landscape",
+                    "value": "ratio8_5",
+                    "label": "8:5"
+                  },
+                  {
+                    "group": "Landscape",
+                    "value": "ratio3_2",
+                    "label": "3:2"
+                  },
+                  {
+                    "group": "Landscape",
+                    "value": "ratio4_3",
+                    "label": "4:3"
+                  },
+                  {
+                    "group": "Landscape",
+                    "value": "ratio_nt",
+                    "label": "Ratio ASOS"
+                  },
+                  {
+                    "group": "Squared",
+                    "value": "ratio1_1",
+                    "label": "1:1"
+                  },
+                  {
+                    "group": "Portrait",
+                    "value": "ratio2_3",
+                    "label": "2:3"
+                  },
+                  {
+                    "group": "Portrait",
+                    "value": "ratio3_4",
+                    "label": "3:4"
+                  },
+                  {
+                    "group": "Portrait",
+                    "value": "ratio1_2",
+                    "label": "1:2"
+                  },
+                   {
+                    "group": "Custom",
+                    "value": "ratio_custom_1",
+                    "label": "Custom 1(128%)"
+                  }
+                ]
+              },
+                  {
+                  "type": "header",
+                  "content": "== Design Options"
+                  },
+                  {
+                  "type": "color",
+                  "id": "cl_bg",
+                  "label": "Background color",
+                  "default": "#fff"
+                  },
+                  {
+                  "type": "text",
+                  "id": "pd",
+                  "label": "Padding",
+                  "info":"Padding top, padding right, padding bottom, padding left. If you not use to blank"
+                  }   
+            ]
+        }
+        
+      ],
+      "default": {
+        "blocks": [
+			{ "type": "benefit" }
+        ]
+      }
+
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

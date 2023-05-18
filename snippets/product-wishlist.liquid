@@ -1,0 +1,114 @@
+{% include 'product-res-variables' %}
+{%- assign image_size = image_size | default: '200x' -%}
+{%- assign style_product = settings.content_style_product -%}
+{%- assign show_label_in_stock = settings.collection_info_show_label_in_stock -%}
+{%- assign show_label_out_stock = settings.collection_info_show_label_out_stock -%}
+{%- assign show_label_sale = settings.collection_info_show_label_sale -%}
+{%- assign show_label_new =  settings.collection_info_show_label_new -%}
+{%- assign show_label_hot =  settings.collection_info_show_label_hot -%}
+{%- assign show_collection = settings.collection_info_show_collections -%}
+{%- assign show_title = settings.collection_info_show_title -%}
+{%- assign show_price = settings.collection_info_show_price -%}
+{%- assign show_button_add_to_cart = settings.collection_info_show_button_add_to_cart -%}
+{%- assign show_button_add_to_wishlist = settings.collection_info_show_button_add_to_wishlist -%}
+{%- assign show_button_add_to_compare =  settings.collection_info_show_button_add_to_compare -%}
+{%- assign show_button_quick_view = settings.collection_info_show_button_quick_view -%}
+{%- assign show_reviews = settings.collection_info_show_reviews -%}
+{%- assign show_button_remove = true -%}
+<div class="product-wishlist product-item" data-js-product data-js-store-lists-product-wishlist data-product-handle="{{ product.handle }}" data-product-variant-id="{{ current_variant_id }}">
+    <div class="product-collection">
+  <div class="product-collection__image js-product-images-navigation js-product-images-hovered-end">
+      	<a href="{{ url }}">
+          {% assign image = product.featured_image.src %}
+          {% assign ratio = image.aspect_ratio |default:1.0 %} 
+      	<div data-image-effect class="pr_lazy_img main-img lazyload laber_bg_lz  {{settings.product_hover_animation_type}}" data-id="{{image.id}}" data-bgset="{{ image | img_url: '1x1' }}" data-parent-fit="width" data-wiis data-ratio="{{ratio}}" data-sizes="auto" style="padding-top:{{ 1 | divided_by: ratio | times: 100}}%;"></div>
+      	</a>     
+        {%- if show_label_in_stock or show_label_out_stock or show_label_sale or show_label_new or show_label_hot -%}
+            {%- assign label_present = true -%}
+        {%- else -%}
+            {%- assign label_present = false -%}
+        {%- endif -%}
+        {%- if label_present -%}
+            <div class="product-image__overlay-top ">
+                <a href="{{ url }}"></a>
+                {%- if label_present -%}
+                    <div class="product-image__overlay-top-left ">
+                        {% include 'product-get-label'%}
+                    </div>
+                {%- endif -%}               
+            </div>
+        {%- endif -%}
+        {%- if show_button_add_to_cart or show_button_add_to_wishlist or show_button_add_to_compare or show_button_quick_view -%}
+              <div class="product-image__overlay-bottom">
+                <div class="group-button">
+                  <div class="inner"> 
+                    {% if show_button_add_to_wishlist %}
+                    	<!--<a href="javascript:void(0);" class="wishlist-button wishlist" data-js-tooltip data-tippy-content="{{'general.wishlist.title' | t}}"><i class="fa fa-heart" aria-hidden="true"></i></a>-->
+                    	{% include 'product-get-button-wishlist' %}
+                    {% endif %}
+                    {% if show_button_add_to_cart%}
+                      {% if product.available %}
+                          <button type="submit" class="add-to-cart js_add_to_cart_button"  data-js-tooltip data-tippy-content="{{'products.product.add_to_cart' | t}}" data-pid="{{ product.variants.first.id }}" data-js-product-button-add-to-cart>
+                            {% render 'icon-cart' %}
+                          	<i aria-hidden="true" class="laber-loading fa fa-spinner fa-spin fa-3x fa-fw"></i>
+                            <span class="text">{{'products.product.add_to_cart' | t}}</span></button>
+                      {% else %}
+                          <a class="add-to-cart js-btn-sold-out" onclick="location.href='{{ product.url | within: collection }}'">
+                            {% render 'icon-cart' %}<span class="text">{{'products.product.sold_out' | t}}</span></a>
+                      {% endif %}
+                    {% endif %}
+                    {% if show_button_quick_view %}
+                   		 {% include 'product-get-button-quickview' %}                
+                    {% endif %}
+                    {% if show_button_add_to_compare %}
+                      <!--<a href="javascript:void(0);" class="compare-button js-compare" data-js-tooltip data-tippy-content="{{'general.compare.title' | t}}" {% if product.available %} style="display:inline-block;" {% else %} style="display:none;" {% endif %}  data-pid="{{product.handle}}"><i class="fa fa-eye" aria-hidden="true"></i></a>-->
+                      {% include 'product-get-button-compare' %}
+                    {% endif %}
+                    
+                    
+                    
+                    
+                  </div>
+                </div>
+              </div>
+          {%- endif -%}
+    </div>
+    <div class="product-collection__content style_{{style_product}}">   
+      
+      	{% if show_collection %}
+        <div class="product-collection__info">
+          
+          <div class="product-collection__more-info">
+            {%- if product.collections.size > 0 -%}
+            {% render 'product-get-collections' with product: product %}
+            {%- endif -%}   
+          </div>
+         
+        </div>
+		 {%- endif -%} 
+        {%- if show_title -%}
+            <div class="product-collection__title">
+                <h2>
+                    <a href="{{ url }}">{{ title }}</a>
+                </h2>
+            </div>
+        {%- endif -%}
+      {%- if show_reviews -%}
+        <div class="product-collection__reviews">
+          {% render 'product-get-review' with id: id hide_counter: hide_reviews_counter %}
+        </div>
+      {%- endif -%}
+      <div class="frm-price-color">
+        {%- if show_price -%}
+        <div class="product-collection__price ">
+          {% render 'product-get-price' with price: price compare_at_price: compare_at_price %}
+        </div>
+        {%- endif -%}
+      </div>
+        {%- if show_button_remove -%}
+            <div class="product-wishlist__remove js-store-lists-remove-wishlist">
+              <i class="icon-x" data-js-popup-close=""></i> <span>{{ 'products.product.remove' | t }}</span></div>
+        {%- endif -%}
+    </div>
+</div>
+</div>

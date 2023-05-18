@@ -1,0 +1,18 @@
+<li class="currency-picker hide-mobile item-list" >
+  {% render 'currency-picker' %}
+  <p class="toggle-submenu">                
+    <span class="lang-currency">{{shop.currency}}</span><span class="icon"><i class="icon-chevron-down"></i></span>
+  </p>  
+  <ul class="{{shop.currency}} dropdown list-currencies currency-lists child-list">         
+    {% assign codes = 'USD,EUR,GBP,CAD,ARS,AUD,BBD,BDT,BSD,BHD,BRL,BOB,BND,BGN,ILS,MMK,KYD,CLP,CNY,COP,CRC,HRK,CZK,DKK,DOP,XCD,EGP,XPF,FJD,GHS,GTQ,GYD,GEL,HKD,HUF,ISK,INR,IDR,NIS,JMD,JPY,JOD,KZT,KES,KWD,LVL,LTL,MXN,MYR,MUR,MDL,MAD,MNT,MZN,ANG,NZD,NGN,NOK,OMR,PKR,PYG,PEN,PHP,PLN,QAR,RON,RUB,SAR,RSD,SCR,SGD,SYP,ZAR,KRW,LKR,SEK,CHF,TWD,THB,TZS,TTD,TRY,UAH,AED,UYU,VEB,VND,ZMK' | split: ',' %}
+    {% assign supported_codes = settings.supported_currencies | split: ' ' %}  
+    {% assign currency_default = shop.currency %}
+    {% for code in supported_codes %}
+      {% if codes contains code %}
+        <li data-value="{{ code }}" class="{{ code }}{% if currency_default == code %} active{%endif%}" >
+          <p><span class="code_currency">{{ code }}</span></p>
+        </li>
+      {% endif %}
+    {% endfor %} 
+  </ul>      
+</li>

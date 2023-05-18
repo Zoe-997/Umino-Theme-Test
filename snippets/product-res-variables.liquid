@@ -1,0 +1,42 @@
+{%- assign id = product.id -%}
+{%- assign title = product.title -%}
+{%- assign description = product.description -%}
+{%- assign type = product.type -%}
+{%- assign vendor = product.vendor -%}
+{%- assign metafields = product.metafields -%}
+{%- if select_current_variant_by_id -%}
+    {%- for variant in product.variants -%}
+        {%- if variant.id == select_current_variant_by_id -%}
+            {%- assign current_variant = variant -%}
+            {%- break -%}
+        {%- endif -%}
+    {%- endfor -%}
+{%- else -%}
+    {%- assign current_variant = product.selected_or_first_available_variant -%}
+{%- endif -%}
+{%- assign current_variant_id = current_variant.id -%}
+{%- assign current_variant_metafields = current_variant.metafields -%}
+{%- assign url = product.url | within: collection -%}
+{%- assign quantity = current_variant.inventory_quantity -%}
+{%- assign sku = current_variant.sku -%}
+{%- assign barcode = current_variant.barcode -%}
+{%- assign price = current_variant.price -%}
+{%- assign compare_at_price = current_variant.compare_at_price -%}
+{%- assign available = current_variant.available -%}
+{%- if product.selected_variant.id == product.selected_or_first_available_variant.id and current_variant.image != blank -%}
+    {%- assign image = current_variant.image -%}
+    {%- assign hover_image = null -%}
+{%- elsif select_current_variant_by_id and current_variant.image != blank -%}
+    {%- assign image = current_variant.image -%}
+    {%- assign hover_image = null -%}
+{%- else -%}
+    {%- assign image = product.images[0] -%}
+    {%- assign hover_image = product.images[1] -%}
+{%- endif -%}
+{%- assign label_hot = current_variant_metafields.labels.hot | default: metafields.labels.hot -%}
+{%- assign label_new = current_variant_metafields.labels.new | default: metafields.labels.new -%}
+{%- assign countdown_date = current_variant_metafields.countdown.date | default: metafields.countdown.date -%}
+{%- assign select_current_variant_by_id = null -%}
+{%- assign img_hover_url = hover_image | img_url: 'grande'-%}
+{%- assign current_img_url = image | img_url: 'grande'-%}
+{%- assign ratio = image.aspect_ratio -%}

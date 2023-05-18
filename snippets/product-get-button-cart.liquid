@@ -1,0 +1,15 @@
+<a href="{{ url }}" data-pid="{{ product.variants.first.id }}" class="btn btn--status js-product-button-add-to-cart js_add_to_cart_button" name="add" data-js-product-button-add-to-cart{% unless current_variant.available %} disabled="disabled" data-button-status="sold-out"{% endunless %}>
+    {%- if enable_select_options_button -%}
+        <span class="d-none d-sm-flex flex-center"><i class="btn__icon mr-5 mb-4"></i><span class="btn__text">{{ 'products.product.add_to_cart_pr.select_options' | t }}</span></span>
+        <span class="d-flex d-sm-none flex-center"><i class="btn__icon mr-5 mb-4"></i><span class="btn__text">{{ 'products.product.add_to_cart_pr.select_options_mobile' | t }}</span></span>
+    {%- else -%}
+        <span class="d-flex flex-center"><i class="btn__icon mr-5 mb-4"></i><span class="btn__text">{{ 'products.product.add_to_cart_pr.title' | t }}</span></span>
+        <span class="d-flex flex-center" data-button-content="added"><i class="mr-5 mb-4"></i>{{ 'products.product.add_to_cart_pr.added' | t }}</span>
+        {%- if enable_select_variant_button -%}
+            <span class="d-none d-sm-flex flex-center" data-button-content="select"><i class="btn__icon mr-5 mb-4"></i><span class="btn__text">{{ 'products.product.add_to_cart_pr.select_options' | t }}</span></span>
+            <span class="d-flex d-sm-none flex-center" data-button-content="select"><i class="btn__icon mr-5 mb-4"></i><span class="btn__text">{{ 'products.product.add_to_cart_pr.select_options_mobile' | t }}</span></span>
+        {%- endif -%}
+    {%- endif -%}
+    <span class="d-flex flex-center" data-button-content="sold-out">{{ 'products.product.add_to_cart_pr.sold_out' | t }}</span>
+</a>
+{%- assign enable_select_options_button = false -%}

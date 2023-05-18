@@ -1,0 +1,111 @@
+{{ 'style.collection_page.css' | asset_url | stylesheet_tag }}
+{% assign layout = settings.layout_collection | plus:0 %}
+{% liquid
+	if layout == 3 
+    	assign c_layout = "top-sidebar style1" 
+    elsif layout == 4    
+    	assign c_layout = "top-sidebar style2"
+    elsif layout == 5   
+    	assign c_layout = "popup-sidebar"   
+    elsif layout == 6   
+    	assign c_layout = "no-sidebar"   
+    endif    
+%}
+
+{% assign show_ajax_scroll = settings.show_ajax_scroll %}
+{% assign style_scroll = settings.style_scroll | plus:0 %}
+
+<div class="collections js_container_cat {%if show_ajax_scroll %}ajax_scroll{%endif%}" {%if show_ajax_scroll %}data-offset="{{style_scroll}}" {%endif%}>
+
+
+  
+{% assign laber_ck = false %}
+{% if collection.current_type or collection.current_vendor %}
+{% assign laber_ck = true %}
+{%endif %}
+{% section 'breadcrumb' %}
+
+
+<div class="{{c_layout}} main-content shop-page main-content-grid">
+
+  <div class=" {% if settings.collection_fullwidth %}full-width container{% else %}container{% endif %}">    
+    <div class="row row-15">  
+      {% if layout ==3 or layout == 4 %}
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"> 
+			
+            <div id="primary" class="js_categories_content ">
+              {% section 'banner-collection' %}
+              {% include 'products-top' %}
+              <div data-filter class="js_filter sidebar-top">
+                  {% section 'collection-sidebar' %}
+               </div>
+              {% section 'collection' %}
+            </div>
+
+        </div>
+      {% else %}
+      	{%if layout !=6 %}
+      	<div data-filter id="js-stickySidebar" class="js_filter js-sidebar-mobile-content sidebar-moible col-lg-auto  col-xs-12 
+                                {% if settings.collection_fullwidth %}
+                                	col-sm-4 col-lg-auto 
+                                {% else %} 
+                                	col-sm-4 col-md-3 col-lg-3 
+                                {% endif %} 
+                                	sidebar{%if layout ==1 %}-left {% elsif layout ==2 %}-right{% endif%}">
+          	{% section 'collection-sidebar' %}
+        </div>
+      	{%endif%}
+        <div class="mobile-content {% if settings.collection_fullwidth %} col {% else %}col {% endif %}"> 
+          <div id="primary" class="js_categories_content"> 
+            {% section 'banner-collection' %}
+            {% include 'products-top' %}
+            {% section 'collection' %}
+          </div>
+          
+        </div>        
+      {% endif %}
+    </div>
+    
+    
+  </div>
+</div>
+</div>  
+<script>
+  var json_collection_filter =  {{collection.products | json }};
+  var json_wishlist = [];
+  var json_product_tag = [];
+  var json_email = [];
+  {% if customer %}
+  
+    {% capture tags %}{% for tag in customer.tags %}{{ tag }} {% endfor %}{% endcapture %}
+    {% assign tags = tags | remove:'x' | split:' ' | uniq | join:' ' %}
+    {% for product in collection.products %}
+        		
+        {% if tags contains product.id %}
+          	{% for tag in customer.tags %}
+              {% if tag contains product.id %}
+                  {% assign t = tag %}  				
+
+              {% endif %}
+          	{% endfor %}
+  			json_product_tag.push("{{t}}");			
+  
+        	{% assign check = t.size | minus:product.id.size | modulo:2 %}
+        	{% assign  check_mod =  t.size | modulo :2   %}
+        	{% if check == 0 or check_mod == 0  %}
+			 	json_wishlist.push({{t | remove: 'x'}});
+			{% endif %} 
+  		{% else %}
+  			json_product_tag.push("{{product.id}}");
+  		{% endif %}
+    {% endfor %} 
+  		json_email.push("{{customer.email}}");
+                                  
+   {%else%}  
+     
+      {% for product in collection.products %}
+            json_product_tag.push("{{product.id}}");
+      {% endfor %}                             
+                                  
+  {% endif %}
+</script>

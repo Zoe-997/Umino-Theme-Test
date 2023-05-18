@@ -1,0 +1,116 @@
+{% render 'product-res-variables' %}
+{%- assign style_product = settings.content_style_product -%}	
+{%- assign design_product = settings.design_product -%}
+{%- assign show_label_in_stock = settings.collection_info_show_label_in_stock -%}
+{%- assign show_label_out_stock = settings.collection_info_show_label_out_stock -%}
+{%- assign show_label_sale = settings.collection_info_show_label_sale -%}
+{%- assign show_label_new =  settings.collection_info_show_label_new -%}
+{%- assign show_label_hot =  settings.collection_info_show_label_hot -%}
+{%- assign show_countdown = false | default: settings.product_collection_show_countdown -%}
+{%- assign show_images_navigation = true | default: settings.product_collection_show_images_navigation -%}
+{%- assign show_collection = settings.collection_info_show_collections -%}
+{%- assign show_title = settings.collection_info_show_title -%}
+{%- assign show_sku = settings.collection_info_show_sku -%}
+{%- assign show_barcode =  settings.collection_info_show_barcode -%}
+{%- assign show_availability =  settings.collection_info_show_availability -%}
+{%- assign show_type = settings.collection_info_show_type -%}
+{%- assign show_vendor = settings.collection_info_show_vendor -%}
+{%- assign show_description = settings.collection_info_show_description -%}
+{%- assign show_price = settings.collection_info_show_price -%}
+{%- assign show_options = settings.collection_info_show_options -%}
+{%- assign show_custom_options = true | default: settings.product_show_custom_options -%}
+{%- assign show_quantity = false | default: settings.product_collection_show_quantity -%}
+{%- assign show_button_add_to_cart = settings.collection_info_show_button_add_to_cart -%}
+{%- assign show_button_add_to_wishlist = settings.collection_info_show_button_add_to_wishlist -%}
+{%- assign show_button_add_to_compare =  settings.collection_info_show_button_add_to_compare -%}
+{%- assign show_button_quick_view = settings.collection_info_show_button_quick_view -%}
+{%- assign show_reviews = settings.collection_info_show_reviews -%}
+{%- assign hide_reviews_counter = settings.product_collection_hide_reviews_counter -%}
+{% assign enable_hover_image = settings.collection_info_enable_hover_image %}
+{% assign build_variant = "all" %}
+
+{% assign layout = settings.layout_collection | plus: 0 %}
+
+<div class="product-item laber-product-item-{{design_product}}">
+  <div class="product-collection" {% render 'product-get-attributes' %} >
+    <div class="product-collection__image product-image js-product-images-navigation js-product-images-hovered-end {% if enable_hover_image %} cms-hover-image {% endif %}">
+      <a href="{{ product.url | within: collection }}" class="d-block image_product cursor-default" data-js-product-image>
+                  {% assign image = product.featured_media %}
+                  {% render 'responsive-image', image: image, image_class: 'w-full h-full' %}
+      	</a>
+      </div>
+      <div class="product-collection__content product-grid-style style_{{style_product}}">  
+        
+        {% if show_collection %}
+          <div class="product-collection__info">
+            <div class="product-collection__more-info">
+              {%- if product.collections.size > 0 -%}
+              {% render 'product-get-collections' with product: product %}
+              {%- endif -%}   
+            </div>
+          </div>
+        {%endif%}
+          {%- if show_title -%}
+              <div class="product-collection__title">
+                  <h2>
+                      <a href="{{ url }}">{{ title }}</a>
+                  </h2>
+              </div>
+          {%- endif -%}         
+          <div class="frm-price-color">
+          {%- if show_price -%}
+              <div class="product-collection__price ">
+                  {% render 'product-get-price' with price: price compare_at_price: product.compare_at_price %}
+              </div>
+          {%- endif -%}
+        </div>
+        {% form "product", product, id: null, class: "frm_product_collection", data-js-product-form: '' %}
+             <input type="hidden" name="id" value="{{ current_variant.id }}" data-js-product-variant-input> 
+              {%- if show_options and show_custom_options -%}
+                  <div class="product-collection__options">
+                      {% render 'product-get-options' %}
+                  </div>
+              {%- else -%}
+                  {%- assign variants_size = product.variants | size -%}
+                  {%- if variants_size > 1 -%}
+                      {%- assign enable_select_options_button = true -%} 
+                  {%- endif -%}
+              {%- endif -%}
+          {% endform %}
+          {%- if show_button_add_to_cart or show_button_add_to_wishlist or show_button_add_to_compare -%}
+                <div class="group-button">
+                  <div class="inner"> 
+                    {% if show_button_add_to_cart%}
+                      {% if product.available %}
+                      <button type="submit" class="add-to-cart js_add_to_cart_button {%if settings.disable_ajax_cart %}page_{{settings.custom_page_cart}}{%endif%}"  data-pid="{{ product.variants.first.id }}" data-js-product-button-add-to-cart>
+                        
+                          {% render 'icon-cart' %}
+                          <i aria-hidden="true" class="laber-loading fa fa-spinner fa-spin fa-3x fa-fw"></i>
+                        
+                        <span class="text">{{'products.product.add_to_cart' | t  }}</span>
+                      </button>
+                      {% else %}
+                      <a  class="add-to-cart js-btn-sold-out" onclick="location.href='{{ product.url | within: collection }}'">
+                        <span class="icon">
+                          <i class="icon-alert-circle" aria-hidden="true"></i>
+                        </span>
+                        <span class="text">{{'products.product.sold_out' | t  }}</span></a>
+                      {% endif %}
+                    {% endif %}
+                    
+                    {% if show_button_add_to_wishlist %}
+                        <div class="product-image__overlay-top-right">
+                        {% render 'product-get-button-wishlist' %}
+                        </div>
+                    {% endif %}
+                    {% if show_button_add_to_compare %}
+                     {% render 'product-get-button-compare' %}
+                    {% endif %}
+                      
+                  </div>
+                </div>
+          {%- endif -%}
+      </div>
+    
+  </div>
+</div>

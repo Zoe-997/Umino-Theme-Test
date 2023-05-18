@@ -1,0 +1,19 @@
+{%- liquid
+  assign icon = block.settings.icon
+  if icon != blank
+    assign arr_icon = icon | split:','
+    assign icon_class1 = arr_icon[1] | default:'las'
+  endif  -%}
+{%- if icon != blank %}
+	<span class="icon">
+      <i class="lab {{arr_icon[1] | default:'las'}} la-{{arr_icon[0]}}"></i>
+	</span>  
+{% endif -%}
+
+{{block.settings.title }}
+
+{% if block.settings.lb != blank and enable_icon %}
+  <span class="lbl_nav_title" style="background-color: {{block.settings.lb_cl}}">
+    {{block.settings.lb}}
+  </span>
+{% endif -%}

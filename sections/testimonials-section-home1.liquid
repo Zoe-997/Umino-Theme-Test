@@ -1,0 +1,558 @@
+<link rel="preconnect" href=" {{ 'testimonials.css' | asset_url}}" crossorigin>
+<link rel="preload" as="style" href="{{ 'testimonials.css' | asset_url}}">
+{{ 'testimonials.css' | asset_url | stylesheet_tag }}
+{%- liquid
+	assign settings = section.settings	
+  assign sid = section.id
+  assign layout = section.settings.layout
+  
+  assign autoplay =  section.settings.autoplay
+  assign arrows =  section.settings.arrows
+  assign dots =  section.settings.dots
+  assign infinite =  section.settings.infinite
+    assign col_pr =section.settings.col_pr |plus:0
+    assign col_ipad =section.settings.col_ipad |plus:0
+    assign col_mobile =section.settings.col_mobile |plus:0
+	 assign  no-img1 ="https://via.placeholder.com/200x200.png/f5f5f5"
+      if col_pr == 5
+    	assign col = 15
+    else
+    	assign col = 12 | divided_by: col_pr
+    endif
+    
+ %}
+{%- for i in (1..1) -%}    
+    {%- if section.settings.hidden %}{% break %}{% endif -%}
+    <section id="laber_{{sid}}">
+      <div class="container {%if layout == 'full-width' %}{{layout}}{%endif%}">
+        {% if section.settings.title != blank or section.settings.sub_title!= blank %}
+		<div class="wrap_title ">
+          
+		  {% if section.settings.sub_title!= blank %}
+		  	<span class="section-subtitle h4">{{section.settings.sub_title}}</span>
+		  {% endif %}
+          
+          {% if section.settings.title != blank %}
+		  <h3 class="section-title">{{section.settings.title}}</h3>  
+		  {% endif %}
+          
+          
+          {% if section.settings.content!= blank %}
+		  <div class="content">{{section.settings.content}}</div>
+		  {% endif %}
+          
+		</div>
+        {% endif %}
+        <div  class="quotes_wrapper {{section.settings.style}}">
+          {% capture grid %}col-xs-6 col-sm-6 col-md-4 col-lg-{{ col }}{% endcapture %}
+          {%- if section.blocks.size > 0 -%}  
+              {% assign index = 0 %}         
+			{% include 'grid-slider', settings:settings %} 
+            <div class="content_section slick-carousel">
+              <div class="grid-slider collection-slider laber-slick-carousel {%if sett_equal%}{{image_ratio}} {%endif%}" {{gridSlider}} data-append-Arrows=".arrows_{{sid}}" data-append-Dots=".dots_{{sid}}" > 
+                  {%- for block in section.blocks -%}
+                	{%- case block.type -%}
+                	{%- when 'quote' -%}	
+                    <div class="quote_slide {{grid}}">
+                      <div class="quote_content">
+                        <div class="testimonial_{{index}} testimonial_avatar">	
+                          {%- if block.settings.image -%}
+                              {%assign image = block.settings.image %}
+                              {%assign ratio = image.aspect_ratio  %}
+                            <div  class="quote_avatar {% if forloop.first%} active {% endif %}" >
+                              <div data-image-effect class="pr_lazy_img main-img lazyload laber_bg_lz " data-id="{{image.id}}" data-bgset="{{ image | img_url: '1x1' }}" data-parent-fit="width" data-wiis data-ratio="{{ratio}}" data-sizes="auto" style="padding-top:{{ 1 | divided_by: ratio | times: 100}}%;"></div>
+                            </div>
+                          {% else %}
+                            <div  class="quote_avatar {% if forloop.first%} active {% endif %}">
+                              <div class="laber_bg_lz lazyload pr_lazy_img" data-bg="https://via.placeholder.com/80x80.png/{% cycle 'a8dacc', '56cfe1', 'f99077','c8b09b','efe1ba','a5d0d9','a1a19f' %}/fff?text=80x80" style="padding-top:100%;"></div>
+                            </div>
+                          {%- endif -%}
+                          {% assign index = index | plus: 1 %}
+                          {%comment%}
+                          <div class="quote_icon">
+                            <svg viewBox="0 0 48.97 51.02"><path d="M 7.998,13.118c0,1.69, 1.32,3.060, 2.946,3.060c 0.522,0, 1.004-0.152, 1.43-0.4 c-0.146,1.636-0.97,4.022-3.99,6.454c-0.422,0.342-0.5,0.974-0.172,1.412c 0.192,0.256, 0.478,0.39, 0.766,0.39 c 0.208,0, 0.416-0.068, 0.594-0.212c 3.706-2.99, 4.632-6.062, 4.756-8.114C 14.54,13.084, 13.744,11.704, 13.016,10.984 C 12.95,10.914, 12.888,10.838, 12.814,10.776C 12.64,10.628, 12.484,10.524, 12.348,10.446C 12.342,10.442, 12.338,10.436, 12.332,10.434 c-0.010-0.006-0.020-0.008-0.030-0.012C 12.104,10.312, 11.962,10.26, 11.962,10.26l 0.010,0.024C 11.65,10.152, 11.312,10.058, 10.944,10.058 C 9.316,10.058, 7.998,11.428, 7.998,13.118zM 17.694,13.118c0,1.69, 1.318,3.060, 2.946,3.060c 0.522,0, 1.004-0.152, 1.43-0.4 c-0.146,1.636-0.97,4.022-3.99,6.454c-0.424,0.342-0.5,0.974-0.172,1.412c 0.192,0.256, 0.478,0.39, 0.766,0.39 c 0.208,0, 0.416-0.068, 0.594-0.212c 3.706-2.99, 4.632-6.062, 4.756-8.114c 0.212-2.624-0.586-4.004-1.312-4.724 c-0.068-0.070-0.13-0.146-0.204-0.208c-0.174-0.148-0.33-0.252-0.466-0.33c-0.006-0.004-0.010-0.008-0.016-0.012 c-0.010-0.006-0.020-0.008-0.030-0.012c-0.198-0.108-0.34-0.162-0.34-0.162l 0.010,0.024c-0.322-0.132-0.662-0.226-1.028-0.226 C 19.012,10.058, 17.694,11.428, 17.694,13.118z"></path></svg></div>
+                          {%endcomment%}
+                        </div>
+                        <div class="cms_content_quote">
+                          {%- if block.settings.rating >= 1 -%}
+                            {%- case block.settings.rating -%}
+                            {%- when 1 -%}{% assign class = ', _outline,_outline,_outline,_outline,dn' %}
+                            {%- when 1.5 -%}{% assign class = ',_half pr,_outline,_outline,_outline,_outline' %}
+                            {%- when 2 -%}{% assign class = ',, _outline,_outline,_outline,dn' %}
+                            {%- when 2.5 -%}{% assign class = ',,_half pr,_outline,_outline,_outline' %}
+                            {%- when 3 -%}{% assign class = ',,, _outline,_outline,dn' %}
+                            {%- when 3.5 -%}{% assign class = ',,,_half pr,_outline,_outline' %}
+                            {%- when 4 -%}{% assign class = ',,,, _outline,dn' %}
+                            {%- when 4.5 -%}{% assign class = ',,,,_half pr,_outline' %}
+                            {%- else -%}{% assign class = ',,,,,dn' %}
+                            {%- endcase -%}
+                            {% assign arr = class | split:',' %}
+                            <div class="quote_rating cra rating_{{block.settings.rating}}">
+                                <i class="icon-star{{arr[0]}}"></i>
+                                <i class="icon-star{{arr[1]}}"></i>
+                                <i class="icon-star{{arr[2]}}"></i>
+                                <i class="icon-star{{arr[3]}}"></i>
+                                <i class="icon-star{{arr[4]}}"></i>
+                            </div>
+                          {%- endif -%}  
+                          <div class="quote_author">{{block.settings.title}}</div>
+                          {{block.settings.content}}
+                              <div class="quote_address">{{block.settings.address}}</div>
+                          </div>
+                        
+                      </div>
+                    </div>
+                	{%endcase%}
+                  {%- endfor -%} 
+                </div>
+              {%- for block in section.blocks -%}
+                {%- case block.type -%}
+                  {%- when 'images' -%}
+                      {% assign top = block.settings.top_position %}
+                      {% assign left = block.settings.left_position %}
+
+                      {% assign image = block.settings.image %}
+                      {% assign ratio = image.aspect_ratio |default:1.0 %}
+                      {% assign pd = 1 | divided_by: ratio | times: 100 %}
+              		  {% assign size_img = block.settings.size_img %}
+					  {% assign arr_size = size_img | remove:' ' | split:',' -%}	
+                      <div class="laber_image no-mobile animation-up" style="position: absolute;top:{{top}}%;left:{{left}}%;width:{{arr_size[0]}}px;height:{{arr_size[1]}}px;">
+                        <div class="lazyload laber_bg_lz pr_lazy_img" data-bgset="{% if image != blank %}{{ image | img_url: '1x1' }}{% else %}{{ no-img1}}{% endif %}" data-ratio="{{ratio1}}" data-sizes="auto" style="padding-top:{% if image != blank %} {{pd}}%{% else %}{{arr_size[1]}}px;{% endif %};" ></div>
+                      </div>
+                  {%endcase%}
+                {%- endfor -%}
+                {%if dots %}
+              <div class="laber_append_dots dots_{{sid}}"></div>
+              {%endif%}
+              {%if arrows%}	
+              <div class="laber_append_arrows arrows_{{sid}}"></div>	
+              {% endif %}
+          	</div>
+          {%- endif -%}
+        </div>
+      </div>
+    </section>
+{%- endfor -%}
+{%style%}
+
+@media (min-width: 1200px){
+	#laber_{{sid}} .content_section{
+		width: {{section.settings.width_c}}%;
+    	margin: 0 auto;
+	}
+}
+	
+{%endstyle%}
+{%- render 'section_style' -%}
+{%- schema -%}
+  {
+    "name": "Testimonials",
+    "class": "type_testimonials type_carousel",
+    "max_blocks": 30,
+    "settings": [
+	  {
+        "type": "header",
+        "content": "== Design Options"
+      },
+      {
+        "type": "checkbox",
+        "id": "hidden",
+        "label": "Hidden Section?",
+        "default": false
+      },      
+      {
+        "type": "select",
+        "id": "layout",
+        "options": [
+         {
+            "value": "container",
+            "label": "Container"
+         },
+         {
+            "value": "full-width",
+            "label": "Full Width"
+          }
+        ],
+        "label": "Layout"
+      },
+      {  
+      "type": "range",  
+      "id": "width_c",  
+      "label": "Width container",
+      "min": 0,
+      "max": 100,
+      "step": 10,
+      "unit": "%",
+      "default": 100 
+      },	
+      {
+        "type": "select",
+        "id": "style",
+        "options": [
+         {
+            "value": "style1",
+            "label": "Style 1"
+         },
+         {
+            "value": "style2",
+            "label": "Style 2"
+          }
+        ],
+        "label": "Style"
+      },  
+	
+      {
+        "type": "header",
+        "content": "== General Settings"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading",
+        "default": "What people say?"
+      },
+      {
+        "type": "text",
+        "id": "sub_title",
+        "label": "Sub Text",
+        "default": "Testimonials"
+      },
+	  {
+        "type": "textarea",
+        "id": "content",
+        "label": "Content",
+        "default": "Commodo sociosqu venenatis cras dolor sagittis integer luctus maecenas."
+      },
+      {
+        "type": "header",
+        "content": "---- Slider Show Collection ----",
+        "info": "Refer to the attribute values [here](httpss://kenwheeler.github.io/slick)"
+    }, 	
+    {
+        "type": "checkbox",
+        "id": "use-slider",
+        "label": "Use slider?",
+        "default": true
+    },
+    {  
+        "type": "range",  
+        "id": "slides-To-Scroll",  
+        "label": "Slide to scroll",  
+        "info": "The number of items slide to scroll",
+        "min": 1,
+        "max": 8,
+        "step": 1,
+        "unit": "col",
+        "default": 1
+    },   
+    {  
+        "type": "range",  
+        "id": "visible",  
+        "label": "Columns in Visible",
+		"info": "Item(s) in screen ( Size >= 1920 )",
+        "min": 1,
+        "max": 8,
+        "step": 1,
+        "unit": "col",
+        "default": 5 
+    },
+    {  
+        "type": "range",  
+        "id": "widescreen",  
+        "label": "Columns in Widescreen",
+		"info": "Item(s) in screen ( 1366 <= Size < 1920 )",
+        "min": 1,
+        "max": 8,
+        "step": 1,
+        "unit": "col",
+        "default": 4 
+    },  
+    {  
+        "type": "range",  
+        "id": "desktop",  
+        "label": "Columns in Desktop",
+		"info":  "Item(s) in screen ( 1200 <= Size < 1480 )",
+        "min": 1,
+        "max": 8,
+        "step": 1,
+        "unit": "col",
+        "default": 4  
+    },	  
+    {  
+        "type": "range",  
+        "id": "laptop",  
+        "label": "Columns in Laptop",
+		"info": "Item(s) in screen ( 992 <= Size < 1200 )",
+        "min": 1,
+        "max": 8,
+        "step": 1,
+        "unit": "col",
+        "default": 4
+    },	  
+    {  
+        "type": "range",  
+        "id": "notebook",  
+        "label": "Columns in Notebook",
+		"info": "Item(s) in screen ( 768 <= Size < 992 )",
+        "min": 1,
+        "max": 8,
+        "step": 1,
+        "unit": "col",
+        "default": 3  
+    },  
+    {  
+        "type": "range",  
+        "id": "tablet",  
+        "label": "Columns in Tablet",
+		"info": "Item(s) in screen ( 576 <= Size < 768 )",
+        "min": 1,
+        "max": 8,
+        "step": 1,
+        "unit": "col",
+        "default": 3 
+    },
+    {  
+        "type": "range",  
+        "id": "landscape",  
+        "label": "Columns in Landscape",
+		"info": "Item(s) in screen ( 480 <= Size < 576 )",
+        "min": 1,
+        "max": 6,
+        "step": 1,
+        "unit": "col",
+        "default": 2 
+    }, 
+    {  
+        "type": "range",  
+        "id": "portrait",  
+        "label": "Columns in Portrait",
+		"info": "Item(s) in screen ( 360 < Size < 480 )",
+        "min": 1,
+        "max": 6,
+        "step": 1,
+        "unit": "col",
+        "default": 2 
+    },
+    {  
+        "type": "range",  
+        "id": "mobile",  
+        "label": "Columns in Mobile",
+		"info": "Item(s) in screen ( Size < = 360 )",
+        "min": 1,
+        "max": 4,
+        "step": 1,
+        "unit": "col",
+        "default": 1 
+    },
+    {  
+        "type": "range",  
+        "id": "rows",  
+        "label": "Rows Slider",  
+        "min": 1,
+        "max": 3,
+        "step": 1,
+        "unit": "col",
+        "default": 1
+    },
+    {
+        "type": "checkbox",
+        "id": "autoplay",
+        "label": "Autoplay",
+        "default": true
+    },
+    {	
+        "type": "text",
+        "id": "speed",
+        "label": "Speed",
+        "default": "300",
+        "info": "Autoplay Speed in milliseconds"
+    },
+    {	
+        "type": "text",
+        "id": "autoplay-Speed",
+        "label": "Auto Play Speed",
+        "default": "3000",
+        "info": "Autoplay Speed in milliseconds"
+    },
+    {	
+        "type": "checkbox",
+        "id": "arrows",
+        "label": "Arrows",
+        "default": true
+    },
+    {	
+        "type": "checkbox",
+        "id": "fade",
+        "label": "Fade",
+        "default": false,
+        "info": "Only use for 1 column"
+    },
+    {	
+        "type": "checkbox",
+        "id": "center-Mode",
+        "label": "Center Mode",
+        "default": false
+    },
+    {	
+        "type": "checkbox",
+        "id": "adaptive-Height",
+        "label": "Adaptive Height",
+        "default": false
+    },
+    {	
+        "type": "checkbox",
+        "id": "dots",
+        "label": "Dots",
+        "default": false 
+    },
+    {	
+        "type": "checkbox",
+        "id": "infinite",
+        "label": "Infinite",
+        "default": false
+    },
+    {  
+        "type": "range",  
+        "id": "padding",  
+        "label": "padding",
+		"info": "Distance between items",
+        "min": 0,
+        "max": 15,
+        "step": 5,
+        "unit": "px",
+        "default": 10 
+    },
+    {	
+        "type": "checkbox",
+        "id": "vertical",
+        "label": "Vertical",
+        "default": false
+    },
+      {
+      "type": "image_picker",
+      "id": "bg_image",
+      "label": "Background images"
+      },
+      {
+      "type": "color",
+      "id": "cl_bg",
+      "label": "Background color",
+      "default": "#fff"
+      },
+	  {
+        "type": "header",
+        "content": "== Setting PC",
+		"info":"Margin"
+      },	
+      {
+        "type": "text",
+        "id": "mg",
+        "label": "Margin",
+        "info":"Margin top, margin right, margin bottom, margin left. If you not use to blank"
+      },
+      {
+        "type": "text",
+        "id": "pd",
+        "label": "Padding",
+        "info":"Padding top, padding right, padding bottom, padding left. If you not use to blank"
+      },
+     {
+        "type": "header",
+        "content": "== Design Mobile Options"
+      },
+      {
+        "type": "text",
+        "id": "mg_mb",
+        "label": "Margin"
+      },
+      {
+        "type": "text",
+        "id": "pd_mb",
+        "label": "Padding"
+      }
+
+    ],
+    "blocks": [
+      {
+        "type": "quote",
+        "name": "Testimonial",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Author's image",
+            "info": "200x200 recommend"
+          },
+          {
+            "type": "richtext",
+            "id": "content",
+            "label": "Text",
+            "default": "<p>I love my lash tint! I don't have extremely blonde lashes, but I do like that they can be even darker than they are. It makes my eyes stand out more and I love the way it looks!</p>"
+          },
+          {
+             "type": "text",
+             "id": "title",
+             "label": "Author",
+             "default": "Alexander Ball"
+          },
+          {
+             "type": "text",
+             "id": "address",
+             "label": "Address",
+		     "default":"New York"
+          },
+          {
+            "type": "range",
+            "id": "rating",
+            "min": 0,
+            "max": 5,
+            "step": 0.5,
+            "label": "Rating",
+            "info": "Set less than '1' to disable Rating.",
+            "default": 5
+          }
+        ]
+      },
+		{
+		"type": "images",
+        "name": "Images",
+        "settings": [
+			{
+            "type": "image_picker",
+            "id": "image",
+            "label": "image"
+          },
+          {
+          "type": "text",
+          "id": "size_img",
+          "label": "Size images",
+          "default": "200,200",
+		  "info":"The space between the lengths and the width is a comma (example 200,200)"	
+          },
+          {
+          "type": "number",
+          "id": "top_position",
+          "label": "Top position",
+          "default": 0,
+		   "info":"Top position unit is calculated in%"		
+          },
+          {
+          "type": "number",
+          "id": "left_position",
+          "label": "Left position",
+          "default": 0,
+          "info":"Left position unit is calculated in%"		
+          }
+		]
+
+	}
+    ],
+    "presets": [
+      {
+        "name": "8. Testimonials",
+        "category": "Text",
+        "blocks": [{"type": "quote"},{"type": "quote"},{ "type": "quote"},{ "type": "quote"},{ "type": "quote"},{ "type": "quote"},{ "type": "quote"},{ "type": "quote"}]
+      }
+    ]
+  }
+{% endschema %}

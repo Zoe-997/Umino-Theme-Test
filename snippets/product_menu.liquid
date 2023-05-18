@@ -1,0 +1,78 @@
+{%- assign id = product.id -%}
+{%- assign hide_reviews_counter = settings.product_collection_hide_reviews_counter -%}
+{%- assign product_reviews_count = 0 -%}
+{%- if product.metafields.spr.reviews -%}
+
+  {%- capture review_data -%}{{ product.metafields.spr.reviews }}{%- endcapture -%}
+
+  {%- if review_data contains '"votes"' -%}
+    {%- assign keyword = '"votes"' -%}
+  {%- else  -%}
+    {%- assign keyword = '"reviewCount"' -%}
+  {%- endif -%}
+
+  {%- assign rd_a1 = review_data | split: keyword -%}
+  {%- assign rd_a2 = rd_a1[1] | split: ":" -%}
+  {%- assign rd_a3 = rd_a2[1] | split: '"' -%}
+  {%- assign product_reviews_count = rd_a3[1] | plus: 1 | minus: 1 -%}
+
+{%- endif -%}
+
+<div class="product-item">
+  <div class="product-inner">
+    <div class="row">
+    {%comment%}<ul class="group-flash">
+      {% assign date_published = product.published_at | date:'%Y%m%d' %}
+      {% assign date_now = 'now' | date:'%Y%m%d' %}
+      {% assign date_difference = date_now | minus: date_published %}
+      {% assign limit_day = settings.product_page_new_product | plus: 0%}
+      {% if date_difference <  limit_day%}
+      <li><span class="new flash">{{settings.collection_page_new_title}}</span></li>       	   
+      {% endif %}      
+      {% if on_sale == true %}
+      {% if settings.collection_page_sale_title != blank %}
+      <li><span class="sale flash">{{settings.collection_page_sale_title}}</span></li>
+      {% endif %}
+      {% if settings.collection_page_sale_desc != blank %}
+      <li><span class="best flash">{{settings.collection_page_sale_desc}}</span></li>
+      {% endif %}
+      {% endif %}
+    </ul>{%endcomment%}
+    <div class="thumb col">
+      
+      <a href="{{ product.url | within: collection }}" class="thumb-link">        
+        {%- assign image = product.featured_image.src -%}
+        {%- if image -%}
+        	<div class="lazyload pr_lazy_img" data-bgset="{{ image | img_url: '1x1' }}" data-ratio="{{image.aspect_ratio}}" data-sizes="auto" style="padding-top:{{ 1 | divided_by: image.aspect_ratio | times: 100}}%;"></div>
+        {%- endif -%}
+      </a>
+      <a href="{{ product.url | within: collection }}" data-pid="{{ product.variants.first.id }}"   data-js-tooltip data-tippy-content="{{settings.collection_page_quickview}}" class="js_quick_view button-quick-view">
+        	<i class="lnr lnr-magnifier" aria-hidden="true"></i>
+      </a>
+    </div>
+    <div class="info col">	
+      {%- for collection in product.collections limit: 1 -%}
+          <a class="collection_item" href="{{ collection.url }}">
+            {{ collection.title }}{% if forloop.last != true %},{% endif %}
+          </a>{% if forloop.last != true %} {% endif %}
+      {%- endfor -%}
+      {% if product_reviews_count > 0%}
+        <div class="product-collection__reviews">
+          {% render 'product-get-review' with id: id hide_counter: hide_reviews_counter %}
+        </div>
+      {% endif %}
+      <h4 class="name_product">
+      	<a href="{{ product.url | within: collection }}" class="product-name">{{ product.title }}</a>
+      </h4>  
+      <div class="price {% if product.compare_at_price != blank %}price--sale{% endif %}">
+        {% if product.compare_at_price != blank %}
+          <span class="compare">{{product.compare_at_price | money }}</span>
+          <span class="current">{{product.variants[0].price | money }}</span>      
+        {% else %}
+        	<span class="current">{{product.variants[0].price | money }}</span>
+        {% endif %}
+      </div>
+    </div>
+    </div>
+  </div>
+</div>  

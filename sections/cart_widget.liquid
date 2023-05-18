@@ -1,0 +1,179 @@
+<div id="js_nt_cart_canvas" class="hero_canvas">
+   <div class="mini_cart_header"><div class="widget-title">{{ 'cart.general.title' | t }}</div><i class="close_popup_ajax fa fa-close"></i></div> 
+   {% if cart.item_count > 0 %}
+    <div class="js-cart-inner">
+        <h5 class="title">You have <span class="count-item">{{ cart.item_count }}</span> item(s) in your cart</h5>
+        <ul class="list-item">
+          {% for item in cart.items%}
+            <li class="product-item" id="item-{{ item.id }}">
+              <a href="{{ item.product.url }}" class="thumb"><img src="{{ item | img_url: 'small' }}" width="100" height="120" alt=""></a>
+              <div class="info">
+                <a href="{{ item.product.url }}" class="product-name">{{ item.title }}</a>
+                <div class="product-item-qty">
+                  <span class="number price">
+                    <span class="qty">{{ item.quantity }}</span> x <span >{{ item.price | money }}</span>
+                  </span>
+                </div>
+                <a class="js-remove-item remove" href="#" data-id="{{ item.id }}" title="Remove this item">
+                  <i class="fa fa-trash-o"></i>
+                </a>
+              </div>
+            </li>
+          {% endfor %}
+        </ul>
+        <div class="subtotal">
+          <span class="text">{{ 'cart.label.total' | t }} : </span>
+          <span class="js-total-price">{{ cart.total_price | money }}</span>
+        </div>
+        <div class="group-button-checkout">
+          <a href="{{ routes.cart_url }}">{{ 'cart.general.title' | t }}</a>
+          <a href="{{ routes.root_url }}checkout">{{ 'cart.general.checkout' | t }}</a>
+        </div>
+     </div>
+    {% else %}    
+          <div class="js-cart-inner cart-empty">
+            <i class="fa fa-shopping-bag"></i><p>{{ 'cart.general.empty' | t }}</p>            
+          </div>  	
+    {% endif %}   
+</div>
+
+{%- schema -%}
+  {
+    "name": "Shopping Cart Widget",
+    "max_blocks": 20,
+     "settings": [
+      {      
+        "type": "paragraph", 
+        "content": "Those settings are only applicable when the cart contains at least one product."
+      },
+      {
+        "type": "select",
+        "id": "style",
+        "options": [
+          {"value": "1","label": "Icon"},
+          {"value": "2","label": "Button"}
+        ],
+        "label": "Buttons Style: "
+      },
+      {
+        "type": "select",
+        "id": "pos",
+        "default": "2",
+        "options": [
+          {"value": "1","label": "Top"},
+          {"value": "2","label": "Bottom"}
+        ],
+        "info": "Only working with button style icon",
+        "label": "Position button icon:"
+      },
+      {
+        "type": "checkbox",
+        "id": "calc_ship",
+        "label": "Enable Calc Shipping?",
+        "info":"Enable free shipping minimum amount?",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "show_note",
+        "label": "Enable order notes?",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "show_rates",
+        "label": "Enable shipping rates calculator?",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "show_discount",
+        "label": "Enable input box discounts codes?",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "show_gift_wrap",
+        "label": "Enable Gift wrap?",
+        "default": true
+      }
+     ],
+    "blocks": [
+      {
+        "type": "price",
+        "name": "Total Price",
+        "limit": 1
+      },
+      {
+        "type": "tax",
+        "name": "Taxes and shipping info",
+        "limit": 1
+      },
+      {
+        "type": "agree",
+        "name": "Terms,conditions checkbox",
+        "limit": 1
+      },
+      {
+        "type": "btnc",
+        "name": "Button Cart",
+        "limit": 1
+      },
+      {
+        "type": "btnck",
+        "name": "Button Checkout",
+        "limit": 1
+      },
+      {
+        "type": "btnmr",
+        "name": "More checkout buttons",
+        "limit": 1
+      },
+      {
+        "type": "img",
+        "name": "Image trust",
+        "limit": 1,
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          }
+        ]
+      },
+      {
+        "type": "btn",
+        "name": "Button emty",
+        "settings": [
+          {
+            "type": "paragraph",
+            "content": "Tip: Only show when cart empty."
+          },
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Button Title",
+            "default": "Return To Shop"
+          },
+          {
+            "type": "url","id": "url","label": "Button link"
+          },
+          {
+            "type": "select",
+            "id": "style",
+            "options": [
+              {"value": "primary tu","label": "Button Primary"},
+              {"value": "secondary","label": "Button Secondary"}
+            ],
+            "label": "Button Style: "
+          }
+        ]
+      }
+   ],
+    "default": {
+      "blocks": [
+        {"type": "price"},{"type": "tax"},{"type": "agree"},{"type": "btnc"},{"type": "btnck"},{"type": "btnmr"},{"type": "img"},{"type": "btn"}
+      ]
+    }
+  }
+{% endschema %}

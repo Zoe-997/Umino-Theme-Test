@@ -1,0 +1,22 @@
+
+    {{ 'instafeed.min.js' | asset_url | script_tag }}
+    <ul id="instafeed" style="width: 100%!important; height:auto ! important;"  class="fick-photo list-photo instargram clearfix owl-carousel nav-center-center nav-style2"></ul>
+    {% assign instafeed_img = '{{image}}' %}
+    {% assign instafeed_link = '{{link}}' %}
+    <script>
+      jQuery(document).ready(function(){
+        var feed = new Instafeed({
+          get: 'user',
+          userId: '{{section.settings.user_id_instagram_home18}}',
+          accessToken: '{{section.settings.accessToken_instagram_home18}}',
+          sortBy: 'most-recent',
+          limit: {{section.settings.limit_instagram_home18}},
+          template: '<li class="instagram-img-wrap col-lg-2 col-md-3 col-sm-3 col-xs-4"><a href="{{instafeed_link}}"><img style="width:100%;" src="{{instafeed_img}}" /></a><li>'
+        });
+        feed.run();
+      });
+      $(window).load(function() {
+        $('#instafeed li:empty').remove()
+      });
+    </script>
+

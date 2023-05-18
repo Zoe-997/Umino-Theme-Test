@@ -1,0 +1,333 @@
+
+<div class="main-content shop-page services-page">
+  {% assign index = 0 %}
+  {%- for block in section.blocks -%}
+  	{% if block.type == 'service' %} 
+  		{% assign index = index | plus: 1 %}
+  		{% assign image = block.settings.background_part %}
+        <div class="part container {{block.settings.layout}}" style="{% if block.settings.align == "left" %}margin-left: calc((100% - 1170px)/2 + {{block.settings.margin_left_part}});{% endif %}  {% if block.settings.align == "right" %}margin-right: calc((100% - 1170px)/2 + {{block.settings.margin_right_part}}); {% endif %}">
+          <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-6 first">
+              <div class="left">
+				<div class="wrap-left lazyload" data-bg="{{ image | img_url: 'x660' }}" data-ratio="{{image.aspect_ratio}}">
+                </div>
+                <div class="left-content">
+                  {% assign banner1 = block.settings.small_banner %}
+                  {% assign banner2 = block.settings.large_banner %}                  
+                  <div class="banner2 lazyload" {% if banner2 != blank %} data-bg="{{ banner2 | img_url: '370x490' }}" data-ratio="{{banner2.aspect_ratio}}" {% endif %}></div>
+                  <div class="banner1 lazyload" {% if banner1 != blank %} data-bg="{{ banner1 | img_url: '300x300' }}" data-ratio="{{banner1.aspect_ratio}}" {% endif %}></div>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-12 col-md-12 col-lg-6 second">
+              <div class="right">
+                <div class="number">{% if index <10 %}0{% endif %}{{index}}.</div>
+                <h3>{{block.settings.title_part}}</h3>
+                <p>{{block.settings.subtitle_part}}</p>
+                <ul>
+                  {% if block.settings.content1_part != blank %}
+                  	<li>{{block.settings.content1_part}}</li>
+                  {% endif %}
+                  {% if block.settings.content2_part != blank %}
+                  	<li>{{block.settings.content2_part}}</li>
+                  {% endif %}
+                  {% if block.settings.content3_part != blank %}
+                  	<li>{{block.settings.content3_part}}</li>
+                  {% endif %}
+                  {% if block.settings.content4_part != blank %}
+                  	<li>{{block.settings.content4_part}}</li>
+                  {% endif %}
+                </ul>
+               
+                <a class="button_part" href="{{block.settings.button_link_part}}"> {{block.settings.button_part}} </a>
+                
+              </div>
+            </div>
+          </div>
+        </div>  
+  	{% endif %}
+  {% endfor %}
+  
+  {% assign image = section.settings.background_appointment %}
+  {% assign title_img = image | img_url%}
+  <div class="appointment lazyload" data-bg="{% unless title_img contains 'no-image' %}{{ image | img_url: '1920x' }} {% else %} https://placehold.it/1920x1080.png/e1e1e1/fff?text=No image {% endunless%}" data-ratio="{{image.aspect_ratio}}" style="padding-top:{{ 1 | divided_by: image.aspect_ratio | times: 100}}%">
+    <div class=" container form">
+      <h3 class="service-title"> {{section.settings.form_title_sevice}} </h3>
+      <form action="/contact" method="post">
+        {% assign name_attr = section.settings.name_label_sevice | handle %}
+        <input placeholder="{{section.settings.name_label_sevice}} " class="input-info" id="name" required name="contact[{{ name_attr }}]"  type="text" value="{% if form[name_attr] %}{{ form[name_attr] }}{% elsif customer %}{{ customer.first_name }}{% endif %}"/>                            
+        {% assign name_attr = section.settings.phone_label_sevice | handle %}
+        <input placeholder="{{section.settings.phone_label_sevice}}" value="{% if form[name_attr] %}{{ form[name_attr] }} {% endif %}" required name="contact[{{ name_attr }}]" class="input-info" id="phone" type="text"/>
+        <div data-service class="wrap_service">
+          {% assign name_attr = section.settings.services_label_sevice | handle %}
+          <input  onfocus="this.blur();" placeholder="{{section.settings.services_label_sevice }}" value="{% if form[name_attr] %}{{ form[name_attr] }} {% endif %}" required name="contact[{{ name_attr }}]" class="input-info" id="service" type="text"/>
+          <span>
+            <i class="fa fa-angle-down" aria-hidden="true"></i>
+          </span>
+          <div data-display-content class="content_drop">
+            <ul>
+              {%- for block in section.blocks -%}
+                {% if block.type == 'form' %} 
+                      <li>{{block.settings.service_item}}</li>
+                {% endif %}
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+        <div data-date class="wrap_service">
+          {% assign name_attr = section.settings.date_label_sevice | handle %}
+          <input  onfocus="this.blur();" placeholder="{{section.settings.date_label_sevice }}" value="{% if form[name_attr] %}{{ form[name_attr] }} {% endif %}" name="contact[{{ name_attr }}]" class="input-info" id="date" type="text"/>
+          <span>
+            <i class="fa fa-angle-down" aria-hidden="true"></i>
+          </span>
+        </div>
+        <div class="group-button">                
+          <button class="button submit" type="submit">{{section.settings.button_label_sevice}}</button>
+        </div>        
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script type="text/javascript">
+  jQuery(document).ready(function($) {
+    $("<link/>", {
+      rel: "stylesheet",
+      type: "text/css",
+      href: "//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"
+    }).appendTo("head");
+    var index = 0;
+    $("div[data-service] span").on('click',function(){
+      index++;
+      if(index % 2 != 0){
+        var parent = $(this).closest("div");
+        parent.find("div[data-display-content]").show();
+      }else{
+        var parent = $(this).closest("div");
+        parent.find("div[data-display-content]").hide();
+      }
+    })  
+    $("div[data-display-content] li").on('click',function(){
+      index = 0;
+      $("#service").val($(this).text());
+      $(this).closest("div").hide();      
+    })
+    
+    $("#date").datepicker();
+    $("div[data-date] span").on('click',function(){
+      $("#date").datepicker("show");
+    })
+  })  
+</script>
+{% schema %}
+  {
+    "name": "Services",
+    "class": "content-services",
+	"max_blocks": 20,
+    "settings": [		
+		{
+          "type": "header",
+          "content": "==Form setting"
+        },
+		{
+          "type": "image_picker",
+          "id": "background_appointment",
+          "label": "Background image of form",
+		  "info" : "Dimension: 1920 x 682"
+        },
+        {
+          "type": "text",
+          "id": "form_title_sevice",
+          "label": "Title of form",
+		  "default": "Book service"
+        },
+        {
+          "type": "text",
+          "id": "name_label_sevice",
+          "label": "Label of name",
+		  "default": "Your name"
+        },
+        {
+          "type": "text",
+          "id": "phone_label_sevice",
+          "label": "Label of phone",
+		  "default": "Your phone"
+        },
+        {
+          "type": "text",
+          "id": "services_label_sevice",
+          "label": "Label of service",
+		  "default": "Choose a services"
+        },
+        {
+          "type": "text",
+          "id": "date_label_sevice",
+          "label": "Label of date",
+		  "default": "Choose a date"
+        },
+        {
+          "type": "text",
+          "id": "button_label_sevice",
+          "label": "Sbumit button",
+		  "default": "Appointment"
+        }
+
+	],
+	"blocks": [
+		{
+          "type": "service",
+          "name": "Part",
+          "settings": [   
+			{
+              "type": "header",
+              "content": "==Layout setting"
+            },
+            {
+              "type": "select",
+              "id": "layout",
+              "options": [
+                {
+                "value": "ltr",
+                "label": "Style #1: Banner is left and content is right."
+                },
+                {
+                "value": "rtl",
+                "label": "Style #2: Banner is right and content is left."
+                }
+              ],
+              "label": "Layout",
+			  "default": "ltr"
+            },
+			{
+              "type": "select",
+              "id": "align",
+              "options": [
+				{
+                  "value": "none",
+                  "label": "None"
+                },
+                {
+                  "value": "left",
+                  "label": "Left"
+                },
+                {
+                  "value": "right",
+                  "label": "Right"
+                }
+              ],
+              "label": "Layout align",
+			  "default": "none"
+            },
+			{
+               "type": "text",
+               "id": "margin_left_part",
+               "label": "Margin left",
+               "default": "0px",
+			   "info":"Only active when layout align is left"
+            },
+			{
+               "type": "text",
+               "id": "margin_right_part",
+               "label": "Margin right",
+               "default": "0px",
+			   "info":"Only active when layout align is right"
+            },
+            {
+              "type": "header",
+              "content": "==Banner area setting"
+            },
+            {
+               "type": "image_picker",
+               "id": "background_part",
+               "label": "Background image",
+		  	   "info" : "Dimension: 511 x 660"
+			},
+			{
+               "type": "image_picker",
+               "id": "large_banner",
+               "label": "Large banner",
+		  	   "info" : "Dimension: 370 x 490"
+			},
+			{
+               "type": "image_picker",
+               "id": "small_banner",
+               "label": "Small banner",
+		  	   "info" : "Dimension: 300 x 300"
+			},
+		    {
+              "type": "header",
+              "content": "==Content area setting"
+            },
+			{
+               "type": "text",
+               "id": "title_part",
+               "label": "Title",
+               "default": "Body treatment"
+             },			 
+			 {
+               "type": "text",
+               "id": "subtitle_part",
+               "label": "Subtitle",
+               "default": "A body treatment is a blanket term for a whole gamut of different holistic, non-medical, physical procedures aimed at helping you achieve something specific for your body or wellbeing."
+             },
+			 {
+               "type": "text",
+               "id": "content1_part",
+               "label": "Content #1",
+               "default": "Massaged or scrubbed with a particular mineral."
+             },
+			 {
+               "type": "text",
+               "id": "content2_part",
+               "label": "Content #2",
+               "default": "Wrapped or enveloped in something."
+             },
+			 {
+               "type": "text",
+               "id": "content3_part",
+               "label": "Content #3",
+               "default": "Immersed or soaked in a liquid, such as water or algae."
+             },
+			 {
+               "type": "text",
+               "id": "content4_part",
+               "label": "Content #4",
+               "default": "Stroked, treated with or exposed to something external."
+             },
+			 {
+               "type": "text",
+               "id": "button_part",
+               "label": "Button",
+               "default": "Read more"
+             },
+			 {
+               "type": "text",
+               "id": "button_link_part",
+               "label": "Button",
+               "default": "#"
+             }
+          ]
+    	},
+		{
+          "type": "form",
+          "name": "Service of form",
+          "settings": [
+            {
+               "type": "text",
+               "id": "service_item",
+               "label": "Name",
+               "default": "Body treatment"
+             }
+
+          ]
+    	}
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

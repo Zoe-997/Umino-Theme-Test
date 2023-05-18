@@ -1,0 +1,28 @@
+{% capture load_shortcode %}{{ register_block | strip_html}}{% endcapture %}
+{% unless  load_shortcode == "" %}
+	{% assign code_variable =  load_shortcode | strip %}
+	 	{% unless code_variable =="" %}
+				 {% assign block_handle =  settings[code_variable] %}
+				 {% unless  block_handle == "" %}
+				     {% include 'shortcode' load:block_handle  %}
+				 {% endunless %}
+		{% endunless %}
+{% endunless %}
+{% comment %}
+	This section will use for small section
+{% endcomment %}
+{% capture load_shortcode %}{{ register_section | strip_html}}{% endcapture %}
+{% unless  load_shortcode == "" %}
+	{% assign code_variable =  load_shortcode | strip %}
+	 	{% unless code_variable =="" %}
+				 {% assign section_handle =  settings[code_variable] %}
+				 {% unless  section_handle == "" %}
+				     {% include 'shortcode' load:section_handle  %}
+				 {% endunless %}
+		{% endunless %}
+{% endunless %}
+{% comment %}
+{% include 'render-layout' register_block: 'block_blockname'  %}
+{% include 'render-layout' register_block: 'section_blockname'  %}
+{% endcomment %}
+

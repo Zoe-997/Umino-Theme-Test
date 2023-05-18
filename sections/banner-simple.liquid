@@ -1,0 +1,463 @@
+{% liquid
+  assign sid = section.id 
+%}
+{%- for i in (1..1) -%}
+  {%- if section.settings.hidden %}{% break %}{% endif -%}		
+  {%- if section.settings.cp_code and request.page_type == 'index' %}<div class="dn tc mt__40 mb__40 cp_cd_js"><input type="text" class="dcp_cd_ip" value='<div class="inc_lz inc_ins_laz" data-include="/search/?section_id={{sid}}"><div class="loading_bg"></div></div>'><button class="dcp_cd_btn">Copy Shortcode</button></div>{% endif -%}
+  {%- if section.settings.hidden and request.page_type == 'index' %}{% break %}{% endif -%}
+  <section class="laber_{{sid}}">
+  <div class="{{section.settings.layout}} content-position-{{section.settings.content_position}}">
+    
+          <div class="content-banner">
+          {%- for block in section.blocks -%}
+            {% if block.settings.des != blank %}
+              <span class="desc">
+                  <span>{{ block.settings.des }}</span>
+              </span>
+            {% endif %}
+          {%- endfor -%}
+          </div>
+          {%- if section.settings.view_all_button -%}
+            <div class="button-discover">
+              <button class="button-action btn-modal" data-modal="modal-banner-simple-{{sid}}">{{section.settings.view_text}}</button>
+            </div>
+          {%- endif -%}
+    
+  </div>
+  <div class="overlay-modal modal-custom modal-banner-simple popup-{{ section.settings.popup_style }}" id="modal-banner-simple-{{sid}}">
+        <div class="inner-modal-custom">
+          <div class="modal-custom-content">
+            <div class="btn-close btn-modal" data-modal="modal-banner-simple-{{sid}}">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M6.4 19L5 17.6L10.6 12L5 6.4L6.4 5L12 10.6L17.6 5L19 6.4L13.4 12L19 17.6L17.6 19L12 13.4L6.4 19Z"/>
+                </svg>
+              </div>
+            <div class="modal-header">
+              <div class="SectionHeader__Title">
+              {%- if section.settings.subheading_pop != blank -%}
+                <h3 class="SectionHeader__SubHeading Heading u-h6">{{ section.settings.subheading_pop }}</h3>
+              {%- endif -%}
+              {%- if section.settings.heading_pop != blank -%}
+                <h3 class="SectionHeader__Heading Heading u-h6">{{ section.settings.heading_pop }}</h3>
+              {%- endif -%}
+              </div>
+              <div class="SectionHeader__Image">
+                <div class="content__Image">
+                {%- if section.settings.image_pop != blank -%}
+                  {{ section.settings.image_pop | image_url: width: 528 | image_tag }}
+                {% else %}
+                  {{ 'product-6' | placeholder_svg_tag: placeholder_svg_tag }}
+                {%- endif -%}
+                </div>
+              </div>
+            </div>
+            <div class="modal-content">
+              <div class="Liquid text-{{ section.settings.text_align }}">
+                {{ section.settings.liquid_pop }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+</section>
+{%- endfor -%}
+{% style%}
+{% assign mg_top = section.settings.mg_top %}
+{% assign mg_bottom = section.settings.mg_bottom %}
+{% assign pd_top = section.settings.pad_top %}
+{% assign pd_bottom = section.settings.pad_bottom %}
+{% assign ip_mg_top = section.settings.ip_mg_top %}
+{% assign ip_mg_bottom = section.settings.ip_mg_bottom %}
+{% assign ip_pd_top = section.settings.ip_pd_top %}
+{% assign ip_pd_bottom = section.settings.ip_pd_bottom %}
+{% assign mobile_mg_top = section.settings.mobile_mg_top %}
+{% assign mobile_mg_bottom = section.settings.mobile_mg_bottom %}
+{% assign mobile_pd_top = section.settings.mobile_pd_top %}
+{% assign mobile_pd_bottom = section.settings.mobile_pd_bottom %}
+	.laber_{{sid}}{
+      {% if mg_top !=0 %}margin-top:{{mg_top}}px;{%endif%} 
+      {% if mg_bottom !=0 %}margin-bottom:{{mg_bottom}}px;{%endif%} 
+      {% if pd_top !=0 %}padding-top:{{pd_top}}px;{%endif%} 
+      {% if pd_bottom !=0 %}padding-bottom:{{pd_bottom}}px;{%endif%} 
+      {% if section.settings.section_bg != blank %}
+        background-size: cover;
+        background-image: url('{{ section.settings.section_bg | img_url:"master"}}'); 
+        background-position: center center;
+        background-repeat: no-repeat;
+      {%endif%}
+	}
+    .laber_{{sid}} .container {
+      max-width: 1048px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    .laber_{{sid}} .content-banner .desc{
+                color: {{section.settings.cl_text}};
+              }
+    .laber_{{sid}} .button-action{
+      color: {{section.settings.cl_button}};
+      background-color: {{section.settings.bg_button}};
+    }
+    .laber_{{sid}} .button-action:hover{
+      background-color: {{section.settings.bg_button_hv}};
+    }
+  .laber_{{sid}} .modal-custom-content{
+      background: {{ section.settings.bg_pop }};
+      color: {{ section.settings.color_pop }};
+    }
+    .laber_{{sid}} .modal-custom-content .Heading{
+      color: {{ section.settings.color_pop }};
+    }
+    .laber_{{sid}} .btn-close{
+      border-color: {{ section.settings.color_pop }};
+    }
+    .laber_{{sid}} .btn-close svg{
+      fill: {{ section.settings.color_pop }};
+    }
+  @media(min-width:768px){
+    .laber_{{sid}}{
+      {% if section.settings.section_bg != blank %}
+/*         background-attachment: fixed; */
+      {%endif%}
+	}
+  }
+    @media (max-width: 1199px) {
+      .laber_{{sid}}{
+        {% if ip_mg_top !=0 %}margin-top:{{ip_mg_top}}px;{%endif%} 
+        {% if ip_mg_bottom !=0 %}margin-bottom:{{ip_mg_bottom}}px;{%endif%} 
+        {% if ip_pd_top !=0 %}padding-top:{{ip_pd_top}}px;{%endif%} 
+        {% if ip_pd_bottom !=0 %}padding-bottom:{{ip_pd_bottom}}px;{%endif%} 
+      }
+    }
+    @media (max-width: 767px) {
+      .laber_{{sid}}{
+        {% if mobile_mg_top !=0 %}margin-top:{{mobile_mg_top}}px;{%endif%} 
+        {% if mobile_mg_bottom !=0 %}margin-bottom:{{mobile_mg_bottom}}px;{%endif%} 
+        {% if mobile_pd_top !=0 %}padding-top:{{mobile_pd_top}}px;{%endif%} 
+        {% if mobile_pd_bottom !=0 %}padding-bottom:{{mobile_pd_bottom}}px;{%endif%} 
+        {% if section.settings.section_bg_mobile != blank %}
+          background-image: url('{{ section.settings.section_bg_mobile | img_url:"master"}}'); 
+        {%endif%}
+      }
+      .laber_{{sid}} .container{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        min-height: {{section.settings.height_mobile}};
+        padding: 0 20px;
+      }
+    }
+{% endstyle%} 
+{%- schema -%}
+  {
+    "name": "Banner Simple",
+    "class": "cms_section banner-simple",
+	"max_blocks": 5,
+    "settings": [
+      {
+      "type": "checkbox",
+      "id": "hidden",
+      "label": "Hidden Section?",
+      "default": false
+      },
+      {
+        "type": "header",
+        "content": "== Design Options"
+      },
+    	{
+        "type": "select",
+        "id": "layout",
+        "options": [
+         {
+            "value": "container",
+            "label": "Container"
+         },
+         {
+            "value": "full-width",
+            "label": "Full Width"
+          }
+        ],
+        "label": "Layout"
+      },
+      {
+        "type": "select",
+        "id": "content_position",
+        "options": [
+         {
+            "value": "left",
+            "label": "Left"
+         },
+         {
+            "value": "right",
+            "label": "Right"
+          }
+        ],
+        "label": "Content Position"
+      },
+      {
+        "type": "image_picker",
+        "id": "section_bg",
+        "label": "Background Section"
+      },
+      {
+        "type": "image_picker",
+        "id": "section_bg_mobile",
+        "label": "Background Section Mobile"
+      },
+      {
+        "type": "checkbox",
+        "id": "view_all_button",
+        "label": "View more displays button",
+        "default": true
+      },  
+      {
+        "type": "text",
+        "id": "view_text",
+        "label": "View more text"
+      },
+      {
+      "type": "header",
+      "content": "Popup settings"
+    },
+    {
+      "type": "select",
+      "id": "popup_style",
+      "options": [
+       {
+          "value": "style1",
+          "label": "Style 1"
+       },
+       {
+          "value": "style2",
+          "label": "Style 2"
+        }
+      ],
+      "label": "Popup Style"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading_pop",
+      "label": "Sub heading popup",
+      "default": "Sub heading popup"
+    },  
+    {
+      "type": "textarea",
+      "id": "heading_pop",
+      "label": "Heading popup",
+      "default": "Heading popup"
+    }, 
+    {
+      "type": "image_picker",
+      "id": "image_pop",
+      "label": "Image popup"
+    },
+    {
+      "type": "liquid",
+      "id": "liquid_pop",
+      "label": "Liquid Pop",
+      "info": "Add app snippets or other Liquid code to create advanced customizations.",
+      "default": "<p>Write your own custom Liquid content.</p>"
+    },
+      {
+      "type": "header",
+      "content": "Color settings"
+    },
+      {
+        "type": "color",
+        "id": "cl_text",
+        "label": "Color text",
+        "default": "#fff"
+      },
+      {
+        "type": "color",
+        "id": "cl_button",
+        "label": "Color button",
+        "default": "#FFFFFF"
+      },
+      {
+        "type": "color",
+        "id": "bg_button",
+        "label": "Background button",
+        "default": "#87C1B7"
+      },
+      {
+        "type": "color",
+        "id": "bg_button_hv",
+        "label": "Background button hover",
+        "default": "#317766"
+      },
+      {
+        "type": "color_background",
+        "id": "color_pop",
+        "label": "Color popup",
+        "default": "#fff"
+      },
+      {
+        "type": "color_background",
+        "id": "bg_pop",
+        "label": "Background popup",
+        "default": "#8cbeb3"
+      },
+      {
+          "type": "header",
+          "content": "== Setting ==",
+          "info":"Padding and Margin"
+        },
+        {
+          "type": "range",
+          "id": "mg_top",
+          "label": "Margin Top",
+          "default": 0,
+          "min": 0,
+          "max": 300,
+          "step": 5,
+          "unit": "px"
+        },
+        {
+          "type": "range",
+          "id": "mg_bottom",
+          "label": "Margin bottom",
+          "default": 0,
+          "min": 0,
+          "max": 300,
+          "step": 5,
+          "unit": "px"
+        },
+        {
+          "type": "range",
+          "id": "pad_top",
+          "label": "Padding Top",
+          "default": 0,
+          "min": 0,
+          "max": 300,
+          "step": 5,
+          "unit": "px"
+        },
+        {
+          "type": "range",
+          "id": "pad_bottom",
+          "label": "Padding bottom",
+          "default": 0,
+          "min": 0,
+          "max": 300,
+          "step": 5,
+          "unit": "px"
+        },
+      {
+          "type": "header",
+          "content": "== Setting ipad",
+          "info":"Padding and Margin"
+        },
+       {
+          "type": "range",
+          "id": "ip_mg_top",
+          "label": "Margin top",
+          "default": 0,
+          "min": 0,
+          "max": 200,
+          "step": 5,
+          "unit": "px"
+        },
+        {
+          "type": "range",
+          "id": "ip_mg_bottom",
+          "label": "Margin bottom",
+          "default": 0,
+          "min": 0,
+          "max": 200,
+          "step": 5,
+          "unit": "px"
+        },
+        {
+          "type": "range",
+          "id": "ip_pd_top",
+          "label": "Padding top",
+          "default": 0,
+          "min": 0,
+          "max": 200,
+          "step": 5,
+          "unit": "px"
+        },
+        {
+          "type": "range",
+          "id": "ip_pd_bottom",
+          "label": "Padding bottom",
+          "default": 0,
+          "min": 0,
+          "max": 200,
+          "step": 5,
+          "unit": "px"
+        },
+        {
+          "type": "header",
+          "content": "== Setting mobile",
+          "info":"Padding and Margin"
+        },
+        {
+          "type": "text",
+          "id": "height_mobile",
+          "label": "Min height banner",
+          "default": "650px"
+        },
+       {
+          "type": "range",
+          "id": "mobile_mg_top",
+          "label": "Margin top",
+          "default": 0,
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "px"
+        },
+        {
+          "type": "range",
+          "id": "mobile_mg_bottom",
+          "label": "Margin bottom",
+          "default": 0,
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "px"
+        },
+        {
+          "type": "range",
+          "id": "mobile_pd_top",
+          "label": "Padding top",
+          "default": 0,
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "px"
+        },
+        {
+          "type": "range",
+          "id": "mobile_pd_bottom",
+          "label": "Padding bottom",
+          "default": 0,
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "px"
+        }
+    ],
+	"blocks": [{
+    "type": "text_block",
+    "name": "Item",
+    "settings": [
+      {
+        "type": "textarea",
+        "id": "des",
+        "label": "Description",
+        "default": "私たちは、繊維そのものの性質にこだわり素材を選びました",
+        "info": "Insert <br> to line break mobile"
+      }
+      ]
+    }],
+    "presets": [
+      {
+        "name": "Banner Simple",
+        "category": "Images"
+      }
+    ]
+  }
+{% endschema %}

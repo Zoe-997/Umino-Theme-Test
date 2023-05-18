@@ -1,0 +1,26 @@
+{% assign current_variant = product.selected_or_first_available_variant %}
+
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org/",
+  "@type": "Product",
+  "@id": "{{ shop.url | append: '/products/' | append: product.handle }}",
+  "url": "{{ shop.url | append: '/products/' | append: product.handle }}",
+  "name": "{{ product.title }}",
+  "image": "{{ product.featured_image.src | img_url: 'master' }}",
+  "description": "{{ product.description | strip_html | escape }}",
+  "brand": {
+    "name": "{{ product.vendor }}"
+  },
+  "offers": {
+    "@type": "Offer",
+    "priceCurrency": "{{ shop.currency }}",
+    "price": "{{ current_variant.price | money_without_currency }}",
+    "availability": "http://schema.org/{% if product.available %}InStock{% else %}OutOfStock{% endif %}",
+    "seller": {
+      "@type": "Organization",
+      "name": "{{ shop.name }}"
+    }
+  }
+}
+</script>

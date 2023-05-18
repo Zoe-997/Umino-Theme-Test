@@ -1,0 +1,104 @@
+/* Collection list page */
+
+ .list-collections-template .cat_grid_item__link {
+   overflow: hidden;
+   display: block;
+   position: relative;
+}
+.list-collections-template .cat_grid_item__link:before {
+    content: "";
+    background-color: #000;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 9;
+    opacity: 0;
+    -webkit-transition: all 240ms linear 0s;
+    -khtml-transition: all 240ms linear 0ms;
+    -moz-transition: all 240ms linear 0s;
+    -ms-transition: all 240ms linear 0s;
+    -o-transition: all 240ms linear 0s;
+    transition: all 240ms linear 0s;
+}
+.list-collections-template .cat_grid_item__link:hover:before {
+    opacity: .5;
+}
+ .list-collections-template .cat_grid_item__content {
+  background-color: var(--color-bg-product);
+  border: 1px solid var(--color-border-product);
+   display: block;
+   -webkit-transition: all 240ms linear 0s;
+   -khtml-transition: all 240ms linear 0ms;
+   -moz-transition: all 240ms linear 0s;
+   -ms-transition: all 240ms linear 0s;
+   -o-transition: all 240ms linear 0s;
+   transition: all 240ms linear 0s;
+}
+ .list-collections-template .cat_grid_item__content .cat_grid_item__wrapper {
+	 margin-top: 15px;
+}
+
+.list-collections-template .cat_grid_item__link .icon {
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    -webkit-transition: all .24s linear 0s;
+    -khtml-transition: all .24s linear 0ms;
+    -moz-transition: all .24s linear 0s;
+    -ms-transition: all .24s linear 0s;
+    -o-transition: all .24s linear 0s;
+    transition: all .24s linear 0s;
+    display: block;
+    margin: auto;
+    z-index: 99;
+    opacity: 0;
+}
+.list-collections-template .cat_grid_item__link:hover .icon {
+    opacity: 1;
+}
+.list-collections-template .cat_grid_item__link .icon:before {
+    content: "";
+    background-color: #fff;
+    width: 1px;
+    display: block;
+    height: 100%;
+    position: absolute;
+    left: 50%;
+}
+.list-collections-template .cat_grid_item__link .icon:after {
+    content: "";
+    background-color: #fff;
+    width: 100%;
+    display: block;
+    height: 1px;
+    position: absolute;
+    top: 50%;
+}
+ .list-collections-template .cat_grid_item__content .cat_grid_item__wrapper .cat_grid_item__title {
+   font-size: 12px;
+   text-transform: uppercase;
+   padding: 0;
+   line-height: 1;
+   font-weight: 500;
+   color: var(--color-main);
+     display: flex;
+         justify-content: center;
+}
+ .list-collections-template .cat_grid_item__content .cat_grid_item__wrapper .cat_grid_item__count {
+    display: flex;
+         justify-content: center;
+    color: #707b91;
+    font-size: 13px;
+    margin: 0;
+    -webkit-transform: translate(0,0);
+    -ms-transform: translate(0,0);
+    transform: translate(0,0);
+    padding-top: 10px;
+}
+/* End collection list page*/

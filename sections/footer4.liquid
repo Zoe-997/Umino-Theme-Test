@@ -1,0 +1,1184 @@
+{%- assign social_icons = false -%}
+{% assign se_blocks = section.blocks %}
+{% if
+  settings.social_twitter_link != blank
+  or settings.social_facebook_link != blank
+  or settings.social_pinterest_link != blank
+  or settings.social_instagram_link != blank
+  or settings.social_tumblr_link != blank
+  or settings.social_snapchat_link != blank
+  or settings.social_youtube_link != blank
+  or settings.social_vimeo_link != blank
+  or template.name == 'article'
+  or template.name == 'blog'
+%}
+  {%- assign social_icons = true -%}
+{% endif %}
+
+
+{% capture image_footer_size %}{{ section.settings.logo_footer_max_width | escape }}x{% endcapture %}
+{% render 'footer_4' %}
+{%style%}
+:root {
+--color-title-footer:{{section.settings.cl_title}};
+--color-text1-footer:{{section.settings.cl_text1}};
+--color-text2-footer:{{section.settings.cl_text2}};
+--color-menu-footer:{{section.settings.cl_menu_footer}};
+--color-menu-hover-footer:{{section.settings.cl_menu_hover_footer}};
+
+--color-copyright-text:{{section.settings.cl_copyright_text}};
+--color-copyright-text-a:{{section.settings.cl_copyright_a}};
+}
+{% assign pd = section.settings.pd %}
+{% assign pd_mb = section.settings.pd_mb %}
+.main-footer{
+    {%- if pd != blank %}{% assign arr_pd = pd | remove:' ' | split:',' -%}
+    padding-top: {{arr_pd[0]}} ;
+    padding-right: {{arr_pd[1]}} ;
+    padding-bottom: {{arr_pd[2]}} ;
+    padding-left: {{arr_pd[3]}} ;
+    {%- endif -%}
+}
+
+@media only screen and (max-width: 1200px) {
+.main-footer{
+    {%- if pd_mb != blank %}{% assign arr_pd = pd_mb | remove:' ' | split:',' -%}
+      padding-top: {{arr_pd[0]}};
+      padding-right: {{arr_pd[1]}};
+      padding-bottom: {{arr_pd[2]}};
+      padding-left: {{arr_pd[3]}};
+    {%- endif -%}
+}	
+}
+{%endstyle%}
+
+
+{%- schema -%}
+  {
+    "name": "Footer style 4",
+    "class": "footer_top",
+    "max_blocks": 7,
+    "settings": [ 
+	  {
+        "type": "header",
+        "content": "== Center footer"
+      },
+      {
+        "type": "color", 
+        "id": "cl_title",
+        "label": "Color title",
+        "default": "#fff"
+      }, 
+	  {
+        "type": "color", 
+        "id": "cl_text1",
+        "label": "Color text 1",
+        "default": "#B0AFCC"
+      },
+      {
+      "type": "color", 
+      "id": "cl_text2",
+      "label": "Color text 2",
+      "default": "#96AE00"
+      },
+      {
+      "type": "color", 
+      "id": "cl_menu_footer",
+      "label": "Color menu",
+      "default": "#B0AFCC"
+      },
+      {
+      "type": "color", 
+      "id": "cl_menu_hover_footer",
+      "label": "Color menu hover",
+      "default": "#fff"
+      },
+      {
+        "type": "header",
+        "content": "== Bottom footer"
+      },
+      
+      {
+      "type": "image_picker",
+      "label": "Paymen image",            
+      "id": "footer_payment",
+	  "info":"Dimension: 278x24. If you don't use it, you can leave it blank"
+      },
+      {
+      "type": "richtext",
+      "id": "copyright_text",
+      "label": "Copyright",
+		"default": "<p>Copyright</p>"
+      },
+
+	  {
+        "type": "header",
+        "content": "Color copyright"
+      },
+	  {
+        "type": "color", 
+        "id": "cl_copyright_text",
+        "label": "Color Copyright text",
+        "default": "#fff"
+      }, 
+      {
+        "type": "color", 
+        "id": "cl_copyright_a",
+        "label": "Color Copyright link",
+        "default": "#96AE00"
+      }, 	
+      {
+        "type": "header",
+        "content": "== Footer background"
+      },	
+	  {
+        "type": "color", 
+        "id": "bg_line",
+        "label": "Color line",
+        "default": "#fff"
+      }, 
+      {
+        "type": "color", 
+        "id": "bg",
+        "label": "Select background color",
+        "default": "#fff"
+      }, 
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Background image"
+      },
+	  {
+        "type": "header",
+        "content": "== Padding",
+		"info":"Padding top, Padding bottom. If you not use to blank"
+      },  
+
+      {
+        "type": "text",
+        "id": "pd",
+        "label": "Padding",
+        "info":"Padding top, padding right, padding bottom, padding left. If you not use to blank"
+      },
+     {
+        "type": "header",
+        "content": "== Design Mobile Options"
+      },
+      {
+        "type": "text",
+        "id": "pd_mb",
+        "label": "Padding"
+      }
+      
+    ],
+    "blocks": [
+	  {
+        "type": "mail",
+        "name": "Newsletter",
+        "limit": 1,
+        "settings": [
+          
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Heading",
+            "default": "Newsletter Signup"
+          },
+          {
+            "type": "text",
+            "id": "sub_title",
+            "label": "Sub Text",
+            "default": "Subscribe to our newsletter and get 10% off your first purchase"
+          },
+		  {
+            "type": "text",
+            "id": "sub_title2",
+            "label": "Sub Text 2",
+            "default": "I would like to receive news and special offers."
+          },
+		  {
+            "type": "color", 
+            "id": "cl_text",
+            "label": "Color Text",
+            "default": "#fff"
+            },	
+          {
+          "type": "color", 
+          "id": "cl_sub",
+          "label": "Color Submit",
+          "default": "#fff"
+          },
+          {
+          "type": "color", 
+          "id": "cl_sub_hover",
+          "label": "Color Submit Hover",
+          "default": "#fff"
+          },
+		  {
+        "type": "select",
+        "id": "h_position",
+        "label": "Horizontal Position",
+        "default": "left",
+        "options": [
+            {
+            "value": "left",
+            "label": "Left"
+            },
+            {
+            "value": "center",
+            "label": "Center"
+            },
+            {
+            "value": "right",
+            "label": "Right"
+            }
+          ]
+        },
+		{
+        "type": "select",
+        "id": "v_position",
+        "label": "Vertical Position",
+        "default": "top",
+        "options": [
+            {
+            "value": "top",
+            "label": "Top"
+            },
+            {
+            "value": "middle",
+            "label": "Middle"
+            },
+            {
+            "value": "bottom",
+            "label": "Bottom"
+            }
+          ]
+        },
+		{
+            "type": "select",
+            "id": "txt_align",
+            "label": "Text Align",
+            "default": "left",
+            "options": [
+              {
+                "value": "left",
+                "label": "Left"
+              },
+              {
+                "value": "center",
+                "label": "Center"
+              },
+              {
+                "value": "right",
+                "label": "Right"
+              }
+            ]
+          },
+          {
+            "type": "header",
+            "content": "== Width settings"
+          },
+	       
+          {
+            "type": "select",
+            "id": "cl",
+            "label": "Container width",
+            "default": "4",
+            "options": [
+	          {
+	            "value": "12",
+	            "label": "100%"
+	          },
+            {
+              "value": "8",
+              "label": "66%"
+            },
+	          {
+	            "value": "6",
+	            "label": "50%"
+	          },
+			  {
+	            "value": "5",
+	            "label": "41.667%"
+	          },
+	          {
+	            "value": "4",
+	            "label": "33%"
+	          },
+              {
+              "value": "16",
+              "label": "30%"
+              },
+	          {
+	            "value": "3",
+	            "label": "25%"
+	          },
+	          {
+	            "value": "15",
+	            "label": "20%"
+	          },
+	          {
+	            "value": "2",
+	            "label": "16%"
+	          }
+            ]
+          },
+          {
+            "type": "select",
+            "id": "cl_tb",
+            "label": "Container width tablet",
+            "default": "6",
+            "options": [
+	          {
+	            "value": "12",
+	            "label": "100%"
+	          },
+            {
+              "value": "8",
+              "label": "66%"
+            },
+	          {
+	            "value": "6",
+	            "label": "50%"
+	          },
+	          {
+	            "value": "4",
+	            "label": "33%"
+	          },
+	          {
+	            "value": "3",
+	            "label": "25%"
+	          }
+            ]
+          },
+          {
+            "type": "select",
+            "id": "cl_mb",
+            "label": "Container width mobile",
+            "default": "12",
+            "options": [
+	          {
+	            "value": "12",
+	            "label": "100%"
+	          },
+	          {
+	            "value": "6",
+	            "label": "50%"
+	          }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "menu",
+        "name": "Menu",
+        "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Heading",
+            "default": "Quick links"
+          },
+          {
+            "type": "link_list",
+            "id": "menu",
+            "label": "Add menu"
+          },	       
+          {
+            "type": "select",
+            "id": "cl",
+            "label": "Container width",
+            "default": "2",
+            "options": [
+	          {
+	            "value": "12",
+	            "label": "100%"
+	          },
+            {
+              "value": "8",
+              "label": "66%"
+            },
+	          {
+	            "value": "6",
+	            "label": "50%"
+	          },
+			  {
+	            "value": "5",
+	            "label": "41.667%"
+	          },
+	          {
+	            "value": "4",
+	            "label": "33%"
+	          },
+	          {
+	            "value": "3",
+	            "label": "25%"
+	          },
+	          {
+	            "value": "15",
+	            "label": "20%"
+	          },
+	          {
+	            "value": "2",
+	            "label": "16%"
+	          }
+            ]
+          },
+          {
+            "type": "select",
+            "id": "cl_tb",
+            "label": "Container width tablet",
+            "default": "6",
+            "options": [
+	          {
+	            "value": "12",
+	            "label": "100%"
+	          },
+            {
+              "value": "8",
+              "label": "66%"
+            },
+	          {
+	            "value": "6",
+	            "label": "50%"
+	          },
+	          {
+	            "value": "4",
+	            "label": "33%"
+	          },
+	          {
+	            "value": "3",
+	            "label": "25%"
+	          }
+            ]
+          },
+          {
+            "type": "select",
+            "id": "cl_mb",
+            "label": "Container width mobile",
+            "default": "12",
+            "options": [
+	          {
+	            "value": "12",
+	            "label": "100%"
+	          },
+	          {
+	            "value": "6",
+	            "label": "50%"
+	          }
+            ]
+          },
+          {
+          "type": "select",
+          "id": "h_position",
+          "label": "Horizontal Position",
+          "default": "left",
+          "options": [
+          {
+          "value": "left",
+          "label": "Left"
+          },
+          {
+          "value": "center",
+          "label": "Center"
+          },
+          {
+          "value": "right",
+          "label": "Right"
+          }
+          ]
+          },
+          {
+          "type": "select",
+          "id": "txt_align",
+          "label": "Text Align",
+          "default": "left",
+          "options": [
+          {
+          "value": "left",
+          "label": "Left"
+          },
+          {
+          "value": "center",
+          "label": "Center"
+          },
+          {
+          "value": "right",
+          "label": "Right"
+          }
+          ]
+          }
+        ]
+      },
+      
+      
+      {
+        "type": "text",
+        "name": "Text",
+        "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Heading",
+            "default": "Talk about your business"
+          },
+          {
+            "type": "richtext",
+            "id": "content",
+            "label": "Content",
+            "default": "<p>Share store details, promotions, or brand content with your customers.</p>"
+          },	       
+          {
+            "type": "select",
+            "id": "cl",
+            "label": "Container width",
+            "default": "3",
+            "options": [
+	          {
+	            "value": "12",
+	            "label": "100%"
+	          },
+            {
+              "value": "8",
+              "label": "66%"
+            },
+	          {
+	            "value": "6",
+	            "label": "50%"
+	          },
+			  {
+	            "value": "5",
+	            "label": "41.667%"
+	          },
+	          {
+	            "value": "4",
+	            "label": "33%"
+	          },
+	          {
+	            "value": "3",
+	            "label": "25%"
+	          },
+	          {
+	            "value": "15",
+	            "label": "20%"
+	          },
+	          {
+	            "value": "2",
+	            "label": "16%"
+	          }
+            ]
+          },
+          {
+            "type": "select",
+            "id": "cl_tb",
+            "label": "Container width tablet",
+            "default": "6",
+            "options": [
+	          {
+	            "value": "12",
+	            "label": "100%"
+	          },
+            {
+              "value": "8",
+              "label": "66%"
+            },
+	          {
+	            "value": "6",
+	            "label": "50%"
+	          },
+	          {
+	            "value": "4",
+	            "label": "33%"
+	          },
+	          {
+	            "value": "3",
+	            "label": "25%"
+	          }
+            ]
+          },
+          {
+            "type": "select",
+            "id": "cl_mb",
+            "label": "Container width mobile",
+            "default": "12",
+            "options": [
+	          {
+	            "value": "12",
+	            "label": "100%"
+	          },
+	          {
+	            "value": "6",
+	            "label": "50%"
+	          }
+            ]
+          },
+          {
+          "type": "select",
+          "id": "h_position",
+          "label": "Horizontal Position",
+          "default": "left",
+          "options": [
+          {
+          "value": "left",
+          "label": "Left"
+          },
+          {
+          "value": "center",
+          "label": "Center"
+          },
+          {
+          "value": "right",
+          "label": "Right"
+          }
+          ]
+          },
+          {
+          "type": "select",
+          "id": "txt_align",
+          "label": "Text Align",
+          "default": "left",
+          "options": [
+          {
+          "value": "left",
+          "label": "Left"
+          },
+          {
+          "value": "center",
+          "label": "Center"
+          },
+          {
+          "value": "right",
+          "label": "Right"
+          }
+          ]
+          }
+        ]
+      },
+      {
+        "type": "collection",
+        "name": "Featured Products",
+        "settings": [
+         {
+          "type":"text",
+          "id":"title",
+          "label":"Title",
+          "default":"Sale Products"
+          },
+          {
+           "type": "collection",
+           "id": "collection",
+           "label": "Collection to use"
+         },
+          {
+            "type": "range",
+            "id": "limit",
+            "min": 1,
+            "max": 20,
+            "step": 1,
+            "label": "Number of products to show",
+            "default": 3
+          },         
+          {
+            "type": "select",
+            "id": "cl",
+            "label": "Container width",
+            "default": "3",
+            "options": [
+            {
+              "value": "12",
+              "label": "100%"
+            },
+            {
+              "value": "8",
+              "label": "66%"
+            },
+            {
+              "value": "6",
+              "label": "50%"
+            },
+			  {
+	            "value": "5",
+	            "label": "41.667%"
+	          },
+            {
+              "value": "4",
+              "label": "33%"
+            },
+            {
+              "value": "3",
+              "label": "25%"
+            },
+            {
+              "value": "15",
+              "label": "20%"
+            },
+            {
+              "value": "2",
+              "label": "16%"
+            }
+            ]
+          },
+          {
+            "type": "select",
+            "id": "cl_tb",
+            "label": "Container width tablet",
+            "default": "6",
+            "options": [
+            {
+              "value": "12",
+              "label": "100%"
+            },
+            {
+              "value": "8",
+              "label": "66%"
+            },
+            {
+              "value": "6",
+              "label": "50%"
+            },
+            {
+              "value": "4",
+              "label": "33%"
+            },
+            {
+              "value": "3",
+              "label": "25%"
+            }
+            ]
+          },
+          {
+            "type": "select",
+            "id": "cl_mb",
+            "label": "Container width mobile",
+            "default": "12",
+            "options": [
+            {
+              "value": "12",
+              "label": "100%"
+            },
+            {
+              "value": "6",
+              "label": "50%"
+            }
+            ]
+          },
+          {
+          "type": "select",
+          "id": "h_position",
+          "label": "Horizontal Position",
+          "default": "left",
+          "options": [
+          {
+          "value": "left",
+          "label": "Left"
+          },
+          {
+          "value": "center",
+          "label": "Center"
+          },
+          {
+          "value": "right",
+          "label": "Right"
+          }
+          ]
+          },
+          {
+          "type": "select",
+          "id": "txt_align",
+          "label": "Text Align",
+          "default": "left",
+          "options": [
+          {
+          "value": "left",
+          "label": "Left"
+          },
+          {
+          "value": "center",
+          "label": "Center"
+          },
+          {
+          "value": "right",
+          "label": "Right"
+          }
+          ]
+          }
+        ]
+      },
+      {
+        "type": "html",
+        "name": "HTML",
+        "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Heading",
+            "default": "HTML"
+          },
+          {
+            "type": "html",
+            "id": "content",
+            "label": "Content",
+            "default": "<p>html code</p>"
+          },
+		  
+          {
+          "type": "html",
+          "id": "content2",
+          "label": "Content2",
+          "default": "<p>html code</p>"
+          },
+          {
+          "type": "checkbox",
+          "id": "use_social",
+          "label": "Display social on top bar",
+          "default": false,
+          "info":"Note: you can edit social at 'Theme settings' -> 'Social media'"
+          },
+		  {
+            "type": "text",
+            "id": "title_social",
+            "label": "Title Social",
+            "default": "Social Media:"
+          },			
+          {
+          "type": "select",
+          "id": "type_social",
+          "label": "Show sharing Or link:",
+          "options": [
+          {
+          "value": "1",
+          "label": "Social link"
+          },
+          {
+          "value": "2",
+          "label": "Social sharing"
+          }
+          ],
+          "default": "2"
+          },
+		  {
+        "type": "select",
+        "id": "h_position",
+        "label": "Horizontal Position",
+        "default": "left",
+        "options": [
+            {
+            "value": "left",
+            "label": "Left"
+            },
+            {
+            "value": "center",
+            "label": "Center"
+            },
+            {
+            "value": "right",
+            "label": "Right"
+            }
+          ]
+        },
+		{
+            "type": "select",
+            "id": "txt_align",
+            "label": "Text Align",
+            "default": "left",
+            "options": [
+              {
+                "value": "left",
+                "label": "Left"
+              },
+              {
+                "value": "center",
+                "label": "Center"
+              },
+              {
+                "value": "right",
+                "label": "Right"
+              }
+            ]
+          },
+          {
+            "type": "select",
+            "id": "cl",
+            "label": "Container width",
+            "default": "3",
+            "options": [
+	          {
+	            "value": "12",
+	            "label": "100%"
+	          },
+            {
+              "value": "8",
+              "label": "66%"
+            },
+	          {
+	            "value": "6",
+	            "label": "50%"
+	          },
+			  {
+	            "value": "5",
+	            "label": "41.667%"
+	          },
+	          {
+	            "value": "4",
+	            "label": "33%"
+	          },
+	          {
+	            "value": "3",
+	            "label": "25%"
+	          },
+	          {
+	            "value": "15",
+	            "label": "20%"
+	          },
+	          {
+	            "value": "2",
+	            "label": "16%"
+	          }
+            ]
+          },
+          {
+            "type": "select",
+            "id": "cl_tb",
+            "label": "Container width tablet",
+            "default": "6",
+            "options": [
+	          {
+	            "value": "12",
+	            "label": "100%"
+	          },
+            {
+              "value": "8",
+              "label": "66%"
+            },
+	          {
+	            "value": "6",
+	            "label": "50%"
+	          },
+	          {
+	            "value": "4",
+	            "label": "33%"
+	          },
+	          {
+	            "value": "3",
+	            "label": "25%"
+	          }
+            ]
+          },
+          {
+            "type": "select",
+            "id": "cl_mb",
+            "label": "Container width mobile",
+            "default": "12",
+            "options": [
+	          {
+	            "value": "12",
+	            "label": "100%"
+	          },
+	          {
+	            "value": "6",
+	            "label": "50%"
+	          }
+            ]
+          }
+        ]
+      },
+	  {
+        "type": "banner",
+        "name": "Banner (Top footer)",
+        "settings": [
+			{
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image",
+            "info":"Dimension: 640x440."
+          },
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Title",
+            "default": "BIg Sale Off"
+          },
+          {
+            "type": "text",
+            "id": "sub_title",
+            "label": "Sub title",
+            "default": "OUR LATEST SHOES STYLES"
+          },
+		  {
+          "type": "text",
+          "id": "btn",
+          "label": "Buttons",
+		  "default": "Shop Now"	
+          },
+          {
+          "type": "url",
+          "id": "btn_link",
+          "label": "Button link",
+          "info": "Note: if you want to display this button then you need to fill button link"
+          }, 
+          {
+          "type": "select",
+          "id": "open_link",
+          "options": [
+          {
+          "value": "_self",
+          "label": "Current window (_self)"
+          },
+          {
+          "value": "_blank",
+          "label": "New window (_blank)"
+          }
+          ],
+          "label": "Open link in",
+          "default": "_blank"
+          },	
+		  
+		  {
+        "type": "select",
+        "id": "h_position",
+        "label": "Horizontal Position",
+        "default": "left",
+        "options": [
+            {
+            "value": "left",
+            "label": "Left"
+            },
+            {
+            "value": "center",
+            "label": "Center"
+            },
+            {
+            "value": "right",
+            "label": "Right"
+            }
+          ]
+        },
+		{
+        "type": "select",
+        "id": "v_position",
+        "label": "Vertical Position",
+        "default": "top",
+        "options": [
+            {
+            "value": "top",
+            "label": "Top"
+            },
+            {
+            "value": "middle",
+            "label": "Middle"
+            },
+            {
+            "value": "bottom",
+            "label": "Bottom"
+            }
+          ]
+        },
+		{
+            "type": "select",
+            "id": "txt_align",
+            "label": "Text Align",
+            "default": "left",
+            "options": [
+              {
+                "value": "left",
+                "label": "Left"
+              },
+              {
+                "value": "center",
+                "label": "Center"
+              },
+              {
+                "value": "right",
+                "label": "Right"
+              }
+            ]
+          },
+          {
+            "type": "select",
+            "id": "cl",
+            "label": "Container width",
+            "default": "3",
+            "options": [
+	          {
+	            "value": "12",
+	            "label": "100%"
+	          },
+            {
+              "value": "8",
+              "label": "66%"
+            },
+	          {
+	            "value": "6",
+	            "label": "50%"
+	          },
+			  {
+	            "value": "5",
+	            "label": "41.667%"
+	          },
+	          {
+	            "value": "4",
+	            "label": "33%"
+	          },
+	          {
+	            "value": "3",
+	            "label": "25%"
+	          },
+	          {
+	            "value": "15",
+	            "label": "20%"
+	          },
+	          {
+	            "value": "2",
+	            "label": "16%"
+	          }
+            ]
+          },
+          {
+            "type": "select",
+            "id": "cl_tb",
+            "label": "Container width tablet",
+            "default": "6",
+            "options": [
+	          {
+	            "value": "12",
+	            "label": "100%"
+	          },
+            {
+              "value": "8",
+              "label": "66%"
+            },
+	          {
+	            "value": "6",
+	            "label": "50%"
+	          },
+	          {
+	            "value": "4",
+	            "label": "33%"
+	          },
+	          {
+	            "value": "3",
+	            "label": "25%"
+	          }
+            ]
+          },
+          {
+            "type": "select",
+            "id": "cl_mb",
+            "label": "Container width mobile",
+            "default": "12",
+            "options": [
+	          {
+	            "value": "12",
+	            "label": "100%"
+	          },
+	          {
+	            "value": "6",
+	            "label": "50%"
+	          }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

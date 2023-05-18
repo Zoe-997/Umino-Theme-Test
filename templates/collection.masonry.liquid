@@ -1,0 +1,120 @@
+<!-- Created by Andy 10/08/2017 -->
+
+<script>
+  var json_collection_filter =  {{collection.products | json }};
+  var json_wishlist = [];
+  var json_product_tag = [];
+  var json_email = [];
+  {% if customer %}
+  
+    {% capture tags %}{% for tag in customer.tags %}{{ tag }} {% endfor %}{% endcapture %}
+    {% assign tags = tags | remove:'x' | split:' ' | uniq | join:' ' %}
+    {% for product in collection.products %}
+        		
+        {% if tags contains product.id %}
+          	{% for tag in customer.tags %}
+              {% if tag contains product.id %}
+                  {% assign t = tag %}  				
+
+              {% endif %}
+          	{% endfor %}
+  			json_product_tag.push("{{t}}");			
+  
+        	{% assign check = t.size | minus:product.id.size | modulo:2 %}
+        	{% assign  check_mod =  t.size | modulo :2   %}
+        	{% if check == 0 or check_mod == 0  %}
+			 	json_wishlist.push({{t | remove: 'x'}});
+			{% endif %} 
+  		{% else %}
+  			json_product_tag.push("{{product.id}}");
+  		{% endif %}
+    {% endfor %} 
+  		json_email.push("{{customer.email}}");
+                                  
+   {%else%}  
+     
+      {% for product in collection.products %}
+            json_product_tag.push("{{product.id}}");
+      {% endfor %}                             
+                                  
+  {% endif %}
+</script>
+
+{% if collection.image and collection != empty %}
+  {% capture collection_image_url %}{{ collection | img_url: collection_image_size, scale: collection_image_scale, crop: 'top' }}{% endcapture %}
+{% elsif collection.products.first and collection.products.first.images != empty and collection != empty %}
+  {% capture collection_image_url %}{{ collection.products.first | img_url: collection_image_size, scale: collection_image_scale, crop: 'top' }}{% endcapture %}
+{% else %}
+  {% assign collection_image_url = blank %}
+{% endif %}
+
+<div class="main-content shop-page main-content-grid">
+  <div class="container">
+    <div class="breadcrumbs">
+      <a href="{{routes.root_url}}/account/logout">Home</a> / {%if collection.handle != 'all'%} {{collection.title | link_to: collection.url}} {% else %}{{ 'Shop'| link_to: collection.url}} {% endif %}
+    </div>
+    <div class="row">      
+      {% paginate collection.products by settings.pagination_limit %}
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">       
+        <div id="primary" class="js_categories_content">
+          <h4 class="shop-title">{{collection.title }}</h4>
+          <div class="top-control box-has-content">
+            <div class="control">
+              <div class="filter-choice">
+                {% include 'collection-sorting' %}                   
+              </div>              
+              <div class="select-item">
+                <select data-placeholder="All Categories" class="chosen-select">                  
+                  <option value="{{settings.pagination_limit}}">{{settings.pagination_limit}} per page</option>                 
+                </select>
+              </div>              
+              {% assign view_mod = "grid" %}
+             
+            </div>
+          </div>
+          <div id="collection-product" class="product-container auto-clear js-masonry-collection grid-style equal-container box-has-content" data-isotope='{ "itemSelector": ".js-grid-item", "layoutMode": "masonry","columnWidth":".js-grid-sizer","percentPosition": false,"rtl": false }'>            
+            <div class="js-grid-sizer col-ts-12 col-xs-6 col-sm-6 col-md-3 col-lg-3"></div>
+            {% assign view_mod = "grid" %}
+            {% assign index = 0 %}            
+            {% for product in collection.products %}  
+                {% assign val = forloop.index | modulo:2 %} 
+              	{% include 'product-grid-item-masonry' %} 
+            {% endfor %} 
+          </div>          
+          {% if paginate.pages > 1 %}
+          <nav class="pagination pagation">      
+            {%comment%}{{ paginate | default_pagination | replace: '&laquo; Previous', '&larr;' | replace: 'Next &raquo;', '&rarr;' }}{%endcomment%}
+            <ul class="page-numbers list-page">
+              {% if paginate.previous.is_link %}
+              <li> <a class="nav-button page-numbers" href="{{ paginate.previous.url }}#primary">{{ paginate.previous.title }}</a></li>           
+              {% endif %}
+              {% assign i=1 %}
+              {% for i in (1..paginate.pages) %}
+              {% if paginate.current_page == i %}
+              <li><span class="page-number page-numbers current">{{i}}</span></li>
+              {% else %}
+              {% assign index = i | plus:0 %}
+              {% assign index = index | minus:1 %}
+              {% if paginate.parts[index].is_link == true %}
+              <li><a class="page-number page-numbers" href="{{paginate.parts[index].url}}">{{paginate.parts[index].title}}</a></li>
+              {% endif %}
+              {%endif%}
+              {% endfor %}
+              {% if paginate.next.is_link %}
+              <li> <a class="nav-button page-numbers" href="{{ paginate.next.url }}#primary">{{ paginate.next.title }}</a></li>           
+              {% endif %}
+            </ul>
+          </nav>
+          {% endif %} 
+          {% assign val_1 = paginate.current_offset%}
+          {% assign val_2 = val_1 | plus: paginate.page_size %}
+          {% if val_2 > paginate.items %}
+          	{% assign val_2 = paginate.items %}
+          {% endif %}
+          <span class="note products-result-count">Showing {% if paginate.items >0 %}{{val_1 | plus:1}}{% else %} {{val_1}} {% endif %}&ndash;{{val_2}} of {{paginate.items}}</span>
+        </div>
+        {% endpaginate %}
+      </div>      
+    </div>
+  </div>  
+</div>

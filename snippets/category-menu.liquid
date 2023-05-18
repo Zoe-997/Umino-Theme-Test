@@ -1,0 +1,24 @@
+<div class="vertical-wapper parent-content">
+  <div class="block-title show-content">
+    <span class="icon-bar">
+      <span></span>
+      <span></span>
+      <span></span>
+    </span>
+    <span class="text">{{section.settings.header_category_menu_txt}}</span>
+  </div>
+  <div class="vertical-content hidden-content">
+    <ul class="vertical-menu lazyload" data-include="{{routes.search_url}}?view=hcat-nav">
+      <li class="loading_bg pr"></li>
+    </ul>
+  </div>
+</div>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $(document).on('click','.show-content',function(){
+      $(this).closest('.parent-content').toggleClass('active');
+      $(this).closest('.parent-content').find('.hidden-content').toggleClass('show-up');
+      return false;
+    });
+  })
+</script>

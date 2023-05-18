@@ -1,0 +1,28 @@
+{%- assign disabled_value = true -%}
+{%- assign active_value = false -%}
+{%- assign variant_auto_select = settings.product_variant_auto_select -%}
+{%- for variant in product.variants -%}
+    {%- if variant.available != true and settings.product_hide_options_without_availability_variants -%}
+        {%- continue -%}
+    {%- endif -%}
+    {%- if option_index0 == 0 and value == variant.option1 -%}
+        {%- assign disabled_value = false -%}
+        {%- break -%}
+    {%- elsif option_index0 == 1 and current_variant.option1 == variant.option1 and value == variant.option2 -%}
+        {%- assign disabled_value = false -%}
+        {%- break -%}
+    {%- elsif option_index0 == 2 and current_variant.option1 == variant.option1 and current_variant.option2 == variant.option2 and value == variant.option3 -%}
+        {%- assign disabled_value = false -%}
+        {%- break -%}
+    {%- endif -%}
+{%- endfor -%}
+{%- unless disabled_value == true  -%}
+    {%- unless variant_auto_select == 'disable'  -%}
+      {%- if product.options contains option.name -%}
+          {%- if current_variant.option1 == value or current_variant.option2 == value or current_variant.option3 == value -%}
+              {%- assign active_value = true -%}
+          {%- endif -%}
+      {%- endif -%}
+    {%- endunless -%}
+{%- endunless -%}
+{% capture trigger_attr %}{% if trigger %} data-js-trigger="{{ trigger }}-{% render 'product-get-options-strip-symbols' with value: option.name %}-{% render 'product-get-options-strip-symbols' with value: value %}"{% elsif trigger_id %} data-js-trigger-id="{{ trigger_id }}-{% render 'product-get-options-strip-symbols' with value: option.name %}-{% render 'product-get-options-strip-symbols' with value: value %}"{% endif %}{% endcapture %}

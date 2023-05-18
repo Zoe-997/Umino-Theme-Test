@@ -1,0 +1,102 @@
+{% liquid
+  assign id = section.id 
+%}
+{%- for i in (1..1) -%} 
+  <section id="laber_{{id}}"> 
+      <div class=" {%if section.settings.layout != 'full-width' %}container {%else%} {{section.settings.layout}}{%endif%}">
+    <div class="wrap_title">
+      <h3 class="section-title"><span > {{section.settings.title}}</span></h3>        
+    </div> 
+    <div class="code_setting">{{ section.settings.code }}</div>
+  </div>
+</section>
+{%- endfor -%}
+{%- render 'section_style' -%}
+
+
+{%- schema -%}
+  {
+    "name": "Custom HTML",   
+    "class": "laber_section type_custom_html",    
+    "settings": [
+      {
+        "type": "header",
+        "content": "== General Settings"
+      },
+	  {
+        "type": "text",
+        "id": "title",
+        "label": "Heading"
+      },
+      {
+        "type": "html",
+        "id": "code",
+        "label": "Content",
+        "default": "<div class=\"text-center\">This is an advanced section. Knowledge of web design languages such as HTML, CSS is required.</div>"
+      },
+      {
+        "type": "header",
+        "content": "== Design Options"
+      },
+      {
+        "type": "select",
+        "id": "layout",
+        "options": [
+         {
+            "value": "container",
+            "label": "Container"
+         },
+         {
+            "value": "full-width",
+            "label": "Full Width"
+          }
+        ],
+        "label": "Layout"
+      },
+      {
+      "type": "color",
+      "id": "cl_bg",
+      "label": "Background color",
+      "default": "#fff"
+      },
+      {
+        "type": "text",
+        "id": "mg",
+        "label": "Margin",
+        "info":"Margin top, margin right, margin bottom, margin left. If you not use to blank",
+        "default": "30px,,,",
+        "placeholder": "30px,,30px,"
+      },
+      {
+        "type": "text",
+        "id": "pd",
+        "label": "Padding",
+        "info":"Padding top, padding right, padding bottom, padding left. If you not use to blank",
+        "placeholder": "30px,,30px,"
+      },
+     {
+        "type": "header",
+        "content": "== Design Mobile Options"
+      },
+      {
+        "type": "text",
+        "id": "mg_mb",
+        "label": "Margin",
+        "placeholder": "30px,,30px,"
+      },
+      {
+        "type": "text",
+        "id": "pd_mb",
+        "label": "Padding",
+        "placeholder": "30px,,30px,"
+      }  
+     
+    ],    
+    "presets": [
+      {
+        "name": "6. Custom HTML",
+        "category": "Text"
+      }
+    ]
+  }
+{% endschema %}

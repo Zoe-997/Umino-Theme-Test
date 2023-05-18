@@ -1,0 +1,24 @@
+{%- assign image = block.settings.image %}
+{% assign ratio = image.aspect_ratio |default:1.0 %}
+{% assign url = block.settings.url -%}
+<div id="pin_{{block.id}}" class="pin__wr_js item_ins iteam_{{for_i}} {{ccol}}" style="margin-bottom:{{ block.settings.mg_bottom }}px;" {{ block.shopify_attributes }}>
+
+  <div class="wrap_ins_img">
+  {%- if url != blank -%}
+  <a data-no-instant rel="nofollow"  href="{{url}}" target="{{open_link}}">
+  {%- endif -%}  
+    
+    <div data-image-effect class="pr_lazy_img main-img lazyload laber_bg_lz " 
+         data-id="{{image.id}}" 
+         data-bgset="{% if image != blank %}{{ image | img_url: '1x1' }}{% else %}{{cimg}}{% endif %}" 
+         data-parent-fit="width" 
+         data-wiis data-ratio="{{ratio}}" 
+         data-sizes="auto" 
+         style="padding-top:{% if image != blank %}{{ 1 | divided_by: ratio | times: 100}}%{% else %}{{ ratio_demo }}%{% endif %};"></div>
+
+   {%- if url != blank -%} 
+    <i class=" icon-instagram"></i>
+  </a>    
+  {%- endif -%}
+	</div>
+</div>

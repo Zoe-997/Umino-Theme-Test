@@ -1,0 +1,46 @@
+{%- if template contains 'collection.' -%}
+    {%- assign items_length = current_tags | size -%}
+{{ current_tags |json }}
+{%- else -%}
+    {%- assign namespace = template | remove: 'cart.' | remove: 'page.' -%}
+    {%- assign items = customer.metafields[namespace] -%}
+    {%- assign items_length = items | size -%}
+{%- endif -%}
+{% assign sett_equal = settings.use_eq_height %}
+{%  assign image_ratio = settings.image_ratio %}
+<div class="wishlist">
+    <div class="container">
+      	<div class="wishlist__head">
+        <div class="wishlist__button-remove js-store-lists-clear-wishlist{% if items_length < 1 %} d-none-important{% endif %}" data-js-store-lists-has-items-wishlist>
+          <i class="icon-trash-2" data-js-popup-close=""></i>   {{ 'general.wishlist-full.button_remove_all' | t }}
+      	</div>
+      </div>
+        <div class="row {%if sett_equal%}{{image_ratio}} {%endif%} {% if items_length < 1 %} d-none{% endif %}" data-js-store-lists-has-items-wishlist>
+            {%- if template contains 'collection.' -%}
+                {%- for tag in current_tags limit: 20 -%}
+                    {%- assign item = tag | split: '=' -%}
+                    {%- assign current_handle = item[0] -%}
+                    {%- assign current_variant_id = item[1] | abs -%}
+                    {%- assign product = all_products[current_handle] -%}
+                    <div class="col-xs-12 col-sm-6 col-md-3 col-lg-15">
+                        {% include 'product-wishlist' with select_current_variant_by_id: current_variant_id %}
+                    </div>
+                {%- endfor -%}
+            {%- else -%}
+                {%- for item in items -%}
+                    {%- assign current_handle = item[1] -%}
+                    {%- assign current_variant_id = item[0] | abs -%}
+                    {%- assign product = all_products[current_handle] -%}
+                    <div class="col-6 col-md-4 col-lg-3 col-xl-3">
+                        {% include 'product-wishlist' with select_current_variant_by_id: current_variant_id %}
+                    </div>
+                {%- endfor -%}
+            {%- endif -%}
+        </div>
+        
+        <div class="shopify-info no-products {% if items_length > 0 %} d-none {% endif %} wishlist-empty" data-js-store-lists-dhas-items-wishlist>
+   			 <i class="flash icon-alert-triangle" aria-hidden="true"></i>
+            <p>{{ 'general.wishlist-full.empty.paragraph' | t }}</p>
+        </div>
+    </div>
+</div>

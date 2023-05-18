@@ -1,0 +1,190 @@
+<!-- /templates/customers/account.liquid -->
+{% comment %}
+
+For all available customer liquid tags:
+- http://docs.shopify.com/themes/liquid-variables/customer
+
+{% endcomment %}
+{{ 'customer.css' | asset_url | stylesheet_tag }}
+<div class="main-content shop-page-account">
+  <div class="container">
+    <div class="container block-page-login" style="margin: 32px 0;">
+      <div id="primary" >
+        <h1 class="page-title">
+               {{'customer.account.title'|t}}
+             </h1>
+         <div class="row">  
+           	
+           <div class="col-lg-auto col-xs-12 col-sm-4 col-md-3 col-lg-3 ">
+             <div class="wrapper_tabcontent customer">
+               <h3><i class="icon-menu"></i>{{'customer.account.dashboard'|t}}</h3>
+               
+               <a href="{{routes.root_url}}checkout" class="btn btn--full checkout"><i class="icon-check-circle"></i>{{ 'cart.general.checkout' | t }}</a>
+               <a class="btn btn--full view-address" href="{{routes.account_addresses_url }}">
+                 <i class="icon-map-pin"></i>
+                 {{ 'customer.account.view_addresses' | t }} ({{ customer.addresses_count }})
+               </a>
+               <a class="btn btn--full view-address" href="{{routes.root_url}}pages/wishlist">
+                 <i class="icon-heart"></i>
+                 {{ 'general.wishlist.view' | t }}
+                  (<span class="header__counter" data-js-wishlist-count="0">0</span>)
+               </a>
+               <a href="{{routes.account_logout_url }}" class="btn  btn-link">
+                 <i class="icon-log-out"></i>
+                 {{'customer.login.sign_out' | t}}
+               </a>
+             </div>
+           </div>
+           <div class="account-content col ">
+             
+               <p class="title-customer">{{'customer.login.welcome' | t}} <span>{{ customer.name }}</span> {%comment%}( {{ 'customer.logout.not' | t }} <span>{{ customer.name }} ?</span> <a href="{{routes.account_logout_url }}">{{ 'customer.logout.title' | t }}</a> ){%endcomment%}</p>
+               <div class="order-history">
+                 <h3>{{ 'customer.orders.title' | t }}</h3>
+
+                 {% paginate customer.orders by 20 %}
+                 {%- if customer.orders.size > 0 -%}
+                 <table role="table" class="order-history">
+                   <caption class="visually-hidden">{{ 'customer.orders.title' | t }}</caption>
+                   <thead role="rowgroup">
+                     <tr role="row">
+                       <th id="ColumnOrder" scope="col" role="columnheader">{{ 'customer.orders.order_number' | t }}</th>
+                       <th id="ColumnDate" scope="col" role="columnheader">{{ 'customer.orders.date' | t }}</th>
+                       <th id="ColumnPayment" scope="col" role="columnheader">{{ 'customer.orders.payment_status' | t }}</th>
+                       <th id="ColumnFulfillment" scope="col" role="columnheader">{{ 'customer.orders.fulfillment_status' | t }}</th>
+                       <th id="ColumnTotal" scope="col" role="columnheader">{{ 'customer.orders.total' | t }}</th>
+                     </tr>
+                   </thead>
+                   <tbody role="rowgroup">
+                     {%- for order in customer.orders -%}
+                     <tr role="row">
+                       <td
+                           id="RowOrder"
+                           role="cell"
+                           headers="ColumnOrder"
+                           data-label="{{ 'customer.orders.order_number' | t }}"
+                           >
+                         <a href="{{ order.customer_url }}" aria-label="{{ 'customer.orders.order_number_link' | t: number: order.name }}">
+                           {{ order.name }}
+                         </a>
+                       </td>
+                       <td headers="RowOrder ColumnDate" role="cell" data-label="{{ 'customer.orders.date' | t }}">
+                         {{ order.created_at | time_tag: format: 'date' }}
+                       </td>
+                       <td headers="RowOrder ColumnPayment" role="cell" data-label="{{ 'customer.orders.payment_status' | t }}">
+                         {{ order.financial_status_label }}
+                       </td>
+                       <td headers="RowOrder ColumnFulfillment" role="cell" data-label="{{ 'customer.orders.fulfillment_status' | t }}">
+                         {{ order.fulfillment_status_label }}
+                       </td>
+                       <td headers="RowOrder ColumnTotal" role="cell" data-label="{{ 'customer.orders.total' | t }}">
+                         {{ order.total_price | money_with_currency }}</td>
+                     </tr>
+                     {%- endfor -%}
+                   </tbody>
+                 </table>
+                 {%- else -%}
+                 <p class="none">
+                   <a href="{{routes.root_url}}collections/all">
+                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M3.01 11.2202V15.7102C3.01 20.2002 4.81 22.0002 9.3 22.0002H14.69C19.18 22.0002 20.98 20.2002 20.98 15.7102V11.2202" stroke="#96AE00" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                  <path d="M12 12C13.83 12 15.18 10.51 15 8.68L14.34 2H9.67L9 8.68C8.82 10.51 10.17 12 12 12Z" stroke="#96AE00" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                  <path d="M18.31 12C20.33 12 21.81 10.36 21.61 8.35L21.33 5.6C20.97 3 19.97 2 17.35 2H14.3L15 9.01C15.17 10.66 16.66 12 18.31 12Z" stroke="#96AE00" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                  <path d="M5.64 12C7.29 12 8.78 10.66 8.94 9.01L9.16 6.8L9.64 2H6.59C3.97 2 2.97 3 2.61 5.6L2.34 8.35C2.14 10.36 3.62 12 5.64 12Z" stroke="#96AE00" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                  <path d="M12 17C10.33 17 9.5 17.83 9.5 19.5V22H14.5V19.5C14.5 17.83 13.67 17 12 17Z" stroke="#96AE00" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                  </svg> {{ 'customer.account.collections_all' | t }} </a> {{ 'customer.orders.none' | t }}</p>
+                 {%- endif -%}
+
+                 {%- if paginate.pages > 1 -%}
+                 {%- if paginate.parts.size > 0 -%}
+                 <nav class="pagination" role="navigation" aria-label="{{ 'general.pagination.label' | t }}">
+                   <ul role="list">
+                     {%- if paginate.previous -%}
+                     <li>
+                       <a href="{{ paginate.previous.url }}" aria-label="{{ 'general.pagination.previous' | t }}">
+                         <svg aria-hidden="true" focusable="false" viewBox="0 0 10 6">
+                           <path fill-rule="evenodd" clip-rule="evenodd" d="M9.354.646a.5.5 0 00-.708 0L5 4.293 1.354.646a.5.5 0 00-.708.708l4 4a.5.5 0 00.708 0l4-4a.5.5 0 000-.708z" fill="currentColor">
+                             </svg>
+                           </a>
+                         </li>
+                       {%- endif -%}
+
+                       {%- for part in paginate.parts -%}
+                     <li>
+                       {%- if part.is_link -%}
+                       <a href="{{ part.url }}" aria-label="{{ 'general.pagination.page' | t: number: part.title }}">{{ part.title }}</a>
+                       {%- else -%}
+                       {%- if part.title == paginate.current_page -%}
+                       <span aria-current="page" aria-label="{{ 'general.pagination.page' | t: number: part.title }}">{{ part.title }}</span>
+                       {%- else -%}
+                       <span>{{ part.title }}</span>
+                       {%- endif -%}
+                       {%- endif -%}
+                     </li>
+                     {%- endfor -%}
+
+                     {%- if paginate.next -%}
+                     <li>
+                       <a href="{{ paginate.next.url }}" aria-label="{{ 'general.pagination.next' | t }}" >
+                         <svg aria-hidden="true" focusable="false" viewBox="0 0 10 6">
+                           <path fill-rule="evenodd" clip-rule="evenodd" d="M9.354.646a.5.5 0 00-.708 0L5 4.293 1.354.646a.5.5 0 00-.708.708l4 4a.5.5 0 00.708 0l4-4a.5.5 0 000-.708z" fill="currentColor">
+                             </svg>
+                           </a>
+                         </li>
+                       {%- endif -%}
+                   </ul>
+                 </nav>
+                 {%- endif -%}
+                 {%- endif -%}
+                 {% endpaginate %}
+               </div>
+             <div class="account_details">
+               <h3>{{'customer.account.account_details'|t}}</h3>
+             {% for address in customer.addresses %}
+             	
+               <div class="table-res">   
+                 <table class="table">
+                   <tbody>
+                     <tr>
+                       <td><span class="h3">{{'customer.account.name'|t}}</span></td>
+                       <td>{{address.name}}</td>
+                     </tr>
+                     <tr>
+                       <td><span class="h3">{{'customer.account.country'|t}}</span></td>
+                       <td>{{address.country}}</td>
+                     </tr>
+                     <tr>
+                       <td><span class="h3">{{'customer.account.email'|t}}</span></td>
+                       <td>{{ customer.email }}</td>
+                     </tr>
+                     <tr>
+                       <td><span class="h3">{{'customer.account.phone'|t}}</span></td>
+                       <td>{{ address.phone }}</td>
+                     </tr>
+                     <tr>
+                       <td><span class="h3">{{'customer.account.city'|t}}</span></td>
+                       <td>{{ address.city }}</td>
+                     </tr>
+                     <tr>
+                       <td><span class="h3">{{'customer.account.zip'|t}}</span></td>
+                       <td>{{ address.zip }}</td>
+                     </tr>
+                     
+                     <tr>
+                       <td><span class="h3">{{'customer.account.address'|t}}</span></td>
+                       <td>{{address.address1}}</td>
+                     </tr>
+                     <tr>
+                       <td><span class="h3">{{'customer.account.address2'|t}}</span></td>
+                       <td>{{address.address2}}</td>
+                     </tr></tbody>
+                 </table>
+               </div>
+             {% endfor%}
+             </div>
+           </div>
+           
+         </div>
+        </div>
+    </div>
+  </div>
+</div>

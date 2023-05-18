@@ -1,0 +1,75 @@
+{%- liquid
+
+  assign border_radius = section.settings.border_radius
+  assign bd = section.settings.bd
+  assign show_br_top = section.settings.show_br_top
+  assign cl_border = section.settings.cl_border
+  
+  assign cl_bg = section.settings.cl_bg
+  assign mg = section.settings.mg
+  assign pd = section.settings.pd
+  assign mg_mb = section.settings.mg_mb
+  assign pd_mb = section.settings.pd_mb
+  assign sid = section.id
+ -%}
+
+{%- capture style -%}
+
+
+	#laber_{{sid}} {
+	   {%- if mg != blank %}
+       {% assign arr_mg = mg | remove:' ' | split:',' -%}
+		   	margin-top: {{arr_mg[0]}} ;
+			margin-right: {{arr_mg[1]}} ;
+			margin-bottom: {{arr_mg[2]}} ;
+			margin-left: {{arr_mg[3]}} ;
+	   {%- endif -%}
+
+	   {%- if pd != blank %}{% assign arr_pd = pd | remove:' ' | split:',' -%}
+	       padding-top: {{arr_pd[0]}} ;
+		   padding-right: {{arr_pd[1]}} ;
+           padding-bottom: {{arr_pd[2]}} ;
+           padding-left: {{arr_pd[3]}} ;
+	   {%- endif -%}
+	   background-color:{{cl_bg}};	
+	   {% if section.settings.bg_image != blank %}
+        	background-image: url('{{ section.settings.bg_image | img_url:"1920x"}}');
+			background-size: cover;
+        {% endif %}	
+
+		{%- if bd != blank %}
+			border-radius:{{bd}}
+		{% endif %}	
+        {% if show_br_top %}
+          border-top: 1px solid {{ cl_border }};
+        {% endif %}  
+	  }
+      {%- if border_radius != blank %}
+      #laber_{{sid}} .cms-img{
+			border-radius: {{border_radius}} ;
+      }
+      {%- endif -%}
+
+	{%- if mg_mb != blank or pd_mb != blank -%} 
+	@media only screen and (max-width: 1024px) {
+		#laber_{{sid}} {
+	
+		   {%- if mg_mb != blank %}{% assign arr_mg = mg_mb | remove:' ' | split:',' -%}
+              margin-top: {{arr_mg[0]}};
+              margin-right: {{arr_mg[1]}};
+              margin-bottom: {{arr_mg[2]}};
+              margin-left: {{arr_mg[3]}};
+		   {%- endif -%}
+
+		   {%- if pd_mb != blank %}{% assign arr_pd = pd_mb | remove:' ' | split:',' -%}
+              padding-top: {{arr_pd[0]}};
+              padding-right: {{arr_pd[1]}};
+              padding-bottom: {{arr_pd[2]}};
+              padding-left: {{arr_pd[3]}};
+		   {%- endif -%}
+		}
+	}
+	{%- endif -%}
+{%- endcapture -%}
+
+{%- style -%}{{ style | strip_newlines | remove:"  "}}{%- endstyle -%}

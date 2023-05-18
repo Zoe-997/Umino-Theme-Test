@@ -1,0 +1,98 @@
+<div class="topbar layout1">
+  <div class="container">
+    <ul class="menu-language">
+      <li class="language"  {%if section.settings.header_use_language%} {%else%} style="display:none" {% endif %}>
+        <a href="#" class="toggle-submenu"><span class="flag">{{ 'flag1.jpg' | asset_url | img_tag: shop.name }}</span> English</a>        
+      </li>
+      <li class="currencies menu-item-has-children" {%if section.settings.header_use_currency%} {%else%} style="display:none" {% endif %}>
+        {% include 'currency-picker' %} 
+        <a href="#" class="toggle-submenu lang-currency"><span class="text">United State</span>(USD)</a>
+        <ul class="list-currencies currency-lists">
+              {% assign codes = 'USD,EUR,GBP,CAD,ARS,AUD,BBD,BDT,BSD,BHD,BRL,BOB,BND,BGN,ILS,MMK,KYD,CLP,CNY,COP,CRC,HRK,CZK,DKK,DOP,XCD,EGP,XPF,FJD,GHS,GTQ,GYD,GEL,HKD,HUF,ISK,INR,IDR,NIS,JMD,JPY,JOD,KZT,KES,KWD,LVL,LTL,MXN,MYR,MUR,MDL,MAD,MNT,MZN,ANG,NZD,NGN,NOK,OMR,PKR,PYG,PEN,PHP,PLN,QAR,RON,RUB,SAR,RSD,SCR,SGD,SYP,ZAR,KRW,LKR,SEK,CHF,TWD,THB,TZS,TTD,TRY,UAH,AED,UYU,VEB,VND,ZMK' | split: ',' %}
+              {% assign supported_codes = settings.supported_currencies | split: ' ' %}                
+              {% for code in supported_codes %}
+                  {% if codes contains code %}
+                      {% case code %} 
+                      {% when 'USD' %}
+                      <li data-value="{{ code }}" ><a href="javascript:void(0);" class="{{ code }}"><span class="text">United State</span> (<span class="code_currency">{{ code }}</span>)</a></li>
+                      {% when 'EUR' %}
+                      <li data-value="{{ code }}" ><a href="javascript:void(0);" class="{{ code }}"><span class="text">Euro</span> (<span class="code_currency">{{ code }}</span>)</a></li>
+                      {% when 'GBP'  %}
+                      <li data-value="{{ code }}" ><a href="javascript:void(0);" class="{{ code }}"><span class="text">England</span> (<span class="code_currency">{{ code }}</span>)</a></li>
+                      {% when 'CAD' %}
+                      <li data-value="{{ code }}" ><a href="javascript:void(0);" class="{{ code }}"><span class="text">Canada</span> (<span class="code_currency">{{ code }}</span>)</a></li>
+                      {% when 'VND' %}
+                      <li data-value="{{ code }}" ><a href="javascript:void(0);" class="{{ code }}"><span class="text">Viet Nam</span> (<span class="code_currency">{{ code }}</span>)</a></li>
+                      {% when 'JPY' %}
+                      <li data-value="{{ code }}" ><a href="javascript:void(0);" class="{{ code }}"><span class="text">Japan</span> (<span class="code_currency">{{ code }}</span>)</a></li>
+                      {% when 'AUD' %}
+                      <li data-value="{{ code }}" ><a href="javascript:void(0);" class="{{ code }}"><span class="text">Australia</span> (<span class="code_currency">{{ code }}</span>)</a></li>
+                      {% when 'CNY' %}
+                      <li data-value="{{ code }}" ><a href="javascript:void(0);" class="{{ code }}"><span class="text">China</span> (<span class="code_currency">{{ code }}</span>)</a></li>
+                      {% else %}
+                      <li data-value="{{ code }}" ><a href="javascript:void(0);" class="{{ code }}">(<span class="code_currency">{{ code }}</span>)</a></li>
+                      {% endcase %} 
+                  {% endif %}
+              {% endfor %} 
+        </ul>
+      </li>
+    </ul>
+
+    <ul class="list-socials">
+      {% if settings.footer_social_twitter_enable %}
+      <li>
+        <a class="twitter" target="_blank" href="{{settings.footer_social_twitter_link}}" title="{{settings.footer_social_twitter_text}}"><i class="fa fa-twitter"></i></a>
+      </li>
+      {% endif %}
+      {% if settings.footer_social_facebook_enable %}
+      <li>
+        <a class="facebook" target="_blank" href="{{settings.footer_social_facebook_link}}" title="{{settings.footer_social_facebook_text}}"><i class="fa fa-facebook"></i></a>
+      <li>
+        {% endif %}
+        {% if settings.footer_social_google_enable %}
+      <li>
+        <a class="google" target="_blank" href="{{settings.footer_social_google_link}}" title="{{settings.footer_social_google_text}}"><i class="fa fa-google-plus"></i></a>
+      </li>
+      {% endif %}
+      {% if settings.footer_social_pinterest_enable %}
+      <li>
+        <a class="pinterest" target="_blank" href="{{settings.footer_social_pinterest_link}}" title="{{settings.footer_social_pinterest_text}}"><i class="fa fa-pinterest-p"></i></a>
+      </li>
+      {% endif %}
+      {% if settings.footer_social_instargram_enable %}
+      <li>
+        <a class="instagram" target="_blank" href="{{settings.footer_social_instargram_link}}" title="{{settings.footer_social_instargram_text}}"><i class="fa fa-instagram"></i></a>
+      </li>
+      {% endif %}
+
+      {% if settings.footer_social_tumblr_enable %}
+      <li>
+        <a class="tumblr" target="_blank" href="{{settings.social_tumblr_link}}" title="{{settings.footer_social_tumblr_text}}"><i class="fa fa-tumblr-square"></i></a>
+      </li>
+      {% endif %}
+      {% if settings.footer_social_snapchat_enable %}
+      <li>
+        <a class="tumblr" target="_blank" href="{{settings.social_snapchat_link}}" title="{{settings.footer_social_snapchat_text}}"><i class="fa fa-snapchat-ghost"></i></a>
+      </li>
+      {% endif %}
+      {% if settings.footer_social_youtube_enable %}
+      <li>
+        <a class="tumblr" target="_blank" href="{{settings.social_youtube_link}}" title="{{settings.footer_social_youtube_text}}"><i class="fa fa-youtube-square"></i></a>
+      </li>
+      {% endif %}
+      {% if settings.footer_social_vimeo_enable %}
+      <a class="tumblr" target="_blank" href="{{settings.social_vimeo_link}}" title="{{settings.footer_social_vimeo_text}}"><i class="fa fa-vimeo "></i></a>
+      {% endif %} 
+    </ul>
+
+    <ul class="top-links">
+      {% if customer %}
+        <li><a href="{{ routes.account_logout_url  }}">{{'layout.customer.log_out'|t}}</a></li>
+      {% else %}
+        <li><a href="{{ routes.account_login_url }}">{{'layout.customer.log_in' | t}}</a></li>
+      {% endif %}    
+     
+    </ul>
+
+  </div>
+</div>

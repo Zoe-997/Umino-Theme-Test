@@ -1,0 +1,122 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "993a628c-32eb-456f-9eb4-88c3a61fa8e0": {
+          "type": "product_infor",
+          "settings": {
+            "show_sku": true,
+            "show_barcode": true,
+            "show_vendor": true,
+            "show_type": true,
+            "show_availability": false,
+            "color_in_stock": "#00b853",
+            "color_out_stock": "#c6452c"
+          }
+        },
+        "ed5dec54-d995-4f88-87d3-102460e07067": {
+          "type": "name_product",
+          "settings": {
+            "np_text_transform": "none",
+            "np_size": 24,
+            "np_weight": 700,
+            "np_size_mobile": 24,
+            "np_mg_top": 0,
+            "np_mg_bottom": 0
+          }
+        },
+        "c78dd46d-d065-4e43-aaa7-13423da0532f": {
+          "type": "show_description",
+          "settings": {
+            "title": "Description",
+            "tr_words": "35",
+            "des_size": 20,
+            "view_more": "",
+            "des_mg_top": 0,
+            "des_mg_bottom": 0,
+            "des_pad_top": 0,
+            "des_pad_right": 0,
+            "des_pad_bottom": 0,
+            "des_pad_left": 0,
+            "des_bg": "rgba(0,0,0,0)"
+          }
+        },
+        "7235b678-d27d-4d9c-a54f-c65411d1ef0c": {
+          "type": "related-product",
+          "settings": {
+            "max_count": 4
+          }
+        }
+      },
+      "block_order": [
+        "993a628c-32eb-456f-9eb4-88c3a61fa8e0",
+        "ed5dec54-d995-4f88-87d3-102460e07067",
+        "c78dd46d-d065-4e43-aaa7-13423da0532f",
+        "7235b678-d27d-4d9c-a54f-c65411d1ef0c"
+      ],
+      "settings": {
+        "cl_bg": "#ffffff",
+        "mg": "0,0,30px,0",
+        "pd": "0,0,0,0",
+        "bd": "0 0 0 0",
+        "mg_mb": "0,0,30px,0",
+        "pd_mb": "0,0,0,0"
+      }
+    },
+    "product-page-tab": {
+      "type": "product-page-tab",
+      "blocks": {
+        "f9332aee-ca1e-4993-ad5c-e3d5984789cc": {
+          "type": "tab_description",
+          "settings": {
+            "title_description": "Description"
+          }
+        },
+        "5d50cdc1-62b7-4fe4-a1d3-de4b0fea8c25": {
+          "type": "show_variants",
+          "settings": {
+            "title": "Additional Information"
+          }
+        },
+        "d07132a9-cf30-4c47-a9f5-6b3bd410c124": {
+          "type": "tab_custom_html",
+          "settings": {
+            "title": "Shipping & Return",
+            "page_content": "shipping-return"
+          }
+        },
+        "22f75249-e4ab-453e-84d5-0006118d5803": {
+          "type": "tab_metafields",
+          "settings": {
+          }
+        },
+        "0e2c2c01-948c-43f1-ae77-e8dbabaf8f55": {
+          "type": "tab_reviews",
+          "settings": {
+            "title_reviews": "Reviews"
+          }
+        }
+      },
+      "block_order": [
+        "f9332aee-ca1e-4993-ad5c-e3d5984789cc",
+        "5d50cdc1-62b7-4fe4-a1d3-de4b0fea8c25",
+        "d07132a9-cf30-4c47-a9f5-6b3bd410c124",
+        "22f75249-e4ab-453e-84d5-0006118d5803",
+        "0e2c2c01-948c-43f1-ae77-e8dbabaf8f55"
+      ],
+      "settings": {
+        "cl_bg": "#ffffff",
+        "mg": "0,0,80px,0",
+        "pd": "40px,0,40px,0",
+        "bd": "0 0 0 0",
+        "mg_mb": "0,0,50px,0",
+        "pd_mb": "20px,0,20px,0"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "product-page-tab"
+  ]
+}

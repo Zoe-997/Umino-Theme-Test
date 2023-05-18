@@ -1,0 +1,58 @@
+{% include 'product-res-variables' %}
+{% assign enable_hover_image = settings.product_collection_enable_hover_image %}
+{% assign build_variant = "all" %}
+<div class="product-item">
+  <div class="product-collection" {% include 'product-get-attributes' %}>
+  <div class="product-inner">
+    <div class="row row-0">
+  <div class="thumb">
+    <div class="product-collection__image product-image js-product-images-navigation js-product-images-hovered-end {% if enable_hover_image %} cms-hover-image {% endif %}">
+                	
+         <a href="{{ product.url | within: collection }}" class="d-block image_product cursor-default" data-js-product-image>
+           
+            {% if current_img_url != blank%}
+            	{% unless current_img_url contains 'no-image' %}
+           			<div data-image-effect class="pr_lazy_img main-img lazyload laber_bg_lz laber_img_1 {{settings.product_hover_animation_type}}" data-id="{{image.id}}" data-bgset="{{ image | img_url: '1x1' }}" data-parent-fit="width" data-wiis data-ratio="{{ratio}}" data-sizes="auto" style="padding-top:{{ 1 | divided_by: ratio | times: 100}}%;"></div>
+            	{% endunless %}
+                {% if current_img_url contains 'no-image'%}
+                	<div data-image-effect class="pr_lazy_img main-img lazyload laber_bg_lz laber_img_1" style="padding-top:127%; background-image:url('https://via.placeholder.com/540x690.png/F2F3F5/fff?text=No Image')"></div>
+                {% endif %} 
+            {% else %}
+            	<div data-image-effect class="pr_lazy_img main-img lazyload laber_bg_lz laber_img_1"  style="padding-top:127%; background-image:url('https://via.placeholder.com/540x690.png/F2F3F5/fff?text=No Image')"></div>
+            {% endif %}
+           
+           {% if img_hover_url != blank%}
+            	{% unless img_hover_url contains 'no-image' %}
+           			<div data-image-hover class="pr_lazy_img main-img lazyload laber_bg_lz laber_img_2 {{settings.product_hover_animation_type}}" data-id="{{image.id}}" data-bgset="{{ hover_image | img_url: '1x1' }}" data-parent-fit="width" data-wiis data-ratio="{{ratio}}" data-sizes="auto" style="padding-top:{{ 1 | divided_by: ratio | times: 100}}%;"></div>
+            		
+            	{% endunless %}
+                {% if img_hover_url contains 'no-image'%}
+                	<div data-image-hover class="pr_lazy_img main-img lazyload laber_bg_lz laber_img_2" style="padding-top:127%; background-image:url('{{ current_img_url }}')"></div>
+                {% endif %} 
+            {% else %}
+            	<div data-image-hover class="pr_lazy_img main-img lazyload laber_bg_lz laber_img_2"  style="padding-top:127%; background-image:url('https://via.placeholder.com/540x690.png/F2F3F5/fff?text=No Image')"></div>
+            {% endif %} 
+      	</a>
+      </div>
+  </div>
+      <div class="info"> 
+            <h2 class="name_product">
+              <a href="{{ url }}">{{ title}}</a>
+            </h2>
+            {% include 'reviews-count' %}
+            {% if product_reviews_count > 0%}
+            <div class="product-collection__reviews">
+              {% render 'product-get-review' with id: id hide_counter: hide_reviews_counter %}
+            </div>
+            {% endif %}
+			<div class="frm-price-color">
+                  <div class="product-collection__price ">
+                      {% render 'product-get-price' with price: price compare_at_price: product.compare_at_price %}
+                  </div>
+            </div>
+
+      </div>
+    </div>
+  </div>
+  </div>
+</div>

@@ -1,0 +1,214 @@
+{%- liquid
+  assign sid = section.id
+   -%}
+   
+{%- for i in (1..1) -%}
+  
+<section style="margin:{{section.settings.mg_top}}px {{section.settings.mg_right}}px {{section.settings.mg_bottom}}px {{section.settings.mg_left}}px;">           
+  <div class="nt_se_{{sid}} {{section.settings.layout}}">
+
+    {%- if section.settings.hidden %}{% break %}{% endif -%}
+
+    <div class="{% if section.settings.title != blank %} wrap_title {% endif %}">
+      {% if section.settings.sub_title != blank %}<span class="section-subtitle">{{section.settings.sub_title | downcase }}</span>{% endif %} 
+      {% if section.settings.title != blank %}<h3 class="section-title"><span > {{section.settings.title | downcase}}</span></h3>{% endif %} 
+    </div> 
+    <div class="section_content">
+      <div class="content container"> 
+        <div class="col-lg-6 col-md-12 col-sm-12">
+          <ul>
+            {% assign index  = 0 %}
+            {%- for block in section.blocks -%}
+                {% if block.type == 'service' %} 
+                    {% assign index  = index | plus: 1 %}               
+                    <li class="item">
+                      {% if section.settings.enable_number %}<label>{% if index <10 %}0{% endif %}{{index}}.</label> {% endif %}
+                      <a href="{{block.settings.link}}">{{block.settings.name}}</a>
+                      {% if block.settings.desc != blank %}
+                      	<span class="cms-service-desc">{{block.settings.desc}}</span>
+                      {% endif %}
+                    </li>
+                {% endif %}
+            {% endfor %}
+          </ul>
+        </div>
+        <div class="col-lg-6 col-md-12 col-sm-12 video-mobile">
+          {% assign url = section.settings.url | default:"https://www.youtube.com/watch?v=_9VUPq3SxOc"%}        
+          <div class="wrap_video">
+            <div data-video-play-button class="wrapper_button" {% if section.settings.background_video != blank %}style="background-image:url('{{section.settings.background_video | img_url:"x500"}}')" {% endif %}>
+              <button type="button" class="video-control__play"><i class="fa fa-play"></i></button>
+            </div>
+            <iframe class="iframe_video" style="height:100%; width:100%;" data-expand="-100" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" src="https://{% if url.type == 'youtube' %}www.youtube.com/embed/{{url.id}}?playsinline=1&modestbranding=1&autohide=1&branding=0&fs=1{% else %}player.vimeo.com/video/{{url.id}}{% endif %}"></iframe>
+          </div>   
+        </div>
+      </div>
+      <div class="video">   
+        {% assign url = section.settings.url | default:"https://www.youtube.com/watch?v=_9VUPq3SxOc"%}        
+        <div class="wrap_video">
+          <div data-video-play-button class="wrapper_button" {% if section.settings.background_video != blank %}style="background-image:url('{{section.settings.background_video | img_url:"x500"}}')" {% endif %}>
+            <button type="button" class="video-control__play"><i class="fa fa-play"></i></button>
+          </div>
+          <iframe class="iframe_video" style="height:100%; width:100%;" data-expand="-100" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" src="https://{% if url.type == 'youtube' %}www.youtube.com/embed/{{url.id}}?playsinline=1&modestbranding=1&autohide=1&branding=0&fs=1{% else %}player.vimeo.com/video/{{url.id}}{% endif %}"></iframe>
+        </div>            
+      </div>
+    </div>
+  </div>
+</section>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $("div[data-video-play-button]").on("click",function(){
+      $(this).hide();
+      $(".iframe_video")[0].src += "?autoplay=1";
+      
+    })   
+    
+  })
+  
+</script>
+{%- endfor -%}
+
+{%- schema -%}
+  {
+    "name": "Our service",
+    "class": "cms_section type_proposal_service",
+	"max_blocks": 10,	
+    "settings": [
+	  {
+        "type": "header",
+        "content": "== Design Options"
+      },
+      {
+        "type": "checkbox",
+        "id": "hidden",
+        "label": "Hidden Section?",
+        "default": false
+      },      
+      {
+        "type": "select",
+        "id": "layout",
+        "default": "nt_full",
+        "options": [
+         {
+            "value": "container",
+            "label": "Container"
+         },
+         {
+            "value": "nt_full",
+            "label": "Full Width"
+          }
+        ],
+        "label": "Layout"
+      },     
+      {
+        "type": "range",
+        "id": "mg_top",
+        "label": "Margin top",
+        "default": 100,
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "mg_right",
+        "label": "Margin right",
+        "default": 0,
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "mg_bottom",
+        "label": "Margin bottom",
+        "default": 0,
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "mg_left",
+        "label": "Margin left",
+        "default": 0,
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "px"
+      },
+      {
+        "type": "header",
+        "content": "==General setting"
+      },     
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title of section"
+      },     
+      {
+        "type": "text",
+        "id": "sub_title",
+        "label": "Subtitle"
+      },
+	  {
+        "type": "image_picker",
+        "id": "background_video",
+        "label": "Background image of video",
+        "info" : "Dimension: 960 x 500"
+      },
+      {
+        "id": "url",
+        "type": "video_url",
+        "label": "Video URL",
+        "accept": ["youtube", "vimeo"],
+        "default": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
+        "info": "Accepts YouTube,vimeo links"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_number",
+        "label": "Show number label for each block content",
+        "default": true
+      }
+    ],
+	"blocks": [		
+		{
+          "type": "service",
+          "name": "Service item",
+          "settings": [			 
+              {
+                "type": "text",
+                "id": "name",
+                "label": "Name",
+                "default": "Body treatment"
+              },
+              {
+                "type": "text",
+                "id": "desc",
+                "label": "Description"
+              },
+			  {
+                "type": "url",
+                "id": "link",
+                "label": "Link"
+              }
+          ]
+    	}
+    ],
+    "presets": [
+      {
+        "name": "3. Our service",
+        "category": "Introduce",
+		"blocks": [
+          { "type": "service" },
+          { "type": "service" },
+		  { "type": "service" },
+          { "type": "service" }         
+        ]
+      }
+    ]
+  }
+{% endschema %}

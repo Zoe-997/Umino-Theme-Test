@@ -1,0 +1,291 @@
+<div class="js-menu-mobile-content categories-menu-moible" style="background-color:{{section.settings.bg_menu}};">
+  <div class="js-close-sidebar close-sidebar-btn"><i class="icon-x"></i></div>
+  <div id="mobile_menu" class="menu-mobile">
+    <h3>{{section.settings.title}}</h3>	
+<ul id="menu_mb_ul" class="nav-accordion laber_mb_menu">
+   {%- if section.blocks.size > 0 -%}
+      {%- for block in section.blocks -%}
+         {%- assign block_stts = block.settings -%}
+  	  	{%- case block.type -%}
+  		{%- when 'cate' -%}
+         {%- assign collection = collections[block_stts.cat] -%}
+  
+                  {%- if linklists[block_stts.menu].links.size > 0 -%}
+                      <li id="item_{{block.id}}" class="menu-item item-level-0 has-children" {{ block.shopify_attributes }}>
+                        <a href="{{block_stts.url | default:collection.url}}">
+                          {% if block_stts.show_icon and block_stts.icon != blank %}
+                       		<span class="icon">{{block_stts.icon}}</span>
+                      	{% endif %}
+                          
+                          <span>{{block_stts.title | default:collection.title}}
+                            {% if block_stts.lb != blank %}
+                              <span class="label" style="background-color: {{block_stts.lb_cl | default:'#222'}}">{{block_stts.lb}}</span>
+                            {% endif %}
+                          </span>
+                        </a>
+                           <ul class="sub-menu">
+                              {%- for link in linklists[block_stts.menu].links -%}
+                               
+                                 {%- if link.links != blank -%}
+                                    <li class="menu-item item-level-1 has-children {% if link.active %}active{% endif %}">
+                                       <a href="{{link.url}}"><span>{{link.title}}</span></a>
+                                       <ul class="sub-menu2">
+                                          {%- for child_link in link.links -%}
+
+                                             {%- assign arrlt = child_link.title | split: '[' -%}
+                                             {%- if child_link.links != blank -%}
+                                                <li id="item_{{block.id}}" class="menu-item item-level-2 has-children {% if child_link.active %}active{% endif %}">
+                                                   <a href="{{child_link.url}}"><span>{{child_link.title}}</span></a>
+                                                   <ul class="sub-menu3">
+
+                                                      {%- for grandchild_link in child_link.links -%}
+                                                      {%- assign arrlt = grandchild_link.title | split: '[' -%}
+                                                      <li class="menu-item item-level-3 {% if grandchild_link.active %}active{% endif %}">
+                                                        	<a href="{{grandchild_link.url}}">{{grandchild_link.title}}</a>
+                                                    	</li>
+                                                      {%- endfor -%}
+
+                                                   </ul>
+                                                </li>
+                                             {%- else -%}
+                                                 <li class="menu-item item-level-2{% if child_link.active %} active{% endif %}">
+                                                   <a href="{{child_link.url}}"><span>{{child_link.title}}</span></a></li>
+                                             {%- endif -%}
+
+                                          {%- endfor -%}
+                                       </ul>
+                                    </li>
+                                 {%- else -%}
+                                    <li class="menu-item item-level-1 {% if link.active %}active{% endif %}"><a href="{{link.url}}">
+                                      <span>{{link.title}}</span></a>
+                             		</li>
+                                 {%- endif -%}
+
+                              {%- endfor -%}
+                           </ul>
+                     </li>
+                  {%- else -%}
+                      <li id="item_{{block.id}}" class="menu-item item-level-0">
+                        
+                        <a href="{{block_stts.url | default:collection.url}}">
+						{% if block_stts.show_icon and block_stts.icon != blank %}
+                       		<span class="icon">{{block_stts.icon}}</span>
+                      	{% endif %}
+                       <span>
+                       {{block_stts.title | default:collection.title}}
+                         {% if block_stts.lb != blank %}<span class="label" style="background-color: {{block_stts.lb_cl | default:'#222'}}">{{block_stts.lb}}</span>{% endif %}</span></a></li>
+                  {%- endif -%}
+  
+              {%- endcase -%}
+      {%- endfor -%}
+   {%- endif -%}
+</ul>
+      {%- if section.blocks.size > 0 -%}
+      {%- for block in section.blocks -%}
+         {%- assign block_stts = block.settings -%}
+  	  	{%- case block.type -%}
+  		{%- when 'social' -%}
+  			<div class="item_social">
+              <h3>
+              	<span>{{block_stts.title}}</span>
+              </h3>
+            {% assign type_social = block_stts.type_social | plus: 0 %}
+              {%- if type_social == 1 -%}
+              	{% include 'social_link' %}
+              {%- else -%}
+              	{% include 'social-sharing' %}
+              {%- endif -%}
+            </div>
+        {%- when 'contact' -%}
+          <div class="item_contact">
+            <h3>
+              <span>{{block_stts.title}}</span>
+            </h3>
+            <div class="menu_contact_text">
+              {% if block_stts.phone%}
+              <p>
+                <span class="title">{{'general.mobile_menu.hotline' | t}}</span>
+                <span>{{block_stts.phone}}</span>
+              </p>
+              {%endif%}
+              {% if block_stts.email%}
+              <p>
+                <span class="title">{{'general.mobile_menu.email' | t}}</span> 
+                <a href="mailto:{{block_stts.email}}"><span>{{block_stts.email}}</span></a>
+              </p>
+              {%endif%}
+            </div>
+          </div>
+     {%- endcase -%}
+    {%- endfor -%}
+    {%endif%}
+    
+  </div>
+</div>
+{%style%}
+    .categories-menu-moible .item_social h3,
+    .categories-menu-moible .item_contact h3,
+    .categories-menu-moible .menu-mobile h3{
+		color:{{section.settings.color_title}};
+	}
+    .categories-menu-moible .menu-mobile .laber_mb_menu .menu-item .menu_contact_text a, 
+    .categories-menu-moible .menu-mobile .laber_mb_menu .menu-item .menu_contact_text p,
+    .categories-menu-moible .menu-mobile .laber_mb_menu .menu-item .menu_contact_title,
+    .categories-menu-moible .menu-mobile .laber_mb_menu .menu-item,
+    .categories-menu-moible .menu-mobile .laber_mb_menu .menu-item>a{
+    	color:{{section.settings.color_text}};
+    }
+    .categories-menu-moible .menu-mobile .laber_mb_menu .menu-item .menu_contact_text a:hover, 
+    .categories-menu-moible .menu-mobile .laber_mb_menu .menu-item .menu_contact_text p .title,
+    .categories-menu-moible .menu-mobile .laber_mb_menu .menu-item>a:hover{
+    	color:{{section.settings.color_text_hover}};
+    }
+{%endstyle%}
+{%- schema -%}
+  {
+    "name": "All Categories Top",
+    "class": "sc-categories-mobile",
+    "max_blocks": 50,
+	"settings": [
+      {
+      "type": "text",
+      "id": "title",
+      "label": "== Title",
+      "default": "All categories"
+      },
+      {
+      "type": "color",
+      "id": "bg_menu",
+      "label": "Background Color",
+      "default": "#0a2748"
+      },
+      {
+      "type": "color",
+      "id": "color_title",
+      "label": "Color title",
+      "default": "#fff"
+      },
+      {
+      "type": "color",
+      "id": "color_text",
+      "label": "Color text",
+      "default": "#fff"
+      },
+	  {
+      "type": "color",
+      "id": "color_text_hover",
+      "label": "Color text (Hover)",
+      "default": "#f04f35"
+      }
+	],
+    "blocks": [
+      {
+      "type": "social",
+      "name": "Social",
+      "limit": 1,
+      "settings": [
+        {
+        "type": "text",
+        "id": "title",
+        "label": "== Title",
+        "default": "Follow us"
+        },
+        {
+        "type": "select",
+        "id": "type_social",
+        "label": "Show sharing Or link:",
+        "options": [
+        {
+        "value": "1",
+        "label": "Social link"
+        },
+        {
+        "value": "2",
+        "label": "Social sharing"
+        }
+        ],
+        "default": "2"
+        }
+      ]
+      },
+	   {
+        "type": "contact",
+        "name": "Contact Us",
+        "limit": 1,
+        "settings": [
+         {
+            "type": "text",
+            "id": "title",
+            "label": "Title",
+            "default": "Contact Us?"
+         },
+		 {
+            "type": "text",
+            "id": "phone",
+            "label": "Title",
+            "default": "+391 (0)35 2568 4593"
+         },
+         {
+            "type": "text",
+            "id": "email",
+            "label": "Title",
+            "default": "Gosto@google.com"
+         }
+        ]
+      },	
+      {
+        "type": "cate",
+        "name": "Collection List",
+        "settings": [
+         {
+            "label": "== Collection",
+            "id": "cat",
+            "type": "collection"
+         },
+         {
+           "type": "text",
+           "id": "title",
+           "label": "== Title (optional)",
+			"default": "Women",
+            "info": "Prioritize instead of (collection title)."
+         },
+          {
+            "type": "url",
+            "id": "url",
+            "label": "Link (optional)",
+            "info": "Prioritize instead of (collection url)."
+          },
+         {
+            "type": "link_list",
+            "id": "menu",
+            "label": "== Add menu (optional)"
+         },
+         {
+            "type":"text",
+            "id":"lb",
+            "label":"== Label text"
+         },
+         {
+            "type":"color",
+            "id":"lb_cl",
+            "default":"#222",
+            "label":"== Label color"
+         },
+         {
+            "type": "checkbox",
+            "id": "show_icon",
+            "label": "Show icon",
+            "default": false
+          },
+         {
+            "id": "icon",
+            "type": "text",
+            "label": "Icon",
+            "default":"<i class=\"las la-female\"></i>",
+            "info":"Ex:user [Line awesome icons](https://icons8.com/line-awesome)"
+         }
+        ]
+      }
+    ]
+  }
+{% endschema %}

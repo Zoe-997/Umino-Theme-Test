@@ -1,0 +1,83 @@
+ {% assign limit = block.settings.limit %}
+{% assign handle_current = product.handle %}
+{% assign handle = product.collections[0].handle %}
+
+{% if handle =='' or handle == blank %}
+    {% assign handle = 'frontpage' %}
+{% endif %}	
+
+{% assign check_product = false %}
+
+{% for product in collections[handle].products%}            
+  {% if handle_current != product.handle %}
+    {% assign check_product = true %}
+  {% endif %}
+{% endfor %}
+<div class="modal-custom modal-product-carousel" id="modal-product-carousel-{{ block_id }}">
+    <div class="inner-modal-custom">
+        <div class="modal-custom-content">
+          <div class="btn-close btn-modal" data-modal="modal-product-carousel-{{ block_id }}">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M6.4 19L5 17.6L10.6 12L5 6.4L6.4 5L12 10.6L17.6 5L19 6.4L13.4 12L19 17.6L17.6 19L12 13.4L6.4 19Z"/>
+                    </svg>
+                </div>
+            <div class="modal-header">
+                
+            </div>
+            <div class="modal-content">
+                <div class="modal-content-top">
+                    <div class="modal-inner-top">
+                      <div class="modal-title">
+                          <div class="subtitle">{{ subtitle }}</div>
+                          <h3 class="product-title">
+                            {{ product.title }}
+                            {%- if product.selected_or_first_available_variant.sku != blank -%}
+                              <p class="ProductMeta__Sku Heading Text--subdued u-h6"><span class="ProductMeta__SkuNumber">{{ product.selected_or_first_available_variant.sku }}</span></p>
+                            {%- endif -%}
+                          </h3>
+                      </div>
+                      <div class="modal-media-top modal-media">
+                          {% for image in product.images %}
+                              <img src="{{ image.src | product_img_url: 'grande' }}" alt="{{ product.title }}">
+                          {% endfor %}
+                      </div>
+                    </div>
+                    <div class="modal-media-bottom modal-media">
+                        {% for image in product.images %}
+                            <img src="{{ image.src | product_img_url: 'grande' }}" alt="{{ product.title }}">
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="modal-content-description">{{ product.description }}</div>
+                <div class="modal-content-product-related">
+                    <div class="grid-slider CarouselProductRelative" 
+                        data-arrows="true" 
+                        data-dots="true" 
+                        data-infinite="false" 
+                        data-padding="8"
+                        data-rows="1" 
+                        data-speed="300" 
+                        data-autoplay-speed="3000"
+                        data-autoplay="false" 
+                        data-slides-to-show="2" 
+                        data-slides-to-scroll="1" 
+                        data-responsive='[
+                            {"breakpoint": 1200, "settings": {"slidesToShow": 2}}, 
+                            {"breakpoint": 992, "settings": {"slidesToShow": 2}}, 
+                            {"breakpoint": 768, "settings": {"slidesToShow": 2}}, 
+                            {"breakpoint": 481, "settings": {"slidesToShow": 1}}, 
+                            {"breakpoint": 361, "settings": {"slidesToShow": 1}}
+                        ]'>
+                        {% for product_r in collections[handle].products limit: limit %}    
+                        {% if handle_current != product_r.handle %}   
+                          {% render 'product-popup' with product: product_r show_vendor: true show_button_add_to_wishlist: true show_button_add_to_compare: true show_title: true %}  
+                        {% endif %}
+                    {% endfor %} 
+                    </div>
+                    
+                  </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

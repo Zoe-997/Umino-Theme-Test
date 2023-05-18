@@ -1,0 +1,20 @@
+{% assign admin_sp = request.design_mode %}
+{% assign header_design = section.settings.header_design %}
+{% if header_design == 'logo-center_2l' or header_design == 'logo-left_2l' %}
+  {% assign header_class = 'header-2-lines' %}
+{% else %}
+  {% assign header_class = 'header-1-lines' %}
+{% endif %}
+<div class="header {{ header_design }} {{ header_class }} {% if section.settings.sticky_top %}sticky_top{% endif %}">
+  {% if header_design == 'logo-center_2l' or header_design == 'logo-left_2l' %}
+    {%- render 'header-2-lines' ,se_blocks:se_blocks,tp_blocks:tp_blocks -%}
+  {% else %}
+    {%- render 'header-1-lines' ,se_blocks:se_blocks,tp_blocks:tp_blocks -%}
+  {% endif %}
+</div>
+{%- if admin_sp -%}
+    {%- assign arr_sub = 'link,link2,banner,html,pr,cat' -%}
+    {%- for block in se_blocks %}
+      <div {% if arr_sub contains block.type %}
+           {% assign id_data = block.id %} {{ block.shopify_attributes }}{% else %}{% assign id_data2 = block.id %}{% endif %}id="bkjs_{{id_data}}" data-id='{{id_data2}}'></div>{% endfor -%}
+{%- endif -%}

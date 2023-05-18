@@ -1,0 +1,348 @@
+{%- liquid
+  assign collection = collections[section.settings.collection_id]
+  assign available_products = collection.products | where: "available"
+  assign key = search.terms | default: request.page_type | strip
+  assign page_type = section.settings[key] | default:false
+  assign show_cl = section.settings.show_cl -%}
+
+{% if section.settings.use_cross_sell_popup %}
+    {%- for i in (1..1) %}
+    {% if page_type == false or available_products.size == 0 %}{% break %}{% endif -%}
+
+    {%- capture url_cat -%}{% if collection %}/collections/{{collection.handle}}{% endif %}{%- endcapture -%}
+
+    <div data-popup-crossell class="popup_slpr_wrap sales_animated hide des_{{section.settings.des}} slpr_mb_{{section.settings.mb}}{% if show_cl %} slpr_has_btns{% endif %}"
+        data-stt='{
+         "show":{
+          "index":{{section.settings.index | json}},
+          "product":{{section.settings.product | json}},
+          "collection":{{section.settings.collection | json}},
+          "article":{{section.settings.article | json}},
+          "blog":{{section.settings.blog | json}},
+          "cart":{{section.settings.cart | json}},
+          "page":{{section.settings.page | json}}
+        },
+         "classDown":{
+          "aniswing":"anibounceOutDown","anishake":"anibounceOutDown","aniwobble":"anibounceOutDown","anijello":"anibounceOutDown","anislideInUp":"anislideOutDown","anislideInLeft":"anislideOutLeft","anifadeIn":"anifadeOut","anifadeInLeft":"anifadeOutLeft","anibounceInUp":"anibounceOutDown","anibounceInLeft":"anibounceOutLeft","anirotateInDownLeft":"anirotateOutDownLeft","anirotateInUpLeft":"anirotateOutDownLeft","aniflipInX":"aniflipOutX","anizoomIn":"anizoomOut","anirollIn":"anirollOut"
+        },
+        "limit": {{ section.settings.limit | json }},
+        "pp_type": {{ section.settings.pp_type | json }},
+        "catlink": {{ collection.url | json}}, 
+        "url": {{ available_products | map:'url' | json }},
+        "id": {{ available_products | map:'id' | json }},
+        "image": {{ available_products | map:'featured_image' | json }},
+        "StarTime": {{ section.settings.start_time | json }},
+        "StarTime_unit": {{ section.settings.start_time_unit | plus:0 | json }},
+        "StayTime": {{ section.settings.stay_time | json }},
+        "StayTime_unit": {{ section.settings.stay_time_unit | plus:0 | json }},
+        "ClassUp": {{ section.settings.pp_ani | json }}
+        }'>
+       <div class="row al_center no-gutters fl_nowrap pr">
+          <div class="col-auto popup_slpr_thumb">
+            <a href="" class="js_slpr_a">
+                <img class="js_slpr_img" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" srcset="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="sales popup"></a>
+          </div>
+          <div class="col popup_slpr_info">
+               <span><span class="js_slpr_location"></span> {{section.settings.txt1}}</span>
+               <a href="#" class="js_slpr_a pp_slpr_title js_slpr_tt"></a>
+               <div class="pp_slpr_ago">
+                   {%- if section.settings.show_time %}<span class="pp_slpr_time js_slpr_ago"></span>{% endif -%}
+                   {%- if section.settings.show_verify %}<span class="pp_slpr_verify"><i class="icon-check-circle"></i>{{section.settings.txt2}}</span>{% endif -%}
+               </div>
+          </div>
+          {%- if show_cl %}<a class="pp_slpr_close" href="#" rel="nofollow"><i class="icon-x"></i></a>{% endif -%}
+       </div>
+    </div>
+    <script type="application/json" id="id_sale_pp">{{- available_products | map:'id' | json -}}</script>
+    <script type="application/json" id="title_sale_pp">{{- available_products | map:'title' | json -}}</script>
+    <script type="application/json" id="location_sale_pp">{{- section.settings.list_user | replace: ' | ', '|' | replace: ' |', '|' | replace: '| ', '|' | split: '|' | json -}}</script>
+    <script type="application/json" id="time_sale_pp">{{- section.settings.list_time | replace: ' | ', '|' | replace: ' |', '|' | replace: '| ', '|' | split: '|' | json -}}</script>
+    {%- endfor -%}
+{% endif %}
+                                            
+                                                 
+{%- schema -%}
+  {
+    "name": "Notification popup",
+    "class":"mfp-hide-",
+    "settings": [
+      {
+          "type": "checkbox",
+          "id": "use_cross_sell_popup",
+          "label": "Show notification popup",
+          "default": true
+	  },        
+      {
+        "type": "collection",
+        "label": "Select collection to display",
+        "id": "collection_id"
+      },
+      {
+        "type": "range",
+        "id": "limit",
+        "min": 1,
+        "max": 50,
+        "step": 1,
+        "label": "Limit Products",
+        "default": 8
+      },
+      {
+        "type": "header",
+        "content": "Select page to display"
+      },
+      {
+        "type": "checkbox",
+        "id": "index",
+        "label": "Home page",
+        "default": true,
+        "info": "Notification popup will display on home page"
+      },
+      {
+        "type": "checkbox",
+        "id": "product",
+        "label": "Product single",
+        "default": true,
+        "info": "Notification popup will display on Product single"
+      },
+      {
+        "type": "checkbox",
+        "id": "collection",
+        "label": "Collection page",
+        "default": false,
+        "info": "Notification popup will display on Collection page"
+      },
+      {
+        "type": "checkbox",
+        "id": "article",
+        "label": "Article page",
+        "default": false,
+        "info": "Notification popup will display on Article page"
+      },
+      {
+        "type": "checkbox",
+        "id": "blog",
+        "label": "Blog page",
+        "default": false,
+        "info": "Notification popup will display on Blog page"
+      },
+      {
+        "type": "checkbox",
+        "id": "cart",
+        "label": "Cart page",
+        "default": false,
+        "info": "Notification popup will display on Cart page"
+      },
+      {
+        "type": "checkbox",
+        "id": "page",
+        "label": "Other page",
+        "default": false,
+        "info": "Notification popup will display on Other page"
+      },
+      {
+        "type": "header",
+        "content": "General settings"
+      },
+      {
+        "type": "select",
+        "id": "pp_type",
+        "label": "Notification popup type",
+        "default": "2",
+        "options": [
+          {
+            "value": "1",
+            "label": "Sequential"
+          },
+          {
+            "value": "2",
+            "label": "Random"
+          }
+        ]
+      },
+      {
+        "type": "range",
+        "id": "start_time",
+        "min": 1,
+        "max": 60,
+        "step": 1,
+        "label": "Notification popup Start Time",
+        "default": 4
+      },
+      {
+        "type": "select",
+        "id": "start_time_unit",
+        "label": "Notification popup Start Time Unit",
+        "default": "1000",
+        "options": [
+          {
+            "value": "1000",
+            "label": "Second"
+          },
+          {
+            "value": "60000",
+            "label": "Minute"
+          }
+        ]
+      },
+      {
+        "type": "range",
+        "id": "stay_time",
+        "min": 1,
+        "max": 60,
+        "step": 1,
+        "label": "Popup Stay Time",
+        "default": 5
+      },
+      {
+        "type": "select",
+        "id": "stay_time_unit",
+        "label": "Notification popup Start Time Unit",
+        "default": "1000",
+        "options": [
+          {
+            "value": "1000",
+            "label": "Second"
+          },
+          {
+            "value": "60000",
+            "label": "Minute"
+          }
+        ]
+      },
+      {
+        "type": "checkbox",
+        "id": "show_cl",
+        "label": "Show close button?",
+        "default": false
+      },
+      {
+        "type": "textarea",
+        "id": "list_user",
+        "default": "Nathan (California) | Alex (Texas) | Henry (New York) | Kiti (Ohio) | Daniel (Washington) | Hau (California) | Van (Ohio) | Sara (Montana)  | Kate (Georgia)",
+        "info":"separate with '|'. If you not want use list user you can write a text. eg:'someone'",
+        "label": "List user purchased:",
+        "placeholder": "user1 | user2 | ..."
+      },
+      {
+        "type": "checkbox",
+        "id": "show_time",
+        "label": "Show time ago in suggest",
+        "default": true
+      },
+      {
+        "type": "textarea",
+        "id": "list_time",
+        "default": "4 hours ago | 2 hours ago | 45 minutes ago | 1 day ago | 8 hours ago | 10 hours ago | 25 minutes ago | 2 day ago | 5 hours ago | 40 minutes ago",
+        "info":"separate with '|'",
+        "label": "List time:",
+        "placeholder": "time1 | time2 | ..."
+      },
+      {
+        "type": "checkbox",
+        "id": "show_verify",
+        "label": "Show Verified?",
+        "default": true
+      },
+      {
+        "type": "header",
+        "content": "Theme settings"
+      },
+      {
+        "type": "select",
+        "id": "des",
+        "options": [
+          {
+            "value": "1",
+            "label": "Desgin 1"
+          },
+          {
+            "value": "2",
+            "label": "Desgin 2"
+          }
+        ],
+        "label": "Desgin Popup:",
+        "default": "1"
+      },
+      {
+        "type": "select",
+        "id": "pp_ani",
+        "label": "Animation Style",
+        "default": "anislideInUp",
+        "options": [
+          {
+            "value": "anislideInUp",
+            "label": "slideInUp"
+          },
+          {
+            "value": "anislideInLeft",
+            "label": "slideInLeft"
+          },
+          {
+            "value": "anifadeIn",
+            "label": "fadeIn"
+          },
+          {
+            "value": "anifadeInLeft",
+            "label": "fadeInLeft"
+          },
+          {
+            "value": "anibounceInUp",
+            "label": "bounceInUp"
+          },
+          {
+            "value": "anibounceInLeft",
+            "label": "bounceInLeft"
+          },
+          {
+            "value": "anirotateInDownLeft",
+            "label": "rotateInDownLeft"
+          },
+          {
+            "value": "anirotateInUpLeft",
+            "label": "rotateInUpLeft"
+          },
+          {
+            "value": "aniflipInX",
+            "label": "flipInX"
+          },
+          {
+            "value": "anizoomIn",
+            "label": "zoomIn"
+          },
+          {
+            "value": "anirollIn",
+            "label": "rollIn"
+          },
+          {
+            "value": "aniswing",
+            "label": "swing"
+          },
+          {
+            "value": "anishake",
+            "label": "shake"
+          },
+          {
+            "value": "aniwobble",
+            "label": "wobble"
+          },
+          {
+            "value": "anijello",
+            "label": "jello"
+          }
+        ]
+      },
+      {
+        "type": "text",
+        "id": "txt1",
+        "default": "purchased",
+        "label": "Text 'Purchased'"
+      },
+      {
+        "type": "text",
+        "id": "txt2",
+        "default": "Verified",
+        "label": "Text 'Verified'"
+      }
+    ]
+  }
+{% endschema %}

@@ -1,0 +1,39 @@
+{{ 'style.collection_page.css' | asset_url | stylesheet_tag }}
+
+<script>
+var json_collection_filter =  {{collection.products | json }};
+  var json_wishlist = [];
+  var json_product_tag = [];
+  var json_email = [];
+  {% if customer %}
+  
+    {% capture tags %}{% for tag in customer.tags %}{{ tag }} {% endfor %}{% endcapture %}
+    {% assign tags = tags | remove:'x' | split:' ' | uniq | join:' ' %}
+    {% for product in collection.products %}
+        		
+        {% if tags contains product.id %}
+          	{% for tag in customer.tags %}
+              {% if tag contains product.id %}
+                  {% assign t = tag %}  				
+
+              {% endif %}
+          	{% endfor %}
+  			json_product_tag.push("{{t}}");			
+  
+        	{% assign check = t.size | minus:product.id.size | modulo:2 %}
+        	{% assign  check_mod =  t.size | modulo :2   %}
+        	{% if check == 0 or check_mod == 0  %}
+			 	json_wishlist.push({{t | remove: 'x'}});
+			{% endif %} 
+  		{% else %}
+  			json_product_tag.push("{{product.id}}");
+  		{% endif %}
+    {% endfor %} 
+  		json_email.push("{{customer.email}}");
+  {% endif %}
+   
+  var pages="search";
+</script>
+
+{% section 'breadcrumb' %}
+{% section 'main-search' %}

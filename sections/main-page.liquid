@@ -1,0 +1,92 @@
+{% liquid
+	assign sid = section.id 
+ %}
+<section id="laber_{{sid}}">
+<div class="page-width page-width--narrow">
+  <div class="container">
+    {% if section.settings.show_page%}
+    <h1 class="main-page-title page-title h3">
+      {{ page.title | escape }}
+    </h1>
+    {%endif%}
+    <div class="rte">
+      {{ page.content }}
+    </div>
+  </div>
+</div>
+</section>
+{%style%}
+body {
+    background-color: {{section.settings.cl_bg}};
+}
+{%endstyle%}
+{%- render 'section_style' -%}
+{% schema %}
+  {
+    "name": "page",
+    "settings": [
+        {
+        "type": "checkbox",
+        "id": "show_page",
+        "label": "show Name page",
+        "default": false
+        }, 
+        {
+        "type": "header",
+        "content": "== setting content"
+        },
+        {
+        "type": "color",
+        "id": "cl_bg",
+        "label": "Background color",
+        "default": "#fff"
+        },
+
+        {
+        "type": "text",
+        "id": "pd_c",
+        "label": "Padding",
+        "info":"Padding top, Padding right, Padding bottom, Padding left. If you not use to blank"
+        },
+        {
+        "type": "header",
+        "content": "== Setting PC",
+        "info":"Margin"
+        },	
+        {
+        "type": "text",
+        "id": "mg",
+        "label": "Margin",
+        "info":"Margin top, margin right, margin bottom, margin left. If you not use to blank"
+        },
+        {
+        "type": "text",
+        "id": "pd",
+        "label": "Padding",
+        "info":"Padding top, padding right, padding bottom, padding left. If you not use to blank"
+        },
+        {
+        "type": "header",
+        "content": "== Design Mobile Options"
+        },
+        {
+        "type": "text",
+        "id": "mg_mb",
+        "label": "Margin"
+        },
+        {
+        "type": "text",
+        "id": "pd_mb",
+        "label": "Padding"
+        }
+		
+	]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}
+

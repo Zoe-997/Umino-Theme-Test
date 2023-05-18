@@ -1,0 +1,119 @@
+<!-- Created by Andy 10/08/2017 -->
+<!-- Created by Andy 10/08/2017 -->
+{% include 'product-res-variables' %}
+{%- assign show_label_in_stock = false | default: settings.product_collection_show_label_in_stock -%}
+{%- assign show_label_out_stock = true | default: settings.product_collection_show_label_out_stock -%}
+{%- assign show_label_sale = true | default: settings.product_collection_show_label_sale -%}
+{%- assign show_label_new = true | default: settings.product_collection_show_label_new -%}
+{%- assign show_label_hot = true | default: settings.product_collection_show_label_hot -%}
+{%- assign show_countdown = false | default: settings.product_collection_show_countdown -%}
+{%- assign show_images_navigation = true | default: settings.product_collection_show_images_navigation -%}
+{%- assign show_title = true | default: settings.product_collection_show_title -%}
+{%- assign show_sku = false | default: settings.product_collection_show_sku -%}
+{%- assign show_barcode = false | default: settings.product_collection_show_barcode -%}
+{%- assign show_availability = false | default: settings.product_collection_show_availability -%}
+{%- assign show_type = false | default: settings.product_collection_show_type -%}
+{%- assign show_vendor = false | default: settings.product_collection_show_vendor -%}
+{%- assign show_description = false | default: settings.product_collection_show_description -%}
+{%- assign show_price = true | default: settings.product_collection_show_price -%}
+{%- assign show_options = true | default: settings.product_collection_show_options -%}
+{%- assign show_custom_options = true | default: settings.product_show_custom_options -%}
+{%- assign show_quantity = false | default: settings.product_collection_show_quantity -%}
+{%- assign show_button_add_to_cart = true | default: settings.product_collection_show_button_add_to_cart -%}
+{%- assign show_button_add_to_wishlist = true | default: settings.product_collection_show_button_add_to_wishlist -%}
+{%- assign show_button_add_to_compare = true | default: settings.product_collection_show_button_add_to_compare -%}
+{%- assign show_button_quick_view = true | default: settings.product_collection_show_button_quick_view -%}
+{%- assign show_reviews = true | default: settings.product_collection_show_reviews -%}
+{%- assign hide_reviews_counter = true | default: settings.product_collection_hide_reviews_counter -%}
+{% assign build_variant = "all" %}
+
+{% unless current_collection == blank %}
+  {% assign current_collection = collection %}
+{% endunless %}
+{% unless current_collection == blank %}
+  {% assign current_collection = collection %}
+{% endunless %}
+
+{% assign on_sale = false %}
+{% assign sale_text = 'products.product.on_sale' | t %}
+{% if product.compare_at_price > product.price %}
+  {% assign on_sale = true %}
+{% endif %}
+
+{% assign sold_out = true %}
+{% assign sold_out_text = 'products.product.sold_out' | t %}
+{% if product.available %}
+  {% assign sold_out = false %}
+{% endif %}
+
+
+<div {% include 'product-get-attributes' %} class="js-grid-item col-ts-12 col-xs-6 col-sm-6 col-md-4 col-lg-4 product-item layout1 {% if index == 0 %} js-grid-item-width2 {% endif%}no-padding" data-col="4">
+  <div class="product-inner equal-elem">
+    <ul class="group-flash">
+      
+      {% assign date_published = product.published_at | date:'%Y%m%d' %}
+      {% assign date_now = 'now' | date:'%Y%m%d' %}
+      {% assign date_difference = date_now | minus: date_published %}
+      {% assign limit_day = settings.product_page_new_product | plus: 0%}
+      {% if date_difference <  limit_day%}
+          <li><span class="new flash">{{settings.collection_page_new_title}}</span></li>       	   
+      {% endif %}      
+      {% if on_sale == true %}
+      	<li><span class="sale flash">{{settings.collection_page_sale_title}}</span></li>
+      	<li><span class="best flash">{{settings.collection_page_sale_desc}}</span></li>
+      {% endif %}
+      
+    </ul>
+    <div class="thumb">
+      <a href="{{ product.url | within: collection }}" data-pid="{{ product.variants.first.id }}" class="quickview-button js_quick_view"><span class="icon"><i class="fa fa-eye" aria-hidden="true"></i></span> {{settings.collection_page_quickview}}</a>
+      <a href="{{ product.url | within: collection }}" class="thumb-link" >
+        {%- assign image = product.featured_image.src -%}
+        {%- if image -%}<div class="lazyload pr_lazy_img" data-bgset="{{ image | img_url: '1x1' }}" data-ratio="{{image.aspect_ratio}}" data-sizes="auto" style="padding-top:{{ 1 | divided_by: image.aspect_ratio | times: 100}}%;"></div>{%- endif -%}
+      </a>
+    </div>
+    <div class="info">
+      <!-- Rate code -->
+      <div class="star-rating" style="height:24px; line-height:24px;">
+        <span class="shopify-product-reviews-badge" data-id="{{ product.id }}"></span>
+      </div>
+      <!-- End rate-->
+      <a href="{{ product.url | within: collection }}" class="product-name">{{ product.title | strip_html | truncatewords: 8}}</a>
+      <p class="description">{{product.description| strip_html | truncatewords: 15 }}</p>
+      <div class="price">        
+        {% if on_sale %}
+        	<span class="del">{{product.compare_at_price | money }}</span>
+        	<span class="ins">{{product.variants[0].price | money }}</span>      
+        {% else %}
+        	<span>{{product.variants[0].price | money }}</span>
+        {% endif %}
+        
+      </div>
+      <div class="availability">{{settings.collection_page_availability}}: <a href="#">{% if product.available %} {{settings.collection_page_instock}} {% else %} {{'products.product.unavailable' | t}}{% endif %}</a></div>
+    </div>
+    
+    {% if sold_out == false %}          
+          <div class="group-button">
+            <div class="inner">
+              {% if product.variants.size > 1 %}
+              	<a class="button select-option" onclick="location.href='{{ product.url | within: collection }}'">{{'Product option' | upcase }}</a>
+              {% else %}
+                {% if product.variants.first.available %}
+                    <button type="submit" class="add-to-cart js_add_to_cart_button" data-pid="{{ product.variants.first.id }}" title="{{'products.product.add_to_cart' | t}}"><span class="text">{{'products.product.add_to_cart' | t | upcase }}</span><span class="icon"><i class="fa fa-cart-arrow-down" aria-hidden="true"></i></span></button>                   
+                    {% include 'product-get-button-wishlist' %}
+                    {% include 'product-get-button-compare' %}
+                {% endif %}
+              {% endif %}              
+            </div>
+          </div>
+      {% else %}
+          <div class="group-button" style="text-align: center;">
+            <div class="inner">
+            	<a class="button btn-sold-out" onclick="location.href='{{ product.url | within: collection }}'">{{'products.product.sold_out' | t | upcase }}</a>                                
+                  {% include 'product-get-button-wishlist' %}
+                  {% include 'product-get-button-compare' %}                
+            </div>
+          </div>
+      {% endif %}
+    
+  </div>
+</div>

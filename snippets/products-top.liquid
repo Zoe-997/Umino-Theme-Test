@@ -1,0 +1,37 @@
+{% assign layout = settings.layout_collection | plus:0 %}
+{% assign pagination_limit = settings.pagination_limit %}
+{% paginate collection.products by pagination_limit %}
+<div class="top-control box-has-content">
+      <div class="control">
+        {%if layout !=6 %}
+          {% if layout ==3 %}
+          <div class="filter-title">
+            <a href="javascript:void(0)">
+            	<i class="icon-filter"></i>
+            {{ 'collections.filters.title_tags' | t }} 
+            </a>
+          </div>
+         {% endif %}
+            <a href="javascript:void(0)" class="js-mobile-sidebar mobile-sidebar-btn"> 
+              <i class="icon-filter"></i>
+              {{ 'collections.filters.title_tags' | t }} 
+            </a>
+         {% endif %} 
+          {% if paginate.pages > 1 %}
+          	{% assign val_1 = paginate.current_offset%}
+          	{% assign val_2 = val_1 | plus: paginate.page_size %}
+          	{% if val_2 > paginate.items %}
+          		{% assign val_2 = paginate.items %}
+          	{% endif %}
+          	<div class="col laber-products-count">
+           		<span class="note products-result-count  align-left">{{'collections.general.showing' | t}} {% if paginate.items >0 %}{{val_1 | plus:1}}{% else %} {{val_1}} {% endif %}&ndash;{{val_2}} of {{paginate.items}} {{'collections.general.results' | t}}</span>
+        	</div>
+            {% endif %} 
+        
+        <div class="filter-choice col">
+          {% include 'collection-sorting' %}                   
+        </div> 
+        {% include 'collection-views' %} 
+      </div>
+    </div>
+{% endpaginate %}

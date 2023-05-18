@@ -1,0 +1,164 @@
+{%- liquid
+  assign bid = search.terms
+  assign se_blocks = section.blocks
+  assign arr_id = se_blocks | map: 'id'
+  assign arr_id_size = arr_id |split:bid | first |split:',' | size
+  assign block = se_blocks | where: "id", bid | first
+  assign arrType = "dropdown,logo,btn,simple,mega" -%}
+ 
+{%- if block.type == 'dropdown' -%}
+	{%- assign llists = linklists[block.settings.menu].links -%} 
+	         {%- for link in llists -%}
+	            {%- if link.links != blank -%}
+			         <div class="menu-item menu-item-has-children{% if link.active %} current{% endif %}">
+			            <a href="{{ link.url }}">{%- render 'item_drop_down',title:link.title -%}</a>
+			            <div class="submenu sub-menu-2">
+			            	{%- for child_link in link.links -%}
+				            	{%- if child_link.links != blank -%}
+					               <div class="menu-item menu-item-has-children{% if child_link.active %} current{% endif %}">
+					                  <a href="{{ child_link.url }}">{%- render 'item_drop_down',title:child_link.title -%}</a>
+					                  <div class="submenu sub-menu-3">
+					                  	{%- for grandchild_link in child_link.links -%}
+					                        <li class="menu-item{% if menu.active %} current{% endif %}">
+                                              <a href="{{ grandchild_link.url }}">{%- render 'item_drop_down',title:grandchild_link.title -%}</a>
+                                        	</li>
+					                     {%- endfor -%}
+					                  </div>
+					               </div>
+				               {%- else -%}
+                          			<div class="menu-item{% if child_link.active %} current{% endif %}"><a href="{{ child_link.url }}">
+                                    {%- render 'item_drop_down',title:child_link.title -%}</a>
+                          			</div>
+				               {%- endif -%}
+			               {%- endfor -%}
+			            </div>
+			         </div>
+	            {%- else -%}
+			         <div class="menu-item{% if link.active %} current{% endif %}">
+                       <a href="{{ link.url }}">
+                       		{%- render 'item_drop_down',title:link.title -%}
+                       </a>
+				     </div>
+			      {%- endif -%}
+	         {%- endfor -%}
+{%- else -%}
+
+	{%- for block in se_blocks offset:arr_id_size -%}
+
+	  {%- if arrType contains block.type %}{% break %}{% endif -%}
+	  {%- case block.type -%}
+
+	      {%- when 'banner' %}{% assign c_bid = block.id %}{% assign image = block.settings.image -%}
+	         <div id="bk_{{c_bid}}" class="type_mn_banner menu-item col-lg-{{block.settings.col}} col-md-12 col-sm-12">
+		        <div class="banner_menu zoom_img">
+                  <a href="{{ block.settings.url | default:'#' }}" target="{{block.settings.open_link}}" class="d-block image_product cursor-default">
+                    {%- if image != blank -%}
+                     
+                          <div class="lazyload pr_lazy_img" data-bgset="{{ image | img_url: '1x1' }}" data-ratio="{{image.aspect_ratio}}" data-sizes="auto" style="padding-top:{{ 1 | divided_by: image.aspect_ratio | times: 100}}%;"></div>
+                     
+                    {%- else -%}
+                      {%- capture cl -%}{% cycle 'a8dacc', '56cfe1' %}{%- endcapture -%}
+                     
+                          <img class="lazyload" data-src="https://placehold.it/530x600.png/{{cl}}/{{cl}}?text=1" />
+                    
+                    {%- endif -%}
+		          </a>
+                  {% if block.settings.enable_content_banner %}
+		          <div class="laber_content_html">
+                    <h3>
+                      <a href="{{ block.settings.url | default:'#' }}" target="{{block.settings.open_link}}">
+                      	{{block.settings.coll_name}}
+                      </a>
+                    </h3>
+                  </div>
+                  {% endif %}
+		        </div>
+	         </div>
+         
+         {%- when 'cat' -%}
+
+				  {%- assign collection = collections[block.settings.collection] -%}
+				  {%- assign image = block.settings.image | default:collection.image -%}
+				  {%- assign home_t = 'homepage.onboarding.collection_title' | t  | append:' #' | append:for_i -%} 
+            	<div id="bk_{{block.id}}" class="type_mn_pr menu-item sub-column-item col-lg-{{block.settings.col}} col-md-12 col-sm-12 equal_nt hoverz_{{block.settings.hoverz}} cat_design_{{block.settings.cat_design}}">
+					<div class="cat_grid_item cat_space_item">
+					  <div class="cat_grid_item__content pr oh">
+					    <a href="{{ collection.url | default:'/' }}" class="db cat_grid_item__link">
+					      {%- if image != blank -%}
+					        <div class="cat_grid_item__overlay item__position nt_bg_lz lazyload" data-bgset="{{ image | img_url: '1x1' }}" data-ratio="{{image.aspect_ratio}}" data-sizes="auto" data-parent-fit="width" style="padding-top:{{ 1 | divided_by: image.aspect_ratio | times: 100}}%;"></div>
+					      {%- else -%}
+					        <div class="cat_grid_item__overlay item__position nt_bg_lz lazyload" data-bg="https://placehold.it/1x1.png/a6d7cb/a6d7cb?text=570x300" style="padding-top:127%;"></div>
+					      {%- endif -%}
+					    </a>
+					    <div class="cat_grid_item__wrapper pe_none">
+					      <div class="cat_grid_item__title">{{ block.settings.title | default:collection.title | default:home_t }}</div>
+					      <div class="cat_grid_item__count dn">{{collection.all_products_count}} {{pr_txt}}</div>
+					    </div>
+					  </div>
+					</div>
+				</div>
+
+	      {%- when 'pr' -%}
+		      	{%- assign tcat = block.settings.id_cat | default:"all" -%}
+				{%- assign collection = collections[tcat] -%}
+		      	{%- if collection.products.size == 0 -%}{% continue %}{%- endif -%}
+   
+				{%- assign sett_equal = block.settings.use_eq_height -%}
+				{%- assign show_vendor = block.settings.show_vendor -%}
+				
+			
+				{%- assign limit = block.settings.limit -%}
+		      	{%- assign use_cdt = section.settings.use_cdt  -%} 
+		      	{%- assign txt_cd = 'products.grid_items.offer_end_in' | t  -%}
+
+	         <div id="bk_{{block.id}}" class="type_product type_link menu-item col-lg-{{block.settings.col}} col-md-12 col-sm-12">
+               <a href="{{ collection.url | default:'/admin/collections' }} " class="heading" target="_self">{{block.settings.tt_Product}}</a>
+               <div class="laberProducts-column">
+                   {%- for product in collection.products limit:limit -%}                 		
+                      	{%- render 'product_menu',product:product -%}
+                   {%- endfor -%}
+                      
+               </div>
+	         </div>			 
+	      {%- when 'link' -%}
+             {%- assign llists = linklists[block.settings.menu].links -%}
+	         {%- if llists.size == 0 -%}{% continue %}{%- endif -%}
+	         <div id="bk_{{block.id}}" class="type_link menu-item col-lg-{{block.settings.col}} col-md-12 col-sm-12">
+	         		{%- if block.settings.tt_hd != blank %}
+                		<a href="{{ block.settings.url }}" class="heading" target="{{block.settings.open_link}}">
+                			{{ block.settings.tt_hd }}
+               			</a>
+               		{% endif -%}
+					<ul class="sub-column">
+                      {%- for link in llists -%}
+						<li class="menu-item{% if link.active %} current{% endif %}">
+                          <a href="{{ link.url }}">{{ link.title }}</a>
+                      	</li>
+					 {%- endfor -%}
+					</ul>
+	         </div>
+	      {%- when 'link2' -%}
+				{%- assign llists = linklists[block.settings.menu].links -%}
+	         	{%- if llists.size == 0 -%}{% continue %}{%- endif -%}
+                 <div id="bk_{{block.id}}" class="type_link2 menu-item  col-lg-{{block.settings.col}} col-md-12 col-sm-12">
+                    {%- for link in llists -%}
+                       <div class="menu-item{% if link.active %} current{% endif %}">
+                         <a href="{{ link.url }}">
+                              {{ link.title }}
+                         </a>
+                       </div>
+                   {%- endfor -%}
+                 </div>
+	      {%- when 'html' -%}
+				<div id="bk_{{block.id}}" class="type_mn_html menu-item sub-column-item col-{{block.settings.col}} col-md-12 col-sm-12">
+                  {{- block.settings.html -}}
+				</div>
+	      {%- else -%}
+			<style>
+              #item_{{bid}} .submenu {display: none !important}
+			</style>
+
+	  {%- endcase -%}
+	{%- endfor -%}
+
+{%- endif -%}

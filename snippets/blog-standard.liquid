@@ -1,0 +1,29 @@
+<div class="post-item layout3 post-limit-width">
+  <div class="post-format">
+    <a href="{{ article.url }}"><img class="lazyload" data-src="{{ article.image.src | img_url: '1024x1024' }}" alt="{{ article.title }}"></a>
+  </div>
+  <div class="post-info" style="text-align: justify;">
+    <div class="head">
+      <a href="{{ article.url }}" class="post-title">{{ article.title | truncatewords: 5 }}</a>
+      <ul class="meta-post">
+        <li class="author">{{'blogs.article.by_author' | t: author : article.author}}</li>
+        <li class="time-post">
+          <a href="{{ article.url }}">
+          	<span class="day">{{ article.created_at | date: "%d" }}</span>{{ article.created_at | date: "%b" }} {{ article.created_at | date: "%Y" }}
+          </a>
+        </li>
+        
+      </ul>
+    </div>
+    <div class="main-info-post">
+      <div>
+        {% if article.excerpt.size > 0 %}
+          {{ article.excerpt | truncate: 400}}         
+        {% else %}
+          <p class="des">{{ article.content | truncatewords: 20}}</p>
+        {% endif %}   
+      </div>
+      <a href="{{article.url}}" class="button read-more">{{'blogs.article.read_more'|t}}</a>
+    </div>
+  </div>
+</div>
