@@ -1,26 +1,35 @@
-<li class="currency-picker hide-mobile item-list" >
+{% assign currencies = shop.money_format | split: '{{amount}}' %}
+{% assign codes = 'USD,EUR,GBP,CAD,ARS,AUD,BBD,BDT,BSD,BHD,BRL,BOB,BND,BGN,ILS,MMK,KYD,CLP,CNY,COP,CRC,HRK,CZK,DKK,DOP,XCD,EGP,XPF,FJD,GHS,GTQ,GYD,GEL,HKD,HUF,ISK,INR,IDR,NIS,JMD,JPY,JOD,KZT,KES,KWD,LVL,LTL,MXN,MYR,MUR,MDL,MAD,MNT,MZN,ANG,NZD,NGN,NOK,OMR,PKR,PYG,PEN,PHP,PLN,QAR,RON,RUB,SAR,RSD,SCR,SGD,SYP,ZAR,KRW,LKR,SEK,CHF,TWD,THB,TZS,TTD,TRY,UAH,AED,UYU,VEB,VND,ZMK'
+  | split: ','
+%}
+{% assign supported_codes = settings.supported_currencies | split: ' ' %}
+{% assign currency_default = shop.currency %}
+
+<li class="currency-picker hide-mobile item-list">
   {% render 'currency-picker' %}
-  <p class="toggle-submenu">                
-    <span class="lang-currency">{{shop.currency}}</span><span class="icon"><i class="icon-chevron-down"></i></span>
-  </p>  
-  <ul class="{{shop.currency}} dropdown list-currencies currency-lists child-list">         
-    {% assign codes = 'USD,EUR,GBP,CAD,ARS,AUD,BBD,BDT,BSD,BHD,BRL,BOB,BND,BGN,ILS,MMK,KYD,CLP,CNY,COP,CRC,HRK,CZK,DKK,DOP,XCD,EGP,XPF,FJD,GHS,GTQ,GYD,GEL,HKD,HUF,ISK,INR,IDR,NIS,JMD,JPY,JOD,KZT,KES,KWD,LVL,LTL,MXN,MYR,MUR,MDL,MAD,MNT,MZN,ANG,NZD,NGN,NOK,OMR,PKR,PYG,PEN,PHP,PLN,QAR,RON,RUB,SAR,RSD,SCR,SGD,SYP,ZAR,KRW,LKR,SEK,CHF,TWD,THB,TZS,TTD,TRY,UAH,AED,UYU,VEB,VND,ZMK' | split: ',' %}
-    {% assign supported_codes = settings.supported_currencies | split: ' ' %}  
-    {% assign currency_default = shop.currency %}
+  <p class="toggle-submenu">
+    <span class="lang-currency">
+      <span class="title">
+        {% for country in localization.available_countries %}
+          {{ country.currency.name }} ( {{ country.currency.iso_code }}
+            {{ country.currency.symbol }})
+        {% endfor -%}
+      </span>
+      <span class="icon"><i class="icon-chevron-down"></i>
+    </span>
+  </p>
+  <ul class="{{ shop.currency }} dropdown list-currencies currency-lists child-list">
     {% for code in supported_codes %}
       {% if codes contains code %}
-        <li data-value="{{ code }}" class="{{ code }}{% if currency_default == code %} active{%endif%}" >
-          <p><span class="code_currency">{{ code }}</span></p>
+        <li data-value="{{ code }}" class="{{ code }}{% if currency_default == code %} active{% endif %}">
+          <p>
+            <span class="code_currency">
+              {{- code }}
+              {{  -}}
+            </span>
+          </p>
         </li>
       {% endif %}
-    {% endfor %} 
+    {% endfor %}
   </ul>
-  {% assign currencies = shop.money_format | split: '{{amount}}' %}
-  {% assign money_prefix = currencies[0] %}
-  {% assign money_suffix = currencies.last %}
-  <ul>
-  {%- for currency_code in shop.enabled_currencies -%}
-    <li>{{shop.currency_display[currency_code]}} ({{money_prefix}}{{1.00 | money_without_currency | remove: "1.00" }}{{money_suffix}})</li>
-  {%- endfor -%}
-  </ul>    
 </li>
