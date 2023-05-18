@@ -6,7 +6,7 @@
     "rtl": true,
     "show_button_rtl": false,
     "show_load_page": true,
-    "cusotm_width": "1860",
+    "cusotm_width": "1890",
     "select_header": "1",
     "select_footer": "1",
     "show_policy_terms_of_service_page": true,
@@ -1655,7 +1655,7 @@
               "pos_rel": false,
               "wid": "cus",
               "cus_wid": 1200,
-              "bg": "#fff"
+              "bg": "#ffffff"
             }
           },
           "8f05fad1-35de-475f-9f44-61e37029c130": {
@@ -3276,16 +3276,16 @@
               "text_time": 1.5,
               "color": "#ffffff",
               "fw_text": 500,
-              "fs_text": 17,
-              "lh_text": 0,
-              "ls_text": "0",
+              "fs_text": 13,
+              "lh_text": 18,
+              "ls_text": "1.3px",
               "font_style": "normal",
               "mg_top": 10,
               "custom_mark": "",
               "last_mark": false,
               "custom_mark_color": "#fbb71c",
               "mobile_fw_text": 500,
-              "mobile_lh_text": 0,
+              "mobile_lh_text": 15,
               "mobile_font_text": 14,
               "mobile_mg_top": 0
             }
@@ -3297,9 +3297,9 @@
               "text_animate": "none",
               "text_time": 1.5,
               "color": "#ffffff",
-              "fw_text": 600,
-              "fs_text": 60,
-              "lh_text": 0,
+              "fw_text": 700,
+              "fs_text": 90,
+              "lh_text": 122,
               "ls_text": "0",
               "font_style": "normal",
               "mg_top": 10,
@@ -3307,7 +3307,7 @@
               "last_mark": false,
               "custom_mark_color": "#fbb71c",
               "mobile_fw_text": 600,
-              "mobile_lh_text": 0,
+              "mobile_lh_text": 89,
               "mobile_font_text": 40,
               "mobile_mg_top": 5
             }
@@ -3320,13 +3320,13 @@
               "text_time": 1.5,
               "color": "#ffffff",
               "fw_text": 400,
-              "fs_text": 14,
-              "lh_text": 0,
+              "fs_text": 16,
+              "lh_text": 20,
               "ls_text": 0,
               "hide_mobile": false,
               "mg_top": 10,
               "mobile_fw_text": 600,
-              "mobile_lh_text": 0,
+              "mobile_lh_text": 18,
               "mobile_font_text": 14,
               "mobile_mg_top": 5
             }
@@ -3334,7 +3334,7 @@
           "66abf253-6c08-4312-bed8-9ec0a3501e7d": {
             "type": "btn",
             "settings": {
-              "title": "Shop now",
+              "title": "SHOP NOW",
               "text_animate": "none",
               "text_time": 1.5,
               "btn_link": "",
@@ -3345,7 +3345,7 @@
               "cl_bd": "#111111",
               "cl_bd_hover": "#111111",
               "fs_text": 13,
-              "fw_text": 600,
+              "fw_text": 700,
               "br_button": "30px",
               "mg_top": 50,
               "pd": "19px 54px",

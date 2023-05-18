@@ -20,9 +20,14 @@
   assign h_mb = section.settings.h_mb
 %}
 
-<section id="laber_{{ sid }}" class="laber_slidershow_{{ sid }}">
-  <div data-wrapper-slidershow class="{{ section.settings.layout }}">
-    <div class="laberSlidershow">
+<section
+  id="laber_{{ sid }}"
+  class="laber_slidershow_{{ sid }}">
+  <div
+    data-wrapper-slidershow
+    class="{{ section.settings.layout }}">
+    <div
+      class="laberSlidershow">
       {% include 'grid-slider', settings: section.settings %}
       <div
         class="grid-slider js_carousel vertical-center {% if section.settings.fade_zoom %}fade_zoom{% endif %} arrows-{{ design_arrows }}"
@@ -40,7 +45,8 @@
                 assign block_bg_opacity = block.settings.cl_opacity | divided_by: 100
                 assign design = block.settings.design
               -%}
-              <div class="wrap_slide js_image_slide">
+              <div
+                class="wrap_slide js_image_slide">
                 <div
                   id="laber_bock_{{ block.id }}"
                   class="content-item {{ design }}"
@@ -66,16 +72,22 @@
                       data-sizes="auto"
                       style="padding-top:{% if image_mobile != blank %} {{ pd_top_mobile }}%{% else %} {{ pd_top }}{% endif %};"></div>
                   {% else %}
-                    <div class="img-demo">
+                    <div
+                      class="img-demo">
                       {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder-svg' }}
                     </div>
                   {% endif %}
 
-                  <div class="container wrap_text">
-                    <div class="wrapper_caption d-flex flex-wrap h_{{ block.settings.h_position }} v_{{ block.settings.v_position }} text_{{ block.settings.txt_align }}">
-                      <div class="caption">
-                        <div class="outner-caption">
-                          <div class="inner-caption">
+                  <div
+                    class="container wrap_text">
+                    <div
+                      class="wrapper_caption d-flex flex-wrap h_{{ block.settings.h_position }} v_{{ block.settings.v_position }} text_{{ block.settings.txt_align }}">
+                      <div
+                        class="caption">
+                        <div
+                          class="outner-caption">
+                          <div
+                            class="inner-caption">
                             {% for block in section_blocks offset: index %}
                               {% assign index = index | plus: 1 %}
                               {%- case block.type -%}
@@ -89,7 +101,9 @@
                                   class="laber-{{ block.settings.text_animate }}"
                                   {{ block.shopify_attributes }}
                                   style="display:inline-block; -webkit-animation-duration: {{ block.settings.text_time }}s; animation-duration: {{ block.settings.text_time }}s;">
-                                  <div class="logo_img" style="width:{{ logo.width }}px">
+                                  <div
+                                    class="logo_img"
+                                    style="width:{{ logo.width }}px">
                                     <div
                                       class="lazyload"
                                       data-bgset="{% if logo != blank %}{{ logo | img_url: '1x1' }}{% else %}{{ no-logo }}{% endif %}"
@@ -111,7 +125,8 @@
                                   %}
                                   {% for item in somearray %}
                                     {% assign index_mark = index_mark | plus: 1 %}
-                                    <span class="{% if pos contains index_mark %}marked{% endif %}{% if block.settings.last_mark and forloop.last %}marked last{% endif %}">{{ item }}</span>
+                                    <span
+                                      class="{% if pos contains index_mark %}marked{% endif %}{% if block.settings.last_mark and forloop.last %}marked last{% endif %}">{{ item }}</span>
                                   {% endfor %}
                                   {% style %}
                                     #b_{{ block.id }}.marked {
@@ -133,7 +148,8 @@
                                   %}
                                   {% for item in somearray %}
                                     {% assign index_mark = index_mark | plus: 1 %}
-                                    <span class="{% if pos contains index_mark %}marked{% endif %}{% if block.settings.last_mark and forloop.last %}marked last {% endif %}">{{ item }}</span>
+                                    <span
+                                      class="{% if pos contains index_mark %}marked{% endif %}{% if block.settings.last_mark and forloop.last %}marked last {% endif %}">{{ item }}</span>
                                   {% endfor %}
                                   {% style %}
                                     #b_{{ block.id }}.marked {
@@ -168,13 +184,17 @@
                                   id="b_{{ block.id }}"
                                   class="slide_item_box"
                                   {{ block.shopify_attributes }}>
-                                  <div class="inner-box">
-                                    <div class="outside-box">
-                                      <div class="inside-box">
+                                  <div
+                                    class="inner-box">
+                                    <div
+                                      class="outside-box">
+                                      <div
+                                        class="inside-box">
                                         <h2>{{ block.settings.title }}</h2>
                                         <p>{{ block.settings.content }}</p>
                                         {%- if block.settings.btn_link != blank and block.settings.button_text != blank -%}
-                                          <a href="{{ block.settings.btn_link }}">{{ block.settings.button_text }}</a>
+                                          <a
+                                            href="{{ block.settings.btn_link }}">{{ block.settings.button_text }}</a>
                                         {% endif %}
                                       </div>
                                     </div>
@@ -209,9 +229,12 @@
 
       </div>
       {% if section.settings.dots %}
-        <div class="wrapper-dots  {{ design_dots }}">
-          <div class="container">
-            <div class="appendDots"></div>
+        <div
+          class="wrapper-dots  {{ design_dots }}">
+          <div
+            class="container">
+            <div
+              class="appendDots"></div>
           </div>
         </div>
       {% endif %}
@@ -220,8 +243,11 @@
   {%- for block in section_blocks -%}
     {%- case block.type -%}
       {% when 'benefit' %}
-      <div id="b_{{ block.id }}" class="slideshow-benefit">
-        <div class="container">
+      <div
+        id="b_{{ block.id }}"
+        class="slideshow-benefit">
+        <div
+          class="container">
           {% render 'benefit-slideshow' block: block.settings %}
         </div>
       </div>
@@ -232,35 +258,35 @@
 
 {%- capture style-slideshow -%}
   #laber_{{ sid }}{
-    margin-bottom: {{ section.settings.mg_bottom }}px;
+  margin-bottom: {{ section.settings.mg_bottom }}px;
   }
-
-  #laber_{{ sid }} .arrows-design-1 .slick-arrow:before{
+  
+    #laber_{{ sid }} .arrows-design-1 .slick-arrow:before{
   color: {{ section.settings.cl_arrow }};
   }
-            
-  #laber_{{ sid }} .arrows-design-1 .slick-arrow:hover:before{
+              
+    #laber_{{ sid }} .arrows-design-1 .slick-arrow:hover:before{
   color: {{ section.settings.cl_arrow_hover }};
   }
-            
-  #laber_{{ sid }} .arrows-design-1 .slick-arrow:after{
+              
+    #laber_{{ sid }} .arrows-design-1 .slick-arrow:after{
   background: {{ section.settings.bg_arrow }};
   }
-            
-  #laber_{{ sid }} .arrows-design-1 .slick-arrow:hover:after{
+              
+    #laber_{{ sid }} .arrows-design-1 .slick-arrow:hover:after{
   background: {{ section.settings.bg_arrow_hover }};
   }
-            
-  #laber_{{ sid }} .slick-dots li button{
-    background-color: {{ section.settings.cl_dots }};
+              
+    #laber_{{ sid }} .slick-dots li button{
+  background-color: {{ section.settings.cl_dots }};
   }
-            
-    #laber_{{ sid }} .slick-dots li.slick-active button,
+              
+      #laber_{{ sid }} .slick-dots li.slick-active button,
   #laber_{{ sid }} .slick-dots li:hover button{
-    background-color: {{ section.settings.cl_dots_active }};
+  background-color: {{ section.settings.cl_dots_active }};
   }
-            
-    #laber_{{ sid }} .slick-dots li.slick-active{
+              
+      #laber_{{ sid }} .slick-dots li.slick-active{
   border-color: {{ section.settings.cl_dots_active }};
   }
 
@@ -269,35 +295,35 @@
     #laber_{{ sid }} .pr_lazy_img {
     padding-top: {{ h_des }} !important;
     }
-                            }
-                        
-                            @media only screen and (min-width : 768px) and (max-width : 1024px){
-                              #laber_{{ sid }} .pr_lazy_img {
+                                }
+                            
+                                @media only screen and (min-width : 768px) and (max-width : 1024px){
+                                  #laber_{{ sid }} .pr_lazy_img {
     padding-top: {{ h_tb }} !important;
     }
-                            }
-                        
-                            @media only screen and (max-width : 767px){
-                              #laber_{{ sid }} .pr_lazy_img {
+                                }
+                            
+                                @media only screen and (max-width : 767px){
+                                  #laber_{{ sid }} .pr_lazy_img {
     padding-top: {{ h_mb }} !important;
     }
-                            }{%- elsif use_custom_h == '2' -%}
+                                }{%- elsif use_custom_h == '2' -%}
     @media only screen and (min-width : 768px) and (max-width : 1024px){
     #laber_{{ sid }} .pr_lazy_img {
     padding-top: {{ h_tb }} !important;
     }
-                            }
-                            
-                            @media only screen and (max-width : 767px){
-                              #laber_{{ sid }} .pr_lazy_img {
+                                }
+                                
+                                @media only screen and (max-width : 767px){
+                                  #laber_{{ sid }} .pr_lazy_img {
     padding-top: {{ h_mb }} !important;
     }
-                            }{% else %}
+                                }{% else %}
     @media only screen and (max-width : 767px){
     #laber_{{ sid }} .pr_lazy_img {
     padding-top: {{ h_mb }} !important;
     }
-                            }{% endif %}
+                                }{% endif %}
 
   {%- if section_blocks.size > 0 %}
     {%- for block in section_blocks -%}
@@ -325,14 +351,14 @@
         font-weight:{{ block.settings.fw_text }};
         margin-top: {{ block.settings.mg_top }}px; 
         }
-                                                          
-                                                          @media (max-width: 1024px) {
-                                                            .wrapper_caption #b_{{ block.id }}.slide_item_h4{
+                                                                  
+                                                                  @media (max-width: 1024px) {
+                                                                    .wrapper_caption #b_{{ block.id }}.slide_item_h4{
         font-size:{{ block.settings.mobile_font_text }}px;
         {% if block.settings.mobile_lh_text > 0 %}line-height:{{ block.settings.mobile_lh_text }}px;{% endif %}
         font-weight:{{ block.settings.mobile_fw_text }}; 
         }
-                                                          }
+                                                                  }
 
         {% when 'hd' %}
         .wrapper_caption #b_{{ id }}.slide_item_h3 {
@@ -344,14 +370,14 @@
         font-weight:{{ block.settings.fw_text }};
         margin-top: {{ block.settings.mg_top }}px;
         }
-                                                          
-                                                          @media (max-width: 1024px) {
-                                                            .wrapper_caption #b_{{ block.id }}.slide_item_h3{
+                                                                  
+                                                                  @media (max-width: 1024px) {
+                                                                    .wrapper_caption #b_{{ block.id }}.slide_item_h3{
         font-weight:{{ block.settings.mobile_fw_text }};
         {% if block.settings.mobile_lh_text > 0 %}line-height:{{ block.settings.mobile_lh_text }}px;{% endif %}
         font-size:{{ block.settings.mobile_font_text }}px; 
         }
-                                                          }
+                                                                  }
 
         {% when 'txt' %}
         .wrapper_caption #b_{{ id }}.slide_item_p{
@@ -362,14 +388,14 @@
         font-weight:{{ block.settings.fw_text }};
         margin-top: {{ block.settings.mg_top }}px;
         }
-                                                
-                                                          @media (max-width: 1024px) {
-                                                            .wrapper_caption #b_{{ block.id }}.slide_item_p{
+                                                        
+                                                                  @media (max-width: 1024px) {
+                                                                    .wrapper_caption #b_{{ block.id }}.slide_item_p{
         font-size:{{ block.settings.mobile_font_text }}px;
         {% if block.settings.mobile_lh_text > 0 %}line-height:{{ block.settings.mobile_lh_text }}px;{% endif %}
         font-weight:{{ block.settings.mobile_fw_text }};
         }
-                                                          }
+                                                                  }
         {% when 'btn' %}
         {% liquid
             assign padding = block.settings.pd
@@ -421,41 +447,41 @@
         background: {{ block.settings.cl_bg }}; 
         border-color: {{ block.settings.cl_bd }};
         }
-                                                
-                                                          .rtl .content-item #b_{{ id }}.buttons{
+                                                        
+                                                                  .rtl .content-item #b_{{ id }}.buttons{
         padding-right:{{ padding_left }};
         padding-left:{{ padding_right }};
         }
-                                                
-                                                          .content-item #b_{{ block.id }}.buttons:hover{
+                                                        
+                                                                  .content-item #b_{{ block.id }}.buttons:hover{
         color:{{ block.settings.cl_txt_hover }};
         }
-                                                
-                                                          .content-item.design-1 #b_{{ id }}.buttons,
+                                                        
+                                                                  .content-item.design-1 #b_{{ id }}.buttons,
         .content-item.design-1 #b_{{ block.id }}.buttons:hover{
         background: transparent;
-                                                            border-color: transparent;
-                                                          }
-                                                
-                                                          .content-item.design-1 #b_{{ id }}.buttons:before{
+                                                                    border-color: transparent;
+                                                                  }
+                                                        
+                                                                  .content-item.design-1 #b_{{ id }}.buttons:before{
         background: {{ block.settings.cl_bg }}; 
         border-color: {{ block.settings.cl_bd }};
         border-radius:{{ block.settings.br_button }};
         }
-                                                
-                                                          .content-item.design-1 #b_{{ id }}.buttons:hover:before{
+                                                        
+                                                                  .content-item.design-1 #b_{{ id }}.buttons:hover:before{
         background: {{ block.settings.cl_bg_hover }}; 
         border-color: {{ block.settings.cl_bd_hover }};
         }
-                                                
-                                                          @media (max-width: 1024px) {
-                                                            wrapper_caption #b_{{ block.id }}.buttons{
+                                                        
+                                                                  @media (max-width: 1024px) {
+                                                                    wrapper_caption #b_{{ block.id }}.buttons{
         margin-top:{{ block.settings.mobile_mg_top }}px; 
         padding:{{ block.settings.mobile_pd }};
         font-size:{{ block.settings.mobile_font_text }}px;		
         font-weight:{{ block.settings.mobile_fw_text }};
         }	
-                                                          }
+                                                                  }
 
         {% when 'box' %}
         .wrapper_caption #b_{{ block.id }}.slide_item_box .inside-box h2{
@@ -466,8 +492,8 @@
         color:{{ block.settings.color }}; 
         font-weight:{{ block.settings.fw_title }};
         }
-                                                          
-                                                          .wrapper_caption #b_{{ block.id }}.slide_item_box .inside-box  p{
+                                                                  
+                                                                  .wrapper_caption #b_{{ block.id }}.slide_item_box .inside-box  p{
         text-transform:{{ block.settings.contennt_transform }}; 
         letter-spacing:{{ block.settings.ls_text }}px;
         {% if block.settings.lh_text > 0 %}line-height:{{ block.settings.lh_text }}px;{% endif %}
@@ -475,8 +501,8 @@
         color:{{ block.settings.color_content }}; 
         font-weight:{{ block.settings.fw_text }};
         }
-                                                          
-                                                          .wrapper_caption #b_{{ block.id }}.slide_item_box .inside-box  a{
+                                                                  
+                                                                  .wrapper_caption #b_{{ block.id }}.slide_item_box .inside-box  a{
         text-transform:{{ block.settings.btn_transform }}; 
         letter-spacing:{{ block.settings.ls_btn }}px;  
         font-size:{{ block.settings.fs_text_btn }}px; 
@@ -488,28 +514,28 @@
         @media screen and (min-width: 1200px){
         .laber_slidershow_{{ sid }}{
         position: relative;
-                                                            }
-                                                  
-                                                            #b_{{ block.id }} .item-media{
+                                                                    }
+                                                          
+                                                                    #b_{{ block.id }} .item-media{
         color: {{ block.settings.color_icon }};
         }
-                                                  
-                                                            #b_{{ block.id }} .item-details{
+                                                          
+                                                                    #b_{{ block.id }} .item-details{
         color: {{ block.settings.color_text }};
         }
-                                                  
-                                                            #b_{{ block.id }} .item-details .title{
+                                                          
+                                                                    #b_{{ block.id }} .item-details .title{
         color: {{ block.settings.color_title }};
         }
-                                                          }
+                                                                  }
       {% endcase %}
     {% endfor %}
   {%- endif- %}
   @media (max-width: 1024px) {
   .hide_mobile{
-                  display:none;
-                }
-              }{%- endcapture -%}
+                    display:none;
+                  }
+                }{%- endcapture -%}
 
 {% style %}
   {{ style-slideshow }}
@@ -1182,8 +1208,8 @@
             "type": "range",
             "id": "lh_text",
             "min": 0,
-            "max": 100,
-            "step": 1,
+            "max": 200,
+            "step": 2,
             "label": "t:sections.all.styles.fonts.line_height",
             "info": "t:sections.all.note.set_default",
             "unit": "px",
