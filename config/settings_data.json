@@ -1301,6 +1301,7 @@
             "settings": {
               "show_phone": true,
               "show_email": true,
+              "show_icon": false,
               "text_align": "topbar-left",
               "col": "4"
             }
@@ -1308,8 +1309,8 @@
           "33b63695-e95e-42b4-9b51-1247e8ed2e6f": {
             "type": "message",
             "settings": {
-              "message_text": "Free shipping on all orders over <span>$79<\/span>",
-              "text_link": "Shop Now",
+              "message_text": "Sign up for 10% off your first order",
+              "text_link": "Sign Up",
               "btn_link": "shopify:\/\/collections",
               "open_link": "_blank",
               "text_align": "topbar-center",
@@ -1326,7 +1327,7 @@
               "menu_topbar": "",
               "header_use_currency": true,
               "header_use_language": true,
-              "header_use_social": true,
+              "header_use_social": false,
               "type_social": "1",
               "text_align": "topbar-right",
               "col": "4"
