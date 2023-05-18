@@ -1,4 +1,7 @@
 {% include 'google-fonts' %}
+<link rel="preconnect" href=" {{ 'style.import-fonts.css' | asset_url}}" crossorigin>
+<link rel="preload" as="style" href="{{ 'style.import-fonts.css' | asset_url}}">
+{{ 'style.import-fonts.css' | asset_url | stylesheet_tag}} 
 <link rel="preconnect" href=" {{ 'style.fotorama.min.css' | asset_url}}" crossorigin>
 <link rel="preload" as="style" href="{{ 'style.fotorama.min.css' | asset_url}}">
 {{ 'style.fotorama.min.css' | asset_url | stylesheet_tag}} 

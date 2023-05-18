@@ -1,0 +1,9 @@
+@font-face {
+    font-family: 'General Sans';
+    src: url('{{ 'GeneralSans-Regular.woff2' | asset_url }}') format('woff2'), 
+        url('{{ 'GeneralSans-Regular.woff' | asset_url }}') format('woff'),
+        url('{{ 'GeneralSans-Regular.ttf' | asset_url }}') format('truetype');
+        font-weight: normal;
+        font-display: swap;
+        font-style: normal;
+}

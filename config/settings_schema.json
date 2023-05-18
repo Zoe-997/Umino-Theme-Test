@@ -490,8 +490,8 @@
       {
         "type": "select",
         "id": "bd_google_font",
-        "label": "Google Font",
-        "default": "Jost",
+        "label": "Body Font",
+        "default": "GeneralSans",
         "options": [
           {
             "value": "Shippori Mincho",
@@ -524,6 +524,10 @@
           {
             "value": "Quicksand",
             "label": "Font Quicksand"
+          },
+          {
+            "value": "GeneralSans",
+            "label": "Font General Sans"
           }
         ]
       },
@@ -549,8 +553,8 @@
       {
         "type": "select",
         "id": "h1_google_font",
-        "label": "Google Font",
-        "default": "Jost",
+        "label": "H1 Font",
+        "default": "GeneralSans",
         "options": [
           {
             "value": "Jost",
@@ -579,6 +583,10 @@
           {
             "value": "Quicksand",
             "label": "Font Quicksand"
+          },
+          {
+            "value": "GeneralSans",
+            "label": "Font General Sans"
           }
         ]
       },
@@ -604,8 +612,8 @@
       {
         "type": "select",
         "id": "h2_google_font",
-        "label": "Google Font",
-        "default": "Jost",
+        "label": "H2 Font",
+        "default": "GeneralSans",
         "options": [
           {
             "value": "Jost",
@@ -634,6 +642,10 @@
           {
             "value": "Quicksand",
             "label": "Font Quicksand"
+          },
+          {
+            "value": "GeneralSans",
+            "label": "Font General Sans"
           }
         ]
       },
@@ -659,8 +671,8 @@
       {
         "type": "select",
         "id": "h3_google_font",
-        "label": "Google Font",
-        "default": "Jost",
+        "label": "H3 Font",
+        "default": "GeneralSans",
         "options": [
           {
             "value": "Jost",
@@ -689,177 +701,16 @@
           {
             "value": "Quicksand",
             "label": "Font Quicksand"
+          },
+          {
+            "value": "GeneralSans",
+            "label": "Font General Sans"
           }
         ]
       },
       {
         "type": "range",
         "id": "h3_font_weight",
-        "min": 300,
-        "max": 900,
-        "step": 100,
-        "label": "Font weight",
-        "default": 700
-      },
-      {
-        "type": "header",
-        "content": "== H4 heading"
-      },
-      {
-        "type": "checkbox",
-        "id": "h4_use_fonts",
-        "label": "Use fonts",
-        "default": false
-      },
-      {
-        "type": "select",
-        "id": "h4_google_font",
-        "label": "Google Font",
-        "default": "Jost",
-        "options": [
-          {
-            "value": "Jost",
-            "label": "Font Jost"
-          },
-          {
-            "value": "DM+Sans",
-            "label": "Font DM Sans"
-          },
-          {
-            "value": "Barlow",
-            "label": "Font Barlow"
-          },
-          {
-            "value": "Barlow+Condensed",
-            "label": "Font Barlow Condensed"
-          },
-          {
-            "value": "Rubik",
-            "label": "Font Rubik"
-          },
-          {
-            "value": "Schoolbell",
-            "label": "Font Schoolbell"
-          },
-          {
-            "value": "Quicksand",
-            "label": "Font Quicksand"
-          }
-        ]
-      },
-      {
-        "type": "range",
-        "id": "h4_font_weight",
-        "min": 300,
-        "max": 900,
-        "step": 100,
-        "label": "Font weight",
-        "default": 700
-      },
-      {
-        "type": "header",
-        "content": "== H5 heading"
-      },
-      {
-        "type": "checkbox",
-        "id": "h5_use_fonts",
-        "label": "Use fonts",
-        "default": false
-      },
-      {
-        "type": "select",
-        "id": "h5_google_font",
-        "label": "Google Font",
-        "default": "Jost",
-        "options": [
-          {
-            "value": "Jost",
-            "label": "Font Jost"
-          },
-          {
-            "value": "DM+Sans",
-            "label": "Font DM Sans"
-          },
-          {
-            "value": "Barlow",
-            "label": "Font Barlow"
-          },
-          {
-            "value": "Barlow+Condensed",
-            "label": "Font Barlow Condensed"
-          },
-          {
-            "value": "Rubik",
-            "label": "Font Rubik"
-          },
-          {
-            "value": "Schoolbell",
-            "label": "Font Schoolbell"
-          },
-          {
-            "value": "Quicksand",
-            "label": "Font Quicksand"
-          }
-        ]
-      },
-      {
-        "type": "range",
-        "id": "h5_font_weight",
-        "min": 300,
-        "max": 900,
-        "step": 100,
-        "label": "Font weight",
-        "default": 700
-      },
-      {
-        "type": "header",
-        "content": "== H6 heading"
-      },
-      {
-        "type": "checkbox",
-        "id": "h6_use_fonts",
-        "label": "Use fonts",
-        "default": false
-      },
-      {
-        "type": "select",
-        "id": "h6_google_font",
-        "label": "Google Font",
-        "default": "Jost",
-        "options": [
-          {
-            "value": "Jost",
-            "label": "Font Jost"
-          },
-          {
-            "value": "DM+Sans",
-            "label": "Font DM Sans"
-          },
-          {
-            "value": "Barlow",
-            "label": "Font Barlow"
-          },
-          {
-            "value": "Barlow+Condensed",
-            "label": "Font Barlow Condensed"
-          },
-          {
-            "value": "Rubik",
-            "label": "Font Rubik"
-          },
-          {
-            "value": "Schoolbell",
-            "label": "Font Schoolbell"
-          },
-          {
-            "value": "Quicksand",
-            "label": "Font Quicksand"
-          }
-        ]
-      },
-      {
-        "type": "range",
-        "id": "h6_font_weight",
         "min": 300,
         "max": 900,
         "step": 100,
