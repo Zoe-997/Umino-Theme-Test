@@ -33,13 +33,13 @@
                 {%- case block.type -%}
                 {% when 'shipping' %}
                 <div class="col-sm-{{cl_mb}} col-md-{{col_tb}} col-lg-{{col}} bl_{{block.id}}">
-                  <div class="laber_shipping flex-wrap flex">                
+                  <div class="laber_shipping">                
                     {%- if source == '1' -%}
-                    <div class="icon">
-                      <i class="{{block.settings.icon}}"></i>
-                    </div>
+                      <div class="icon">
+                        <i class="{{block.settings.icon}}"></i>
+                      </div>
                     {%- elsif source == '2' -%}
-                    {% assign image = block.settings.icon_img %} 
+                      {% assign image = block.settings.icon_img %} 
                     <div class="icon icon_img">
                       {% if image != blank %}
                         {% render 'responsive-image', image: image, image_class: 'w-full h-full' %}

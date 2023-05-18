@@ -45,11 +45,11 @@
     "color_label_sale": "#9c6d3a",
     "color_label_out": "#d93939",
     "color_btn_text": "#ffffff",
-    "color_btn": "#1a1a1a",
-    "color_border_btn": "#1a1a1a",
-    "color_btn_text_hover": "#ffffff",
-    "color_btn_hover": "#d93939",
-    "color_border_btn_hover": "#d93939",
+    "color_btn": "#111111",
+    "color_border_btn": "#111111",
+    "color_btn_text_hover": "#111111",
+    "color_btn_hover": "#ffffff",
+    "color_border_btn_hover": "#ffffff",
     "cl_btn_p_n": "#111111",
     "bg_btn_p_n": "#ffffff",
     "cl_btn_p_n_hover": "#ffffff",
@@ -2991,39 +2991,42 @@
               "cl_mb": "12"
             }
           },
-          "e667f7e9-b124-4bfe-8c4d-f9a360e1a6ae": {
-            "type": "contact_information",
+          "b7c46801-8e3e-408b-aa11-eb7a24709c85": {
+            "type": "menu",
             "settings": {
-              "title": "Let’s Talk",
-              "show_phone": true,
-              "show_email": true,
-              "cl": "3",
+              "title": "CUSTOMER SERVICE",
+              "menu": "",
+              "cl": "2",
               "cl_tb": "6",
               "cl_mb": "12",
               "h_position": "left",
               "txt_align": "left"
             }
           },
-          "c8c34e4c-83a5-46d5-92fd-922ee173399e": {
-            "type": "html",
+          "0b565afd-5486-4348-bbe7-7e72334c2890": {
+            "type": "menu",
             "settings": {
-              "title": "Find Us",
-              "content": "<p>1418 Riverwood Drive, Suite 3245 Cottonwood<\/p>\n<p>CA 96052, United States<\/p><p><\/p>",
-              "h_position": "left",
-              "txt_align": "left",
-              "cl": "3",
+              "title": "SHOP BY CATEGORIES",
+              "menu": "",
+              "cl": "2",
               "cl_tb": "6",
-              "cl_mb": "12"
+              "cl_mb": "12",
+              "h_position": "left",
+              "txt_align": "left"
             }
           },
-          "9d2ce28c-0923-4b81-8f99-6245e7115e92": {
-            "type": "image",
+          "5f498e5d-2b19-4db0-8853-c3e5a319bab7": {
+            "type": "mail",
             "settings": {
-              "title": "We Accept",
-              "max_width": 230,
+              "title": "SIGN UP TO NEWSLETTER",
+              "sub_title": "Enter your email address to get $10 off your first order and free  shipping. Updates information on Sales and Offers.",
+              "cl_text": "#555555",
+              "cl_sub": "#fff",
+              "cl_sub_hover": "#fff",
               "h_position": "left",
+              "v_position": "top",
               "txt_align": "left",
-              "cl": "3",
+              "cl": "4",
               "cl_tb": "6",
               "cl_mb": "12"
             }
@@ -3031,9 +3034,9 @@
         },
         "block_order": [
           "ce1c3204-2b0c-4a4a-9584-c8ed8c85c033",
-          "e667f7e9-b124-4bfe-8c4d-f9a360e1a6ae",
-          "c8c34e4c-83a5-46d5-92fd-922ee173399e",
-          "9d2ce28c-0923-4b81-8f99-6245e7115e92"
+          "b7c46801-8e3e-408b-aa11-eb7a24709c85",
+          "0b565afd-5486-4348-bbe7-7e72334c2890",
+          "5f498e5d-2b19-4db0-8853-c3e5a319bab7"
         ],
         "settings": {
           "cl_bg": "#ffffff",
@@ -3582,9 +3585,9 @@
         "settings": {
           "hidden": false,
           "show_border_top": false,
-          "title": "Featured Services",
+          "title": "",
           "sub_title": "",
-          "content": "Nemo enim ipsam quia sit aut odit aut fugit",
+          "content": "",
           "text_size": "medium",
           "style_title": "style_1",
           "source": "2",
@@ -3608,42 +3611,42 @@
             "type": "img",
             "settings": {
               "image": "shopify:\/\/shop_images\/instagram_1.png",
-              "url": ""
+              "url": "#"
             }
           },
           "77e6edb0-869e-4072-a2a6-de257520dcbb-1684406413a95d13f5-1": {
             "type": "img",
             "settings": {
               "image": "shopify:\/\/shop_images\/instagram_2.png",
-              "url": ""
+              "url": "#"
             }
           },
           "77e6edb0-869e-4072-a2a6-de257520dcbb-1684406413a95d13f5-2": {
             "type": "img",
             "settings": {
               "image": "shopify:\/\/shop_images\/instagram_3.png",
-              "url": ""
+              "url": "#"
             }
           },
           "77e6edb0-869e-4072-a2a6-de257520dcbb-1684406413a95d13f5-3": {
             "type": "img",
             "settings": {
               "image": "shopify:\/\/shop_images\/instagram_4.png",
-              "url": ""
+              "url": "#"
             }
           },
           "77e6edb0-869e-4072-a2a6-de257520dcbb-1684406413a95d13f5-4": {
             "type": "img",
             "settings": {
               "image": "shopify:\/\/shop_images\/instagram_5.png",
-              "url": ""
+              "url": "#"
             }
           },
           "77e6edb0-869e-4072-a2a6-de257520dcbb-1684406413a95d13f5-5": {
             "type": "img",
             "settings": {
               "image": "shopify:\/\/shop_images\/instagram_6.png",
-              "url": ""
+              "url": "#"
             }
           }
         },

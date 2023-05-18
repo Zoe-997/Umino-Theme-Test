@@ -14,118 +14,80 @@
   -%}
 
 {%- for i in (1..1) -%}
-  <section id="laber_{{sid}}" class="laber_lookbook_instagram_{{sid}}">
-    <div class="{%if layout == 'full-width' %}{{layout}}{% else %}container{%endif%}">
-      {% if section.settings.title != blank or section.settings.sub_title != blank %}
-        <div class="wrap_title {{ section.settings.text_size }} {{section.settings.style_title}}">
-
-          {% if section.settings.sub_title != blank %}
-            <span class="section-subtitle">{{ section.settings.sub_title }}</span>
-          {% endif %}
-
+    <section id="laber_{{sid}}" class="laber_lookbook_instagram_{{sid}}">
+    	<div class="{%if layout == 'full-width' %}{{layout}}{% else %}container{%endif%}" >  
+        {% if section.settings.title != blank or section.settings.sub_title!= blank %}
+		<div class="wrap_title {{ section.settings.text_size }} {{section.settings.style_title}}">
+          
+		  {% if section.settings.sub_title!= blank %}
+		  	<span class="section-subtitle">{{section.settings.sub_title}}</span>
+		  {% endif %}
+          
           {% if section.settings.title != blank %}
-            <h3 class="section-title">{{ section.settings.title }}</h3>
-          {% endif %}
+		  <h3 class="section-title">{{section.settings.title}}</h3>  
+		  {% endif %}
+          
+          
+          {% if section.settings.content!= blank %}
+		  <div class="content">{{section.settings.content}}</div>
+		  {% endif %}
+          
+		</div>
+        {% endif %}
+        {% capture grid %} padding-0-{{space}} col-xs-6 col-sm-6 col-md-4 col-lg-{{ col }}{% endcapture %}
 
+    {% include 'grid-slider', settings:section.settings %} 
+    <div class="content_section slick-carousel">
+    <div class="grid-slider" {{gridSlider}} data-append-Arrows=".arrows_{{sid}}" data-append-Dots=".dots_{{sid}}" >
+                      
+            {% assign offset = 0 -%}
+            {%- for bl in arr_img -%}
+            	{% assign check = true %}{% assign index = 0 %}{% assign offset = offset | plus:1 -%}
+                {%- assign image = bl.settings.image %}
+                {% assign ratio = image.aspect_ratio |default:1.0 %}
+            	{% assign url = bl.settings.url -%}
+                <div id="pin_{{bl.id}}" class="pin__wr_js item_ins" {{ bl.shopify_attributes }}>
 
-          {% if section.settings.content != blank %}
-            <div class="content">{{ section.settings.content }}</div>
-          {% endif %}
+                  {%- for block in section_blocks offset:offset -%}
+                      {%- if block.type == 'img' %}{% break %}{% endif -%}{% assign offset = offset | plus:1 -%}
+                      {%- if block.type  == 'pin' -%}
+                      {%- if block.settings.product == blank %}{% continue %}{% endif -%}{% assign check = false -%}{% assign index = index | plus:1 -%}{% assign b_id = block.id -%}
+                      <a id="pin_{{b_id}}" data-i='{{bl.id}}' data-id='{{b_id}}' href="{{ routes.root_url }}products/{{block.settings.product}}" rel="nofollow" class="js_add_qv js_quick_view hotspot_ins hotspot_{{b_id}} {{block.settings.cl_pin}}" style="transform: translate(-{{block.settings.pos_l}}%, -{{block.settings.pos_t}}%);top:{{block.settings.pos_t}}%;left:{{block.settings.pos_l}}%" {{ block.shopify_attributes }}><span>{{index}}</span></a>
+                      {%- endif -%}
+                  {%- endfor -%}
 
-        </div>
-      {% endif %}
-      {% capture grid %}
-        padding-0-{{ space }} col-xs-6 col-sm-6 col-md-4 col-lg-{{ col }}{% endcapture %}
+                  {%- if url != blank -%}
+                    <div class="wrap_ins_img">
+                      <div data-image-effect class="pr_lazy_img main-img lazyload laber_bg_lz " data-id="{{image.id}}" data-bgset="{% if image != blank %}{{ image | img_url: '1x1' }}{% else %}https://via.placeholder.com/320x320.png/{% cycle 'a8dacc', '56cfe1', 'f99077','c8b09b','efe1ba','a5d0d9','a1a19f' %}/fff?text=320x320{% endif %}" data-parent-fit="width" data-wiis data-ratio="{{ratio}}" data-sizes="auto" style="padding-top:{{ 1 | divided_by: ratio | times: 100}}%;">
+                      </div>
+                      <a data-no-instant rel="nofollow" href="{{url}}" target="{{open_link}}">
+                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path fill-rule="evenodd" clip-rule="evenodd" d="M9.1875 3.79744C9.1875 2.51799 8.08822 1.49319 6.78558 1.61957L6.78399 1.61972C5.72148 1.71888 4.8125 2.79554 4.8125 3.90828V4.47411C4.8125 4.71573 4.61662 4.91161 4.375 4.91161C4.13338 4.91161 3.9375 4.71573 3.9375 4.47411V3.90828C3.9375 2.39627 5.13978 0.894844 6.70188 0.748577C8.52556 0.572114 10.0625 2.00883 10.0625 3.79744V4.60244C10.0625 4.84407 9.86662 5.03994 9.625 5.03994C9.38338 5.03994 9.1875 4.84407 9.1875 4.60244V3.79744Z" fill="white"/>
+                          <path fill-rule="evenodd" clip-rule="evenodd" d="M1.9679 5.14334C2.48439 4.52929 3.3699 4.22913 4.66667 4.22913H9.33334C10.6301 4.22913 11.5156 4.52929 12.0321 5.14334C12.5444 5.75244 12.5924 6.55296 12.5099 7.29891L12.5092 7.30506L12.0721 10.8013C12.0076 11.4 11.8566 12.0557 11.3223 12.5438C10.7908 13.0294 9.96734 13.2708 8.75001 13.2708H5.25001C4.03268 13.2708 3.20923 13.0294 2.67773 12.5438C2.14343 12.0557 1.9924 11.4 1.92791 10.8013L1.49012 7.29892C1.40757 6.55296 1.45558 5.75244 1.9679 5.14334ZM2.35952 7.19966L2.79758 10.7042C2.85583 11.2478 2.97649 11.6316 3.2679 11.8978C3.56328 12.1676 4.12233 12.3958 5.25001 12.3958H8.75001C9.87768 12.3958 10.4367 12.1676 10.7321 11.8978C11.0235 11.6316 11.1443 11.2478 11.2025 10.7042L11.2033 10.6965L11.6405 7.19959C11.7149 6.5238 11.6372 6.03323 11.3625 5.70658C11.0915 5.38438 10.5274 5.10413 9.33334 5.10413H4.66667C3.47261 5.10413 2.90853 5.38438 2.63752 5.70658C2.36276 6.03324 2.28512 6.52383 2.35952 7.19966Z" fill="white"/>
+                          <path fill-rule="evenodd" clip-rule="evenodd" d="M8.4557 6.99996C8.4557 6.67779 8.71687 6.41663 9.03904 6.41663H9.04428C9.36644 6.41663 9.62761 6.67779 9.62761 6.99996C9.62761 7.32213 9.36644 7.58329 9.04428 7.58329H9.03904C8.71687 7.58329 8.4557 7.32213 8.4557 6.99996Z" fill="white"/>
+                          <path fill-rule="evenodd" clip-rule="evenodd" d="M4.3718 6.99996C4.3718 6.67779 4.63296 6.41663 4.95513 6.41663H4.96037C5.28253 6.41663 5.5437 6.67779 5.5437 6.99996C5.5437 7.32213 5.28253 7.58329 4.96037 7.58329H4.95513C4.63296 7.58329 4.3718 7.32213 4.3718 6.99996Z" fill="white"/>
+                        </svg>
+                      </a>
+                    </div>
+                  {%- else -%}
+                  		<div class="wrap_ins_img">
+                          <div data-image-effect class="pr_lazy_img main-img lazyload laber_bg_lz " data-id="{{image.id}}" data-bgset="{% if image != blank %}{{ image | img_url: '1x1' }}{% else %}https://via.placeholder.com/320x320.png/{% cycle 'a8dacc', '56cfe1', 'f99077','c8b09b','efe1ba','a5d0d9','a1a19f' %}/fff?text=320x320{% endif %}" data-parent-fit="width" data-wiis data-ratio="{{ratio}}" data-sizes="auto" style="padding-top:{{ 1 | divided_by: ratio | times: 100}}%;"></div>
+                  		</div>
+                  {%- endif -%}
 
-      {% include 'grid-slider', settings: section.settings %}
-      <div class="content_section slick-carousel">
-        <div
-          class="grid-slider"
-          {{ gridSlider }}
-          data-append-Arrows=".arrows_{{sid}}"
-          data-append-Dots=".dots_{{sid}}">
-
-          {% assign offset = 0 -%}
-          {%- for bl in arr_img -%}
-            {% assign check = true %}{% assign index = 0 %}{% assign offset = offset | plus: 1 -%}
-            {%- assign image = bl.settings.image %}
-            {% assign ratio = image.aspect_ratio | default: 1.0 %}
-            {% assign url = bl.settings.url -%}
-            <div
-              id="pin_{{bl.id}}"
-              class="pin__wr_js item_ins"
-              {{ bl.shopify_attributes }}>
-
-              {%- for block in section_blocks offset: offset -%}
-                {%- if block.type == 'img' %}
-                  {% break %}{% endif -%}
-                {% assign offset = offset | plus: 1 -%}
-                {%- if block.type == 'pin' -%}
-                  {%- if block.settings.product == blank %}
-                    {% continue %}{% endif -%}
-                  {% assign check = false -%}{% assign index = index | plus: 1 -%}{% assign b_id = block.id -%}
-                  <a
-                    id="pin_{{b_id}}"
-                    data-i='{{bl.id}}'
-                    data-id='{{b_id}}'
-                    href="{{ routes.root_url }}products/{{block.settings.product}}"
-                    rel="nofollow"
-                    class="js_add_qv js_quick_view hotspot_ins hotspot_{{b_id}} {{block.settings.cl_pin}}"
-                    style="transform: translate(-{{block.settings.pos_l}}%, -{{block.settings.pos_t}}%);top:{{block.settings.pos_t}}%;left:{{block.settings.pos_l}}%"
-                    {{ block.shopify_attributes }}>
-                    <span>{{ index }}</span>
-                  </a>
-                {%- endif -%}
-              {%- endfor -%}
-
-              {%- if url != blank -%}
-                <a
-                  data-no-instant
-                  rel="nofollow"
-                  class="wrap_ins_img"
-                  href="{{url}}"
-                  target="{{open_link}}">
-                  <div
-                    data-image-effect
-                    class="pr_lazy_img main-img lazyload laber_bg_lz "
-                    data-id="{{image.id}}"
-                    data-bgset="{% if image != blank %}{{ image | img_url: '1x1' }}{% else %}https://via.placeholder.com/320x320.png/{% cycle 'a8dacc', '56cfe1', 'f99077','c8b09b','efe1ba','a5d0d9','a1a19f' %}/fff?text=320x320{% endif %}"
-                    data-parent-fit="width"
-                    data-wiis
-                    data-ratio="{{ratio}}"
-                    data-sizes="auto"
-                    style="padding-top:{{ 1 | divided_by: ratio | times: 100}}%;"></div>
-
-                  <i class=" icon-instagram"></i>
-                </a>
-              {%- else -%}
-                <div class="wrap_ins_img">
-                  <div
-                    data-image-effect
-                    class="pr_lazy_img main-img lazyload laber_bg_lz "
-                    data-id="{{image.id}}"
-                    data-bgset="{% if image != blank %}{{ image | img_url: '1x1' }}{% else %}https://via.placeholder.com/320x320.png/{% cycle 'a8dacc', '56cfe1', 'f99077','c8b09b','efe1ba','a5d0d9','a1a19f' %}/fff?text=320x320{% endif %}"
-                    data-parent-fit="width"
-                    data-wiis
-                    data-ratio="{{ratio}}"
-                    data-sizes="auto"
-                    style="padding-top:{{ 1 | divided_by: ratio | times: 100}}%;"></div>
                 </div>
-              {%- endif -%}
+            {%- endfor -%}
 
-            </div>
-          {%- endfor -%}
-
-        </div>
-        {% if dots %}
+          </div>
+          {%if dots %}
           <div class="laber_append_dots dots_{{sid}}"></div>
-        {% endif %}
-        {% if arrows %}
-          <div class="laber_append_arrows arrows_{{sid}}"></div>
-        {% endif %}
+          {%endif%}
+          {%if arrows%}	
+          <div class="laber_append_arrows arrows_{{sid}}"></div>	
+          {% endif %}
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
 {%- endfor -%}
 
 {%- render 'section_style' -%}
@@ -140,7 +102,7 @@
         "type": "header",
         "content": "== Design Options"
       },
-      {
+       {
         "type": "text",
         "id": "title",
         "label": "Heading"
@@ -149,13 +111,14 @@
         "type": "text",
         "id": "sub_title",
         "label": "Sub Text"
-      },
-      {
+      },  
+	  {
         "type": "textarea",
         "id": "content",
         "label": "Content",
         "default": "Commodo sociosqu venenatis cras dolor sagittis integer luctus maecenas."
-      }, {
+      },
+      {
         "type": "select",
         "id": "text_size",
         "default": "medium",
@@ -163,239 +126,274 @@
           {
             "value": "small",
             "label": "small"
-          }, {
+         },
+         {
             "value": "medium",
             "label": "Medium"
-          }, {
+         },
+         {
             "value": "large",
             "label": "Large"
           }
         ],
         "label": "Text size"
-      }, {
+      },
+      {
         "type": "select",
         "id": "style_title",
         "default": "style_1",
         "options": [
-          {
+         {
             "value": "style_1",
             "label": "Center"
-          }, {
+         },
+         {
             "value": "style_2",
             "label": "Left"
           }
         ],
         "label": "Text alignment"
-      }, {
+      },
+      {
         "type": "header",
         "content": "---- Slider Show Collection ----",
         "info": "Refer to the attribute values [here](httpss://kenwheeler.github.io/slick)"
-      }, {
+    }, 	
+    {
         "type": "checkbox",
         "id": "use-slider",
         "label": "Use slider?",
         "default": true
-      }, {
-        "type": "range",
-        "id": "slides-To-Scroll",
-        "label": "Slide to scroll",
+    },
+    {  
+        "type": "range",  
+        "id": "slides-To-Scroll",  
+        "label": "Slide to scroll",  
         "info": "The number of items slide to scroll",
         "min": 1,
         "max": 8,
         "step": 1,
         "unit": "pds",
         "default": 1
-      }, {
-        "type": "range",
-        "id": "visible",
+    },   
+    {  
+        "type": "range",  
+        "id": "visible",  
         "label": "Columns in Visible",
-        "info": "Item(s) in screen ( Size >= 1920 )",
+		"info": "Item(s) in screen ( Size >= 1920 )",
         "min": 1,
         "max": 8,
         "step": 1,
         "unit": "pds",
-        "default": 5
-      }, {
-        "type": "range",
-        "id": "widescreen",
+        "default": 5 
+    },
+    {  
+        "type": "range",  
+        "id": "widescreen",  
         "label": "Columns in Widescreen",
-        "info": "Item(s) in screen ( 1366 <= Size < 1920 )",
+		"info": "Item(s) in screen ( 1366 <= Size < 1920 )",
         "min": 1,
         "max": 8,
         "step": 1,
         "unit": "pds",
-        "default": 4
-      }, {
-        "type": "range",
-        "id": "desktop",
+        "default": 4 
+    },  
+    {  
+        "type": "range",  
+        "id": "desktop",  
         "label": "Columns in Desktop",
-        "info": "Item(s) in screen ( 1200 <= Size < 1480 )",
+		"info":  "Item(s) in screen ( 1200 <= Size < 1480 )",
         "min": 1,
         "max": 8,
         "step": 1,
         "unit": "pds",
-        "default": 4
-      }, {
-        "type": "range",
-        "id": "laptop",
+        "default": 4  
+    },	  
+    {  
+        "type": "range",  
+        "id": "laptop",  
         "label": "Columns in Laptop",
-        "info": "Item(s) in screen ( 992 <= Size < 1200 )",
+		"info": "Item(s) in screen ( 992 <= Size < 1200 )",
         "min": 1,
         "max": 8,
         "step": 1,
         "unit": "pds",
         "default": 4
-      }, {
-        "type": "range",
-        "id": "notebook",
+    },	  
+    {  
+        "type": "range",  
+        "id": "notebook",  
         "label": "Columns in Notebook",
-        "info": "Item(s) in screen ( 768 <= Size < 992 )",
+		"info": "Item(s) in screen ( 768 <= Size < 992 )",
         "min": 1,
         "max": 8,
         "step": 1,
         "unit": "pds",
-        "default": 3
-      }, {
-        "type": "range",
-        "id": "tablet",
+        "default": 3  
+    },  
+    {  
+        "type": "range",  
+        "id": "tablet",  
         "label": "Columns in Tablet",
-        "info": "Item(s) in screen ( 576 <= Size < 768 )",
+		"info": "Item(s) in screen ( 576 <= Size < 768 )",
         "min": 1,
         "max": 8,
         "step": 1,
         "unit": "pds",
-        "default": 3
-      }, {
-        "type": "range",
-        "id": "landscape",
+        "default": 3 
+    },
+    {  
+        "type": "range",  
+        "id": "landscape",  
         "label": "Columns in Landscape",
-        "info": "Item(s) in screen ( 480 <= Size < 576 )",
+		"info": "Item(s) in screen ( 480 <= Size < 576 )",
         "min": 1,
         "max": 6,
         "step": 1,
         "unit": "pds",
-        "default": 2
-      }, {
-        "type": "range",
-        "id": "portrait",
+        "default": 2 
+    }, 
+    {  
+        "type": "range",  
+        "id": "portrait",  
         "label": "Columns in Portrait",
-        "info": "Item(s) in screen ( 360 < Size < 480 )",
+		"info": "Item(s) in screen ( 360 < Size < 480 )",
         "min": 1,
         "max": 6,
         "step": 1,
         "unit": "pds",
-        "default": 2
-      }, {
-        "type": "range",
-        "id": "mobile",
+        "default": 2 
+    },
+    {  
+        "type": "range",  
+        "id": "mobile",  
         "label": "Columns in Mobile",
-        "info": "Item(s) in screen ( Size < = 360 )",
+		"info": "Item(s) in screen ( Size < = 360 )",
         "min": 1,
         "max": 4,
         "step": 1,
         "unit": "pds",
-        "default": 1
-      }, {
-        "type": "range",
-        "id": "rows",
-        "label": "Rows Slider",
+        "default": 1 
+    },
+    {  
+        "type": "range",  
+        "id": "rows",  
+        "label": "Rows Slider",  
         "min": 1,
         "max": 3,
         "step": 1,
         "unit": "pds",
         "default": 1
-      }, {
+    },
+    {
         "type": "checkbox",
         "id": "autoplay",
         "label": "Autoplay",
         "default": true
-      }, {
+    },
+    {	
         "type": "text",
         "id": "speed",
         "label": "Speed",
         "default": "300",
         "info": "Autoplay Speed in milliseconds"
-      }, {
+    },
+    {	
         "type": "text",
         "id": "autoplay-Speed",
         "label": "Auto Play Speed",
         "default": "3000",
         "info": "Autoplay Speed in milliseconds"
-      }, {
+    },
+    {	
         "type": "checkbox",
         "id": "arrows",
         "label": "Arrows",
         "default": true
-      }, {
+    },
+    {	
         "type": "checkbox",
         "id": "adaptive-Height",
         "label": "Adaptive Height",
         "default": false
-      }, {
+    },
+    {	
         "type": "checkbox",
         "id": "dots",
         "label": "Dots",
-        "default": false
-      }, {
+        "default": false 
+    },
+    {	
         "type": "checkbox",
         "id": "infinite",
         "label": "Infinite",
         "default": false
-      }, {
-        "type": "range",
-        "id": "padding",
+    },
+    {  
+        "type": "range",  
+        "id": "padding",  
         "label": "padding",
-        "info": "Distance between items",
+		    "info": "Distance between items",
         "min": 0,
         "max": 15,
         "step": 5,
         "unit": "px",
-        "default": 10
-      }, {
+        "default": 10 
+    },
+      {
         "type": "header",
         "content": "== Design Options"
-      }, {
+      },
+      {
         "type": "select",
         "id": "layout",
         "default": "container",
         "options": [
-          {
+         {
             "value": "container",
             "label": "Container"
-          }, {
+         },
+         {
             "value": "full-width",
             "label": "Full Width"
           }
         ],
         "label": "Layout"
-      }, {
+      },
+      {
         "type": "color",
         "id": "cl_bg",
         "label": "Background color",
         "default": "#fff"
-      }, {
+      },  
+          
+	{
         "type": "text",
         "id": "mg",
         "label": "Margin",
-        "info": "Margin top, margin right, margin bottom, margin left. If you not use to blank"
-      }, {
+        "info":"Margin top, margin right, margin bottom, margin left. If you not use to blank"
+      },
+      {
         "type": "text",
         "id": "pd",
         "label": "Padding",
-        "info": "Padding top, padding right, padding bottom, padding left. If you not use to blank"
-      }, {
+        "info":"Padding top, padding right, padding bottom, padding left. If you not use to blank"
+      },
+     {
         "type": "header",
         "content": "== Design Mobile Options"
-      }, {
+      },
+      {
         "type": "text",
         "id": "mg_mb",
         "label": "Margin"
-      }, {
+      },
+      {
         "type": "text",
         "id": "pd_mb",
         "label": "Padding"
-      }
-
+      } 
+      
     ],
     "blocks": [
       {
@@ -404,14 +402,10 @@
         "limit": 12,
         "settings": [
           {
-            "type": "image_picker",
-            "id": "image",
-            "label": "Choose image",
-            "info": "320 x 320px .jpg recommended"
-          }, {
-            "type": "url",
-            "id": "url",
-            "label": "Link (optional)"
+            "type": "image_picker","id": "image","label": "Choose image","info": "320 x 320px .jpg recommended"
+          },
+          {
+            "type": "url","id": "url","label": "Link (optional)"
           }
         ]
       }
@@ -433,9 +427,11 @@
           },
           {
             "type": "img"
-          }, {
+          },
+          {
             "type": "img"
-          }, {
+          },
+          {
             "type": "img"
           }
         ]
