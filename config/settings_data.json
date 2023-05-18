@@ -1310,14 +1310,15 @@
           "33b63695-e95e-42b4-9b51-1247e8ed2e6f": {
             "type": "message",
             "settings": {
-              "message_text": "Free shipping on all orders over <span>$79<\/span>",
-              "text_link": "Shop Now",
+              "message_text": "Sign up for 10% off your first order:",
+              "text_link": "Sign Up",
               "btn_link": "shopify:\/\/collections",
               "open_link": "_blank",
               "text_align": "topbar-center",
               "col": "4",
-              "color_link": "#ffffff",
-              "color_link_hover": "#ffffff"
+              "color": "#555555",
+              "color_link": "#111111",
+              "color_link_hover": "#111111"
             }
           },
           "0cfd9b2f-3016-425c-a275-f60b6eaf931a": {
@@ -1326,7 +1327,7 @@
               "menu_topbar": "",
               "header_use_currency": true,
               "header_use_language": true,
-              "header_use_social": true,
+              "header_use_social": false,
               "type_social": "1",
               "text_align": "topbar-right",
               "col": "4"
@@ -1345,7 +1346,7 @@
           "layout": "container",
           "bg_top_header": "#f6f6f8",
           "cl_text": "#1a1a1a",
-          "cl_text_h": "#d93939"
+          "cl_text_h": "#9c6d3a"
         }
       },
       "breadcrumb": {
