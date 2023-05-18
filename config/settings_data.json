@@ -3508,6 +3508,7 @@
           "894283a0-6238-4048-bdf1-febc2d2021a9-1684395236c67983c7-0": {
             "type": "img",
             "settings": {
+              "image_sl": "shopify:\/\/shop_images\/img_2ffc7a5f-92d1-4447-a604-691c0f646184.png",
               "link_img": "",
               "open_link": "_blank",
               "caption_w": "2",
@@ -3515,28 +3516,105 @@
               "v_position": "middle",
               "design": "design-1",
               "txt_align": "center",
-              "cl_overlay": "transparent",
+              "cl_overlay": "rgba(0,0,0,0)",
               "cl_opacity": 100
             }
           },
-          "894283a0-6238-4048-bdf1-febc2d2021a9-1684395236c67983c7-1": {
-            "type": "img",
+          "cbc8a906-391e-488d-9e27-66c42392fa33": {
+            "type": "subhd",
             "settings": {
-              "link_img": "",
-              "open_link": "_blank",
-              "caption_w": "2",
-              "h_position": "center",
-              "v_position": "middle",
-              "design": "design-1",
-              "txt_align": "center",
-              "cl_overlay": "transparent",
-              "cl_opacity": 100
+              "title": "BEAUTIFUL & ELEGANT",
+              "text_animate": "none",
+              "text_time": 1.5,
+              "color": "#ffffff",
+              "fw_text": 500,
+              "fs_text": 17,
+              "lh_text": 0,
+              "ls_text": "0",
+              "font_style": "normal",
+              "mg_top": 0,
+              "custom_mark": "",
+              "last_mark": false,
+              "custom_mark_color": "#FBB71C",
+              "mobile_fw_text": 500,
+              "mobile_lh_text": 0,
+              "mobile_font_text": 14,
+              "mobile_mg_top": 0
+            }
+          },
+          "e2d36a76-dd0d-4094-85bd-16e8aab8528c": {
+            "type": "hd",
+            "settings": {
+              "title": "PREMIUM BEDROOM",
+              "text_animate": "none",
+              "text_time": 1.5,
+              "color": "#111",
+              "fw_text": 600,
+              "fs_text": 60,
+              "lh_text": 0,
+              "ls_text": "0",
+              "font_style": "normal",
+              "mg_top": 10,
+              "custom_mark": "",
+              "last_mark": false,
+              "custom_mark_color": "#FBB71C",
+              "mobile_fw_text": 600,
+              "mobile_lh_text": 0,
+              "mobile_font_text": 14,
+              "mobile_mg_top": 0
+            }
+          },
+          "ffcd3f80-25a8-47c5-b497-3001c152f088": {
+            "type": "txt",
+            "settings": {
+              "title": "Discount 50% On Products & Free Shipping.",
+              "text_animate": "none",
+              "text_time": 1.5,
+              "color": "#ffffff",
+              "fw_text": 400,
+              "fs_text": 14,
+              "lh_text": 0,
+              "ls_text": 0,
+              "hide_mobile": false,
+              "mg_top": 10,
+              "mobile_fw_text": 600,
+              "mobile_lh_text": 0,
+              "mobile_font_text": 14,
+              "mobile_mg_top": 0
+            }
+          },
+          "9f19d692-b321-4ef4-add4-7e4ed726f9a3": {
+            "type": "btn",
+            "settings": {
+              "title": "Shop now",
+              "text_animate": "bounceIn",
+              "text_time": 1.5,
+              "btn_link": "",
+              "cl_txt": "#111111",
+              "cl_txt_hover": "#111111",
+              "cl_bg": "#ffffff",
+              "cl_bg_hover": "#ffffff",
+              "cl_bd": "#ffffff",
+              "cl_bd_hover": "#ffffff",
+              "fs_text": 14,
+              "fw_text": 700,
+              "br_button": "50%",
+              "mg_top": 50,
+              "pd": "19px 54px",
+              "ls_text": 1.1,
+              "mobile_fw_text": 600,
+              "mobile_font_text": 12,
+              "mobile_mg_top": 0,
+              "mobile_pd": "10px 30px"
             }
           }
         },
         "block_order": [
           "894283a0-6238-4048-bdf1-febc2d2021a9-1684395236c67983c7-0",
-          "894283a0-6238-4048-bdf1-febc2d2021a9-1684395236c67983c7-1"
+          "cbc8a906-391e-488d-9e27-66c42392fa33",
+          "e2d36a76-dd0d-4094-85bd-16e8aab8528c",
+          "ffcd3f80-25a8-47c5-b497-3001c152f088",
+          "9f19d692-b321-4ef4-add4-7e4ed726f9a3"
         ],
         "settings": {
           "layout": "container",
@@ -3567,13 +3645,13 @@
           "padding": 15,
           "design_dots": "design-1",
           "design_arrows": "design-1",
-          "cl_bg": "#fff",
-          "cl_dots": "#000",
-          "cl_dots_active": "#FBB71C",
-          "cl_arrow": "#000",
-          "cl_arrow_hover": "#000",
+          "cl_bg": "#ffffff",
+          "cl_dots": "#000000",
+          "cl_dots_active": "#fbb71c",
+          "cl_arrow": "#000000",
+          "cl_arrow_hover": "#000000",
           "bg_arrow": "rgba(225, 225, 225, 0.1)",
-          "color_background": "#FBB71C",
+          "color_background": "#fbb71c",
           "mg_top": 0,
           "mg_bottom": 0,
           "pd_top": 0,
