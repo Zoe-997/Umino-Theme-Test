@@ -14,5 +14,13 @@
         </li>
       {% endif %}
     {% endfor %} 
-  </ul>      
+  </ul>
+  {% assign currencies = shop.money_format | split: '{{amount}}' %}
+  {% assign money_prefix = currencies[0] %}
+  {% assign money_suffix = currencies.last %}
+  <ul>
+  {%- for currency_code in shop.enabled_currencies -%}
+    <li>{{shop.currency_display[currency_code]}} ({{money_prefix}}{{1.00 | money_without_currency | remove: "1.00" }}{{money_suffix}})</li>
+  {%- endfor -%}
+  </ul>    
 </li>

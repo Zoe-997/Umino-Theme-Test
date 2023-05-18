@@ -3,17 +3,17 @@
     {% assign showFlag = settings.show_flag %}
       <p data-code="{{shop.locale}}" class="toggle-submenu item-active">
         {% if showFlag %}<img alt="{{shop.locale | upcase}}" class="flag" width="16px" height="12px" src="" data-src="{{shop.locale | prepend: 'flag_' | append: '.png' | asset_url }}" />{% endif %}                        
-        <span class="current">{{shop.locale | upcase}}</span><span class="icon"><i class="fa fa-angle-down"></i></span>
+        <span class="current">{{ locale.name | upcase}}</span><span class="icon"><i class="fa fa-angle-down"></i></span>
       </p>
     <ul class="dropdown child-list">
       {% for locale in shop.published_locales %}
-      <li data-code="{{ locale.iso_code }}" class="{{ locale.iso_code }}{% if locale.iso_code == shop.locale %} active{% endif%}{% if locale.primary %} primary{% endif%}">
-        <p data-code="{{ locale.iso_code }}" class="language-code">
-        {% if showFlag %}<img alt="{{ locale.name }}" class="flag" width="16px" height="12px" src="" data-src="{{ locale.iso_code | prepend: 'flag_' | append: '.png' | asset_url }}" />{% endif %}      
-        <span class"name">{{ locale.name }}</span>
-        <span class"code" style="display:none;">{{ locale.iso_code | upcase  }}</span>
-        </p>
-      </li>
+        <li data-code="{{ locale.iso_code }}" class="{{ locale.iso_code }}{% if locale.iso_code == shop.locale %} active{% endif%}{% if locale.primary %} primary{% endif%}">
+          <p data-code="{{ locale.iso_code }}" class="language-code">
+          {% if showFlag %}<img alt="{{ locale.name }}" class="flag" width="16px" height="12px" src="" data-src="{{ locale.iso_code | prepend: 'flag_' | append: '.png' | asset_url }}" />{% endif %}      
+          <span class"name">{{ locale.name }}</span>
+          <span class"code" style="display:none;">{{ locale.iso_code | upcase  }}</span>
+          </p>
+        </li>
       {% endfor %}
     </ul>
   </li>

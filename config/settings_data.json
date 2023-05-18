@@ -67,7 +67,6 @@
     "currency_format": "money_format",
     "supported_currencies": "GBP USD EUR  DKK ARS CNY BRL",
     "default_currency": "USD",
-    "show_flag": false,
     "ajaxcart_enabled": true,
     "ajaxcart_after": "sidebar_cart",
     "show_product_sidebar": false,
@@ -1302,7 +1301,6 @@
             "settings": {
               "show_phone": true,
               "show_email": true,
-              "show_icon": false,
               "text_align": "topbar-left",
               "col": "4"
             }
@@ -1310,8 +1308,8 @@
           "33b63695-e95e-42b4-9b51-1247e8ed2e6f": {
             "type": "message",
             "settings": {
-              "message_text": "Sign up for 10% off your first order",
-              "text_link": "Sign Up",
+              "message_text": "Free shipping on all orders over <span>$79<\/span>",
+              "text_link": "Shop Now",
               "btn_link": "shopify:\/\/collections",
               "open_link": "_blank",
               "text_align": "topbar-center",
@@ -1325,10 +1323,10 @@
           "0cfd9b2f-3016-425c-a275-f60b6eaf931a": {
             "type": "top_header_3",
             "settings": {
-              "menu_topbar": "top-header",
+              "menu_topbar": "",
               "header_use_currency": true,
               "header_use_language": true,
-              "header_use_social": false,
+              "header_use_social": true,
               "type_social": "1",
               "text_align": "topbar-right",
               "col": "4"
