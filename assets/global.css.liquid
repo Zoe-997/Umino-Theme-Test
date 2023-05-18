@@ -188,10 +188,10 @@ div.main{
   }  
 {%- assign show_cusotm_width = settings.show_cusotm_width -%}
 {%- assign cusotm_width = settings.cusotm_width -%} 
-  {%if show_cusotm_width%}  
-  @media (min-width: {{cusotm_width}}){
+  {% if show_cusotm_width %}  
+  @media (min-width: {{ cusotm_width }}px){
     .container {
-      max-width: {{cusotm_width}};
+      max-width: {{ cusotm_width }}px;
     }
   } 
   {%endif%}
@@ -9830,13 +9830,9 @@ border-top: 1px solid #ebebeb;
 /* end animation */
 .full-width {
 	max-width: 100%;
-    max-width: 1920px;
-    margin-left: auto;
-    margin-right: auto;
-}
-.shopify-section {
-    max-width: 1440px;
-    margin: 0 auto;
+  max-width: 1920px;
+  margin-left: auto;
+  margin-right: auto;
 }
 /* Banner Simple */
 .banner-simple .content-banner {

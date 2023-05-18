@@ -1,11 +1,11 @@
 [
   {
     "name": "theme_info",
-    "theme_name": "Sofine theme",
-    "theme_author": "Alothemes",
+    "theme_name": "Umino theme",
+    "theme_author": "ZoeTrinh",
     "theme_version": "2.0.0",
-    "theme_documentation_url": "https:\/\/shopifydocs.alothemes.com\/dukamarket",
-    "theme_support_url": "https:\/\/alothemes.com\/support\/"
+    "theme_documentation_url": "https:\/\/github.com\/Zoe-997",
+    "theme_support_url": "https:\/\/github.com\/Zoe-997"
   },
   {
     "name": "Generals",
@@ -18,14 +18,14 @@
         "type": "textarea",
         "id": "home_keywords",
         "label": "Keywords for homepage",
-        "default": "Eliah theme, Fastest, Ajax Shop, Minimal, Lazyload",
+        "default": "Shopify theme, Fastest, Ajax Shop, Minimal, Lazyload",
         "info": "Define keywords for search engines."
       },
       {
         "type": "text",
         "id": "shop_author",
         "label": "Author for Shop",
-        "default": "Eliah theme",
+        "default": "Zoe Trinh",
         "info": "Define the author of a Shop."
       },
       {
@@ -86,6 +86,10 @@
         "label": "Choose layout for header",
         "default": "1",
         "options": [
+          {
+            "value": "0",
+            "label": "No Header"
+          },
           {
             "value": "1",
             "label": "Header style 1"
@@ -170,7 +174,7 @@
         "type": "text",
         "id": "logo_text",
         "label": "logo Text",
-        "default": "Alothemes"
+        "default": "Shopify Theme"
       },
       {
         "type": "image_picker",
