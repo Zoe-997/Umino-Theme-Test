@@ -35,15 +35,15 @@
         {%endif%}
           {%- if section.blocks.size > 0 -%}         
             {%- for block in section.blocks -%}
-        		<div id="faqs_{{block.id}}" class="faqs_block">
-        		<div class="title_faqs h3">{{block.settings.title}}</div>
+        		<div id="faqs_{{ block.id}}" class="faqs_block">
+        		<div class="title_faqs h3">{{ block.settings.title}}</div>
         		{%if block.settings.faq_name !=blank and block.settings.faq_name !=faq_desc2  %}
-				<div class="js-item-faq item first {% if forloop.first %} active {% endif %}" id="block_{{block.id}}">
+				<div class="js-item-faq item first {% if forloop.first %} active {% endif %}" id="block_{{ block.id}}">
                   <div class="heading">
 					<div class="heading-title">
                       <a href="javascript:void(0);">
                         <span>
-							{{block.settings.faq_name}}
+							{{ block.settings.faq_name}}
                         </span>
                         <span class="faqs-icon">
                         	<i class="icon-plus"></i>
@@ -54,7 +54,7 @@
 				  <div class="content-faqs">
 					<div class="element">
                       <p>
-                        {{block.settings.faq_desc}}
+                        {{ block.settings.faq_desc}}
                       </p>
                     </div>
                   </div>
@@ -66,7 +66,7 @@
 					<div class="heading-title">
                       <a href="javascript:void(0);">
                         <span>
-							{{block.settings.faq_name2}}
+							{{ block.settings.faq_name2}}
                         </span>
                         <span class="faqs-icon">
                         	<i class="icon-plus"></i>
@@ -77,7 +77,7 @@
 				  <div class="content-faqs">
 					<div class="element">
                       <p>
-                        {{block.settings.faq_desc2}}
+                        {{ block.settings.faq_desc2}}
                       </p>
                     </div>
                   </div>
@@ -90,7 +90,7 @@
 					<div class="heading-title">
                       <a href="javascript:void(0);">
                         <span>
-							{{block.settings.faq_name3}}
+							{{ block.settings.faq_name3}}
                         </span>
                         <span class="faqs-icon">
                         	<i class="icon-plus"></i>
@@ -101,7 +101,7 @@
 				  <div class="content-faqs">
 					<div class="element">
                       <p>
-                        {{block.settings.faq_desc3}}
+                        {{ block.settings.faq_desc3}}
                       </p>
                     </div>
                   </div>
@@ -114,7 +114,7 @@
 					<div class="heading-title">
                       <a href="javascript:void(0);">
                         <span>
-							{{block.settings.faq_name4}}
+							{{ block.settings.faq_name4}}
                         </span>
                         <span class="faqs-icon">
                         	<i class="icon-plus"></i>
@@ -125,7 +125,7 @@
 				  <div class="content-faqs">
 					<div class="element">
                       <p>
-                        {{block.settings.faq_desc4}}
+                        {{ block.settings.faq_desc4}}
                       </p>
                     </div>
                   </div>
@@ -138,7 +138,7 @@
 					<div class="heading-title">
                       <a href="javascript:void(0);">
                         <span>
-							{{block.settings.faq_name5}}
+							{{ block.settings.faq_name5}}
                         </span>
                         <span class="faqs-icon">
                         	<i class="icon-plus"></i>
@@ -149,7 +149,7 @@
 				  <div class="content-faqs">
 					<div class="element">
                       <p>
-                        {{block.settings.faq_desc5}}
+                        {{ block.settings.faq_desc5}}
                       </p>
                     </div>
                   </div>

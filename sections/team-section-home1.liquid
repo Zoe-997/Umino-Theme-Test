@@ -24,23 +24,23 @@
           {% endif %}
         </div>
         <div class="info">
-          <h4>{{block.settings.name}}</h4>
-          <span>{{block.settings.job}}</span>
-          <p>{{block.settings.des}}</p>
+          <h4>{{ block.settings.name}}</h4>
+          <span>{{ block.settings.job}}</span>
+          <p>{{ block.settings.des}}</p>
         </div>
         <div class="social">
           <ul>
             {% if block.settings.enable_use_facebook %}
-            <li><a href="{{block.settings.facebook_link}}"><span class="fa fa-facebook"></span></a></li>
+            <li><a href="{{ block.settings.facebook_link}}"><span class="fa fa-facebook"></span></a></li>
             {% endif %}
             {% if block.settings.enable_use_twitter %}
-            <li><a href="{{block.settings.twitter_link}}"><span class="fa fa-twitter"></span></a></li>                  
+            <li><a href="{{ block.settings.twitter_link}}"><span class="fa fa-twitter"></span></a></li>                  
             {% endif %}
             {% if block.settings.enable_use_instagram %}
-            <li><a href="{{block.settings.instagram_link}}"><span class="fa fa-instagram"></span></a></li>
+            <li><a href="{{ block.settings.instagram_link}}"><span class="fa fa-instagram"></span></a></li>
             {% endif %}
             {% if block.settings.enable_use_youtube %}
-            <li><a href="{{block.settings.youtube_link}}"><span class="fa fa-youtube"></span></a></li>
+            <li><a href="{{ block.settings.youtube_link}}"><span class="fa fa-youtube"></span></a></li>
             {% endif %}
           </ul>
         </div>

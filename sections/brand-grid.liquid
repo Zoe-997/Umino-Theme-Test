@@ -9,94 +9,123 @@
     endif
     
 %}
-   
-{%- for i in (1..1) -%}  
-  {%- if section.settings.hidden %}{% break %}{% endif -%}
 
- <section class="laber_brand_{{id}}">   
-  <div class="container {% if section.settings.layout == "full-width"%}{{section.settings.layout}}{% endif %}">
-    <div class="wrap-section">
-      {% if section.settings.title != blank or section.settings.sub_title!= blank %}
-		<div class="wrap_title ">
-          
-		  {% if section.settings.sub_title!= blank %}
-		  	<span class="section-subtitle">{{section.settings.sub_title}}</span>
-		  {% endif %}
-          
-          {% if section.settings.title != blank %}
-		  <h3 class="section-title">{{section.settings.title}}</h3>  
-		  {% endif %}
-          
-          
-          {% if section.settings.content!= blank %}
-		  <div class="content">{{section.settings.content}}</div>
-		  {% endif %}
-          
-		</div>
+{%- for i in (1..1) -%}
+  {%- if section.settings.hidden %}
+    {% break %}{% endif -%}
+
+  <section class="laber_brand_{{id}}">
+    <div class="container {% if section.settings.layout == "full-width"%}{{section.settings.layout}}{% endif %}">
+      <div class="wrap-section">
+        {% if section.settings.title != blank or section.settings.sub_title != blank %}
+          <div class="wrap_title ">
+
+            {% if section.settings.sub_title != blank %}
+              <span class="section-subtitle">{{ section.settings.sub_title }}</span>
+            {% endif %}
+
+            {% if section.settings.title != blank %}
+              <h3 class="section-title">{{ section.settings.title }}</h3>
+            {% endif %}
+
+
+            {% if section.settings.content != blank %}
+              <div class="content">{{ section.settings.content }}</div>
+            {% endif %}
+
+          </div>
         {% endif %}
-    </div>
-    <div class="cms-wrap-brand2">       
-			
-      		{% capture grid %}col-xs-6 col-sm-6 col-md-4 col-lg-{{ col }}{% endcapture %}
-      
-            <div class="laber-brand-grid row">
-              
-        {%- if section.blocks.size > 0 -%}
+      </div>
+      <div class="cms-wrap-brand2">
+
+        {% capture grid %}col-xs-6 col-sm-6 col-md-4 col-lg-{{ col }}{% endcapture %}
+
+        <div
+          class="laber-brand-grid row">
+
+          {%- if section.blocks.size > 0 -%}
             {%- for block in section.blocks -%}
               {%- assign image = block.settings.image -%}
               {%- assign url = block.settings.url -%}
               <div class="brand-item {{grid}}">
-                {%- if url != blank -%}<a href="{{ url }}" class="db" target="{{block.settings.open_link}}">{%- endif -%}
-                {%- if image != blank %}
-                  	<div data-image-effect class="pr_lazy_img main-img lazyload laber_bg_lz" data-id="{{image.id}}" data-bgset="{{ image | img_url: '1x1' }}" data-parent-fit="width" data-wiis data-ratio="{{image.aspect_ratio}}" data-sizes="auto" style="padding-top:{{ 1 | divided_by: image.aspect_ratio | times: 100}}%;"></div>
-                {%- else -%}
-                  <div class="lazyload laber_bg_lz pr_lazy_img" data-bgset="https://via.placeholder.com/142x70.png/{% cycle 'a8dacc', '56cfe1', 'f99077','c8b09b','efe1ba','a5d0d9','a1a19f' %}/fff?text=292x150"  data-sizes="auto" style="padding-top:51.3%;"></div>                   
+                {%- if url != blank -%}
+                  <a
+                    href="{{ url }}"
+                    class="db"
+                    target="{{ block.settings.open_link}}">
+                  {%- endif -%}
+                  {%- if image != blank %}
+                    <div
+                      data-image-effect
+                      class="pr_lazy_img main-img lazyload laber_bg_lz"
+                      data-id="{{image.id}}"
+                      data-bgset="{{ image | img_url: '1x1' }}"
+                      data-parent-fit="width"
+                      data-wiis
+                      data-ratio="{{image.aspect_ratio}}"
+                      data-sizes="auto"
+                      style="padding-top:{{ 1 | divided_by: image.aspect_ratio | times: 100}}%;"></div>
+                  {%- else -%}
+                    <div
+                      class="lazyload laber_bg_lz pr_lazy_img"
+                      data-bgset="https://via.placeholder.com/142x70.png/{% cycle 'a8dacc', '56cfe1', 'f99077','c8b09b','efe1ba','a5d0d9','a1a19f' %}/fff?text=292x150"
+                      data-sizes="auto"
+                      style="padding-top:51.3%;"></div>
+                  {%- endif -%}
+                  {%- if url != blank -%}
+                  </a>
                 {%- endif -%}
-                {%- if url != blank -%}</a>{%- endif -%}
               </div>
             {%- endfor -%}
-        {% else %}
+          {% else %}
             {%- for i in (1..8) -%}
-              <div class="brand-item {{grid}}">                                
-                <div class="lazyload laber_bg_lz pr_lazy_img" data-bgset="https://via.placeholder.com/142x70.png/{% cycle 'a8dacc', '56cfe1', 'f99077','c8b09b','efe1ba','a5d0d9','a1a19f' %}/fff?text=292x150"  data-sizes="auto" style="padding-top:51.3%;"></div>     
+              <div class="brand-item {{grid}}">
+                <div
+                  class="lazyload laber_bg_lz pr_lazy_img"
+                  data-bgset="https://via.placeholder.com/142x70.png/{% cycle 'a8dacc', '56cfe1', 'f99077','c8b09b','efe1ba','a5d0d9','a1a19f' %}/fff?text=292x150"
+                  data-sizes="auto"
+                  style="padding-top:51.3%;"></div>
               </div>
-            {%- endfor -%}             	
-        {%- endif -%}
+            {%- endfor -%}
+          {%- endif -%}
+        </div>
+        {% if section.settings.show_btn %}
+          {%- assign url_btn = section.settings.url -%}
+          <div class="btn">
+            <a
+              href="{{ url_btn }}"
+              class="db"
+              target="{{section.settings.open_link}}">
+              {{ section.settings.title_btn }}
+            </a>
+          </div>
+        {% endif %}
       </div>
-      {% if section.settings.show_btn %}
-      {%- assign url_btn = section.settings.url -%}
-      <div class="btn">
-        <a href="{{ url_btn }}" class="db" target="{{section.settings.open_link}}">
-          {{section.settings.title_btn}}
-        </a>
-      </div>  
-      {%endif%}
-    </div>
-    
-  </div>
-</section>
 
-{%- style -%}
-  	.laber_brand_{{id}}{
-      margin-top:{{section.settings.mg_top}}px ;
-      margin-bottom:{{section.settings.mg_bottom}}px ;
-      padding-top:{{section.settings.pad_top}}px ;
-      padding-bottom:{{section.settings.pad_bottom}}px;
-      background-color:{{section.settings.cl_bg}};
+    </div>
+  </section>
+
+  {%- style -%}
+    .laber_brand_{{ id}}{
+      margin-top: {{ section.settings.mg_top}}px;
+      margin-bottom: {{ section.settings.mg_bottom}}px;
+      padding-top: {{ section.settings.pad_top}}px;
+      padding-bottom: {{ section.settings.pad_bottom}}px;
+      background-color: {{ section.settings.cl_bg}};
       {% if section.settings.bg_brand != blank %}
-      	background-image: url('{{ section.settings.bg_brand | img_url:"1920x"}}');
-		background-position: center center;
-      {% endif %}	
-  	}
-  @media (max-width: 767px) {
-  	.laber_brand_{{id}}{
-      margin-top:{{section.settings.mobile_mg_top}}px ;
-      margin-bottom:{{section.settings.mobile_mg_bottom}}px ;
-      padding-top:{{section.settings.mobile_pd_top}}px ;
-      padding-bottom:{{section.settings.mobile_pd_bottom}}px;
-  	}
-  }
-{%- endstyle -%}
+        background-image: url('{{ section.settings.bg_brand | img_url:"1920x"}}');
+        background-position: center center;
+      {% endif %}
+    }
+    @media(max-width: 767px) {
+      .laber_brand_{{ id}}{
+        margin-top: {{ section.settings.mobile_mg_top}}px;
+        margin-bottom: {{ section.settings.mobile_mg_bottom}}px;
+        padding-top: {{ section.settings.mobile_pd_top}}px;
+        padding-bottom: {{ section.settings.mobile_pd_bottom}}px;
+      }
+    }
+  {%- endstyle -%}
 
 {%- endfor -%}
 
@@ -105,9 +134,9 @@
   {
     "name": "Brand grid",
     "class": "laber_section brand_grid type_brand_grid",
-	"max_blocks": 30,
+    "max_blocks": 30,
     "settings": [
-	  {
+      {
         "type": "header",
         "content": "== Design Options"
       },
@@ -116,17 +145,16 @@
         "id": "hidden",
         "label": "Hidden Section?",
         "default": false
-      },      
+      },
       {
         "type": "select",
         "id": "layout",
         "default": "container",
         "options": [
-         {
+          {
             "value": "container",
             "label": "Container"
-         },
-         {
+          }, {
             "value": "full-width",
             "label": "Full Width"
           }
@@ -134,18 +162,15 @@
         "label": "Layout"
       },
       {
-      "type": "image_picker",
-      "id": "bg_brand",
-      "label": "Background images"
-      },
-      {
+        "type": "image_picker",
+        "id": "bg_brand",
+        "label": "Background images"
+      }, {
         "type": "color",
         "id": "cl_bg",
         "label": "Background color",
         "default": "#fff"
-      },
-	  
-      {
+      }, {
         "type": "range",
         "id": "mg_top",
         "label": "Margin top",
@@ -154,8 +179,7 @@
         "max": 100,
         "step": 1,
         "unit": "px"
-      },
-		{
+      }, {
         "type": "range",
         "id": "mg_bottom",
         "label": "Margin bottom",
@@ -164,8 +188,7 @@
         "max": 100,
         "step": 1,
         "unit": "px"
-      },
-      {
+      }, {
         "type": "range",
         "id": "pad_top",
         "label": "Padding Top",
@@ -174,9 +197,7 @@
         "max": 100,
         "step": 1,
         "unit": "px"
-      },
-      
-      {
+      }, {
         "type": "range",
         "id": "pad_bottom",
         "label": "Padding Bottom",
@@ -185,13 +206,11 @@
         "max": 100,
         "step": 1,
         "unit": "px"
-      },
-	  {
+      }, {
         "type": "header",
         "content": "== Setting mobile",
-		"info":"Padding and Margin"
-      },
-	 {
+        "info": "Padding and Margin"
+      }, {
         "type": "range",
         "id": "mobile_mg_top",
         "label": "Margin top",
@@ -200,8 +219,7 @@
         "max": 100,
         "step": 1,
         "unit": "px"
-      },
-      {
+      }, {
         "type": "range",
         "id": "mobile_mg_bottom",
         "label": "Margin bottom",
@@ -210,8 +228,7 @@
         "max": 100,
         "step": 1,
         "unit": "px"
-      },
-	  {
+      }, {
         "type": "range",
         "id": "mobile_pd_top",
         "label": "Padding top",
@@ -220,8 +237,7 @@
         "max": 100,
         "step": 1,
         "unit": "px"
-      },
-      {
+      }, {
         "type": "range",
         "id": "mobile_pd_bottom",
         "label": "Padding bottom",
@@ -230,39 +246,33 @@
         "max": 100,
         "step": 1,
         "unit": "px"
-      },
-      {
+      }, {
         "type": "header",
         "content": "== General Settings"
-      },  
-      {
+      }, {
         "type": "text",
         "id": "title",
         "label": "Heading"
-      },
-      {
+      }, {
         "type": "text",
         "id": "sub_title",
         "label": "Sub Text"
-      },
-	  {
+      }, {
         "type": "textarea",
         "id": "content",
         "label": "Content",
         "default": "Commodo sociosqu venenatis cras dolor sagittis integer luctus maecenas."
-      },
-      {
+      }, {
         "type": "header",
         "content": "== Slider Settings"
-      }, 
-      {
+      }, {
         "type": "select",
         "id": "col_pr",
         "label": "Brand columns (desktop)",
         "info": "How many brand you want to show",
         "default": "6",
         "options": [
-		  {
+          {
             "value": "1",
             "label": "1"
           },
@@ -277,77 +287,36 @@
           {
             "value": "4",
             "label": "4"
-          },
-          {
+          }, {
             "value": "5",
             "label": "5"
-          },
-	      {
+          }, {
             "value": "6",
             "label": "6"
           }
         ]
-      },
-      {
-      "type": "checkbox",
-      "id": "show_btn",
-      "label": "Show Button",
-      "default": true
-      },
-      {
-      "type": "text",
-      "id": "title_btn",
-      "label": "Text Button",
-	  "default": "view all clients"	
-      },
-	   {
+      }, {
+        "type": "checkbox",
+        "id": "show_btn",
+        "label": "Show Button",
+        "default": true
+      }, {
+        "type": "text",
+        "id": "title_btn",
+        "label": "Text Button",
+        "default": "view all clients"
+      }, {
         "label": "Link to (Optional)",
         "id": "url",
         "type": "url"
-      },
-      {
+      }, {
         "type": "select",
         "id": "open_link",
         "options": [
           {
             "value": "_self",
             "label": "Current window (_self)"
-          },
-         {
-            "value": "_blank",
-            "label": "New window (_blank)"
-          }
-        ],
-        "label": "Open link in",
-        "default": "_blank"
-      }	
-    ],
-	"blocks": 
-	[
-	{
-    "type": "brand",
-    "name": "Brand",
-    "settings": [
-      {
-         "type": "image_picker",
-         "id": "image",
-         "label": "Image",
-		 "info": "Dimension: 1170 x 70 px"
-       },
-       {
-        "label": "Link to (Optional)",
-        "id": "url",
-        "type": "url"
-      },
-      {
-        "type": "select",
-        "id": "open_link",
-        "options": [
-          {
-            "value": "_self",
-            "label": "Current window (_self)"
-          },
-         {
+          }, {
             "value": "_blank",
             "label": "New window (_blank)"
           }
@@ -355,22 +324,66 @@
         "label": "Open link in",
         "default": "_blank"
       }
-      ]
-    }],
+    ],
+    "blocks": [
+      {
+        "type": "brand",
+        "name": "Brand",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image",
+            "info": "Dimension: 1170 x 70 px"
+          }, {
+            "label": "Link to (Optional)",
+            "id": "url",
+            "type": "url"
+          }, {
+            "type": "select",
+            "id": "open_link",
+            "options": [
+              {
+                "value": "_self",
+                "label": "Current window (_self)"
+              }, {
+                "value": "_blank",
+                "label": "New window (_blank)"
+              }
+            ],
+            "label": "Open link in",
+            "default": "_blank"
+          }
+        ]
+      }
+    ],
     "presets": [
       {
         "name": "Brand grid",
         "category": "Images",
-		"blocks": [
-          { "type": "brand" },
-          { "type": "brand" },
-          { "type": "brand" },
-          { "type": "brand" },
-          { "type": "brand" },
-          { "type": "brand" },
-          { "type": "brand" },
-          { "type": "brand" },
-          { "type": "brand" }
+        "blocks": [
+          {
+            "type": "brand"
+          },
+          {
+            "type": "brand"
+          },
+          {
+            "type": "brand"
+          },
+          {
+            "type": "brand"
+          }, {
+            "type": "brand"
+          }, {
+            "type": "brand"
+          }, {
+            "type": "brand"
+          }, {
+            "type": "brand"
+          }, {
+            "type": "brand"
+          }
         ]
       }
     ]

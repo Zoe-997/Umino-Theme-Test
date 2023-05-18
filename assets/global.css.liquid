@@ -10823,12 +10823,32 @@
     visibility: visible;
   }
   .laber-social-link .list-socials li a {
-    font-size: 20px;
-    width: 25px;
-    height: 25px;
-    display: block;
-    line-height: 25px;
-    text-align: center;
+    font-size: 10px;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    border-width: 1px;
+    border-style: solid;
+    border-color: var(--color-text-body);
+    border-radius: 50%;
+  }
+
+  .laber-social-link .list-socials li a > * {
+    color: var(--color-text-body);
+    fill: var(--color-text-body);
+  }
+
+  .laber-social-link .list-socials li a:hover {
+    background-color: var(--color-btn);
+    border-color: var(--color-border-btn);
+  }
+
+  .laber-social-link .list-socials li a:hover > * {
+    color: var(--color-btn-text);
+    fill: var(--color-btn-text);
   }
 
   .alo-image a {
@@ -10847,6 +10867,15 @@
   .alo-image a:hover img {
     transform: scale(1.05);
   }
+
+  .home .page-container section {
+    margin-bottom: 100px;
+  }
+
+  .home .page-container section:last-child {
+    margin-bottom: 0;
+  }
+
   @media(max-width: 479px) {
     .shop-page .pagination {
       float: none;

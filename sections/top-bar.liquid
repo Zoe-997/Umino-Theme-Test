@@ -20,17 +20,17 @@
                         <p class="announcement-bar__message">
                           {{ block.settings.message_text }} 
                               {%- if  block.settings.text_link != blank -%}
-                                <a id="b_{{block.id}}"  class="buttons" href="{{block.settings.btn_link}}" target="{{block.settings.open_link}}"
-                                   {{ block.shopify_attributes }}>{{block.settings.text_link}}</a>
+                                <a id="b_{{ block.id}}"  class="buttons" href="{{ block.settings.btn_link}}" target="{{ block.settings.open_link}}"
+                                   {{ block.shopify_attributes }}>{{ block.settings.text_link}}</a>
                               {%- endif -%}
                           {%style%}
                           	.announcement-bar__message a{
-                          		color:{{block.settings.color_link}};
-                                  background-color:{{block.settings.bg_color_link}};
+                          		color:{{ block.settings.color_link}};
+                                  background-color:{{ block.settings.bg_color_link}};
                           	}
                               .announcement-bar__message a:hover{
-                                  color:{{block.settings.color_link_hover}};
-                                  background-color:{{block.settings.bg_color_link_hover}};
+                                  color:{{ block.settings.color_link_hover}};
+                                  background-color:{{ block.settings.bg_color_link_hover}};
                               }  
                           {%endstyle%}
                         </p>

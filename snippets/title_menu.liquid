@@ -5,15 +5,15 @@
     assign icon_class1 = arr_icon[1] | default:'las'
   endif  -%}
 {%- if icon != blank %}
-	<span class="icon">
-      <i class="lab {{arr_icon[1] | default:'las'}} la-{{arr_icon[0]}}"></i>
-	</span>  
+  <span class="icon">
+    <i class="lab {{arr_icon[1] | default:'las'}} la-{{arr_icon[0]}}"></i>
+  </span>
 {% endif -%}
 
-{{block.settings.title }}
+{{ block.settings.title }}
 
 {% if block.settings.lb != blank and enable_icon %}
-  <span class="lbl_nav_title" style="background-color: {{block.settings.lb_cl}}">
-    {{block.settings.lb}}
+  <span class="lbl_nav_title" style="background-color: {{ block.settings.lb_cl}}">
+    {{ block.settings.lb }}
   </span>
 {% endif -%}

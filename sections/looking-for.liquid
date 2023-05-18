@@ -46,7 +46,7 @@
               {%- if block.settings.enable_image -%}           
             	<div class="images">
                  {%- if image != blank %}{% assign img_url = image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
-                      <div class="laber_bg_lz lazyload pr_lazy_img {{block.settings.img_align}}" data-bgset="{{ image | img_url: '1x1' }}" data-ratio="{{image.aspect_ratio}}" data-sizes="auto" data-parent-fit="cover" style="padding-top:{{ 1 | divided_by: image.aspect_ratio | times: 100}}%"></div>
+                      <div class="laber_bg_lz lazyload pr_lazy_img {{ block.settings.img_align}}" data-bgset="{{ image | img_url: '1x1' }}" data-ratio="{{image.aspect_ratio}}" data-sizes="auto" data-parent-fit="cover" style="padding-top:{{ 1 | divided_by: image.aspect_ratio | times: 100}}%"></div>
                  {%- else -%}
                      <img class="lazyload" data-src="https://via.placeholder.com/370x240.png/a1a19f/ffffff?text=Image+{{forloop.index}}"/>
                  {%- endif -%}
@@ -62,8 +62,8 @@
               {% endif %}
               
               {%- if  block.settings.btn != blank -%}
-              <a  class="buttons" href="{{block.settings.btn_link}}" target="{{block.settings.open_link}}"
-                 {{ block.shopify_attributes }}>{{block.settings.btn}}</a>
+              <a  class="buttons" href="{{ block.settings.btn_link}}" target="{{ block.settings.open_link}}"
+                 {{ block.shopify_attributes }}>{{ block.settings.btn}}</a>
               {%- endif -%}
             </div>	
             </div>

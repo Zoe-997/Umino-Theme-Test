@@ -87,7 +87,7 @@
                             {%- else -%}{% assign class = ',,,,,dn' %}
                             {%- endcase -%}
                             {% assign arr = class | split:',' %}
-                            <div class="quote_rating cra rating_{{block.settings.rating}}">
+                            <div class="quote_rating cra rating_{{ block.settings.rating}}">
                                 <i class="icon-star{{arr[0]}}"></i>
                                 <i class="icon-star{{arr[1]}}"></i>
                                 <i class="icon-star{{arr[2]}}"></i>
@@ -95,9 +95,9 @@
                                 <i class="icon-star{{arr[4]}}"></i>
                             </div>
                           {%- endif -%}  
-                          <div class="quote_author">{{block.settings.title}}</div>
-                          {{block.settings.content}}
-                              <div class="quote_address">{{block.settings.address}}</div>
+                          <div class="quote_author">{{ block.settings.title}}</div>
+                          {{ block.settings.content}}
+                              <div class="quote_address">{{ block.settings.address}}</div>
                           </div>
                         
                       </div>

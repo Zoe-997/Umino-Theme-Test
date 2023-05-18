@@ -21,7 +21,7 @@
               {%- case block.type -%}
                   {% when 'image_card' %} 
                   <div class="col-xs-12 col-sm-12 col-md-{{ block.settings.width }} col-lg-{{ block.settings.width }}">
-                     <div id="bk_{{ block.id }}" class="flex h_{{block.settings.h_position}} v_{{block.settings.v_position}} text_{{block.settings.txt_align}} h-full">
+                     <div id="bk_{{ block.id }}" class="flex h_{{ block.settings.h_position}} v_{{ block.settings.v_position}} text_{{ block.settings.txt_align}} h-full">
                        <div class="image_card w-full">
                          {% assign image = block.settings.image %}
                       {% if block.settings.link !=blank %}<a class="gl" href="{{ block.settings.link }}" title="">{% endif %}
@@ -47,7 +47,7 @@
                   </div>
                  {% when 'text' %} 
                    <div class="col-xs-12 col-sm-12 col-md-{{ block.settings.width }} col-lg-{{ block.settings.width }}">
-                     <div id="bk_{{ block.id }}" class="flex h_{{block.settings.h_position}} v_{{block.settings.v_position}} text_{{block.settings.txt_align}} h-full">
+                     <div id="bk_{{ block.id }}" class="flex h_{{ block.settings.h_position}} v_{{ block.settings.v_position}} text_{{ block.settings.txt_align}} h-full">
                          <div class="content-text">
                             {% if block.settings.subheading != blank %} <p class="about-subtitle">{{ block.settings.subheading }}</p>{% endif %}
                             {% if block.settings.title != blank %} <h2 class="about-title">{{ block.settings.title }}</h2>{% endif %}
@@ -86,7 +86,7 @@
                 {%- when 'video' -%}{%- assign image = block.settings.image -%}
                   <div class="col-xs-12 col-sm-12 col-md-{{ block.settings.width }} col-lg-{{ block.settings.width }}">
                     <div id="bk_{{ block.id }}" class="banner_img">
-                      <div class="about_us_img border_{{block.settings.use_border}}" {{ block.shopify_attributes }}>
+                      <div class="about_us_img border_{{ block.settings.use_border}}" {{ block.shopify_attributes }}>
                         {%- if image != blank -%} 
                         {%- assign img_url = image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
                         <img class="lazyload" src="data:image/svg+xml,%3Csvg%20viewBox%3D%220%200%20{{image.width}}%20{{image.height}}%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3C%2Fsvg%3E" data-src="{{ img_url }}" data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]" data-sizes="auto" alt="{{image.alt | escape}}">
@@ -99,7 +99,7 @@
                         <span class="fr_br_1"></span><span class="fr_br_2"></span><span class="fr_br_3"></span><span class="fr_br_4"></span>
                         {%- if block.settings.video_url != blank -%}
                         <div class="overlay_video">
-                        <a data_js_mfp_video class="video-control__play" href="{{block.settings.video_url}}" target="_blank">
+                        <a data_js_mfp_video class="video-control__play" href="{{ block.settings.video_url}}" target="_blank">
                          <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-play" viewBox="0 0 20 40"><path fill-rule="evenodd" clip-rule="evenodd" d="M23.6 16.8L7 1.5C5.6.3 4 .2 2.9.7 1.6 1.4.8 2.7.7 3.8v31.7c0 1.8 1.1 3.3 3.1 3.3 1.5 0 2.5-.5 3.4-1.4l16.4-15.7c1.5-1.4 1.5-3.6 0-4.9z"></path></svg>
                         </a>
                         </div>
@@ -113,7 +113,7 @@
                     {% assign sub_title = block.settings.sub_title %}
           			{% assign content = block.settings.content %}
           			<div class="col-xs-12 col-sm-12 col-md-{{ block.settings.width }} col-lg-{{ block.settings.width }}">
-                      <div id="bk_{{ block.id }}" class="flex h_{{block.settings.h_position}} v_{{block.settings.v_position}} text_{{block.settings.txt_align}} h-full">
+                      <div id="bk_{{ block.id }}" class="flex h_{{ block.settings.h_position}} v_{{ block.settings.v_position}} text_{{ block.settings.txt_align}} h-full">
                       <div class="content_about_us">
                         {%if sub_title !=blank%}<p class="sub_title">{{sub_title}}</p>{%endif%}
                         {%if title !=blank%}<p class="title h3">{{title}}</p>{%endif%}

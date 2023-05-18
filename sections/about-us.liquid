@@ -12,11 +12,11 @@
             {%- case block.type -%}
                {%- when 'heading' -%}
                    <div class="wrap_title">
-                     <h3 class="section-title"><span > {{block.settings.title}}</span></h3>        
-                     <span class="section-subtitle">{{block.settings.sub_title}}</span>
+                     <h3 class="section-title"><span > {{ block.settings.title}}</span></h3>        
+                     <span class="section-subtitle">{{ block.settings.sub_title}}</span>
                    </div> 
                {%- when 'image' -%}{%- assign image = block.settings.image -%}
-                 <div class="about_us_img border_{{block.settings.use_border}}" {{ block.shopify_attributes }}>
+                 <div class="about_us_img border_{{ block.settings.use_border}}" {{ block.shopify_attributes }}>
                   {%- if image != blank -%} 
                     {%- assign img_url = image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
                     <img class="lazyload" src="data:image/svg+xml,%3Csvg%20viewBox%3D%220%200%20{{image.width}}%20{{image.height}}%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3C%2Fsvg%3E" data-src="{{ img_url }}" data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]" data-sizes="auto" alt="{{image.alt | escape}}">
@@ -26,20 +26,20 @@
                   <span class="fr_br_1"></span><span class="fr_br_2"></span><span class="fr_br_3"></span><span class="fr_br_4"></span>
                    {%- if block.settings.video_url != blank -%}
                    <div class="overlay_video">
-                     <a data_js_mfp_video class="video-control__play" href="{{block.settings.video_url}}" target="_blank">
+                     <a data_js_mfp_video class="video-control__play" href="{{ block.settings.video_url}}" target="_blank">
                        <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-play" viewBox="0 0 20 40"><path fill-rule="evenodd" clip-rule="evenodd" d="M23.6 16.8L7 1.5C5.6.3 4 .2 2.9.7 1.6 1.4.8 2.7.7 3.8v31.7c0 1.8 1.1 3.3 3.1 3.3 1.5 0 2.5-.5 3.4-1.4l16.4-15.7c1.5-1.4 1.5-3.6 0-4.9z"></path></svg>
                      </a>
                    </div>
                    {%- endif -%}
                 </div>
                {%- when 'text' -%}
-                <div class=" about_us_txt h_{{block.settings.h_position}}  text_{{block.settings.txt_align}}" {{ block.shopify_attributes }}>
-                  <div class="content-text">{{block.settings.text}}</div>
+                <div class=" about_us_txt h_{{ block.settings.h_position}}  text_{{ block.settings.txt_align}}" {{ block.shopify_attributes }}>
+                  <div class="content-text">{{ block.settings.text}}</div>
        			</div> 
                {%- else -%}
        			{%assign no-img = "https://placehold.jp/20/bc8e6a/fff/390x188.png?text=390x188"%}
        			{%- assign image = block.settings.image -%}
-                <div class="about_us_sig h_{{block.settings.h_position}}  text_{{block.settings.txt_align}}" {{ block.shopify_attributes }}>
+                <div class="about_us_sig h_{{ block.settings.h_position}}  text_{{ block.settings.txt_align}}" {{ block.shopify_attributes }}>
                   	<img 
                          alt="{{image.alt | escape}}"	
                          src="{% if image != blank %}{{ image | img_url: '500x' }}{%else%}{{no-img}}{%endif%}"                      

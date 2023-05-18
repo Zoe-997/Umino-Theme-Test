@@ -2558,6 +2558,23 @@
       },
       {
         "type": "checkbox",
+        "id": "footer_social_tiktok_enable",
+        "label": "Show social tiktok"
+      },
+      {
+        "type": "text",
+        "id": "social_tiktok_link",
+        "label": "Tiktok",
+        "info": "https:\/\/www.tiktok.com\/vi-VN"
+      },
+      {
+        "type": "text",
+        "id": "footer_social_tiktok_text",
+        "label": "Title of tiktok",
+        "default": "Tiktok"
+      },
+      {
+        "type": "checkbox",
         "id": "footer_social_vimeo_enable",
         "label": "Show social media vimeo"
       },

@@ -148,7 +148,7 @@
  				{% endunless %}
             {%- when 'menu_mb' -%}
                {%- if linklists[sblock.menu].links.size > 0 -%}
-                   <li id="item_{{block.id}}" class="menu-item item-level-0 has-children" {{ block.shopify_attributes }}>
+                   <li id="item_{{ block.id}}" class="menu-item item-level-0 has-children" {{ block.shopify_attributes }}>
                      <a href="{{sblock.url}}" target="{{sblock.open_link}}">
                       {% if sblock.show_icon and sblock.icon != blank %}
                        		<span class="icon">{{sblock.icon}}</span>
@@ -171,7 +171,7 @@
 
                                        
                                        {%- if child_link.links != blank -%}
-                                          <li id="item_{{block.id}}" class="menu-item item-level-2 has-children{% if child_link.active %} active{% endif %}">
+                                          <li id="item_{{ block.id}}" class="menu-item item-level-2 has-children{% if child_link.active %} active{% endif %}">
                                              <a href="{{child_link.url}}">
                                                <span>{{child_link.title }} </span>
                                              </a>
@@ -207,7 +207,7 @@
                      </ul>
                   </li>
                {%- else -%}
-                  <li id="item_{{block.id}}" class="menu-item item-level-0">
+                  <li id="item_{{ block.id}}" class="menu-item item-level-0">
                     <a href="{{sblock.url}}" target="{{sblock.open_link}}">
                       {% if sblock.show_icon and sblock.icon != blank %}
                       	<span class="icon">{{sblock.icon}}</span>

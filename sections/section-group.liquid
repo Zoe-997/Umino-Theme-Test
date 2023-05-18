@@ -12,7 +12,7 @@
       	{%- for block in section.blocks -%}         
           {%- case block.type -%}
            {%- when 'collection' -%}
-               <div class="col-lg-{{block.settings.cl}} col-md-{{block.settings.cl_tb}} col-sm-{{block.settings.cl_mb}} col-xs-12">
+               <div class="col-lg-{{ block.settings.cl}} col-md-{{ block.settings.cl_tb}} col-sm-{{ block.settings.cl_mb}} col-xs-12">
                   {%- if block.settings.title != blank %}<h5 class="widget-title">{{ block.settings.title }}</h5>{% endif -%}
                   {%- if block.settings.collection == blank -%}
                      <p class="mg__0 mb__30">{{ 'homepage.onboarding.no_content' | t }}</p>

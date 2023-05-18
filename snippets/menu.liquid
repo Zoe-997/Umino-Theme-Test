@@ -9,82 +9,116 @@
 
 <!--  /End check -->
 <!--  Check and get sticky menu-->
-{% if settings.menu_sticky  %}
-	{% assign  menu_sticky = true %}
+  {% if settings.menu_sticky %}
+  {% assign menu_sticky = true %}
 {% else %}
-	{% assign  menu_sticky = false %}
+  {% assign menu_sticky = false %}
 {% endif %}
 
-<!--/End check --> 
-  <div class="header-nav-inner">
-    <div class="box-header-nav">
-      <div class="container-wapper">        
-        <ul id="menu-main-menu" class="main-menu clone-main-menu" >
-          {%- for type in tp_blocks -%}
-     
-              {%- assign arrTyCurent = blocktp |remove:'t4,' | split:',' | where:type -%}
-              {%- assign arrblock = se_blocks | where: "type", type -%}
-              {%- assign block = arrblock[arrTyCurent.size] -%}
-              {%- assign blocktp = blocktp | append:',' | append:type -%}
+<!--/End check -->
+<div class="header-nav-inner">
+  <div class="box-header-nav">
+    <div class="container-wapper">
+      <ul id="menu-main-menu" class="main-menu clone-main-menu">
+        {%- for type in tp_blocks -%}
 
-              {%- case block.type -%}
-          		 {%- when 'logo' -%}	
-                    {% if section.settings.header_design =='both-center' %}
-          			 <li class="header-logo" style="width:{{ block.settings.logo_max_width }}px;">
-                        {%- render 'logo' -%}
-                    </li>	
-                  {% endif %}
-                 {%- when 'dropdown' -%}
-          			
-                    <li id="item_{{block.id}}" class="type_{{block.type}} menu-item {% if linklists[block.settings.menu].links.size > 0 %}  has-children {% endif %}"  {{ block.shopify_attributes }}>
-                       <a class="cms-item-title " href="{{block.settings.url}}" target="{{block.settings.open_link}}"{% if block.settings.cus_cl %} style="color:{{block.settings.cl}}"{% endif %}>
-                         {% render 'title_menu',block:block, enable_icon:section.settings.enable_icon_menu %}
-                         {% if linklists[block.settings.menu].links.size > 0 %}  <i class="icon-chevron-down"></i> {% endif %}
-                      </a>
-                       {%- if linklists[block.settings.menu].links.size > 0 %}                      
-                         <div class="submenu" >
-                           	<div id="bk_{{block.id}}" class="lazy_menu_mega lazyload" data-include="{{search_url}}?q={{block.id}}&view=item_menu">
-                           		<div class="loading_bg"></div>
-                         	</div>  
-                      	</div>
-                      {% endif %}
-                    </li>                
-                 {%- when 'simple' -%}
-                    {% if block.settings.url != blank %}
-                        <li id="item_{{block.id}}" class="menu-item type_simple" {{ block.shopify_attributes }}>
-                          <a class="cms-item-title" href="{{block.settings.url}}" target="{{block.settings.open_link}}"{% if block.settings.cus_cl %} style="color:{{block.settings.cl}}"{% endif %}>
-                            {%- render 'title_menu',block:block, enable_icon:section.settings.enable_icon_menu -%}
-                          </a>
-                        </li>
-                    {% endif %}
-                 {%- else -%}
-                    <li id="item_{{block.id}}" class="type_{{block.type}} menu-item has-children {% if block.settings.pos_rel %}pos_rel{%endif%}" {{ block.shopify_attributes }}>
-                       <a class="cms-item-title " href="{{block.settings.url}}" target="{{block.settings.open_link}}"{% if block.settings.cus_cl %} style="color:{{block.settings.cl}}"{% endif %}>
-                         {%- render 'title_menu',block:block, enable_icon:section.settings.enable_icon_menu -%}
-                         <i class="icon-chevron-down"></i>
-                      </a>
-                       <div class="submenu mega-menu mega-menu1" 
-                            style="
-                                   {% if  block.settings.wid == 'cus' %} width:{{block.settings.cus_wid}}px;{% endif %}
-                                   {%if block.settings.bg != blank%}background-color:{{block.settings.bg}};{%endif%}
-                                   {%if block.settings.image != blank%}
-                                   	 background-image:url('{{block.settings.image | img_url:"464x217"}}'); 
-                                     background-position: right bottom;
-                                     background-repeat: no-repeat;
-                                   {%endif%}
-                                   "
-                            >
-                         <div class="{{block.settings.wid}}">
-                           <div id="bk_{{block.id}}" class="row lazy_menu_mega lazyload" data-include="{{search_url}}?q={{block.id}}&view=item_menu" >
-                             <div class="loading_bg"></div>
-                           </div>
-                         </div>
-                      </div>
-                    </li>
-              {%- endcase -%}
-           {%- endfor -%}          
-        </ul>
-      </div>
+          {%- assign arrTyCurent = blocktp | remove: 't4,' | split: ',' | where: type -%}
+          {%- assign arrblock = se_blocks | where: "type", type -%}
+          {%- assign block = arrblock[arrTyCurent.size] -%}
+          {%- assign blocktp = blocktp | append: ',' | append: type -%}
+
+          {%- case block.type -%}
+            {%- when 'logo' -%}
+            {% if section.settings.header_design == 'both-center' %}
+              <li class="header-logo" style="width:{{ block.settings.logo_max_width }}px;">
+                {%- render 'logo' -%}
+              </li>
+            {% endif %}
+            {%- when 'dropdown' -%}
+
+            <li
+              id="item_{{ block.id}}"
+              class="type_{{ block.type}} menu-item {% if linklists[block.settings.menu].links.size > 0 %}  has-children {% endif %}"
+              {{ block.shopify_attributes }}>
+              <a
+                class="cms-item-title "
+                href="{{ block.settings.url}}"
+                target="{{ block.settings.open_link}}"
+                {% if block.settings.cus_cl %}
+                style="color:{{ block.settings.cl}}"
+                {% endif %}>
+                {% render 'title_menu', block: block, enable_icon: section.settings.enable_icon_menu %}
+                {% if linklists[block.settings.menu].links.size > 0 %}
+                  <i class="icon-chevron-down"></i>
+                {% endif %}
+              </a>
+              {%- if linklists[block.settings.menu].links.size > 0 %}
+                <div class="submenu">
+                  <div
+                    id="bk_{{ block.id}}"
+                    class="lazy_menu_mega lazyload"
+                    data-include="{{search_url}}?q={{ block.id}}&view=item_menu">
+                    <div class="loading_bg"></div>
+                  </div>
+                </div>
+              {% endif %}
+            </li>
+            {%- when 'simple' -%}
+            {% if block.settings.url != blank %}
+              <li
+                id="item_{{ block.id}}"
+                class="menu-item type_simple"
+                {{ block.shopify_attributes }}>
+                <a
+                  class="cms-item-title"
+                  href="{{ block.settings.url}}"
+                  target="{{ block.settings.open_link}}"
+                  {% if block.settings.cus_cl %}
+                  style="color:{{ block.settings.cl}}"
+                  {% endif %}>
+                  {%- render 'title_menu', block: block, enable_icon: section.settings.enable_icon_menu -%}
+                </a>
+              </li>
+            {% endif %}
+          {%- else -%}
+            <li
+              id="item_{{ block.id}}"
+              class="type_{{ block.type}} menu-item has-children {% if block.settings.pos_rel %}pos_rel{%endif%}"
+              {{ block.shopify_attributes }}>
+              <a
+                class="cms-item-title "
+                href="{{ block.settings.url}}"
+                target="{{ block.settings.open_link}}"
+                {% if block.settings.cus_cl %}
+                style="color:{{ block.settings.cl}}"
+                {% endif %}>
+                {%- render 'title_menu', block: block, enable_icon: section.settings.enable_icon_menu -%}
+                <i class="icon-chevron-down"></i>
+              </a>
+              <div
+                class="submenu mega-menu mega-menu1"
+                style='
+                {% if block.settings.wid == 'cus' %}
+                  width:{{ block.settings.cus_wid }}px;{% endif %}
+                {% if block.settings.bg != blank %}background-color:{{ block.settings.bg }};{% endif %}
+                {% if block.settings.image != blank %}
+                  background-image:url('{{ block.settings.image | img_url: "464x217" }}'); 
+                  background-position: right bottom;
+                                                       background-repeat: no-repeat;
+                {% endif %}'>
+                <div class="{{ block.settings.wid}}">
+                  <div
+                    id="bk_{{ block.id}}"
+                    class="row lazy_menu_mega lazyload"
+                    data-include="{{search_url}}?q={{ block.id}}&view=item_menu">
+                    <div class="loading_bg"></div>
+                  </div>
+                </div>
+              </div>
+            </li>
+          {%- endcase -%}
+        {%- endfor -%}
+      </ul>
     </div>
   </div>
-
+</div>

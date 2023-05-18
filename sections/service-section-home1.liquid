@@ -23,9 +23,9 @@
                     {% assign index  = index | plus: 1 %}               
                     <li class="item">
                       {% if section.settings.enable_number %}<label>{% if index <10 %}0{% endif %}{{index}}.</label> {% endif %}
-                      <a href="{{block.settings.link}}">{{block.settings.name}}</a>
+                      <a href="{{ block.settings.link}}">{{ block.settings.name}}</a>
                       {% if block.settings.desc != blank %}
-                      	<span class="cms-service-desc">{{block.settings.desc}}</span>
+                      	<span class="cms-service-desc">{{ block.settings.desc}}</span>
                       {% endif %}
                     </li>
                 {% endif %}

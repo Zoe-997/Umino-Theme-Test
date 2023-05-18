@@ -44,7 +44,7 @@
                 {%- assign url = block.settings.url -%}
                 <div class="brand-item">
                   <div class="brand-img">
-                  {%- if url != blank -%}<a href="{{ url }}" class="db" target="{{block.settings.open_link}}">{%- endif -%}
+                  {%- if url != blank -%}<a href="{{ url }}" class="db" target="{{ block.settings.open_link}}">{%- endif -%}
                   {%- if image != blank %}
                         <div data-image-effect class="pr_lazy_img main-img lazyload laber_bg_lz" data-id="{{image.id}}" data-bgset="{{ image | img_url: '1x1' }}" data-parent-fit="width" data-wiis data-ratio="{{image.aspect_ratio}}" data-sizes="auto" style="padding-top:{{ 1 | divided_by: image.aspect_ratio | times: 100}}%;"></div>
                   {%- else -%}
@@ -52,9 +52,9 @@
                   {%- endif -%}
                   {%- if url != blank -%}</a>{%- endif -%}
                   </div>
-                  <h3 class="title">{{block.settings.title}}</h3>
+                  <h3 class="title">{{ block.settings.title}}</h3>
                   <div class="content">
-                    {{block.settings.content}}
+                    {{ block.settings.content}}
                   </div>
                 </div>
               {%- endfor -%}

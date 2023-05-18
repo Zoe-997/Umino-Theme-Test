@@ -27,16 +27,16 @@
                   assign url = block.settings.url 
                   assign open_link = block.settings.open_link 
                 %}
-            <div id="bk_{{block.id}}" class="col-lg-{{block.settings.cl}} col-md-{{block.settings.cl_tb}} col-sm-{{block.settings.cl_mb}} col-xs-12">
+            <div id="bk_{{ block.id}}" class="col-lg-{{ block.settings.cl}} col-md-{{ block.settings.cl_tb}} col-sm-{{ block.settings.cl_mb}} col-xs-12">
 
                 {% if block.settings.title != blank %}
                 <div class="wrap_title style_2">
-                  <h3 class="block-title">{{block.settings.title}}</h3>  
+                  <h3 class="block-title">{{ block.settings.title}}</h3>  
                   {% if block.settings.content!= blank %}
-                  <div class="content">{{block.settings.content}}</div>
+                  <div class="content">{{ block.settings.content}}</div>
                   {% endif %}
                   {%if block.settings.text_btn %}
-                    <div class="bn_button viewall"><a href="{{ url | default:'/admin/collections' }}" target="{{open_link}}"">{{block.settings.text_btn}}</a></div>
+                    <div class="bn_button viewall"><a href="{{ url | default:'/admin/collections' }}" target="{{open_link}}"">{{ block.settings.text_btn}}</a></div>
                   {%endif%}
                 </div>
                 {% endif %}
@@ -62,7 +62,7 @@
               assign bid =  block.id
               assign padding = block.settings.padding
             %}
-            <div id="bk_{{bid}}" class="col-lg-{{block.settings.cl}} col-md-{{block.settings.cl_tb}} col-sm-{{block.settings.cl_mb}} col-xs-12">
+            <div id="bk_{{bid}}" class="col-lg-{{ block.settings.cl}} col-md-{{ block.settings.cl_tb}} col-sm-{{ block.settings.cl_mb}} col-xs-12">
                <div class="products-arrivals ">
                   <div class="section-content">
                     {% include 'grid-slider', settings:block.settings %} 

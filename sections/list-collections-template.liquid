@@ -105,7 +105,7 @@
                 endcase
               -%}
               
-              <div id="bk_{{block.id}}" class="cat_grid_item cat_space_item product-item" {{ block.shopify_attributes }}>
+              <div id="bk_{{ block.id}}" class="cat_grid_item cat_space_item product-item" {{ block.shopify_attributes }}>
                 <div class="cat_grid_item__content">
                   <a href="{{ collection.url | default:'/admin/collections' }}" class="cat_grid_item__link">
                     {%- if image != blank -%}

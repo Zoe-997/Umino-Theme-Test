@@ -10,7 +10,7 @@
       {% include 'header_1' %}
   </div>
 {%- endif -%}
-{%style%}
+{% style %}
   {%- if section.settings.hidden %}
     #header{display:none!important}
   {% endif -%}
@@ -20,7 +20,7 @@
   --color-icon-header:{{ section.settings.color_icon }};
   --color-count-header:{{ section.settings.color_count }};
 }
-{%endstyle%}
+{% endstyle %}
 {% schema %}
   {
     "name": "Header style 1",

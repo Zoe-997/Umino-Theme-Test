@@ -1,222 +1,313 @@
-{%- assign se_blocks = section.blocks -%} 
+{%- assign se_blocks = section.blocks -%}
 {%- assign admin_sp = request.design_mode -%}
 {%- if template.suffix == "item_vegamenu" and template.name == 'search' -%}
-	{%- render 'menu_import',section:section -%}	
+  {%- render 'menu_import', section: section -%}
 {%- endif -%}
 
 {%- if template.suffix == "vertical_menu" and template.name == 'search' -%}
 
-	[v_menu]
-	{%- for block in se_blocks -%}
-		{%- assign arrTyCurent = blocktp |remove:'t4,' | split:',' | where:type -%}
-        {%- assign arrblock = se_blocks | where: "type", type -%}
-        {%- assign block = arrblock[arrTyCurent.size] -%}
-        {%- assign blocktp = blocktp | append:',' | append:type -%}
-		{%- case block.type -%}
-			{%- when 'mega' -%}
-				{%- assign cl_bg = block.settings.cl_bg -%}
-				{%- assign img_bg = block.settings.img_bg -%}
-				<li id="item_{{block.id}}" class="type_{{block.type}} menu_has_offsets verticalmenu-item verticalmenu-item-has-children {% if block.settings.pos_rel %}pos_rel{%endif%} {% if forloop.first == true %}first{%endif%}" {{ block.shopify_attributes }}>
-                  <a class="cms-item-title " href="{{block.settings.url}}" target="{{block.settings.open_link}}"{% if block.settings.cus_cl %} style="color:{{block.settings.cl}}"{% endif %}>
-                    {%- render 'title_menu',block:block, enable_icon:section.settings.enable_icon_menu -%}
-                    <i class="icon_right icon-chevron-down"></i>
-                  </a>
-                  <div class="subverticalmenu vertical-menu vertical-menu1" 
-                       style="{% if  block.settings.wid == 'cus' %} width:{{block.settings.cus_wid}}px;{% endif %}
-                              {%if cl_bg!=blank %}background-color:{{cl_bg}};{%endif%}
-                              {%if img_bg!=blank %}
-                              	{%- assign img_url = img_bg | img_url: '500x' -%}
-                              	background-image:url({{ img_url }});
-                              {%endif%} "
-                       >
-                    <div class="{{block.settings.wid}}">
-                      <div id="bk_{{block.id}}" class="row lazy_menu_mega lazyload" data-include="{{routes.search_url}}?q={{block.id}}&view=item_vegamenu" >
-                        <div class="loading_bg"></div>
-                      </div>
-                    </div>
-                  </div>
-				</li>
-            {%- when 'dropdown' -%}
-              <li id="item_{{block.id}}" class="type_{{block.type}} menu_has_offsets verticalmenu-item {% if linklists[block.settings.menu].links.size > 0 %}  verticalmenu-item-has-children {% endif %} {% if forloop.first == true %}first{%endif%}"  {{ block.shopify_attributes }}>
-                <a class="cms-item-title " href="{{block.settings.url}}" target="{{block.settings.open_link}}"{% if block.settings.cus_cl %} style="color:{{block.settings.cl}}"{% endif %}>
-                  {% render 'title_menu',block:block, enable_icon:section.settings.enable_icon_menu %}
-                  {% if linklists[block.settings.menu].links.size > 0 %}  <i class="icon_right icon-chevron-down"></i> {% endif %}
-                </a>
-                {%- if linklists[block.settings.menu].links.size > 0 %}                      
-                <div class="subverticalmenu" >
-                  <div id="bk_{{block.id}}" class="lazy_menu_mega lazyload" data-include="{{routes.search_url}}?q={{block.id}}&view=item_vegamenu">
-                    <div class="loading_bg"></div>
-                  </div>  
-                </div>
-                {% endif %}
-              </li>                
-            {%- when 'simple' -%}
-              {% if block.settings.url != blank %}
-                <li id="item_{{block.id}}" class="verticalmenu-item type_simple {% if forloop.first == true %}first{%endif%}" {{ block.shopify_attributes }} >
-                  <a class="cms-item-title" href="{{block.settings.url}}" target="{{block.settings.open_link}}"{% if block.settings.cus_cl %} style="color:{{block.settings.cl}}"{% endif %}>
-                    {%- render 'title_menu',block:block, enable_icon:section.settings.enable_icon_menu -%}
-                  </a>
-                </li>
-              {% endif %}	
-		{% endcase%}
-		
-		
-		{%comment%}<li id="item_{{block.id}}" class="cat_menu-0">
-          	<a class="flex" href="{{block.settings.url}}"{% if block.settings.cus_cl %} style="color: {{block.settings.cl}} !important"{% endif %}>
-              	{%- render 'vertical_menu_html',block:block -%}
-          	</a>
-		</li>
-		{%endcomment%}
-		
-	{%- endfor -%}
+  [v_menu]
+  {%- for block in se_blocks -%}
+    {%- assign arrTyCurent = blocktp | remove: 't4,' | split: ',' | where: type -%}
+    {%- assign arrblock = se_blocks | where: "type", type -%}
+    {%- assign block = arrblock[arrTyCurent.size] -%}
+    {%- assign blocktp = blocktp | append: ',' | append: type -%}
+    {%- case block.type -%}
+      {%- when 'mega' -%}
+      {%- assign cl_bg = block.settings.cl_bg -%}
+      {%- assign img_bg = block.settings.img_bg -%}
+      <li
+        id="item_{{ block.id}}"
+        class="type_{{ block.type}} menu_has_offsets verticalmenu-item verticalmenu-item-has-children {% if block.settings.pos_rel %}pos_rel{%endif%} {% if forloop.first == true %}first{%endif%}"
+        {{ block.shopify_attributes }}>
+        <a
+          class="cms-item-title "
+          href="{{ block.settings.url}}"
+          target="{{ block.settings.open_link}}"
+          {% if block.settings.cus_cl %}
+          style="color:{{ block.settings.cl}}"
+          {% endif %}>
+          {%- render 'title_menu', block: block, enable_icon: section.settings.enable_icon_menu -%}
+          <i class="icon_right icon-chevron-down"></i>
+        </a>
+        <div
+          class="subverticalmenu vertical-menu vertical-menu1"
+          style='
+          {% if block.settings.wid == 'cus' %}
+            width:{{ block.settings.cus_wid }}px;{% endif %}
+          {% if cl_bg != blank %}background-color:{{ cl_bg }};{% endif %}
+          {% if img_bg != blank %}
+            {%- assign img_url = img_bg | img_url: '500x' -%}
+            background-image:url({{ img_url }});
+          {% endif %}'>
+          <div class="{{ block.settings.wid}}">
+            <div
+              id="bk_{{ block.id}}"
+              class="row lazy_menu_mega lazyload"
+              data-include="{{routes.search_url}}?q={{ block.id}}&view=item_vegamenu">
+              <div class="loading_bg"></div>
+            </div>
+          </div>
+        </div>
+      </li>
+      {%- when 'dropdown' -%}
+      <li
+        id="item_{{ block.id}}"
+        class="type_{{ block.type}} menu_has_offsets verticalmenu-item {% if linklists[block.settings.menu].links.size > 0 %}  verticalmenu-item-has-children {% endif %} {% if forloop.first == true %}first{%endif%}"
+        {{ block.shopify_attributes }}>
+        <a
+          class="cms-item-title "
+          href="{{ block.settings.url}}"
+          target="{{ block.settings.open_link}}"
+          {% if block.settings.cus_cl %}
+          style="color:{{ block.settings.cl}}"
+          {% endif %}>
+          {% render 'title_menu', block: block, enable_icon: section.settings.enable_icon_menu %}
+          {% if linklists[block.settings.menu].links.size > 0 %}
+            <i class="icon_right icon-chevron-down"></i>
+          {% endif %}
+        </a>
+        {%- if linklists[block.settings.menu].links.size > 0 %}
+          <div class="subverticalmenu">
+            <div
+              id="bk_{{ block.id}}"
+              class="lazy_menu_mega lazyload"
+              data-include="{{routes.search_url}}?q={{ block.id}}&view=item_vegamenu">
+              <div class="loading_bg"></div>
+            </div>
+          </div>
+        {% endif %}
+      </li>
+      {%- when 'simple' -%}
+      {% if block.settings.url != blank %}
+        <li
+          id="item_{{ block.id}}"
+          class="verticalmenu-item type_simple {% if forloop.first == true %}first{%endif%}"
+          {{ block.shopify_attributes }}>
+          <a
+            class="cms-item-title"
+            href="{{ block.settings.url}}"
+            target="{{ block.settings.open_link}}"
+            {% if block.settings.cus_cl %}
+            style="color:{{ block.settings.cl}}"
+            {% endif %}>
+            {%- render 'title_menu', block: block, enable_icon: section.settings.enable_icon_menu -%}
+          </a>
+        </li>
+      {% endif %}
+    {% endcase %}
 
-	{% if section.settings.show_title %}
-    {% assign show_style= section.settings.show_style | plus: 0 %}
-		<li class="js-all-cat" data-numb ="{{ section.settings.item_numb }}" data-style="{% if show_style == 1%}nextcats{%else%}allcat{%endif%}"><a href="javascript:void(0)">
-          	<span class="show-all"><i class="las la-plus"></i> {{ section.settings.item_title }}</span>
-          	<span class="show-less"><i class="las la-minus"></i> {{ section.settings.close_title }}</span>
-          </a></li>	
-    {%endif%}
 
-	[v_menu]
+    {% comment %}<li id="item_{{ block.id}}" class="cat_menu-0">
+      <a class="flex" href="{{ block.settings.url}}"{% if block.settings.cus_cl %} style="color: {{ block.settings.cl}} !important"{% endif %}>
+      {%- render 'vertical_menu_html',block:block -%}
+      </a>
+      </li>
+    {% endcomment %}
+
+  {%- endfor -%}
+
+  {% if section.settings.show_title %}
+    {% assign show_style = section.settings.show_style | plus: 0 %}
+    <li
+      class="js-all-cat"
+      data-numb="{{ section.settings.item_numb }}"
+      data-style="{% if show_style == 1%}nextcats{%else%}allcat{%endif%}">
+      <a href="javascript:void(0)">
+        <span class="show-all">
+          <i class="las la-plus"></i>
+          {{ section.settings.item_title }}</span>
+        <span class="show-less">
+          <i class="las la-minus"></i>
+          {{ section.settings.close_title }}</span>
+      </a>
+    </li>
+  {% endif %}
+
+  [v_menu]
 
 {%- else -%}
 
   <div id="html_vertical_menu" class="hide hidden">
-			{%- for block in se_blocks -%}
-		{%- assign arrTyCurent = blocktp |remove:'t4,' | split:',' | where:type -%}
-        {%- assign arrblock = se_blocks | where: "type", type -%}
-        {%- assign block = arrblock[arrTyCurent.size] -%}
-        {%- assign blocktp = blocktp | append:',' | append:type -%}
-		{%- case block.type -%}
-			{%- when 'mega' -%}
-    			{%- assign cl_bg = block.settings.cl_bg -%}
-				{%- assign img_bg = block.settings.img_bg -%}
-				<li data-id="{{block.id}}" id="item_{{block.id}}" class="type_{{block.type}} menu_has_offsets verticalmenu-item verticalmenu-item-has-children {% if block.settings.pos_rel %}pos_rel{%endif%}" {{ block.shopify_attributes }}>
-                  <a class="cms-item-title " href="{{block.settings.url}}" target="{{block.settings.open_link}}"{% if block.settings.cus_cl %} style="color:{{block.settings.cl}}"{% endif %}>
-                    {%- render 'title_menu',block:block, enable_icon:section.settings.enable_icon_menu -%}
-                    <i class="icon_right las la-angle-down"></i>
-                  </a>
-                  <div class="subverticalmenu vertical-menu vertical-menu1"  
-                       style="{% if  block.settings.wid == 'cus' %} width:{{block.settings.cus_wid}}px;{% endif %}
-                              {%if cl_bg!=blank %}background-color:{{cl_bg}};{%endif%}
-                              {%if img_bg!=blank %}
-                              	{%- assign img_url = img_bg | img_url: '500x' -%}
-                              	background-image:url({{ img_url }});
-                              {%endif%}" 
-                       >
-                    <div class="{{block.settings.wid}}">
-                      
-                      <div id="bk_{{block.id}}" class="row lazy_menu_mega lazyload" data-include="{{routes.search_url}}?q={{block.id}}&view=item_vegamenu" >
-                        <div class="loading_bg"></div>
-                      </div>
-                    </div>
-                  </div>
-				</li>
-            {%- when 'dropdown' -%}
-              <li id="item_{{block.id}}" class="type_{{block.type}} menu_has_offsets verticalmenu-item {% if linklists[block.settings.menu].links.size > 0 %}  verticalmenu-item-has-children {% endif %}"  {{ block.shopify_attributes }}>
-                <a class="cms-item-title " href="{{block.settings.url}}" target="{{block.settings.open_link}}"{% if block.settings.cus_cl %} style="color:{{block.settings.cl}}"{% endif %}>
-                  {% render 'title_menu',block:block, enable_icon:section.settings.enable_icon_menu %}
-                  {% if linklists[block.settings.menu].links.size > 0 %}  <i class="icon_right las la-angle-down"></i> {% endif %}
-                </a>
-                {%- if linklists[block.settings.menu].links.size > 0 %}                      
-                <div class="subverticalmenu" >
-                  <div id="bk_{{block.id}}" class="lazy_menu_mega lazyload" data-include="{{routes.search_url}}?q={{block.id}}&view=item_vegamenu">
-                    <div class="loading_bg"></div>
-                  </div>  
-                </div>
-                {% endif %}
-              </li>                
-            {%- when 'simple' -%}
-              {% if block.settings.url != blank %}
-                <li id="item_{{block.id}}" class="verticalmenu-item type_simple" {{ block.shopify_attributes }}>
-                  <a class="cms-item-title" href="{{block.settings.url}}" target="{{block.settings.open_link}}"{% if block.settings.cus_cl %} style="color:{{block.settings.cl}}"{% endif %}>
-                    {%- render 'title_menu',block:block, enable_icon:section.settings.enable_icon_menu -%}
-                  </a>
-                </li>
-              {% endif %}	
-		{% endcase%}
-		
-		{%comment%}<li id="item_{{block.id}}" class="cat_menu-0">
-          	<a class="flex" href="{{block.settings.url}}"{% if block.settings.cus_cl %} style="color: {{block.settings.cl}} !important"{% endif %}>
-              	{%- render 'vertical_menu_html',block:block -%}
-          	</a>
-		</li>
-		{%endcomment%}
+    {%- for block in se_blocks -%}
+      {%- assign arrTyCurent = blocktp | remove: 't4,' | split: ',' | where: type -%}
+      {%- assign arrblock = se_blocks | where: "type", type -%}
+      {%- assign block = arrblock[arrTyCurent.size] -%}
+      {%- assign blocktp = blocktp | append: ',' | append: type -%}
+      {%- case block.type -%}
+        {%- when 'mega' -%}
+        {%- assign cl_bg = block.settings.cl_bg -%}
+        {%- assign img_bg = block.settings.img_bg -%}
+        <li
+          data-id="{{ block.id}}"
+          id="item_{{ block.id}}"
+          class="type_{{ block.type}} menu_has_offsets verticalmenu-item verticalmenu-item-has-children {% if block.settings.pos_rel %}pos_rel{%endif%}"
+          {{ block.shopify_attributes }}>
+          <a
+            class="cms-item-title "
+            href="{{ block.settings.url}}"
+            target="{{ block.settings.open_link}}"
+            {% if block.settings.cus_cl %}
+            style="color:{{ block.settings.cl}}"
+            {% endif %}>
+            {%- render 'title_menu', block: block, enable_icon: section.settings.enable_icon_menu -%}
+            <i class="icon_right las la-angle-down"></i>
+          </a>
+          <div
+            class="subverticalmenu vertical-menu vertical-menu1"
+            style='
+            {% if block.settings.wid == 'cus' %}
+              width:{{ block.settings.cus_wid }}px;{% endif %}
+            {% if cl_bg != blank %}background-color:{{ cl_bg }};{% endif %}
+            {% if img_bg != blank %}
+              {%- assign img_url = img_bg | img_url: '500x' -%}
+              background-image:url({{ img_url }});
+            {% endif %}'>
+            <div class="{{ block.settings.wid}}">
 
-	{%- endfor -%}
-    
-	{% if section.settings.show_title %}
-    {% assign show_style= section.settings.show_style | plus: 0 %}
-		<li class="js-all-cat" data-numb ="{{ section.settings.item_numb }}" data-style="{% if show_style == 1%}nextcats{%else%}allcat{%endif%}"><a href="javascript:void(0)">
-          	<span class="show-all"><i class="las la-plus"></i> {{ section.settings.item_title }}</span>
-          	<span class="show-less"><i class="las la-minus"></i> {{ section.settings.close_title }}</span>
-          </a></li>	
-    {%endif%}
-    
+              <div
+                id="bk_{{ block.id}}"
+                class="row lazy_menu_mega lazyload"
+                data-include="{{routes.search_url}}?q={{ block.id}}&view=item_vegamenu">
+                <div class="loading_bg"></div>
+              </div>
+            </div>
+          </div>
+        </li>
+        {%- when 'dropdown' -%}
+        <li
+          id="item_{{ block.id}}"
+          class="type_{{ block.type}} menu_has_offsets verticalmenu-item {% if linklists[block.settings.menu].links.size > 0 %}  verticalmenu-item-has-children {% endif %}"
+          {{ block.shopify_attributes }}>
+          <a
+            class="cms-item-title "
+            href="{{ block.settings.url}}"
+            target="{{ block.settings.open_link}}"
+            {% if block.settings.cus_cl %}
+            style="color:{{ block.settings.cl}}"
+            {% endif %}>
+            {% render 'title_menu', block: block, enable_icon: section.settings.enable_icon_menu %}
+            {% if linklists[block.settings.menu].links.size > 0 %}
+              <i class="icon_right las la-angle-down"></i>
+            {% endif %}
+          </a>
+          {%- if linklists[block.settings.menu].links.size > 0 %}
+            <div class="subverticalmenu">
+              <div
+                id="bk_{{ block.id}}"
+                class="lazy_menu_mega lazyload"
+                data-include="{{routes.search_url}}?q={{ block.id}}&view=item_vegamenu">
+                <div class="loading_bg"></div>
+              </div>
+            </div>
+          {% endif %}
+        </li>
+        {%- when 'simple' -%}
+        {% if block.settings.url != blank %}
+          <li
+            id="item_{{ block.id}}"
+            class="verticalmenu-item type_simple"
+            {{ block.shopify_attributes }}>
+            <a
+              class="cms-item-title"
+              href="{{ block.settings.url}}"
+              target="{{ block.settings.open_link}}"
+              {% if block.settings.cus_cl %}
+              style="color:{{ block.settings.cl}}"
+              {% endif %}>
+              {%- render 'title_menu', block: block, enable_icon: section.settings.enable_icon_menu -%}
+            </a>
+          </li>
+        {% endif %}
+      {% endcase %}
+
+      {% comment %}<li id="item_{{ block.id}}" class="cat_menu-0">
+        <a class="flex" href="{{ block.settings.url}}"{% if block.settings.cus_cl %} style="color: {{ block.settings.cl}} !important"{% endif %}>
+        {%- render 'vertical_menu_html',block:block -%}
+        </a>
+        </li>
+      {% endcomment %}
+
+    {%- endfor -%}
+
+    {% if section.settings.show_title %}
+      {% assign show_style = section.settings.show_style | plus: 0 %}
+      <li
+        class="js-all-cat"
+        data-numb="{{ section.settings.item_numb }}"
+        data-style="{% if show_style == 1%}nextcats{%else%}allcat{%endif%}">
+        <a href="javascript:void(0)">
+          <span class="show-all">
+            <i class="las la-plus"></i>
+            {{ section.settings.item_title }}</span>
+          <span class="show-less">
+            <i class="las la-minus"></i>
+            {{ section.settings.close_title }}</span>
+        </a>
+      </li>
+    {% endif %}
+
   </div>
 {%- endif -%}
 {%- if admin_sp -%}
-      {%- assign arr_sub = 'link,link2,banner,html,pr,cat' -%}
-      {%- for block in se_blocks %}
-      	<div {% if arr_sub contains block.type %}{% assign id_data = block.id %} {{ block.shopify_attributes }}{% else %}{% assign id_data2 = block.id %}{% endif %}id="bkjs_{{id_data}}" data-id='{{id_data2}}'></div>{% endfor -%}
-  {%- endif -%}
+  {%- assign arr_sub = 'link,link2,banner,html,pr,cat' -%}
+  {%- for block in se_blocks %}
+    <div {% if arr_sub contains block.type %}{% assign id_data = block.id %}{{ block.shopify_attributes }}{% else %}{% assign id_data2 = block.id %}{% endif %}id="bkjs_{{id_data}}"data-id='{{id_data2}}'></div>
+  {% endfor -%}
+{%- endif -%}
 {%- schema -%}
   {
     "name": "Vertical menu",
-	"class": "sp_header_mid",
+    "class": "sp_header_mid",
     "max_blocks": 40,
-	"settings": [	
-    {
-    "type": "header",
-    "content": "Settings"
-    },
-    {
-    "type": "checkbox",
-    "id": "show_title",
-    "label": "Show More Categories",
-    "default": true
-    },
-    {
-      "type": "radio",
-      "id": "show_style",
-      "label": "Show style",
-      "options": [
-        {
-          "value": "1",
-          "label": "Show next categories"
-        },
-        {
-          "value": "2",
-          "label": "Show all categories"
-        }
-      ],
-      "default": "1"
-    },
-    {
-      "type": "range",
-      "id": "item_numb",
-      "min": 5,
-      "max": 20,
-      "step": 1,
-      "label": "Item number",
-      "default": 10
-    },
-	{
-      "type": "text",
-      "id": "item_title",
-      "label": "More Categories",
-      "default": "More Categories"
-    },
-	{
-      "type": "text",
-      "id": "close_title",
-      "label": "Close",
-      "default": "Close"
-    }
-	],
+    "settings": [
+      {
+        "type": "header",
+        "content": "Settings"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_title",
+        "label": "Show More Categories",
+        "default": true
+      },
+      {
+        "type": "radio",
+        "id": "show_style",
+        "label": "Show style",
+        "options": [
+          {
+            "value": "1",
+            "label": "Show next categories"
+          }, {
+            "value": "2",
+            "label": "Show all categories"
+          }
+        ],
+        "default": "1"
+      },
+      {
+        "type": "range",
+        "id": "item_numb",
+        "min": 5,
+        "max": 20,
+        "step": 1,
+        "label": "Item number",
+        "default": 10
+      }, {
+        "type": "text",
+        "id": "item_title",
+        "label": "More Categories",
+        "default": "More Categories"
+      }, {
+        "type": "text",
+        "id": "close_title",
+        "label": "Close",
+        "default": "Close"
+      }
+    ],
     "blocks": [
-	 {
+      {
         "type": "mega",
         "name": "Mega Menu (Parent)",
         "settings": [
@@ -226,11 +317,11 @@
             "label": "Heading",
             "default": "Heading"
           },
-         {
+          {
             "type": "url",
             "id": "url",
             "label": "Link"
-         },
+          },
           {
             "type": "select",
             "id": "open_link",
@@ -238,8 +329,7 @@
               {
                 "value": "_self",
                 "label": "Current window (_self)"
-              },
-             {
+              }, {
                 "value": "_blank",
                 "label": "New window (_blank)"
               }
@@ -250,50 +340,42 @@
             "id": "icon",
             "type": "text",
             "label": "Icon",
-            "info":"[Get icons Line awesome](https://icons8.com/line-awesome) Example: bell"
-          },
-          {
+            "info": "[Get icons Line awesome](https://icons8.com/line-awesome) Example: bell"
+          }, {
             "type": "checkbox",
             "id": "cus_cl",
             "label": "Use custom heading color?",
             "default": false
-          },
-          {
-            "type":"color",
-            "id":"cl",
+          }, {
+            "type": "color",
+            "id": "cl",
             "default": "#ec0101",
-            "label":"Heading color"
-          },
-          {
-            "type":"text",
-            "id":"lb",
-            "label":"Label text"
-          },
-          {
-            "type":"color",
-            "id":"lb_cl",
-            "label":"Label color"
-          },
-          {
+            "label": "Heading color"
+          }, {
+            "type": "text",
+            "id": "lb",
+            "label": "Label text"
+          }, {
+            "type": "color",
+            "id": "lb_cl",
+            "label": "Label color"
+          }, {
             "type": "select",
             "id": "wid",
             "options": [
               {
                 "value": "cus",
                 "label": "Custom"
-              },
-              {
+              }, {
                 "value": "full",
                 "label": "Full Width"
-              },
-              {
+              }, {
                 "value": "full container",
                 "label": "Content Full Width"
               }
             ],
             "label": "Width Submenu:"
-          },
-          {
+          }, {
             "type": "range",
             "id": "cus_wid",
             "label": "== Custom Width",
@@ -302,21 +384,19 @@
             "step": 50,
             "default": 1200,
             "unit": "px"
-          },
-          {
-          "type": "color",
-          "id": "cl_bg",
-          "label": "Background color",
-          "default": "#fff"
-          },
-          {
-          "type": "image_picker",
-          "id": "img_bg",
-          "label": "Background Image"
+          }, {
+            "type": "color",
+            "id": "cl_bg",
+            "label": "Background color",
+            "default": "#fff"
+          }, {
+            "type": "image_picker",
+            "id": "img_bg",
+            "label": "Background Image"
           }
         ]
-      },	
-	  {
+      },
+      {
         "type": "dropdown",
         "name": "Dropdown Menu (lv 1)",
         "settings": [
@@ -326,11 +406,11 @@
             "label": "Heading",
             "default": "dropdown link"
           },
-         {
+          {
             "type": "url",
             "id": "url",
             "label": "Link"
-         },
+          },
           {
             "type": "select",
             "id": "open_link",
@@ -338,8 +418,7 @@
               {
                 "value": "_self",
                 "label": "Current window (_self)"
-              },
-             {
+              }, {
                 "value": "_blank",
                 "label": "New window (_blank)"
               }
@@ -350,40 +429,35 @@
             "type": "link_list",
             "id": "menu",
             "label": "Add menu"
-          },
-          {
+          }, {
             "id": "icon",
             "type": "text",
             "label": "Icon",
-            "info":"[Get icons Line awesome](https://icons8.com/line-awesome) Example: bell"
-          },
-          {
+            "info": "[Get icons Line awesome](https://icons8.com/line-awesome) Example: bell"
+          }, {
             "type": "checkbox",
             "id": "cus_cl",
             "label": "Use custom heading color?",
             "default": false
-          },
-          {
-            "type":"color",
-            "id":"cl",
+          }, {
+            "type": "color",
+            "id": "cl",
             "default": "#ec0101",
-            "label":"Heading color"
-          },
-          {
-            "type":"text",
-            "id":"lb",
-            "label":"Label text"
-          },
-          {
-            "type":"color",
-            "id":"lb_cl",
-            "label":"Label color"
+            "label": "Heading color"
+          }, {
+            "type": "text",
+            "id": "lb",
+            "label": "Label text"
+          }, {
+            "type": "color",
+            "id": "lb_cl",
+            "label": "Label color"
           }
         ]
       },
-	  {
+      {
         "type": "simple",
-        "name":"Item no children (lv 1)",
+        "name": "Item no children (lv 1)",
         "settings": [
           {
             "type": "text",
@@ -391,12 +465,12 @@
             "label": "Heading",
             "default": "simple"
           },
-         {
+          {
             "type": "url",
             "id": "url",
             "label": "Link",
             "default": "/"
-         },
+          },
           {
             "type": "select",
             "id": "open_link",
@@ -404,8 +478,7 @@
               {
                 "value": "_self",
                 "label": "Current window (_self)"
-              },
-             {
+              }, {
                 "value": "_blank",
                 "label": "New window (_blank)"
               }
@@ -416,35 +489,31 @@
             "id": "icon",
             "type": "text",
             "label": "Icon",
-            "info":"[Get icons Line awesome](https://icons8.com/line-awesome) Example: bell"
-          },
-          {
+            "info": "[Get icons Line awesome](https://icons8.com/line-awesome) Example: bell"
+          }, {
             "type": "checkbox",
             "id": "cus_cl",
             "label": "Use custom heading color?",
             "default": false
-          },
-          {
-            "type":"color",
-            "id":"cl",
+          }, {
+            "type": "color",
+            "id": "cl",
             "default": "#ec0101",
-            "label":"Heading color"
-          },
-          {
-            "type":"text",
-            "id":"lb",
-            "label":"Label text"
-          },
-          {
-            "type":"color",
-            "id":"lb_cl",
-            "label":"Label color"
+            "label": "Heading color"
+          }, {
+            "type": "text",
+            "id": "lb",
+            "label": "Label text"
+          }, {
+            "type": "color",
+            "id": "lb_cl",
+            "label": "Label color"
           }
         ]
       },
-	  {
+      {
         "type": "link",
-        "name":"↳ Linklist (child)",
+        "name": "↳ Linklist (child)",
         "settings": [
           {
             "type": "text",
@@ -452,11 +521,11 @@
             "label": "Heading",
             "default": "Heading"
           },
-         {
+          {
             "type": "url",
             "id": "url",
             "label": "Link"
-         },
+          },
           {
             "type": "select",
             "id": "open_link",
@@ -464,8 +533,7 @@
               {
                 "value": "_self",
                 "label": "Current window (_self)"
-              },
-             {
+              }, {
                 "value": "_blank",
                 "label": "New window (_blank)"
               }
@@ -476,8 +544,7 @@
             "type": "link_list",
             "id": "menu",
             "label": "Add menu"
-          },
-           {
+          }, {
             "type": "select",
             "id": "col",
             "default": "4",
@@ -497,43 +564,35 @@
               {
                 "value": "4",
                 "label": "4/12 (33.333333%)"
-              },
-              {
+              }, {
                 "value": "6",
                 "label": "6/12 (50%)"
-              },
-              {
+              }, {
                 "value": "7",
                 "label": "7/12 (58.333333%)"
-              },
-              {
+              }, {
                 "value": "8",
                 "label": "8/12 (66.666667%)"
-              },
-              {
+              }, {
                 "value": "9",
                 "label": "9/12 (75%)"
-              },
-              {
+              }, {
                 "value": "10",
                 "label": "10/12 (83.333333%)"
-              },
-              {
+              }, {
                 "value": "11",
                 "label": "11/12 (91.666667%)"
-              },
-              {
+              }, {
                 "value": "12",
                 "label": "12/12 (100%)"
               }
             ],
             "label": "Width col:"
-           }
+          }
         ]
-      },
-      {
+      }, {
         "type": "link2",
-        "name":"↳ Linklist 2 ( child )",
+        "name": "↳ Linklist 2 ( child )",
         "settings": [
           {
             "type": "select",
@@ -555,143 +614,136 @@
               {
                 "value": "4",
                 "label": "4/12 (33.333333%)"
-              },
-              {
+              }, {
                 "value": "6",
                 "label": "6/12 (50%)"
-              },
-              {
+              }, {
                 "value": "7",
                 "label": "7/12 (58.333333%)"
-              },
-              {
+              }, {
                 "value": "8",
                 "label": "8/12 (66.666667%)"
-              },
-              {
+              }, {
                 "value": "9",
                 "label": "9/12 (75%)"
-              },
-              {
+              }, {
                 "value": "10",
                 "label": "10/12 (83.333333%)"
-              },
-              {
+              }, {
                 "value": "11",
                 "label": "11/12 (91.666667%)"
-              },
-              {
+              }, {
                 "value": "12",
                 "label": "12/12 (100%)"
               }
             ],
             "label": "Width col:"
-          },
-          {
+          }, {
             "type": "link_list",
-            "id": "menu", 
+            "id": "menu",
             "label": "Add menu"
           }
-           
+
         ]
       },
-     /* {
-        "type": "pr",
-        "name":"↳ Product (child)",
-        "settings": [
-		 {
-            "type": "text",
-            "id": "tt_Product",
-            "label": "Heading",
-            "default": "Trending Products"
-          },		
-          {
-            "type": "range",
-            "id": "limit",
-            "min": 1,
-            "max": 10,
-            "step": 1,
-            "label": "Products per page",
-            "info": "Number of products per page",
-            "default": 3
-          },
-          {
-            "id": "id_cat",
-            "type": "collection",
-            "label": "Collection"
-          },
-              
-           {
-            "type": "select",
-            "id": "col",
-            "default": "4",
-            "options": [
-              {
-                "value": "1",
-                "label": "1/12 (8.333333%)"
-              },
-              {
-                "value": "2",
-                "label": "2/12 (16.666667%)"
-              },
-              {
-                "value": "3",
-                "label": "3/12 (25%)"
-              },
-              {
-                "value": "4",
-                "label": "4/12 (33.333333%)"
-              },
-              {
-                "value": "6",
-                "label": "6/12 (50%)"
-              },
-              {
-                "value": "7",
-                "label": "7/12 (58.333333%)"
-              },
-              {
-                "value": "8",
-                "label": "8/12 (66.666667%)"
-              },
-              {
-                "value": "9",
-                "label": "9/12 (75%)"
-              },
-              {
-                "value": "10",
-                "label": "10/12 (83.333333%)"
-              },
-              {
-                "value": "11",
-                "label": "11/12 (91.666667%)"
-              },
-              {
-                "value": "12",
-                "label": "12/12 (100%)"
-              }
-            ],
-            "label": "Width col:"
-           }
-        ]
+
+      /* {
+      "type": "pr",
+      "name":"↳ Product (child)",
+      "settings": [
+      {
+      "type": "text",
+      "id": "tt_Product",
+      "label": "Heading",
+      "default": "Trending Products"
+      },		
+      {
+      "type": "range",
+      "id": "limit",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "label": "Products per page",
+      "info": "Number of products per page",
+      "default": 3
+      },
+      {
+      "id": "id_cat",
+      "type": "collection",
+      "label": "Collection"
+      },
+      
+      {
+      "type": "select",
+      "id": "col",
+      "default": "4",
+      "options": [
+      {
+      "value": "1",
+      "label": "1/12 (8.333333%)"
+      },
+      {
+      "value": "2",
+      "label": "2/12 (16.666667%)"
+      },
+      {
+      "value": "3",
+      "label": "3/12 (25%)"
+      },
+      {
+      "value": "4",
+      "label": "4/12 (33.333333%)"
+      },
+      {
+      "value": "6",
+      "label": "6/12 (50%)"
+      },
+      {
+      "value": "7",
+      "label": "7/12 (58.333333%)"
+      },
+      {
+      "value": "8",
+      "label": "8/12 (66.666667%)"
+      },
+      {
+      "value": "9",
+      "label": "9/12 (75%)"
+      },
+      {
+      "value": "10",
+      "label": "10/12 (83.333333%)"
+      },
+      {
+      "value": "11",
+      "label": "11/12 (91.666667%)"
+      },
+      {
+      "value": "12",
+      "label": "12/12 (100%)"
+      }
+      ],
+      "label": "Width col:"
+      }
+      ]
       },*/
       {
         "type": "cat",
-        "name":"↳ Collection (child)",
+        "name": "↳ Collection (child)",
         "settings": [
-         {
-           "type": "image_picker",
-           "id": "image",
-           "label": "Image"
-         },   
-         
-        {
-          "type": "checkbox",
-          "id": "hoverz",
-          "label": "Enable zoom image on hover?",
-          "default": true
-        },
-         {
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          },
+
+          {
+            "type": "checkbox",
+            "id": "hoverz",
+            "label": "Enable zoom image on hover?",
+            "default": true
+          },
+          {
             "id": "collection",
             "type": "collection",
             "label": "Collection"
@@ -701,75 +753,66 @@
             "id": "title",
             "label": "Title block (optional)",
             "info": "Leave empty to use 'collection title' title."
-          },
-         {
-          "type": "select",
-          "id": "col",
-          "default": "4",
-          "options": [
-            {
-              "value": "1",
-              "label": "1/12 (8.333333%)"
-            },
-            {
-              "value": "2",
-              "label": "2/12 (16.666667%)"
-            },
-            {
-              "value": "3",
-              "label": "3/12 (25%)"
-            },
-            {
-              "value": "4",
-              "label": "4/12 (33.333333%)"
-            },
-            {
-              "value": "6",
-              "label": "6/12 (50%)"
-            },
-            {
-              "value": "7",
-              "label": "7/12 (58.333333%)"
-            },
-            {
-              "value": "8",
-              "label": "8/12 (66.666667%)"
-            },
-            {
-              "value": "9",
-              "label": "9/12 (75%)"
-            },
-            {
-              "value": "10",
-              "label": "10/12 (83.333333%)"
-            },
-            {
-              "value": "11",
-              "label": "11/12 (91.666667%)"
-            },
-            {
-              "value": "12",
-              "label": "12/12 (100%)"
-            }
-          ],
-          "label": "Width col:"
-         }
+          }, {
+            "type": "select",
+            "id": "col",
+            "default": "4",
+            "options": [
+              {
+                "value": "1",
+                "label": "1/12 (8.333333%)"
+              },
+              {
+                "value": "2",
+                "label": "2/12 (16.666667%)"
+              },
+              {
+                "value": "3",
+                "label": "3/12 (25%)"
+              },
+              {
+                "value": "4",
+                "label": "4/12 (33.333333%)"
+              }, {
+                "value": "6",
+                "label": "6/12 (50%)"
+              }, {
+                "value": "7",
+                "label": "7/12 (58.333333%)"
+              }, {
+                "value": "8",
+                "label": "8/12 (66.666667%)"
+              }, {
+                "value": "9",
+                "label": "9/12 (75%)"
+              }, {
+                "value": "10",
+                "label": "10/12 (83.333333%)"
+              }, {
+                "value": "11",
+                "label": "11/12 (91.666667%)"
+              }, {
+                "value": "12",
+                "label": "12/12 (100%)"
+              }
+            ],
+            "label": "Width col:"
+          }
         ]
-      },
-      {
+      }, {
         "type": "banner",
-        "name":"↳ Banner (child)",
+        "name": "↳ Banner (child)",
         "settings": [
-        {
-           "type": "image_picker",
-           "id": "image",
-           "label": "Image"
-         },
-         {
-          "label": "Link to (Optional)",
-          "id": "url",
-          "type": "url"
-        },
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          },
+          {
+            "label": "Link to (Optional)",
+            "id": "url",
+            "type": "url"
+          },
           {
             "type": "select",
             "id": "open_link",
@@ -777,162 +820,143 @@
               {
                 "value": "_self",
                 "label": "Current window (_self)"
-              },
-             {
+              }, {
                 "value": "_blank",
                 "label": "New window (_blank)"
               }
             ],
             "label": "Open link in"
           },
-         {
-         "type": "header",
-         "content": "== Content Settings"
-         },
-        {
+          {
+            "type": "header",
+            "content": "== Content Settings"
+          }, {
             "type": "checkbox",
             "id": "enable_content_banner",
             "label": "show name collections",
             "default": false
-          },
-        {
-          "type": "text",
-          "id": "coll_name",
-          "label": "name collections:",
-          "default": "collections"
-        },
-         {
-          "type": "select",
-          "id": "col",
-          "default": "4",
-          "options": [
-            {
-              "value": "1",
-              "label": "1/12 (8.333333%)"
-            },
-            {
-              "value": "2",
-              "label": "2/12 (16.666667%)"
-            },
-            {
-              "value": "3",
-              "label": "3/12 (25%)"
-            },
-            {
-              "value": "4",
-              "label": "4/12 (33.333333%)"
-            },
-            {
-              "value": "6",
-              "label": "6/12 (50%)"
-            },
-            {
-              "value": "7",
-              "label": "7/12 (58.333333%)"
-            },
-            {
-              "value": "8",
-              "label": "8/12 (66.666667%)"
-            },
-            {
-              "value": "9",
-              "label": "9/12 (75%)"
-            },
-            {
-              "value": "10",
-              "label": "10/12 (83.333333%)"
-            },
-            {
-              "value": "11",
-              "label": "11/12 (91.666667%)"
-            },
-            {
-              "value": "12",
-              "label": "12/12 (100%)"
-            }
-          ],
-          "label": "Width col:"
-         }
+          }, {
+            "type": "text",
+            "id": "coll_name",
+            "label": "name collections:",
+            "default": "collections"
+          }, {
+            "type": "select",
+            "id": "col",
+            "default": "4",
+            "options": [
+              {
+                "value": "1",
+                "label": "1/12 (8.333333%)"
+              },
+              {
+                "value": "2",
+                "label": "2/12 (16.666667%)"
+              },
+              {
+                "value": "3",
+                "label": "3/12 (25%)"
+              },
+              {
+                "value": "4",
+                "label": "4/12 (33.333333%)"
+              }, {
+                "value": "6",
+                "label": "6/12 (50%)"
+              }, {
+                "value": "7",
+                "label": "7/12 (58.333333%)"
+              }, {
+                "value": "8",
+                "label": "8/12 (66.666667%)"
+              }, {
+                "value": "9",
+                "label": "9/12 (75%)"
+              }, {
+                "value": "10",
+                "label": "10/12 (83.333333%)"
+              }, {
+                "value": "11",
+                "label": "11/12 (91.666667%)"
+              }, {
+                "value": "12",
+                "label": "12/12 (100%)"
+              }
+            ],
+            "label": "Width col:"
+          }
         ]
-      },
-      {
+      }, {
         "type": "html",
-        "name":"↳ HTML ( child )",
+        "name": "↳ HTML ( child )",
         "settings": [
           {
             "type": "html",
             "id": "html",
             "label": "HTML custom",
             "default": "HTML custom code"
-          },
-         {
-          "type": "select",
-          "id": "col",
-          "default": "4",
-          "options": [
-            {
-              "value": "1",
-              "label": "1/12 (8.333333%)"
-            },
-            {
-              "value": "2",
-              "label": "2/12 (16.666667%)"
-            },
-            {
-              "value": "3",
-              "label": "3/12 (25%)"
-            },
-            {
-              "value": "4",
-              "label": "4/12 (33.333333%)"
-            },
-            {
-              "value": "6",
-              "label": "6/12 (50%)"
-            },
-            {
-              "value": "7",
-              "label": "7/12 (58.333333%)"
-            },
-            {
-              "value": "8",
-              "label": "8/12 (66.666667%)"
-            },
-            {
-              "value": "9",
-              "label": "9/12 (75%)"
-            },
-            {
-              "value": "10",
-              "label": "10/12 (83.333333%)"
-            },
-            {
-              "value": "11",
-              "label": "11/12 (91.666667%)"
-            },
-            {
-              "value": "12",
-              "label": "12/12 (100%)"
-            }
-          ],
-          "label": "Width col:"
-         }
+          }, {
+            "type": "select",
+            "id": "col",
+            "default": "4",
+            "options": [
+              {
+                "value": "1",
+                "label": "1/12 (8.333333%)"
+              },
+              {
+                "value": "2",
+                "label": "2/12 (16.666667%)"
+              },
+              {
+                "value": "3",
+                "label": "3/12 (25%)"
+              },
+              {
+                "value": "4",
+                "label": "4/12 (33.333333%)"
+              }, {
+                "value": "6",
+                "label": "6/12 (50%)"
+              }, {
+                "value": "7",
+                "label": "7/12 (58.333333%)"
+              }, {
+                "value": "8",
+                "label": "8/12 (66.666667%)"
+              }, {
+                "value": "9",
+                "label": "9/12 (75%)"
+              }, {
+                "value": "10",
+                "label": "10/12 (83.333333%)"
+              }, {
+                "value": "11",
+                "label": "11/12 (91.666667%)"
+              }, {
+                "value": "12",
+                "label": "12/12 (100%)"
+              }
+            ],
+            "label": "Width col:"
+          }
         ]
       }
-      
-   ],
+
+    ],
     "default": {
       "blocks": [
         {
           "type": "simple",
           "settings": {
-            "title": "Heading 1","url":"#"
+            "title": "Heading 1",
+            "url": "#"
           }
-        },
-        {
+        }, {
           "type": "simple",
           "settings": {
-            "title": "Heading 2","url":"#"
+            "title": "Heading 2",
+            "url": "#"
           }
         }
       ]

@@ -34,7 +34,7 @@
                 <li>
                     <a href="{{ collections[block.settings.collection].url }}"{% if section.blocks.size > 1 %}{% if forloop.index == 1 %} class="active"{% endif %}{% endif %} data-collection="{{ collections[block.settings.collection].handle }}">
                       {% if block.settings.title != blank %}
-                      	<span>{{block.settings.title}}</span>
+                      	<span>{{ block.settings.title}}</span>
                       {% else %}
                       	<span> {% if coll_name !=blank %}{{ coll_name }}{% else %}Tab Title {{ index }}{% endif %}</span>
                       {% endif %}

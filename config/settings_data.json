@@ -23,7 +23,7 @@
     "color_body_bg": "#ffffff",
     "color_body_text": "#555555",
     "color_main": "#111111",
-    "color_link": "#9c6d3a",
+    "color_link": "#111111",
     "color_link_hover": "#9c6d3a",
     "color_scrollbar": "#444444",
     "color_link_menu": "#1a1a1a",
@@ -187,16 +187,16 @@
     "footer_social_instargram_enable": true,
     "footer_social_instargram_link": "",
     "footer_social_instargram_text": "Instargram",
-    "footer_social_pinterest_enable": false,
+    "footer_social_pinterest_enable": true,
     "footer_social_pinterest_link": "",
     "footer_social_pinterest_text": "Pinterest",
     "footer_social_tumblr_enable": false,
     "social_tumblr_link": "",
     "footer_social_tumblr_text": "Tumblr",
-    "footer_social_snapchat_enable": false,
+    "footer_social_snapchat_enable": true,
     "social_snapchat_link": "",
     "footer_social_snapchat_text": "Snapchat",
-    "footer_social_youtube_enable": false,
+    "footer_social_youtube_enable": true,
     "social_youtube_link": "",
     "footer_social_youtube_text": "Youtube",
     "footer_social_vimeo_enable": false,
@@ -1564,6 +1564,12 @@
       "header1": {
         "type": "header1",
         "blocks": {
+          "91d39423-2228-4261-a575-2a91514f5de6": {
+            "type": "logo",
+            "settings": {
+              "logo_max_width": 200
+            }
+          },
           "d68538b5-22d3-4082-9b4b-6cf2ab00a70b": {
             "type": "dropdown",
             "settings": {
@@ -1601,7 +1607,7 @@
               "tt_hd": "Shop Layout",
               "url": "#",
               "open_link": "_self",
-              "menu": "",
+              "menu": "menu-child-1",
               "col": "3"
             }
           },
@@ -1611,28 +1617,75 @@
               "tt_hd": "Products Pages",
               "url": "#",
               "open_link": "_self",
-              "menu": "",
+              "menu": "menu-child-1",
               "col": "3"
             }
           },
-          "c82034d8-9761-4095-be7b-cbc7c165b914": {
-            "type": "banner",
+          "db94d866-7267-458b-aa89-d8abf40b7a27": {
+            "type": "link",
             "settings": {
-              "url": "shopify:\/\/collections\/women-s",
+              "tt_hd": "Heading",
+              "url": "",
               "open_link": "_self",
-              "enable_content_banner": true,
-              "coll_name": "Women’s",
+              "menu": "menu-child-1",
               "col": "3"
             }
           },
-          "d549a5e3-6ea0-4959-8cd7-14b46c1fa870": {
-            "type": "banner",
+          "17d284db-3144-4a8c-be21-0fbce1f5ebb0": {
+            "type": "link",
             "settings": {
-              "url": "shopify:\/\/collections\/shirts",
+              "tt_hd": "Heading",
+              "url": "",
               "open_link": "_self",
-              "enable_content_banner": true,
-              "coll_name": "Shirts",
+              "menu": "menu-child-1",
               "col": "3"
+            }
+          },
+          "0d130502-a278-4626-9c01-6bcd003ba661": {
+            "type": "mega",
+            "settings": {
+              "title": "Product",
+              "url": "",
+              "open_link": "_self",
+              "icon": "",
+              "cus_cl": false,
+              "cl": "#ec0101",
+              "lb": "",
+              "lb_cl": "",
+              "pos_rel": false,
+              "wid": "cus",
+              "cus_wid": 1200,
+              "bg": "#fff"
+            }
+          },
+          "8f05fad1-35de-475f-9f44-61e37029c130": {
+            "type": "link",
+            "settings": {
+              "tt_hd": "Heading",
+              "url": "",
+              "open_link": "_self",
+              "menu": "menu-child-1",
+              "col": "4"
+            }
+          },
+          "b814905a-123b-4bf9-b851-625a08ddd657": {
+            "type": "link",
+            "settings": {
+              "tt_hd": "Heading",
+              "url": "",
+              "open_link": "_self",
+              "menu": "menu-child-1",
+              "col": "4"
+            }
+          },
+          "ef98a40b-c2e2-437e-8657-5e18a2aa4fd1": {
+            "type": "link",
+            "settings": {
+              "tt_hd": "Heading",
+              "url": "",
+              "open_link": "_self",
+              "menu": "menu-child-1",
+              "col": "4"
             }
           },
           "3681d0ce-afc6-4344-b966-cfda71fb5b43": {
@@ -1641,18 +1694,12 @@
               "title": "Pages",
               "url": "",
               "open_link": "_self",
-              "menu": "",
+              "menu": "page",
               "icon": "",
               "cus_cl": false,
               "cl": "#ec0101",
               "lb": "",
               "lb_cl": "#4ad295"
-            }
-          },
-          "91d39423-2228-4261-a575-2a91514f5de6": {
-            "type": "logo",
-            "settings": {
-              "logo_max_width": 200
             }
           },
           "bab6430c-5d2b-4e8e-8e42-224c6d149882": {
@@ -1669,24 +1716,10 @@
               "lb_cl": ""
             }
           },
-          "d39c2c9b-4b7a-4a93-bc6b-af498ca89879": {
-            "type": "simple",
-            "disabled": true,
-            "settings": {
-              "title": "About",
-              "url": "shopify:\/\/pages\/about-us",
-              "open_link": "_self",
-              "icon": "",
-              "cus_cl": false,
-              "cl": "#ec0101",
-              "lb": "",
-              "lb_cl": ""
-            }
-          },
           "407f6f92-2819-4cb0-a735-a3caec3c4cd2": {
             "type": "simple",
             "settings": {
-              "title": "Contact Us",
+              "title": "Buy Umino!",
               "url": "shopify:\/\/pages\/contact",
               "open_link": "_self",
               "icon": "",
@@ -1698,16 +1731,19 @@
           }
         },
         "block_order": [
+          "91d39423-2228-4261-a575-2a91514f5de6",
           "d68538b5-22d3-4082-9b4b-6cf2ab00a70b",
           "2edb69f1-946f-44fb-9516-b508ad1dbadc",
           "cc1ec0f5-91e2-4b61-a17b-8821a0fb0b57",
           "eb4b8b78-e314-4cbd-bfd9-fa78f1dbb8d9",
-          "c82034d8-9761-4095-be7b-cbc7c165b914",
-          "d549a5e3-6ea0-4959-8cd7-14b46c1fa870",
+          "db94d866-7267-458b-aa89-d8abf40b7a27",
+          "17d284db-3144-4a8c-be21-0fbce1f5ebb0",
+          "0d130502-a278-4626-9c01-6bcd003ba661",
+          "8f05fad1-35de-475f-9f44-61e37029c130",
+          "b814905a-123b-4bf9-b851-625a08ddd657",
+          "ef98a40b-c2e2-437e-8657-5e18a2aa4fd1",
           "3681d0ce-afc6-4344-b966-cfda71fb5b43",
-          "91d39423-2228-4261-a575-2a91514f5de6",
           "bab6430c-5d2b-4e8e-8e42-224c6d149882",
-          "d39c2c9b-4b7a-4a93-bc6b-af498ca89879",
           "407f6f92-2819-4cb0-a735-a3caec3c4cd2"
         ],
         "settings": {
@@ -2981,12 +3017,13 @@
               "use_logo_footer": true,
               "logo_footer": "shopify:\/\/shop_images\/Logo.svg",
               "logo_max_width": 95,
+              "address": "268 St, South New York\/NY 98944, United States +222-1800-2628",
               "use_social": true,
               "title_social": "",
               "type_social": "1",
               "h_position": "left",
               "txt_align": "left",
-              "cl": "3",
+              "cl": "4",
               "cl_tb": "6",
               "cl_mb": "12"
             }
@@ -2995,7 +3032,7 @@
             "type": "menu",
             "settings": {
               "title": "CUSTOMER SERVICE",
-              "menu": "",
+              "menu": "customer-service",
               "cl": "2",
               "cl_tb": "6",
               "cl_mb": "12",
@@ -3007,7 +3044,7 @@
             "type": "menu",
             "settings": {
               "title": "SHOP BY CATEGORIES",
-              "menu": "",
+              "menu": "shop-by-categories",
               "cl": "2",
               "cl_tb": "6",
               "cl_mb": "12",
@@ -3021,8 +3058,6 @@
               "title": "SIGN UP TO NEWSLETTER",
               "sub_title": "Enter your email address to get $10 off your first order and free  shipping. Updates information on Sales and Offers.",
               "cl_text": "#555555",
-              "cl_sub": "#fff",
-              "cl_sub_hover": "#fff",
               "h_position": "left",
               "v_position": "top",
               "txt_align": "left",
@@ -3040,8 +3075,14 @@
         ],
         "settings": {
           "cl_bg": "#ffffff",
+          "cl_link": "#555555",
+          "cl_link_hover": "#111111",
           "pd": "80px,0,80px,0",
-          "pd_mb": "40px,0,60px,0"
+          "pd_mb": "40px,0,60px,0",
+          "copyright": "© 2023 Umino Store. All Rights Reserved.",
+          "payment_image": "shopify:\/\/shop_images\/payment.png",
+          "show_currency": true,
+          "show_language": true
         }
       },
       "main-search": {
@@ -3441,7 +3482,7 @@
               "h_position": "right",
               "v_position": "middle",
               "txt_align": "center",
-              "content_bg": "#fff",
+              "content_bg": "#ffffff",
               "mg_bottom": 0
             }
           },
@@ -3452,8 +3493,8 @@
               "title": "LIMITED EDITION",
               "color": "#999999",
               "fw_text": 500,
-              "fs_text": 17,
-              "lh_text": 0,
+              "fs_text": 12,
+              "lh_text": 16,
               "ls_text": 3,
               "text_transform": "uppercase",
               "mg_bottom": 10,

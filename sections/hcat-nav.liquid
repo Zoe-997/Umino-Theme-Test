@@ -4,8 +4,8 @@
 
 	[shopify]
       {%- for block in se_blocks -%}
-      <li id="item_{{block.id}}" class="cat_menu">
-        <a class="cat_link" href="{{block.settings.url}}"{% if block.settings.cus_cl %} style="color: {{block.settings.cl}} !important"{% endif %}>
+      <li id="item_{{ block.id}}" class="cat_menu">
+        <a class="cat_link" href="{{ block.settings.url}}"{% if block.settings.cus_cl %} style="color: {{ block.settings.cl}} !important"{% endif %}>
           {%- render 'title_menu_cat',block:block -%}
         </a>
       </li>
@@ -14,8 +14,8 @@
 {%- else -%}
   <div id="html_hcat_nav" class="">
   	 {%- for block in se_blocks -%}
-      <li class="item_{{block.id}}" class="cat_menu">
-        <a class="cat_link" href="{{block.settings.url}}"{% if block.settings.cus_cl %} style="color: {{block.settings.cl}} !important"{% endif %} {{ block.shopify_attributes }}>
+      <li class="item_{{ block.id}}" class="cat_menu">
+        <a class="cat_link" href="{{ block.settings.url}}"{% if block.settings.cus_cl %} style="color: {{ block.settings.cl}} !important"{% endif %} {{ block.shopify_attributes }}>
           {%- render 'title_menu_cat',block:block -%}
         </a>
       </li>

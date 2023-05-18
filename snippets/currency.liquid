@@ -1,9 +1,8 @@
-{% assign currencies = shop.money_format | split: '{{amount}}' %}
-{% assign codes = 'USD,EUR,GBP,CAD,ARS,AUD,BBD,BDT,BSD,BHD,BRL,BOB,BND,BGN,ILS,MMK,KYD,CLP,CNY,COP,CRC,HRK,CZK,DKK,DOP,XCD,EGP,XPF,FJD,GHS,GTQ,GYD,GEL,HKD,HUF,ISK,INR,IDR,NIS,JMD,JPY,JOD,KZT,KES,KWD,LVL,LTL,MXN,MYR,MUR,MDL,MAD,MNT,MZN,ANG,NZD,NGN,NOK,OMR,PKR,PYG,PEN,PHP,PLN,QAR,RON,RUB,SAR,RSD,SCR,SGD,SYP,ZAR,KRW,LKR,SEK,CHF,TWD,THB,TZS,TTD,TRY,UAH,AED,UYU,VEB,VND,ZMK'
-  | split: ','
+{% liquid
+assign codes = 'USD,EUR,GBP,CAD,ARS,AUD,BBD,BDT,BSD,BHD,BRL,BOB,BND,BGN,ILS,MMK,KYD,CLP,CNY,COP,CRC,HRK,CZK,DKK,DOP,XCD,EGP,XPF,FJD,GHS,GTQ,GYD,GEL,HKD,HUF,ISK,INR,IDR,NIS,JMD,JPY,JOD,KZT,KES,KWD,LVL,LTL,MXN,MYR,MUR,MDL,MAD,MNT,MZN,ANG,NZD,NGN,NOK,OMR,PKR,PYG,PEN,PHP,PLN,QAR,RON,RUB,SAR,RSD,SCR,SGD,SYP,ZAR,KRW,LKR,SEK,CHF,TWD,THB,TZS,TTD,TRY,UAH,AED,UYU,VEB,VND,ZMK' | split: ','
+  assign currencies = shop.money_format | split: '{{ amount }}'
+  assign supported_codes = settings.supported_currencies | split: ' '
 %}
-{% assign supported_codes = settings.supported_currencies | split: ' ' %}
-{% assign currency_default = shop.currency %}
 
 <li class="currency-picker hide-mobile item-list">
   {% render 'currency-picker' %}
@@ -11,8 +10,12 @@
     <span class="lang-currency">
       <span class="title">
         {% for country in localization.available_countries %}
-          {{ country.currency.name }} ( {{ country.currency.iso_code }}
-            {{ country.currency.symbol }})
+          {% liquid 
+            assign currency_default = shop.currency
+            assign country_last = country.currency.name | split: " " | last
+            assign country_curency = country.currency.name | remove: country_last
+            %}
+          {{ country_curency }} ( {{ country.currency.iso_code }} {{ country.currency.symbol }})
         {% endfor -%}
       </span>
       <span class="icon"><i class="icon-chevron-down"></i>
@@ -25,7 +28,6 @@
           <p>
             <span class="code_currency">
               {{- code }}
-              {{  -}}
             </span>
           </p>
         </li>

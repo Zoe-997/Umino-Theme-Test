@@ -35,58 +35,58 @@
       {%- for block in section.blocks -%}
         {%- case block.type -%}
          {%- when 'pr' -%}{%- if block.settings.product == blank -%}{%- continue -%}{%- endif -%}
-             <div {{ block.shopify_attributes }} class="pin__type pin__type_{{block.id}} pa pe_none pin__type_pr pin__size--{{block.settings.pos_size}} pin_ic_{{block.settings.type}}">
+             <div {{ block.shopify_attributes }} class="pin__type pin__type_{{ block.id}} pa pe_none pin__type_pr pin__size--{{ block.settings.pos_size}} pin_ic_{{ block.settings.type}}">
                <span class="zoompin"></span>
                {%- if block.settings.type != '2' -%} 
                   <span class="pin_tt pin_tt_js dn db_mb">
-                    {{block.settings.shorticon}}
+                    {{ block.settings.shorticon}}
                		</span>
                		
                {%- else -%}
-                 <span class="pin_tt pin_tt_js dn db_mb"><span class="truncate">{{block.settings.shorttxt}}</span></span><span data-opennt="#pin_mfp_{{block.id}}" data-ani='none' data-class='mfp__pin' class="pin_tt mfp_js dn_md"><span class="truncate">{{block.settings.shorttxt}}</span></span>
+                 <span class="pin_tt pin_tt_js dn db_mb"><span class="truncate">{{ block.settings.shorttxt}}</span></span><span data-opennt="#pin_mfp_{{ block.id}}" data-ani='none' data-class='mfp__pin' class="pin_tt mfp_js dn_md"><span class="truncate">{{ block.settings.shorttxt}}</span></span>
                {%- endif -%}
-               <div id="pin_mfp_{{block.id}}">
-                 	<div class="pin_lazy_js pin__popup--{{block.settings.pos_pin}} pin__popup--{{block.settings.effect}} lazyload" data-include="/products/{{block.settings.product}}/?view=lookbook">
+               <div id="pin_mfp_{{ block.id}}">
+                 	<div class="pin_lazy_js pin__popup--{{ block.settings.pos_pin}} pin__popup--{{ block.settings.effect}} lazyload" data-include="/products/{{ block.settings.product}}/?view=lookbook">
                  	</div>
                </div>
              </div>
           {%- when 'txt' -%}
-             <div {{ block.shopify_attributes }} class="pin__type pin__type_{{block.id}} pa pe_none pin__type_txt pin__size--{{block.settings.pos_size}} pin_ic_{{block.settings.type}}">
+             <div {{ block.shopify_attributes }} class="pin__type pin__type_{{ block.id}} pa pe_none pin__type_txt pin__size--{{ block.settings.pos_size}} pin_ic_{{ block.settings.type}}">
                   <span class="zoompin"></span>
                   {%- if block.settings.type != '2' -%} 
                   <span class="pin_tt pin_tt_js dn db_mb">
-                    {{block.settings.shorticon}}
+                    {{ block.settings.shorticon}}
                		</span>
                	
                {%- else -%}
-                 <span class="pin_tt pin_tt_js dn db_mb"><span class="truncate">{{block.settings.shorttxt}}</span></span><span data-opennt="#pin_mfp_{{block.id}}" data-ani='none' data-class='mfp__pin' class="pin_tt mfp_js dn_md"><span class="truncate">{{block.settings.shorttxt}}</span></span>
+                 <span class="pin_tt pin_tt_js dn db_mb"><span class="truncate">{{ block.settings.shorttxt}}</span></span><span data-opennt="#pin_mfp_{{ block.id}}" data-ani='none' data-class='mfp__pin' class="pin_tt mfp_js dn_md"><span class="truncate">{{ block.settings.shorttxt}}</span></span>
                {%- endif -%}
-                 <div id="pin_mfp_{{block.id}}"><div class="pin__popup pin__popup--{{block.settings.pos_pin}} pin__popup--{{block.settings.effect}} op__0 pa"><div class="popup__title">{{block.settings.heading}}</div><div class="popup__content">{{block.settings.text}}</div></div></div>
+                 <div id="pin_mfp_{{ block.id}}"><div class="pin__popup pin__popup--{{ block.settings.pos_pin}} pin__popup--{{ block.settings.effect}} op__0 pa"><div class="popup__title">{{ block.settings.heading}}</div><div class="popup__content">{{ block.settings.text}}</div></div></div>
              </div>
           {%- else -%}
-             <div {{ block.shopify_attributes }} class="pin__type pin__type_{{block.id}} pa pe_none pin__type_url pin__size--{{block.settings.pos_size}} pin_ic_{{block.settings.type}}">
+             <div {{ block.shopify_attributes }} class="pin__type pin__type_{{ block.id}} pa pe_none pin__type_url pin__size--{{ block.settings.pos_size}} pin_ic_{{ block.settings.type}}">
                <span class="zoompin"></span>
                {%- if block.settings.type != '2' -%}
-                 <a href='{{block.settings.url}}' target="{{block.settings.open_link}}" class="pin_tt cw">{{block.settings.shorticon}}</a>
+                 <a href='{{ block.settings.url}}' target="{{ block.settings.open_link}}" class="pin_tt cw">{{ block.settings.shorticon}}</a>
                {%- else -%}
-                 <a href='{{block.settings.url}}' target="{{block.settings.open_link}}" class="pin_tt cw">
-                   	<span class="truncate">{{block.settings.shorttxt}}</span></a>
+                 <a href='{{ block.settings.url}}' target="{{ block.settings.open_link}}" class="pin_tt cw">
+                   	<span class="truncate">{{ block.settings.shorttxt}}</span></a>
                {%- endif -%}
              </div>
         {%- endcase -%}
        
         {%- style -%}
-            .pin__type_{{block.id}} {
-       			transform: translate(-{{block.settings.pos_l}}%, -{{block.settings.pos_t}}%);
-       			top:{{block.settings.pos_t}}%;
-       			left:{{block.settings.pos_l}}%
+            .pin__type_{{ block.id}} {
+       			transform: translate(-{{ block.settings.pos_l}}%, -{{ block.settings.pos_t}}%);
+       			top:{{ block.settings.pos_t}}%;
+       			left:{{ block.settings.pos_l}}%
        			}
-       			.pin__type_{{block.id}} .pin_tt{
-       				background-color: {{block.settings.bg_cl}}
+       			.pin__type_{{ block.id}} .pin_tt{
+       				background-color: {{ block.settings.bg_cl}}
        			}
-       			.pin__type_{{block.id}} .zoompin{
-       				background-color: {{block.settings.bg_cl_br}};
-       				opacity:{{block.settings.bg_cl_br_opacity}};
+       			.pin__type_{{ block.id}} .zoompin{
+       				background-color: {{ block.settings.bg_cl_br}};
+       				opacity:{{ block.settings.bg_cl_br_opacity}};
        			}
         {%- endstyle %}
         

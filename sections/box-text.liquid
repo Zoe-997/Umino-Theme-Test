@@ -2,109 +2,141 @@
   assign sid = section.id 
 %}
 {%- for i in (1..1) -%}
-  {%- if section.settings.hidden %}{% break %}{% endif -%}		
-  {%- if section.settings.cp_code and request.page_type == 'index' %}<div class="dn tc mt__40 mb__40 cp_cd_js"><input type="text" class="dcp_cd_ip" value='<div class="inc_lz inc_ins_laz" data-include="/search/?section_id={{sid}}"><div class="loading_bg"></div></div>'><button class="dcp_cd_btn">Copy Shortcode</button></div>{% endif -%}
-  {%- if section.settings.hidden and request.page_type == 'index' %}{% break %}{% endif -%}
+  {%- if section.settings.hidden %}
+    {% break %}{% endif -%}
+  {%- if section.settings.cp_code and request.page_type == 'index' %}
+    <div class="dn tc mt__40 mb__40 cp_cd_js"><input
+        type="text"
+        class="dcp_cd_ip"
+        value='<div class="inc_lz inc_ins_laz" data-include="/search/?section_id={{sid}}"><div class="loading_bg"></div></div>'><button class="dcp_cd_btn">Copy Shortcode</button>
+    </div>
+  {% endif -%}
+  {%- if section.settings.hidden and request.page_type == 'index' %}
+    {% break %}{% endif -%}
   <section class="laber_{{sid}}">
-  <div class="{{section.settings.layout}} layout-{{section.settings.layout_style}}">
-          {% if section.settings.title != blank %}
-            <h3 class="title-box-text text-center">
-                <span>{{ section.settings.title }}</span>
-            </h3>
-          {% endif %}
-          <div class="content-inner-box">
-          {%- for block in section.blocks -%}
-            <div class="item text-center">
+    <div class="{{section.settings.layout}} layout-{{section.settings.layout_style}}">
+      {% if section.settings.title != blank %}
+        <h3 class="title-box-text text-center">
+          <span>{{ section.settings.title }}</span>
+        </h3>
+      {% endif %}
+      <div class="content-inner-box">
+        {%- for block in section.blocks -%}
+          <div class="item text-center">
             {% if block.settings.title_item != blank %}
               <h4 class="title-item">{{ block.settings.title_item }}</h4>
             {% endif %}
             {% if block.settings.des_item != blank %}
               <span class="des-item">{{ block.settings.des_item }}</span>
             {% endif %}
-            </div>
-            {% style %}
-              .laber_{{sid}} .content-inner-box .item{
-                color: {{block.settings.cl_text}};
-              }
-            {% endstyle %}
-          {%- endfor -%}
           </div>
-  </div>
-</section>
+          {% style %}
+            .laber_{{ sid}}.content-inner-box .item {
+              color: {{ block.settings.cl_text}}
+              ;
+            }
+          {% endstyle %}
+        {%- endfor -%}
+      </div>
+    </div>
+  </section>
 {%- endfor -%}
-{% style%}
-{% assign mg_top = section.settings.mg_top %}
-{% assign mg_bottom = section.settings.mg_bottom %}
-{% assign pd_top = section.settings.pad_top %}
-{% assign pd_bottom = section.settings.pad_bottom %}
-{% assign ip_mg_top = section.settings.ip_mg_top %}
-{% assign ip_mg_bottom = section.settings.ip_mg_bottom %}
-{% assign ip_pd_top = section.settings.ip_pd_top %}
-{% assign ip_pd_bottom = section.settings.ip_pd_bottom %}
-{% assign mobile_mg_top = section.settings.mobile_mg_top %}
-{% assign mobile_mg_bottom = section.settings.mobile_mg_bottom %}
-{% assign mobile_pd_top = section.settings.mobile_pd_top %}
-{% assign mobile_pd_bottom = section.settings.mobile_pd_bottom %}
-	.laber_{{sid}}{
-      {% if mg_top !=0 %}margin-top:{{mg_top}}px;{%endif%} 
-      {% if mg_bottom !=0 %}margin-bottom:{{mg_bottom}}px;{%endif%} 
-      {% if pd_top !=0 %}padding-top:{{pd_top}}px;{%endif%} 
-      {% if pd_bottom !=0 %}padding-bottom:{{pd_bottom}}px;{%endif%} 
-      {% if section.settings.section_bg != blank %}
-        background-size: cover;
-        background-image: url('{{ section.settings.section_bg | img_url:"master"}}'); 
-        background-position: center center;
-        background-repeat: no-repeat;
-      {%endif%}
-	}
-    .laber_{{sid}} .container {
-      max-width: 1232px;
-      margin: 0 auto;
-      padding: 0 16px;
+{% style %}
+  {% assign mg_top = section.settings.mg_top %}
+  {% assign mg_bottom = section.settings.mg_bottom %}
+  {% assign pd_top = section.settings.pad_top %}
+  {% assign pd_bottom = section.settings.pad_bottom %}
+  {% assign ip_mg_top = section.settings.ip_mg_top %}
+  {% assign ip_mg_bottom = section.settings.ip_mg_bottom %}
+  {% assign ip_pd_top = section.settings.ip_pd_top %}
+  {% assign ip_pd_bottom = section.settings.ip_pd_bottom %}
+  {% assign mobile_mg_top = section.settings.mobile_mg_top %}
+  {% assign mobile_mg_bottom = section.settings.mobile_mg_bottom %}
+  {% assign mobile_pd_top = section.settings.mobile_pd_top %}
+  {% assign mobile_pd_bottom = section.settings.mobile_pd_bottom %}
+  .laber_{{ sid}}{
+    {% if mg_top !=0 %}
+      margin-top: {{ mg_top}}px;
+    {% endif %}
+    {% if mg_bottom !=0 %}
+      margin-bottom: {{ mg_bottom}}px;
+    {% endif %}
+    {% if pd_top !=0 %}
+      padding-top: {{ pd_top}}px;
+    {% endif %}
+    {% if pd_bottom !=0 %}
+      padding-bottom: {{ pd_bottom}}px;
+    {% endif %}
+    {% if section.settings.section_bg != blank %}
+      background-size: cover;
+      background-image: url('{{ section.settings.section_bg | img_url:"master"}}');
+      background-position: center center;
+      background-repeat: no-repeat;
+    {% endif %}
+  }
+  .laber_{{ sid}}.container {
+    max-width: 1232px;
+    margin: 0 auto;
+    padding: 0 16px;
+  }
+
+  @media(max-width: 1199px) {
+    .laber_{{ sid}}{
+      {% if ip_mg_top !=0 %}
+        margin-top: {{ ip_mg_top}}px;
+      {% endif %}
+      {% if ip_mg_bottom !=0 %}
+        margin-bottom: {{ ip_mg_bottom}}px;
+      {% endif %}
+      {% if ip_pd_top !=0 %}
+        padding-top: {{ ip_pd_top}}px;
+      {% endif %}
+      {% if ip_pd_bottom !=0 %}
+        padding-bottom: {{ ip_pd_bottom}}px;
+      {% endif %}
     }
-    
-    @media (max-width: 1199px) {
-      .laber_{{sid}}{
-        {% if ip_mg_top !=0 %}margin-top:{{ip_mg_top}}px;{%endif%} 
-        {% if ip_mg_bottom !=0 %}margin-bottom:{{ip_mg_bottom}}px;{%endif%} 
-        {% if ip_pd_top !=0 %}padding-top:{{ip_pd_top}}px;{%endif%} 
-        {% if ip_pd_bottom !=0 %}padding-bottom:{{ip_pd_bottom}}px;{%endif%} 
-      }
+  }
+  @media(max-width: 767px) {
+    .laber_{{ sid}}{
+      {% if mobile_mg_top !=0 %}
+        margin-top: {{ mobile_mg_top}}px;
+      {% endif %}
+      {% if mobile_mg_bottom !=0 %}
+        margin-bottom: {{ mobile_mg_bottom}}px;
+      {% endif %}
+      {% if mobile_pd_top !=0 %}
+        padding-top: {{ mobile_pd_top}}px;
+      {% endif %}
+      {% if mobile_pd_bottom !=0 %}
+        padding-bottom: {{ mobile_pd_bottom}}px;
+      {% endif %}
     }
-    @media (max-width: 767px) {
-      .laber_{{sid}}{
-        {% if mobile_mg_top !=0 %}margin-top:{{mobile_mg_top}}px;{%endif%} 
-        {% if mobile_mg_bottom !=0 %}margin-bottom:{{mobile_mg_bottom}}px;{%endif%} 
-        {% if mobile_pd_top !=0 %}padding-top:{{mobile_pd_top}}px;{%endif%} 
-        {% if mobile_pd_bottom !=0 %}padding-bottom:{{mobile_pd_bottom}}px;{%endif%} 
-      }
-    }
-{% endstyle%} 
+  }
+{% endstyle%}
 {%- schema -%}
   {
     "name": "Box Text",
     "class": "cms_section box-text",
-	"max_blocks": 4,
+    "max_blocks": 4,
     "settings": [
       {
-      "type": "checkbox",
-      "id": "hidden",
-      "label": "Hidden Section?",
-      "default": false
+        "type": "checkbox",
+        "id": "hidden",
+        "label": "Hidden Section?",
+        "default": false
       },
       {
         "type": "header",
         "content": "== Design Options"
       },
-    	{
+      {
         "type": "select",
         "id": "layout",
         "options": [
-         {
+          {
             "value": "container",
             "label": "Container"
-         },
-         {
+          }, {
             "value": "full-width",
             "label": "Full Width"
           }
@@ -115,184 +147,167 @@
         "type": "select",
         "id": "layout_style",
         "options": [
-         {
+          {
             "value": "style1",
             "label": "Style 1"
-         },
-         {
+          }, {
             "value": "style2",
             "label": "Style 2"
           }
         ],
         "label": "Layout Style"
-      },
-      {
+      }, {
         "type": "text",
         "id": "title",
         "label": "Title",
         "default": "熟練の技術者が縫い、作り上げる国内裁縫メンバー"
-      },
-      {
+      }, {
         "type": "image_picker",
         "id": "section_bg",
         "label": "Background Section"
-      },
-        {
-          "type": "range",
-          "id": "mg_top",
-          "label": "Margin Top",
-          "default": 0,
-          "min": 0,
-          "max": 300,
-          "step": 5,
-          "unit": "px"
-        },
-        {
-          "type": "range",
-          "id": "mg_bottom",
-          "label": "Margin bottom",
-          "default": 0,
-          "min": 0,
-          "max": 300,
-          "step": 5,
-          "unit": "px"
-        },
-        {
-          "type": "range",
-          "id": "pad_top",
-          "label": "Padding Top",
-          "default": 0,
-          "min": 0,
-          "max": 300,
-          "step": 5,
-          "unit": "px"
-        },
-        {
-          "type": "range",
-          "id": "pad_bottom",
-          "label": "Padding bottom",
-          "default": 0,
-          "min": 0,
-          "max": 300,
-          "step": 5,
-          "unit": "px"
-        },
-      {
-          "type": "header",
-          "content": "== Setting ipad",
-          "info":"Padding and Margin"
-        },
-       {
-          "type": "range",
-          "id": "ip_mg_top",
-          "label": "Margin top",
-          "default": 0,
-          "min": 0,
-          "max": 200,
-          "step": 5,
-          "unit": "px"
-        },
-        {
-          "type": "range",
-          "id": "ip_mg_bottom",
-          "label": "Margin bottom",
-          "default": 0,
-          "min": 0,
-          "max": 200,
-          "step": 5,
-          "unit": "px"
-        },
-        {
-          "type": "range",
-          "id": "ip_pd_top",
-          "label": "Padding top",
-          "default": 0,
-          "min": 0,
-          "max": 200,
-          "step": 5,
-          "unit": "px"
-        },
-        {
-          "type": "range",
-          "id": "ip_pd_bottom",
-          "label": "Padding bottom",
-          "default": 0,
-          "min": 0,
-          "max": 200,
-          "step": 5,
-          "unit": "px"
-        },
-        {
-          "type": "header",
-          "content": "== Setting mobile",
-          "info":"Padding and Margin"
-        },
-       {
-          "type": "range",
-          "id": "mobile_mg_top",
-          "label": "Margin top",
-          "default": 0,
-          "min": 0,
-          "max": 100,
-          "step": 1,
-          "unit": "px"
-        },
-        {
-          "type": "range",
-          "id": "mobile_mg_bottom",
-          "label": "Margin bottom",
-          "default": 0,
-          "min": 0,
-          "max": 100,
-          "step": 1,
-          "unit": "px"
-        },
-        {
-          "type": "range",
-          "id": "mobile_pd_top",
-          "label": "Padding top",
-          "default": 0,
-          "min": 0,
-          "max": 100,
-          "step": 1,
-          "unit": "px"
-        },
-        {
-          "type": "range",
-          "id": "mobile_pd_bottom",
-          "label": "Padding bottom",
-          "default": 0,
-          "min": 0,
-          "max": 100,
-          "step": 1,
-          "unit": "px"
-        }
-    ],
-	"blocks": [{
-    "type": "text_block",
-    "name": "Item",
-    "settings": [
-      {
-        "type": "text",
-        "id": "title_item",
-        "label": "Title",
-        "default": "渡谷なぎさ"
-      },
-      {
-        "type": "textarea",
-        "id": "des_item",
-        "label": "Description",
-        "default": "リボーンスタイルパターン",
-        "info": "Insert <br> to line break"
-      },
-      {
-        "type": "color",
-        "id": "cl_text",
-        "label": "Color text",
-        "default": "#606060"
+      }, {
+        "type": "range",
+        "id": "mg_top",
+        "label": "Margin Top",
+        "default": 0,
+        "min": 0,
+        "max": 300,
+        "step": 5,
+        "unit": "px"
+      }, {
+        "type": "range",
+        "id": "mg_bottom",
+        "label": "Margin bottom",
+        "default": 0,
+        "min": 0,
+        "max": 300,
+        "step": 5,
+        "unit": "px"
+      }, {
+        "type": "range",
+        "id": "pad_top",
+        "label": "Padding Top",
+        "default": 0,
+        "min": 0,
+        "max": 300,
+        "step": 5,
+        "unit": "px"
+      }, {
+        "type": "range",
+        "id": "pad_bottom",
+        "label": "Padding bottom",
+        "default": 0,
+        "min": 0,
+        "max": 300,
+        "step": 5,
+        "unit": "px"
+      }, {
+        "type": "header",
+        "content": "== Setting ipad",
+        "info": "Padding and Margin"
+      }, {
+        "type": "range",
+        "id": "ip_mg_top",
+        "label": "Margin top",
+        "default": 0,
+        "min": 0,
+        "max": 200,
+        "step": 5,
+        "unit": "px"
+      }, {
+        "type": "range",
+        "id": "ip_mg_bottom",
+        "label": "Margin bottom",
+        "default": 0,
+        "min": 0,
+        "max": 200,
+        "step": 5,
+        "unit": "px"
+      }, {
+        "type": "range",
+        "id": "ip_pd_top",
+        "label": "Padding top",
+        "default": 0,
+        "min": 0,
+        "max": 200,
+        "step": 5,
+        "unit": "px"
+      }, {
+        "type": "range",
+        "id": "ip_pd_bottom",
+        "label": "Padding bottom",
+        "default": 0,
+        "min": 0,
+        "max": 200,
+        "step": 5,
+        "unit": "px"
+      }, {
+        "type": "header",
+        "content": "== Setting mobile",
+        "info": "Padding and Margin"
+      }, {
+        "type": "range",
+        "id": "mobile_mg_top",
+        "label": "Margin top",
+        "default": 0,
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "px"
+      }, {
+        "type": "range",
+        "id": "mobile_mg_bottom",
+        "label": "Margin bottom",
+        "default": 0,
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "px"
+      }, {
+        "type": "range",
+        "id": "mobile_pd_top",
+        "label": "Padding top",
+        "default": 0,
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "px"
+      }, {
+        "type": "range",
+        "id": "mobile_pd_bottom",
+        "label": "Padding bottom",
+        "default": 0,
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "px"
       }
-      ]
-    }],
+    ],
+    "blocks": [
+      {
+        "type": "text_block",
+        "name": "Item",
+        "settings": [
+          {
+            "type": "text",
+            "id": "title_item",
+            "label": "Title",
+            "default": "渡谷なぎさ"
+          }, {
+            "type": "textarea",
+            "id": "des_item",
+            "label": "Description",
+            "default": "リボーンスタイルパターン",
+            "info": "Insert <br> to line break"
+          }, {
+            "type": "color",
+            "id": "cl_text",
+            "label": "Color text",
+            "default": "#606060"
+          }
+        ]
+      }
+    ],
     "presets": [
       {
         "name": "Box Text",

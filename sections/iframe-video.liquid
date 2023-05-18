@@ -101,7 +101,7 @@ assign id = section.id
             {%- for block in section.blocks -%}
 				<div class="col-sm-12 col-md-6 col-lg-3">
                     {% if block.settings.number != blank %}
-                    <p class="number">{{block.settings.number}}</h3>  
+                    <p class="number">{{ block.settings.number}}</h3>  
                     {%endif%}
                     {% if block.settings.title != blank %}
                     <h3 class="h3">{{ block.settings.title | escape }}</h4>

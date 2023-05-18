@@ -5,7 +5,7 @@
   	{% if block.type == 'service' %} 
   		{% assign index = index | plus: 1 %}
   		{% assign image = block.settings.background_part %}
-        <div class="part container {{block.settings.layout}}" style="{% if block.settings.align == "left" %}margin-left: calc((100% - 1170px)/2 + {{block.settings.margin_left_part}});{% endif %}  {% if block.settings.align == "right" %}margin-right: calc((100% - 1170px)/2 + {{block.settings.margin_right_part}}); {% endif %}">
+        <div class="part container {{ block.settings.layout}}" style="{% if block.settings.align == "left" %}margin-left: calc((100% - 1170px)/2 + {{ block.settings.margin_left_part}});{% endif %}  {% if block.settings.align == "right" %}margin-right: calc((100% - 1170px)/2 + {{ block.settings.margin_right_part}}); {% endif %}">
           <div class="row">
             <div class="col-sm-12 col-md-12 col-lg-6 first">
               <div class="left">
@@ -22,24 +22,24 @@
             <div class="col-sm-12 col-md-12 col-lg-6 second">
               <div class="right">
                 <div class="number">{% if index <10 %}0{% endif %}{{index}}.</div>
-                <h3>{{block.settings.title_part}}</h3>
-                <p>{{block.settings.subtitle_part}}</p>
+                <h3>{{ block.settings.title_part}}</h3>
+                <p>{{ block.settings.subtitle_part}}</p>
                 <ul>
                   {% if block.settings.content1_part != blank %}
-                  	<li>{{block.settings.content1_part}}</li>
+                  	<li>{{ block.settings.content1_part}}</li>
                   {% endif %}
                   {% if block.settings.content2_part != blank %}
-                  	<li>{{block.settings.content2_part}}</li>
+                  	<li>{{ block.settings.content2_part}}</li>
                   {% endif %}
                   {% if block.settings.content3_part != blank %}
-                  	<li>{{block.settings.content3_part}}</li>
+                  	<li>{{ block.settings.content3_part}}</li>
                   {% endif %}
                   {% if block.settings.content4_part != blank %}
-                  	<li>{{block.settings.content4_part}}</li>
+                  	<li>{{ block.settings.content4_part}}</li>
                   {% endif %}
                 </ul>
                
-                <a class="button_part" href="{{block.settings.button_link_part}}"> {{block.settings.button_part}} </a>
+                <a class="button_part" href="{{ block.settings.button_link_part}}"> {{ block.settings.button_part}} </a>
                 
               </div>
             </div>
@@ -68,7 +68,7 @@
             <ul>
               {%- for block in section.blocks -%}
                 {% if block.type == 'form' %} 
-                      <li>{{block.settings.service_item}}</li>
+                      <li>{{ block.settings.service_item}}</li>
                 {% endif %}
               {% endfor %}
             </ul>

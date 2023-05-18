@@ -11,11 +11,11 @@
           {%- for block in section.blocks -%}
             {%- case block.type -%}
                {%- when 'image' -%}{%- assign image = block.settings.image -%}
-                  <div id="b_{{block.id}}" class=" col-lg-{{block.settings.cl}} col-md-{{block.settings.cl_tb}} col-{{block.settings.cl_mb}}">
+                  <div id="b_{{ block.id}}" class=" col-lg-{{ block.settings.cl}} col-md-{{ block.settings.cl_tb}} col-{{ block.settings.cl_mb}}">
                     <div class="img_custom_section">
                       {%- if image != blank -%} 
                       {%- assign img_url = image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}        
-                      {% if block.settings.url %}<a href="{{block.settings.url}}" target="{{block.settings.open_link}}>{% endif %}
+                      {% if block.settings.url %}<a href="{{ block.settings.url}}" target="{{ block.settings.open_link}}>{% endif %}
                       <div class="laber_bg_lz lazyload pr_lazy_img" data-bgset="{{ image | img_url: '1x1' }}" data-ratio="{{image.aspect_ratio}}" data-sizes="auto" data-parent-fit="cover" style="padding-top:{{ 1 | divided_by: image.aspect_ratio | times: 100}}%"></div>
                       {% if block.settings.url %}</a>a>{% endif %}  
                       {%- else -%}
@@ -24,21 +24,21 @@
                     </div>
                    </div>
                 {%- when 'text' -%}
-                  <div id="b_{{block.id}}" class="col-lg-{{block.settings.cl}} col-md-{{block.settings.cl_tb}} col-{{block.settings.cl_mb}}">
+                  <div id="b_{{ block.id}}" class="col-lg-{{ block.settings.cl}} col-md-{{ block.settings.cl_tb}} col-{{ block.settings.cl_mb}}">
                     <div class="text_custom_section">
                     <div class=" wrap_title ">
                       {% if block.settings.sub_title != blank %}
-                      	<p class="section-subtitle">{{block.settings.sub_title}}</p>
+                      	<p class="section-subtitle">{{ block.settings.sub_title}}</p>
                       {% endif %}  
                       {% if block.settings.title != blank %}
-                      	<h3 class="section-title">{{block.settings.title}}</h3>
+                      	<h3 class="section-title">{{ block.settings.title}}</h3>
                       {% endif %}
                     </div>
-                    <div class="slt4_html">{{block.settings.text}}</div>
+                    <div class="slt4_html">{{ block.settings.text}}</div>
                     <div class="btn">
                         {%- if  block.settings.btn_text != blank -%}
-                        <a id="b_{{block.id}}"  class="buttons" href="{{block.settings.link_btn}}" target="{{block.settings.open_link}}"
-                           {{ block.shopify_attributes }}>{{block.settings.btn_text}}
+                        <a id="b_{{ block.id}}"  class="buttons" href="{{ block.settings.link_btn}}" target="{{ block.settings.open_link}}"
+                           {{ block.shopify_attributes }}>{{ block.settings.btn_text}}
                       	</a>
                         {%- endif -%}
                     </div>

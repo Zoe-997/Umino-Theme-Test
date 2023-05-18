@@ -34,7 +34,7 @@
         {%- style -%}{{ style | strip_newlines | remove:"  "}}{%- endstyle -%}
   	  {% if block.settings.shortcode_show_item %}
         <div class="shortcode_{{sid}} item-shortcode {% if block.settings.shortcode_show_title %} {% else %} hide-title {% endif %}">
-          {{block.settings.shortcode}}
+          {{ block.settings.shortcode}}
         </div>
   	  {%- endif -%}
   {%- endfor -%}

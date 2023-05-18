@@ -51,7 +51,7 @@
       		<article class="post-item post_laber_loop"> 
      		 <ul>  
             
-                   <li id="item_{{block.id}}" class="menu-item item-level-0 has-children" {{ block.shopify_attributes }}>
+                   <li id="item_{{ block.id}}" class="menu-item item-level-0 has-children" {{ block.shopify_attributes }}>
                      {% assign image = block.settings.image %}
                      {% assign ratio = image.aspect_ratio  %}
                      {% assign collection = collections[block.settings.collection] %}
@@ -60,7 +60,7 @@
                          {%- if image != blank -%}
                          <div data-image-effect class="pr_lazy_img main-img lazyload laber_bg_lz " data-id="{{image.id}}" data-bgset="{{ image | img_url: '1x1' }}" data-parent-fit="width" data-wiis data-ratio="{{ratio}}" data-sizes="auto" style="padding-top:{{ 1 | divided_by: ratio | times: 100}}%;"></div>
                          {%- else -%}
-                         <div class="pr_lazy_img main-img lazyload laber_bg_lz {{block.settings.img_align}}" data-bgset="https://placehold.jp/26/{% cycle 'a8dacc', '56cfe1', 'f99077','c8b09b','efe1ba','a5d0d9','a1a19f' %}/fff/390x536.png?text=390x536" data-parent-fit="width"  data-sizes="auto" style="padding-top:137.5%;"></div>
+                         <div class="pr_lazy_img main-img lazyload laber_bg_lz {{ block.settings.img_align}}" data-bgset="https://placehold.jp/26/{% cycle 'a8dacc', '56cfe1', 'f99077','c8b09b','efe1ba','a5d0d9','a1a19f' %}/fff/390x536.png?text=390x536" data-parent-fit="width"  data-sizes="auto" style="padding-top:137.5%;"></div>
                          {%- endif -%}
                        </a>
                         {% if section.settings.show_link %}

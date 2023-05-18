@@ -56,15 +56,15 @@
                             
                           {% style%}
                             .details-info .product-name{
-                              text-transform:{{block.settings.np_text_transform}};
-                              margin-top:{{block.settings.np_mg_top}}px;
-                              margin-bottom:{{block.settings.np_mg_bottom}}px;
-                              font-size: {{block.settings.np_size}}px;
-                              font-weight:{{block.settings.np_weight}};
+                              text-transform:{{ block.settings.np_text_transform}};
+                              margin-top:{{ block.settings.np_mg_top}}px;
+                              margin-bottom:{{ block.settings.np_mg_bottom}}px;
+                              font-size: {{ block.settings.np_size}}px;
+                              font-weight:{{ block.settings.np_weight}};
                             }
                             @media (max-width: 767px) {
                               .details-info .product-name{
-                              font-size: {{block.settings.np_size_mobile}}px
+                              font-size: {{ block.settings.np_size_mobile}}px
                               }
                             }
                           {% endstyle%}
@@ -230,8 +230,8 @@
                 			  {%- if block.settings.show_availability -%}
                               <div class="pr-availability clearfix">
                                 <p><label class="label">{{'products.product.availability' | t}}:</label>             
-                                  <span style="color:{{block.settings.color_in_stock}}" class="available {% if product.available %}  {% else %} d-none {% endif %}" id="js-pr-available" >{{'products.product.available' | t}}</span>             
-                                  <span style="color:{{block.settings.color_out_stock}}" class="unavailable {% if product.available %}d-none{% endif %}" id="js-pr-unavailable"  > {{'products.product.unavailable' | t}}</span>                
+                                  <span style="color:{{ block.settings.color_in_stock}}" class="available {% if product.available %}  {% else %} d-none {% endif %}" id="js-pr-available" >{{'products.product.available' | t}}</span>             
+                                  <span style="color:{{ block.settings.color_out_stock}}" class="unavailable {% if product.available %}d-none{% endif %}" id="js-pr-unavailable"  > {{'products.product.unavailable' | t}}</span>                
                                 </p>  
                               </div>
                               {%endif%}  	
@@ -440,12 +440,12 @@
                                     {%- endfor -%}
                                     </div>
                                   <style>
-                                      .payment_type_img img {padding: 2.5px; height: {{block.settings.svg_height}}px;}
+                                      .payment_type_img img {padding: 2.5px; height: {{ block.settings.svg_height}}px;}
                                   </style>
                                   {%- endif -%}
                                   {% if block.settings.html_custom !=blank %}
                                   <div class="content-text clearfix">
-                                      {{block.settings.html_custom}}
+                                      {{ block.settings.html_custom}}
                                   </div>
                                   {%endif%}
                 				</div>
@@ -478,7 +478,7 @@
             				</div>
                           {%- when 'text' -%}
                               <p class="product__text">
-                                {{- block.settings.text -}} {% if block.settings.show_color %}<span class="product__color" style="background-color:{{block.settings.color}};">{{-block.settings.color-}}</span>{% endif %}
+                                {{- block.settings.text -}} {% if block.settings.show_color %}<span class="product__color" style="background-color:{{ block.settings.color}};">{{-block.settings.color-}}</span>{% endif %}
                               </p>	
                            {%- when 'custom_liquid' -%}
                               {{ block.settings.custom_liquid }}

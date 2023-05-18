@@ -33,7 +33,7 @@
               {%- assign image = block.settings.image -%}
               {%- assign url = block.settings.url -%}
               <div class="cat_space_item brand_list padding-0-15 {{ image.width }}">
-                {%- if url != blank -%}<a href="{{ url }}" class="db" target="{{block.settings.open_link}}">{%- endif -%}
+                {%- if url != blank -%}<a href="{{ url }}" class="db" target="{{ block.settings.open_link}}">{%- endif -%}
                   {%- if image != blank %}
                     <img
                       class="lazyload"

@@ -22,7 +22,7 @@
                         {% endif %}
                         {%- if block.settings.show_email -%}
                           <li>
-                            <a href="mailto:{{shop.email}}">
+                            <a href="mailto:{{ shop.email }}">
                               {%- if block.settings.show_icon %}<i class="icon-mail"></i> {% endif -%}
                               {%- if shop.phone %}{{ shop.email }}{% else %}Add your store email address{% endif -%}
                             </a>
@@ -39,10 +39,10 @@
                       {{ block.settings.message_text }}
                       {%- if block.settings.text_link != blank -%}
                         <a
-                          id="b_{{block.id}}"
+                          id="b_{{ block.id}}"
                           class="buttons"
-                          href="{{block.settings.btn_link}}"
-                          target="{{block.settings.open_link}}"
+                          href="{{ block.settings.btn_link}}"
+                          target="{{ block.settings.open_link}}"
                           {{ block.shopify_attributes }}
                         >
                           {{- block.settings.text_link -}}
@@ -54,11 +54,11 @@
                         }
 
                         .announcement-bar__message a{
-                        	color:{{block.settings.color_link}};
+                        	color:{{ block.settings.color_link}};
                         }
 
                         .announcement-bar__message a:hover{
-                          color:{{block.settings.color_link_hover}};
+                          color:{{ block.settings.color_link_hover}};
                         }
                       {% endstyle %}
                     </p>

@@ -25,12 +25,12 @@
       	{%- for block in section.blocks -%}
           {%- assign image = block.settings.image -%}
       	  {%- assign url = block.settings.url -%}
-          <div class="cat_space_item brand_list laber_b_{{block.id}} tc col-lg-{{col}} col-md-{{col_tb}} col-sm-{{col_mb}} col-xs-12" style="margin-bottom:{{block.settings.mg_img}};">
-              {%- if url != blank -%}<a href="{{ url }}" class="db" target="{{block.settings.open_link}}">{%- endif -%}
+          <div class="cat_space_item brand_list laber_b_{{ block.id}} tc col-lg-{{col}} col-md-{{col_tb}} col-sm-{{col_mb}} col-xs-12" style="margin-bottom:{{ block.settings.mg_img}};">
+              {%- if url != blank -%}<a href="{{ url }}" class="db" target="{{ block.settings.open_link}}">{%- endif -%}
                 {%- if image != blank %}
-                  <div class="laber_bg_lz lazyload pr_lazy_img {{block.settings.img_align}}" data-bgset="{{ image | img_url: '1x1' }}" data-ratio="{{image.aspect_ratio}}" data-sizes="auto" data-parent-fit="cover" style="padding-top:{{ 1 | divided_by: image.aspect_ratio | times: 100}}%"></div>
+                  <div class="laber_bg_lz lazyload pr_lazy_img {{ block.settings.img_align}}" data-bgset="{{ image | img_url: '1x1' }}" data-ratio="{{image.aspect_ratio}}" data-sizes="auto" data-parent-fit="cover" style="padding-top:{{ 1 | divided_by: image.aspect_ratio | times: 100}}%"></div>
                 {%- else -%}
-                  <div class="laber_bg_lz lazyload pr_lazy_img {{block.settings.img_align}}" data-bg="https://placehold.jp/30/f76b6a/fff/250x250.png?text=250x250" style="padding-top:100%;"></div>
+                  <div class="laber_bg_lz lazyload pr_lazy_img {{ block.settings.img_align}}" data-bg="https://placehold.jp/30/f76b6a/fff/250x250.png?text=250x250" style="padding-top:100%;"></div>
                 {%- endif -%}
               {%- if url != blank -%}</a>{%- endif -%}
           </div>

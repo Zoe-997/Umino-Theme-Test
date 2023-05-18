@@ -11,7 +11,7 @@
          {%- assign collection = collections[block_stts.cat] -%}
   
                   {%- if linklists[block_stts.menu].links.size > 0 -%}
-                      <li id="item_{{block.id}}" class="menu-item item-level-0 has-children" {{ block.shopify_attributes }}>
+                      <li id="item_{{ block.id}}" class="menu-item item-level-0 has-children" {{ block.shopify_attributes }}>
                         <a href="{{block_stts.url | default:collection.url}}">
                           {% if block_stts.show_icon and block_stts.icon != blank %}
                        		<span class="icon">{{block_stts.icon}}</span>
@@ -34,7 +34,7 @@
 
                                              {%- assign arrlt = child_link.title | split: '[' -%}
                                              {%- if child_link.links != blank -%}
-                                                <li id="item_{{block.id}}" class="menu-item item-level-2 has-children {% if child_link.active %}active{% endif %}">
+                                                <li id="item_{{ block.id}}" class="menu-item item-level-2 has-children {% if child_link.active %}active{% endif %}">
                                                    <a href="{{child_link.url}}"><span>{{child_link.title}}</span></a>
                                                    <ul class="sub-menu3">
 
@@ -65,7 +65,7 @@
                            </ul>
                      </li>
                   {%- else -%}
-                      <li id="item_{{block.id}}" class="menu-item item-level-0">
+                      <li id="item_{{ block.id}}" class="menu-item item-level-0">
                         
                         <a href="{{block_stts.url | default:collection.url}}">
 						{% if block_stts.show_icon and block_stts.icon != blank %}
