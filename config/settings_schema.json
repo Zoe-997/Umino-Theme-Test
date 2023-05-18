@@ -494,35 +494,19 @@
         "default": "GeneralSans",
         "options": [
           {
-            "value": "Shippori Mincho",
-            "label": "Font Shippori Mincho"
-          },
-          {
-            "value": "Jost",
+            "value": "Jost, sans-serif;",
             "label": "Font Jost"
           },
           {
-            "value": "DM+Sans",
-            "label": "Font DM Sans"
-          },
-          {
-            "value": "Barlow",
-            "label": "Font Barlow"
-          },
-          {
-            "value": "Barlow+Condensed",
-            "label": "Font Barlow Condensed"
-          },
-          {
-            "value": "Rubik",
+            "value": "Rubik, sans-serif;",
             "label": "Font Rubik"
           },
           {
-            "value": "Schoolbell",
+            "value": "Schoolbell, sans-serif;",
             "label": "Font Schoolbell"
           },
           {
-            "value": "Quicksand",
+            "value": "Quicksand, sans-serif;",
             "label": "Font Quicksand"
           },
           {
@@ -557,31 +541,19 @@
         "default": "GeneralSans",
         "options": [
           {
-            "value": "Jost",
+            "value": "Jost, sans-serif;",
             "label": "Font Jost"
           },
           {
-            "value": "DM+Sans",
-            "label": "Font DM Sans"
-          },
-          {
-            "value": "Barlow",
-            "label": "Font Barlow"
-          },
-          {
-            "value": "Barlow+Condensed",
-            "label": "Font Barlow Condensed"
-          },
-          {
-            "value": "Rubik",
+            "value": "Rubik, sans-serif;",
             "label": "Font Rubik"
           },
           {
-            "value": "Schoolbell",
+            "value": "Schoolbell, sans-serif;",
             "label": "Font Schoolbell"
           },
           {
-            "value": "Quicksand",
+            "value": "Quicksand, sans-serif;",
             "label": "Font Quicksand"
           },
           {
