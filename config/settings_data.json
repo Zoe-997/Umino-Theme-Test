@@ -3324,101 +3324,6 @@
           "mobile_pd_bottom": 0
         }
       },
-      "4740667e-2afe-418a-8f34-e5321eddc6f8": {
-        "type": "box-text",
-        "blocks": {
-          "6e4ab94d-78c4-4a9d-89ec-298420c8e0a8": {
-            "type": "text_block",
-            "settings": {
-              "title_item": "渡谷なぎさ",
-              "des_item": "リボーンスタイルパターン<br>パターンナー30年以上<br>パターンメイキング技術検定1級",
-              "cl_text": "#606060"
-            }
-          },
-          "b2fef5b0-48a9-4691-888a-df6f22088744": {
-            "type": "text_block",
-            "settings": {
-              "title_item": "岩本潔子",
-              "des_item": "リボーンスタイル縫製<br>紳士サンプル、縫製歴30年以上",
-              "cl_text": "#606060"
-            }
-          },
-          "6bf261bb-46cd-4820-91f8-68561a754fa6": {
-            "type": "text_block",
-            "settings": {
-              "title_item": "小倉妙子",
-              "des_item": "リボーンスタイル繊維監修<br>技術士（繊維）、繊維製品品質管理士、<br> 衣料管理士、ジーンズソムリエ",
-              "cl_text": "#606060"
-            }
-          }
-        },
-        "block_order": [
-          "6e4ab94d-78c4-4a9d-89ec-298420c8e0a8",
-          "b2fef5b0-48a9-4691-888a-df6f22088744",
-          "6bf261bb-46cd-4820-91f8-68561a754fa6"
-        ],
-        "settings": {
-          "hidden": false,
-          "layout": "container",
-          "layout_style": "style1",
-          "title": "熟練の技術者が縫い、作り上げる国内裁縫メンバー",
-          "mg_top": 0,
-          "mg_bottom": 0,
-          "pad_top": 140,
-          "pad_bottom": 40,
-          "ip_mg_top": 0,
-          "ip_mg_bottom": 0,
-          "ip_pd_top": 0,
-          "ip_pd_bottom": 0,
-          "mobile_mg_top": 0,
-          "mobile_mg_bottom": 0,
-          "mobile_pd_top": 60,
-          "mobile_pd_bottom": 10
-        }
-      },
-      "b2f5753a-c7f9-4b25-9691-8c92b94b6b90": {
-        "type": "box-text",
-        "blocks": {
-          "da70d876-1e06-4261-8b85-e07c4411e45c": {
-            "type": "text_block",
-            "settings": {
-              "title_item": "森政也",
-              "des_item": "アドバイザー<br>葬儀会社勤務<br>衣装監修",
-              "cl_text": "#606060"
-            }
-          },
-          "0aeb2602-abd9-4e37-bf6d-df780fd8e6ce": {
-            "type": "text_block",
-            "settings": {
-              "title_item": "伊藤さゆき",
-              "des_item": "アドバイザー<br>葬儀会社勤務<br>衣装監修",
-              "cl_text": "#606060"
-            }
-          }
-        },
-        "block_order": [
-          "da70d876-1e06-4261-8b85-e07c4411e45c",
-          "0aeb2602-abd9-4e37-bf6d-df780fd8e6ce"
-        ],
-        "settings": {
-          "hidden": false,
-          "layout": "container",
-          "layout_style": "style2",
-          "title": "Special Thanks",
-          "mg_top": 0,
-          "mg_bottom": 0,
-          "pad_top": 20,
-          "pad_bottom": 140,
-          "ip_mg_top": 0,
-          "ip_mg_bottom": 0,
-          "ip_pd_top": 0,
-          "ip_pd_bottom": 0,
-          "mobile_mg_top": 0,
-          "mobile_mg_bottom": 0,
-          "mobile_pd_top": 21,
-          "mobile_pd_bottom": 60
-        }
-      },
       "7d0d8fb7-9d3d-4a85-832c-502bd57b8eec": {
         "type": "product-popup",
         "blocks": {
@@ -3535,7 +3440,7 @@
               "mg_top": 0,
               "custom_mark": "",
               "last_mark": false,
-              "custom_mark_color": "#FBB71C",
+              "custom_mark_color": "#fbb71c",
               "mobile_fw_text": 500,
               "mobile_lh_text": 0,
               "mobile_font_text": 14,
@@ -3548,7 +3453,7 @@
               "title": "PREMIUM BEDROOM",
               "text_animate": "none",
               "text_time": 1.5,
-              "color": "#111",
+              "color": "#111111",
               "fw_text": 600,
               "fs_text": 60,
               "lh_text": 0,
@@ -3557,7 +3462,7 @@
               "mg_top": 10,
               "custom_mark": "",
               "last_mark": false,
-              "custom_mark_color": "#FBB71C",
+              "custom_mark_color": "#fbb71c",
               "mobile_fw_text": 600,
               "mobile_lh_text": 0,
               "mobile_font_text": 14,
@@ -3653,7 +3558,7 @@
           "bg_arrow": "rgba(225, 225, 225, 0.1)",
           "color_background": "#fbb71c",
           "mg_top": 0,
-          "mg_bottom": 0,
+          "mg_bottom": 100,
           "pd_top": 0,
           "pd_bottom": 0,
           "mg_top_mb": 0,
@@ -3661,14 +3566,105 @@
           "pd_top_mb": 0,
           "pd_bottom_mb": 0
         }
+      },
+      "f088fa25-9643-4737-ba33-eb74c5776b7b": {
+        "type": "collection-list-slider",
+        "blocks": {
+          "f088fa25-9643-4737-ba33-eb74c5776b7b-16843963666897fe09-0": {
+            "type": "collection",
+            "settings": {
+              "collection": "",
+              "title": ""
+            }
+          },
+          "f088fa25-9643-4737-ba33-eb74c5776b7b-16843963666897fe09-1": {
+            "type": "collection",
+            "settings": {
+              "collection": "",
+              "title": ""
+            }
+          },
+          "f088fa25-9643-4737-ba33-eb74c5776b7b-16843963666897fe09-2": {
+            "type": "collection",
+            "settings": {
+              "collection": "",
+              "title": ""
+            }
+          },
+          "f088fa25-9643-4737-ba33-eb74c5776b7b-16843963666897fe09-3": {
+            "type": "collection",
+            "settings": {
+              "collection": "",
+              "title": ""
+            }
+          },
+          "f088fa25-9643-4737-ba33-eb74c5776b7b-16843963666897fe09-4": {
+            "type": "collection",
+            "settings": {
+              "collection": "",
+              "title": ""
+            }
+          },
+          "f088fa25-9643-4737-ba33-eb74c5776b7b-16843963666897fe09-5": {
+            "type": "collection",
+            "settings": {
+              "collection": "",
+              "title": ""
+            }
+          }
+        },
+        "block_order": [
+          "f088fa25-9643-4737-ba33-eb74c5776b7b-16843963666897fe09-0",
+          "f088fa25-9643-4737-ba33-eb74c5776b7b-16843963666897fe09-1",
+          "f088fa25-9643-4737-ba33-eb74c5776b7b-16843963666897fe09-2",
+          "f088fa25-9643-4737-ba33-eb74c5776b7b-16843963666897fe09-3",
+          "f088fa25-9643-4737-ba33-eb74c5776b7b-16843963666897fe09-4",
+          "f088fa25-9643-4737-ba33-eb74c5776b7b-16843963666897fe09-5"
+        ],
+        "settings": {
+          "title": "Top Categories",
+          "sub_title": "",
+          "content": "Commodo sociosqu venenatis cras dolor sagittis integer luctus maecenas.",
+          "text_size": "medium",
+          "style_title": "style_1",
+          "num_p_qty": true,
+          "use-slider": true,
+          "slides-To-Scroll": 1,
+          "visible": 5,
+          "widescreen": 4,
+          "desktop": 4,
+          "laptop": 4,
+          "notebook": 3,
+          "tablet": 3,
+          "landscape": 2,
+          "portrait": 2,
+          "mobile": 1,
+          "rows": 1,
+          "autoplay": true,
+          "speed": "300",
+          "autoplay-Speed": "3000",
+          "arrows": true,
+          "fade": false,
+          "center-Mode": false,
+          "adaptive-Height": false,
+          "dots": false,
+          "infinite": false,
+          "padding": 10,
+          "vertical": false,
+          "layout": "container",
+          "cl_bg": "#fff",
+          "mg": "",
+          "pd": "",
+          "mg_mb": "",
+          "pd_mb": ""
+        }
       }
     },
     "content_for_index": [
       "894283a0-6238-4048-bdf1-febc2d2021a9",
+      "f088fa25-9643-4737-ba33-eb74c5776b7b",
       "7d0d8fb7-9d3d-4a85-832c-502bd57b8eec",
-      "4db007e1-6125-46c4-ad31-a6c450208bd2",
-      "4740667e-2afe-418a-8f34-e5321eddc6f8",
-      "b2f5753a-c7f9-4b25-9691-8c92b94b6b90"
+      "4db007e1-6125-46c4-ad31-a6c450208bd2"
     ]
   },
   "presets": {
