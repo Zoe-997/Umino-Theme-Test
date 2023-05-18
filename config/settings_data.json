@@ -3594,6 +3594,7 @@
             "type": "shipping",
             "settings": {
               "icon": "fa fa-truck",
+              "icon_img": "shopify:\/\/shop_images\/Free_Shipping.svg",
               "title": "Free Shipping",
               "text": "Get complimentary ground shipping on every order. Don't love it? Send it back, on us."
             }
@@ -3602,6 +3603,7 @@
             "type": "shipping",
             "settings": {
               "icon": "fa fa-truck",
+              "icon_img": "shopify:\/\/shop_images\/Free_Returns.svg",
               "title": "Free Returns",
               "text": "Free returns within 10 days, please make sure the \nitems are in undamaged condition."
             }
@@ -3610,6 +3612,7 @@
             "type": "shipping",
             "settings": {
               "icon": "fa fa-truck",
+              "icon_img": "shopify:\/\/shop_images\/Support_Online.svg",
               "title": "Support Online",
               "text": "We support customers 24\/7, send questions we will \nsolve for you immediately."
             }
