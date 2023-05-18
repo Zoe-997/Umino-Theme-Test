@@ -20,16 +20,16 @@
       <div class="container form">        
         <form action="/contact" method="post">
           {% assign name_attr = section.settings.name_label_sevice | handle %}
-          <input placeholder="{{section.settings.name_label_sevice}} " class="input-info odd" id="name" required name="contact[{{ name_attr }}]"  type="text" value="{% if form[name_attr] %}{{ form[name_attr] }}{% elsif customer %}{{ customer.first_name }}{% endif %}"/>                            
+          <input placeholder="{{section.settings.name_label_sevice}} " class="input-info odd" id="name" required name="contact[{{ name_attr }}]"  type="text" value="{% if form[name_attr] %}{{ form[name_attr] }}{% elsif customer %}{{ customer.first_name }}{% endif %}">                            
           {% assign name_attr = section.settings.phone_label_sevice | handle %}
-          <input placeholder="{{section.settings.phone_label_sevice}}" value="{% if form[name_attr] %}{{ form[name_attr] }} {% endif %}" required name="contact[{{ name_attr }}]" class="input-info even" id="phone" type="text"/>
+          <input placeholder="{{section.settings.phone_label_sevice}}" value="{% if form[name_attr] %}{{ form[name_attr] }} {% endif %}" required name="contact[{{ name_attr }}]" class="input-info even" id="phone" type="text">
           {% assign name_attr = section.settings.address_label_sevice | handle %}
-          <input placeholder="{{section.settings.address_label_sevice}}" value="{% if form[name_attr] %}{{ form[name_attr] }} {% endif %}" required name="contact[{{ name_attr }}]" class="input-info odd" id="address" type="text"/>
+          <input placeholder="{{section.settings.address_label_sevice}}" value="{% if form[name_attr] %}{{ form[name_attr] }} {% endif %}" required name="contact[{{ name_attr }}]" class="input-info odd" id="address" type="text">
           
           <div data-service class="wrap_service even">
             {% assign name_attr = section.settings.product_label_sevice | handle %} 
            
-            <input  onfocus="this.blur();" placeholder="{{section.settings.product_label_sevice }}" value="{% if form[name_attr] %}{{ form[name_attr] }} {% endif %}" required name="contact[{{ name_attr }}]" class="input-info" id="product" type="text"/>
+            <input  onfocus="this.blur();" placeholder="{{section.settings.product_label_sevice }}" value="{% if form[name_attr] %}{{ form[name_attr] }} {% endif %}" required name="contact[{{ name_attr }}]" class="input-info" id="product" type="text">
             {% if section.blocks.size > 0%}
             <span>
               <i class="fa fa-angle-down" aria-hidden="true"></i>

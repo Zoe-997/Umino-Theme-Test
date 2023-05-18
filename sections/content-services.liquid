@@ -55,12 +55,12 @@
       <h3 class="service-title"> {{section.settings.form_title_sevice}} </h3>
       <form action="/contact" method="post">
         {% assign name_attr = section.settings.name_label_sevice | handle %}
-        <input placeholder="{{section.settings.name_label_sevice}} " class="input-info" id="name" required name="contact[{{ name_attr }}]"  type="text" value="{% if form[name_attr] %}{{ form[name_attr] }}{% elsif customer %}{{ customer.first_name }}{% endif %}"/>                            
+        <input placeholder="{{section.settings.name_label_sevice}} " class="input-info" id="name" required name="contact[{{ name_attr }}]"  type="text" value="{% if form[name_attr] %}{{ form[name_attr] }}{% elsif customer %}{{ customer.first_name }}{% endif %}">                            
         {% assign name_attr = section.settings.phone_label_sevice | handle %}
-        <input placeholder="{{section.settings.phone_label_sevice}}" value="{% if form[name_attr] %}{{ form[name_attr] }} {% endif %}" required name="contact[{{ name_attr }}]" class="input-info" id="phone" type="text"/>
+        <input placeholder="{{section.settings.phone_label_sevice}}" value="{% if form[name_attr] %}{{ form[name_attr] }} {% endif %}" required name="contact[{{ name_attr }}]" class="input-info" id="phone" type="text">
         <div data-service class="wrap_service">
           {% assign name_attr = section.settings.services_label_sevice | handle %}
-          <input  onfocus="this.blur();" placeholder="{{section.settings.services_label_sevice }}" value="{% if form[name_attr] %}{{ form[name_attr] }} {% endif %}" required name="contact[{{ name_attr }}]" class="input-info" id="service" type="text"/>
+          <input  onfocus="this.blur();" placeholder="{{section.settings.services_label_sevice }}" value="{% if form[name_attr] %}{{ form[name_attr] }} {% endif %}" required name="contact[{{ name_attr }}]" class="input-info" id="service" type="text">
           <span>
             <i class="fa fa-angle-down" aria-hidden="true"></i>
           </span>
@@ -76,7 +76,7 @@
         </div>
         <div data-date class="wrap_service">
           {% assign name_attr = section.settings.date_label_sevice | handle %}
-          <input  onfocus="this.blur();" placeholder="{{section.settings.date_label_sevice }}" value="{% if form[name_attr] %}{{ form[name_attr] }} {% endif %}" name="contact[{{ name_attr }}]" class="input-info" id="date" type="text"/>
+          <input  onfocus="this.blur();" placeholder="{{section.settings.date_label_sevice }}" value="{% if form[name_attr] %}{{ form[name_attr] }} {% endif %}" name="contact[{{ name_attr }}]" class="input-info" id="date" type="text">
           <span>
             <i class="fa fa-angle-down" aria-hidden="true"></i>
           </span>
