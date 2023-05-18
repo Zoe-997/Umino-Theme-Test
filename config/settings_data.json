@@ -67,6 +67,7 @@
     "currency_format": "money_format",
     "supported_currencies": "GBP USD EUR  DKK ARS CNY BRL",
     "default_currency": "USD",
+    "show_flag": false,
     "ajaxcart_enabled": true,
     "ajaxcart_after": "sidebar_cart",
     "show_product_sidebar": false,
