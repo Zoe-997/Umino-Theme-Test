@@ -1323,10 +1323,10 @@
           "0cfd9b2f-3016-425c-a275-f60b6eaf931a": {
             "type": "top_header_3",
             "settings": {
-              "menu_topbar": "top-header",
+              "menu_topbar": "",
               "header_use_currency": true,
               "header_use_language": true,
-              "header_use_social": false,
+              "header_use_social": true,
               "type_social": "1",
               "text_align": "topbar-right",
               "col": "4"
