@@ -3561,7 +3561,7 @@
           "mg_bottom": 100,
           "pd_top": 0,
           "pd_bottom": 0,
-          "mg_top_mb": 0,
+          "mg_top_mb": 50,
           "mg_bottom_mb": 0,
           "pd_top_mb": 0,
           "pd_bottom_mb": 0
