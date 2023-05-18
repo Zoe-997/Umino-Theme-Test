@@ -3501,9 +3501,92 @@
           "mg_mb": "",
           "pd_mb": "60px,0,58px,0"
         }
+      },
+      "894283a0-6238-4048-bdf1-febc2d2021a9": {
+        "type": "slideshow",
+        "blocks": {
+          "894283a0-6238-4048-bdf1-febc2d2021a9-1684395236c67983c7-0": {
+            "type": "img",
+            "settings": {
+              "link_img": "",
+              "open_link": "_blank",
+              "caption_w": "2",
+              "h_position": "center",
+              "v_position": "middle",
+              "design": "design-1",
+              "txt_align": "center",
+              "cl_overlay": "transparent",
+              "cl_opacity": 100
+            }
+          },
+          "894283a0-6238-4048-bdf1-febc2d2021a9-1684395236c67983c7-1": {
+            "type": "img",
+            "settings": {
+              "link_img": "",
+              "open_link": "_blank",
+              "caption_w": "2",
+              "h_position": "center",
+              "v_position": "middle",
+              "design": "design-1",
+              "txt_align": "center",
+              "cl_overlay": "transparent",
+              "cl_opacity": 100
+            }
+          }
+        },
+        "block_order": [
+          "894283a0-6238-4048-bdf1-febc2d2021a9-1684395236c67983c7-0",
+          "894283a0-6238-4048-bdf1-febc2d2021a9-1684395236c67983c7-1"
+        ],
+        "settings": {
+          "layout": "container",
+          "use_custom_h": "1",
+          "h_des": "650px",
+          "h_tb": "500px",
+          "h_mb": "350px",
+          "use-slider": true,
+          "slides-To-Scroll": 1,
+          "visible": 1,
+          "widescreen": 1,
+          "desktop": 1,
+          "laptop": 1,
+          "notebook": 1,
+          "tablet": 1,
+          "landscape": 1,
+          "portrait": 1,
+          "mobile": 1,
+          "rows": 1,
+          "autoplay": true,
+          "speed": "300",
+          "autoplay-Speed": "3000",
+          "arrows": true,
+          "fade": false,
+          "adaptive-Height": false,
+          "dots": false,
+          "infinite": true,
+          "padding": 15,
+          "design_dots": "design-1",
+          "design_arrows": "design-1",
+          "cl_bg": "#fff",
+          "cl_dots": "#000",
+          "cl_dots_active": "#FBB71C",
+          "cl_arrow": "#000",
+          "cl_arrow_hover": "#000",
+          "bg_arrow": "rgba(225, 225, 225, 0.1)",
+          "color_background": "#FBB71C",
+          "mg_top": 0,
+          "mg_bottom": 0,
+          "pd_top": 0,
+          "pd_bottom": 0,
+          "mg_top_mb": 0,
+          "mg_bottom_mb": 0,
+          "pd_top_mb": 0,
+          "pd_bottom_mb": 0
+        }
       }
     },
     "content_for_index": [
+      "894283a0-6238-4048-bdf1-febc2d2021a9",
       "7d0d8fb7-9d3d-4a85-832c-502bd57b8eec",
       "4db007e1-6125-46c4-ad31-a6c450208bd2",
       "4740667e-2afe-418a-8f34-e5321eddc6f8",
