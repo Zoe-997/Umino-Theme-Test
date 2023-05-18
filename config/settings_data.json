@@ -1607,7 +1607,7 @@
               "tt_hd": "Shop Layout",
               "url": "#",
               "open_link": "_self",
-              "menu": "menu-child-1",
+              "menu": "",
               "col": "3"
             }
           },
@@ -1617,7 +1617,7 @@
               "tt_hd": "Products Pages",
               "url": "#",
               "open_link": "_self",
-              "menu": "menu-child-1",
+              "menu": "",
               "col": "3"
             }
           },
@@ -1627,7 +1627,7 @@
               "tt_hd": "Heading",
               "url": "",
               "open_link": "_self",
-              "menu": "menu-child-1",
+              "menu": "",
               "col": "3"
             }
           },
@@ -1637,7 +1637,7 @@
               "tt_hd": "Heading",
               "url": "",
               "open_link": "_self",
-              "menu": "menu-child-1",
+              "menu": "",
               "col": "3"
             }
           },
@@ -1655,7 +1655,7 @@
               "pos_rel": false,
               "wid": "cus",
               "cus_wid": 1200,
-              "bg": "#fff"
+              "bg": "#ffffff"
             }
           },
           "8f05fad1-35de-475f-9f44-61e37029c130": {
@@ -1664,7 +1664,7 @@
               "tt_hd": "Heading",
               "url": "",
               "open_link": "_self",
-              "menu": "menu-child-1",
+              "menu": "",
               "col": "4"
             }
           },
@@ -1674,7 +1674,7 @@
               "tt_hd": "Heading",
               "url": "",
               "open_link": "_self",
-              "menu": "menu-child-1",
+              "menu": "",
               "col": "4"
             }
           },
@@ -1684,7 +1684,7 @@
               "tt_hd": "Heading",
               "url": "",
               "open_link": "_self",
-              "menu": "menu-child-1",
+              "menu": "",
               "col": "4"
             }
           },
@@ -1694,7 +1694,7 @@
               "title": "Pages",
               "url": "",
               "open_link": "_self",
-              "menu": "page",
+              "menu": "",
               "icon": "",
               "cus_cl": false,
               "cl": "#ec0101",
@@ -3015,7 +3015,6 @@
             "type": "logo-footer",
             "settings": {
               "use_logo_footer": true,
-              "logo_footer": "shopify:\/\/shop_images\/Logo.svg",
               "logo_max_width": 95,
               "address": "268 St, South New York\/NY 98944, United States +222-1800-2628",
               "use_social": true,
@@ -3032,7 +3031,7 @@
             "type": "menu",
             "settings": {
               "title": "CUSTOMER SERVICE",
-              "menu": "customer-service",
+              "menu": "",
               "cl": "2",
               "cl_tb": "6",
               "cl_mb": "12",
@@ -3044,7 +3043,7 @@
             "type": "menu",
             "settings": {
               "title": "SHOP BY CATEGORIES",
-              "menu": "shop-by-categories",
+              "menu": "",
               "cl": "2",
               "cl_tb": "6",
               "cl_mb": "12",
@@ -3254,7 +3253,7 @@
           "4d7b5277-720a-4ecc-ba9a-db527e51b09e-1684399191aa5ce6f4-0": {
             "type": "img",
             "settings": {
-              "image_sl": "shopify:\/\/shop_images\/img_2ffc7a5f-92d1-4447-a604-691c0f646184.png",
+              "image_sl": "shopify:\/\/shop_images\/img_7dc54578-08fb-4af4-8196-0c802db1495f.png",
               "link_img": "",
               "open_link": "_blank",
               "img_radius": 20,
@@ -3358,7 +3357,7 @@
           "4d7b5277-720a-4ecc-ba9a-db527e51b09e-1684399191aa5ce6f4-1": {
             "type": "img",
             "settings": {
-              "image_sl": "shopify:\/\/shop_images\/img_2ffc7a5f-92d1-4447-a604-691c0f646184.png",
+              "image_sl": "shopify:\/\/shop_images\/img_7dc54578-08fb-4af4-8196-0c802db1495f.png",
               "link_img": "",
               "open_link": "_blank",
               "img_radius": 20,
@@ -3594,7 +3593,6 @@
             "type": "shipping",
             "settings": {
               "icon": "fa fa-truck",
-              "icon_img": "shopify:\/\/shop_images\/Free_Shipping.svg",
               "title": "Free Shipping",
               "text": "Get complimentary ground shipping on every order. Don't love it? Send it back, on us."
             }
@@ -3603,7 +3601,6 @@
             "type": "shipping",
             "settings": {
               "icon": "fa fa-truck",
-              "icon_img": "shopify:\/\/shop_images\/Free_Returns.svg",
               "title": "Free Returns",
               "text": "Free returns within 10 days, please make sure the \nitems are in undamaged condition."
             }
@@ -3612,7 +3609,6 @@
             "type": "shipping",
             "settings": {
               "icon": "fa fa-truck",
-              "icon_img": "shopify:\/\/shop_images\/Support_Online.svg",
               "title": "Support Online",
               "text": "We support customers 24\/7, send questions we will \nsolve for you immediately."
             }
