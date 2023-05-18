@@ -1715,8 +1715,8 @@
           "407f6f92-2819-4cb0-a735-a3caec3c4cd2"
         ],
         "settings": {
-          "hidden": true,
-          "header_design": "logo-center-menu-left",
+          "hidden": false,
+          "header_design": "logo-left-menu-center",
           "sticky_top": false,
           "Background_header": "#ffffff",
           "bg_header_sticky": "#ffffff",
