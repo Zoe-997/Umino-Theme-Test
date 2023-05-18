@@ -3015,6 +3015,7 @@
             "type": "logo-footer",
             "settings": {
               "use_logo_footer": true,
+              "logo_footer": "shopify:\/\/shop_images\/Logo.svg",
               "logo_max_width": 95,
               "address": "268 St, South New York\/NY 98944, United States +222-1800-2628",
               "use_social": true,
