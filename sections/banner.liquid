@@ -50,8 +50,8 @@
                            <div class="lazyload laber_bg_lz pr_lazy_img" data-bgset="{% if image != blank %}{{ image | img_url: '1x1' }}{% else %}{{ no-img}}{% endif %}" data-ratio="{{ratio}}" data-sizes="auto" style="padding-top:{% if image != blank %} {{pd_top}}%{% else %}48.14%{% endif %};" ></div>     
                           </a>
                             <div class="banner_text_{{block.id}}" {%if hidden_content %}style="display:none;"{%endif%}>
-                            <div class="{% if img_size == 1%} container{%endif%} banner_text h_{{block.settings.h_position}} v_{{block.settings.v_position}} text_{{block.settings.txt_align}}">
-                            <div class="content_banner">
+                            <div class="banner_text h_{{block.settings.h_position}} v_{{block.settings.v_position}} text_{{block.settings.txt_align}}">
+                            <div class="content_banner" style="background-color: {{ block.settings.content_bg }}">
                                   {% for block in section_blocks offset:index %}
                                   {% assign index = index|plus:1 %}                          		
                                   {%- case block.type -%}
@@ -143,10 +143,10 @@
       {%- for block in section_blocks -%}
         {%- assign id = block.id -%}
         {%- assign type = block.type -%}
-        {%- case block.type -%} 
+        {%- case block.type -%}
 			{% when 'hd' %}
-			.type_banner .laber_banner .banner_text h3#b_{{id}}{
-				margin-bottom:{{block.settings.mg_bottom}}px;
+			  .type_banner .laber_banner .banner_text h3#b_{{id}}{
+				  margin-bottom:{{block.settings.mg_bottom}}px;
                 text-transform:{{block.settings.text_transform}}; 
                 letter-spacing:{{block.settings.ls_text}}; 
                 {% if block.settings.lh_text >0 %}line-height:{{block.settings.lh_text}}px; {% endif %} 
@@ -344,10 +344,10 @@
         "label": "Layout"
       },
       {
-      "type": "color",
-      "id": "cl_bg",
-      "label": "Background color",
-      "default": "#fff"
+        "type": "color",
+        "id": "cl_bg",
+        "label": "Background color",
+        "default": "#fff"
       },
       {
         "type": "checkbox",
@@ -681,14 +681,20 @@
             ]
           },
           {
-          "type": "range",
-          "id": "mg_bottom",
-          "label": "Margin bottom",
-          "default": 20,
-          "min": 0,
-          "max": 100,
-          "step": 5,
-          "unit": "px"
+            "type": "color",
+            "id": "content_bg",
+            "label": "Background color",
+            "default": "#fff"
+          },
+          {
+            "type": "range",
+            "id": "mg_bottom",
+            "label": "Margin bottom",
+            "default": 20,
+            "min": 0,
+            "max": 100,
+            "step": 5,
+            "unit": "px"
           }
       ]
     },

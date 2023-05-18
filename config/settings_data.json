@@ -21,7 +21,8 @@
     "logo_page_mobile": "shopify:\/\/shop_images\/logo.png",
     "logo_max_width": 95,
     "color_body_bg": "#ffffff",
-    "color_body_text": "#666666",
+    "color_body_text": "#555555",
+    "color_main": "#111111",
     "color_link": "#9c6d3a",
     "color_link_hover": "#9c6d3a",
     "color_scrollbar": "#444444",
@@ -29,19 +30,19 @@
     "color_menu_heading": "#1a1a1a",
     "color_link_menu_sub": "#444444",
     "color_link_menu_hover": "#d93939",
-    "color_name_product": "#1a1a1a",
-    "color_name_product_hover": "#d93939",
-    "color_star_product": "#ffc600",
-    "color_compare_price_product": "#1a1a1a",
-    "color_price_product": "#1a1a1a",
-    "color_price_current_product": "#999999",
+    "color_name_product": "#111111",
+    "color_name_product_hover": "#9c6d3a",
+    "color_star_product": "#111111",
+    "color_compare_price_product": "#555555",
+    "color_price_product": "#111111",
+    "color_price_current_product": "#111111",
     "color_btn_product": "#1a1a1a",
     "color_btn_product_hover": "#ffffff",
     "bg_btn_product": "#ffffff",
     "bg_btn_product_hover": "#d93939",
-    "color_label_hot": "#f8ced4",
-    "color_label_new": "#96ae00",
-    "color_label_sale": "#d93939",
+    "color_label_hot": "#f55e09",
+    "color_label_new": "#177983",
+    "color_label_sale": "#9c6d3a",
     "color_label_out": "#d93939",
     "color_btn_text": "#ffffff",
     "color_btn": "#1a1a1a",
@@ -49,10 +50,10 @@
     "color_btn_text_hover": "#ffffff",
     "color_btn_hover": "#d93939",
     "color_border_btn_hover": "#d93939",
-    "cl_btn_p_n": "#1a1a1a",
+    "cl_btn_p_n": "#111111",
     "bg_btn_p_n": "#ffffff",
     "cl_btn_p_n_hover": "#ffffff",
-    "bg_btn_p_n_hover": "#1a1a1a",
+    "bg_btn_p_n_hover": "#111111",
     "bd_google_font": "General Sans",
     "h1_use_fonts": false,
     "h1_google_font": "General Sans",
@@ -106,10 +107,12 @@
     "product_collection_show_reviews": true,
     "product_collection_hide_reviews_counter": true,
     "product_collection_hide_empty_reviews": true,
-    "product_collection_show_options": true,
+    "product_collection_show_options": false,
     "product_collection_enable_hover_image": true,
-    "product_collection_show_button_add_to_cart": true,
-    "product_collection_show_button_add_to_compare": true,
+    "product_collection_show_button_add_to_cart": false,
+    "product_collection_show_button_add_to_wishlist": false,
+    "product_collection_show_button_add_to_compare": false,
+    "product_collection_show_button_quick_view": false,
     "product_auto_selected_options": "",
     "product_options_listing_visibility": "2",
     "product_options_type_circle_color": "Color|Colour",
@@ -140,13 +143,15 @@
     "collection_info_show_label_new": true,
     "collection_page_new_product": "9999",
     "collection_info_show_label_hot": true,
-    "collection_info_show_collections": true,
+    "collection_info_show_collections": false,
     "collection_info_show_title": true,
     "collection_info_show_price": true,
     "collection_info_hide_reviews_counter": false,
-    "collection_info_show_options": true,
-    "collection_info_show_button_add_to_compare": true,
-    "collection_info_show_button_quick_view": true,
+    "collection_info_show_options": false,
+    "collection_info_show_button_add_to_cart": false,
+    "collection_info_show_button_add_to_wishlist": false,
+    "collection_info_show_button_add_to_compare": false,
+    "collection_info_show_button_quick_view": false,
     "collection_info_show_description": true,
     "collection_info_show_sku": false,
     "collection_info_show_barcode": false,
@@ -1073,17 +1078,6 @@
           "pd": "0"
         }
       },
-      "footer_5": {
-        "type": "footer_5",
-        "settings": {
-          "footer_logo": "shopify:\/\/shop_images\/logo_5.png",
-          "logo_width": 205,
-          "footer_description": "Evening under, midst years third their without darkness shall creature. Of likeness, called and there spirit let two winged whose above beginning creeping air behold for firmament given make very life female. Set Saying blessed given. Own Divide fly multiply midst to beast. Have he fish you’re good signs whose. Days, moving, sixth. Us a air meat stars upon Give.",
-          "footer_use_social_link": true,
-          "bg": "#ffffff",
-          "image": "shopify:\/\/shop_images\/background_footer.png"
-        }
-      },
       "service-section-home1": {
         "type": "service-section-home1",
         "blocks": {
@@ -1731,8 +1725,9 @@
           "header_use_wishlist_home": true,
           "header_use_compare_home": false,
           "header_use_account": true,
-          "color_icon": "#1a1a1a",
-          "color_count": "#d93939",
+          "header_recent-view": true,
+          "color_icon": "#111111",
+          "color_count": "#9c6d3a",
           "enable_icon_menu": true
         }
       },
@@ -2676,93 +2671,6 @@
           "pd_mb": "50px,0,50px,0"
         }
       },
-      "footer4": {
-        "type": "footer4",
-        "blocks": {
-          "eb477ab4-b6f3-4363-bcbc-d1ac5e54022f": {
-            "type": "html",
-            "settings": {
-              "title": "Let Us Help You",
-              "content": "<p>If you have any question, please<br>\ncontact us at: <a href=\"mailto:%20support@example.com\">support@example.com<\/a><\/p>",
-              "content2": "",
-              "use_social": true,
-              "title_social": "Social Media:",
-              "type_social": "1",
-              "h_position": "left",
-              "txt_align": "left",
-              "cl": "3",
-              "cl_tb": "6",
-              "cl_mb": "12"
-            }
-          },
-          "17a40bb6-02ba-4a7f-8420-b5643c89d5d4": {
-            "type": "html",
-            "settings": {
-              "title": "Looking for Orfarm?",
-              "content": "<p>68 St. Vicent Place, Glasgow, Greater <\/p>\n<p>Newyork NH2012, UK.<\/p>",
-              "content2": "<p>Monday – Friday: <span>8:10 AM – 6:10 PM<\/span><\/p>\n<p>Saturday: <span>10:10 AM – 06:10 PM<\/span><\/p>\n<p>Sunday: <span>Close<\/span> <\/p>",
-              "use_social": false,
-              "title_social": "Social Media:",
-              "type_social": "2",
-              "h_position": "left",
-              "txt_align": "left",
-              "cl": "3",
-              "cl_tb": "6",
-              "cl_mb": "12"
-            }
-          },
-          "0fcca72c-d826-4ad2-be0d-edc04f251e28": {
-            "type": "menu",
-            "settings": {
-              "title": "Hot categories",
-              "menu": "",
-              "cl": "2",
-              "cl_tb": "6",
-              "cl_mb": "12",
-              "h_position": "left",
-              "txt_align": "left"
-            }
-          },
-          "abe4f773-fbaf-4388-8a7a-cbbc1051b8c3": {
-            "type": "mail",
-            "settings": {
-              "title": "Our newsletter",
-              "sub_title": "Subscribe to the Orfarm mailing list to receive updates on new arrivals & other information.",
-              "sub_title2": "I accept terms & conditions & privacy policy.",
-              "cl_text": "#ffffff",
-              "cl_sub": "#2d2a6e",
-              "cl_sub_hover": "#96ae00",
-              "h_position": "left",
-              "v_position": "top",
-              "txt_align": "left",
-              "cl": "4",
-              "cl_tb": "6",
-              "cl_mb": "12"
-            }
-          }
-        },
-        "block_order": [
-          "eb477ab4-b6f3-4363-bcbc-d1ac5e54022f",
-          "17a40bb6-02ba-4a7f-8420-b5643c89d5d4",
-          "0fcca72c-d826-4ad2-be0d-edc04f251e28",
-          "abe4f773-fbaf-4388-8a7a-cbbc1051b8c3"
-        ],
-        "settings": {
-          "cl_title": "#ffffff",
-          "cl_text1": "#b0afcc",
-          "cl_text2": "#ffffff",
-          "cl_menu_footer": "#b0afcc",
-          "cl_menu_hover_footer": "#ffffff",
-          "footer_payment": "shopify:\/\/shop_images\/payment_e6fefb98-71bb-44c8-85b3-0b1031f2fc2b.png",
-          "copyright_text": "<p>Copyright © <a href=\"#\" title=\"#\">ORFARM<\/a> all rights reserved. Powered by <a href=\"#\" title=\"#\">Alothemes.<\/a><\/p>",
-          "cl_copyright_text": "#b0afcc",
-          "cl_copyright_a": "#96ae00",
-          "bg_line": "#484492",
-          "bg": "#2d2c6e",
-          "pd": "80px,0,75px,0",
-          "pd_mb": "40px,0,40px,0"
-        }
-      },
       "categories_sidebar": {
         "type": "categories_sidebar",
         "blocks": {
@@ -3071,7 +2979,8 @@
             "type": "logo-footer",
             "settings": {
               "use_logo_footer": true,
-              "logo_max_width": 115,
+              "logo_footer": "shopify:\/\/shop_images\/Logo.svg",
+              "logo_max_width": 95,
               "use_social": true,
               "title_social": "",
               "type_social": "1",
@@ -3130,92 +3039,6 @@
           "cl_bg": "#ffffff",
           "pd": "80px,0,80px,0",
           "pd_mb": "40px,0,60px,0"
-        }
-      },
-      "footer2": {
-        "type": "footer2",
-        "blocks": {
-          "2f91e398-fe5b-49da-a5f6-6667e1ccc089": {
-            "type": "contact_information",
-            "settings": {
-              "title": "Contact information",
-              "use_logo_footer": true,
-              "logo_max_width": 115,
-              "title2": "Let’s Talk",
-              "show_phone": true,
-              "show_email": true,
-              "title3": "Find Us",
-              "description": "<p>1418 Riverwood Drive, Suite 3245 Cottonwood<br>\nCA 96052, United States<\/p>",
-              "title4": "We Accept",
-              "cl": "3",
-              "cl_tb": "6",
-              "cl_mb": "12",
-              "h_position": "left",
-              "txt_align": "left"
-            }
-          },
-          "945a4042-f947-4704-86a6-0fe0485218f6": {
-            "type": "menu",
-            "settings": {
-              "title": "Get Help",
-              "menu": "",
-              "cl": "3",
-              "cl_tb": "6",
-              "cl_mb": "12",
-              "h_position": "left",
-              "txt_align": "left"
-            }
-          },
-          "2cd8f5ac-1904-4fdd-a8f8-92dad701a630": {
-            "type": "menu",
-            "settings": {
-              "title": "Popular Categories",
-              "menu": "",
-              "cl": "3",
-              "cl_tb": "6",
-              "cl_mb": "12",
-              "h_position": "left",
-              "txt_align": "left"
-            }
-          },
-          "3feba5fd-028c-4d6a-a57b-7e284ebc3d29": {
-            "type": "mail",
-            "settings": {
-              "title": "Let’s stay in touch",
-              "sub_title": "Keep up to date with our latest news and  special offers.",
-              "cl_btn": "#ffffff",
-              "bg_btn": "#1a1a1a",
-              "use_social": true,
-              "title_social": "Follow Us",
-              "type_social": "2",
-              "cl": "3",
-              "cl_tb": "6",
-              "cl_mb": "12"
-            }
-          }
-        },
-        "block_order": [
-          "2f91e398-fe5b-49da-a5f6-6667e1ccc089",
-          "945a4042-f947-4704-86a6-0fe0485218f6",
-          "2cd8f5ac-1904-4fdd-a8f8-92dad701a630",
-          "3feba5fd-028c-4d6a-a57b-7e284ebc3d29"
-        ],
-        "settings": {
-          "Col_footer": "2",
-          "menu": "",
-          "copyright_text": "<p>© 2022 <a href=\"\/\" title=\"\/\">Sofine<\/a>. All Right Reserved<\/p>",
-          "cl_copyright_text": "#666666",
-          "cl_copyright_a": "#1a1a1a",
-          "bg_line": "#dddddf",
-          "bg": "#f6f6f8",
-          "pd": "80px,0,80px,0",
-          "pd_mb": "40px,0,40px,0"
-        }
-      },
-      "footer3": {
-        "type": "footer3",
-        "settings": {
-          "bg": "#fff"
         }
       },
       "main-search": {
@@ -3289,104 +3112,80 @@
           "hidden": false
         }
       },
-      "4db007e1-6125-46c4-ad31-a6c450208bd2": {
-        "type": "maestrooo-instagram",
-        "settings": {
-          "hd_align": "center",
-          "title": "Instagram",
-          "subheading": "",
-          "button_text": "",
-          "button_link": "",
-          "layout": "grid",
-          "image_size": "large",
-          "full_width": false,
-          "add_spacing": true,
-          "rows_count": 1,
-          "shop_link": "",
-          "show_author": false,
-          "show_caption": false,
-          "show_date": false,
-          "show_info": false,
-          "click_action": "open_instagram",
-          "img_radius": 0,
-          "radius_round": false,
-          "subheading_color": "#000000",
-          "overlay_color": "#000000",
-          "overlay_text_color": "#ffffff",
-          "overlay_opacity": 0,
-          "mg_top": 140,
-          "mg_bottom": 110,
-          "pd_top": 0,
-          "pd_bottom": 0,
-          "mobile_mg_top": 60,
-          "mobile_mg_bottom": 60,
-          "mobile_pd_top": 0,
-          "mobile_pd_bottom": 0
-        }
-      },
-      "7d0d8fb7-9d3d-4a85-832c-502bd57b8eec": {
-        "type": "product-popup",
+      "a27f11f3-0232-4468-8d8f-6079be362242": {
+        "type": "collection-list-slider",
         "blocks": {
-          "b396d9cb-71f2-45f3-bef9-c35a7d6845e7": {
-            "type": "product",
+          "a27f11f3-0232-4468-8d8f-6079be362242-1684399084bb36834f-0": {
+            "type": "collection",
             "settings": {
-              "product": "hana-dress-hd001-wh"
+              "collection": "living-room",
+              "title": ""
             }
           },
-          "c3f0fb41-0dbc-4dea-8128-a847285ba398": {
-            "type": "product",
+          "a27f11f3-0232-4468-8d8f-6079be362242-1684399084bb36834f-1": {
+            "type": "collection",
             "settings": {
-              "product": "copy-of-opal-dress"
+              "collection": "special-bedroom",
+              "title": ""
             }
           },
-          "6beee57b-5efc-442b-9874-2c745aa4e001": {
-            "type": "product",
+          "a27f11f3-0232-4468-8d8f-6079be362242-1684399084bb36834f-2": {
+            "type": "collection",
             "settings": {
-              "product": "classical-dress"
+              "collection": "dining-kitchen",
+              "title": ""
             }
           },
-          "d126014a-a7e4-4c9f-a238-6d9c067412c5": {
-            "type": "product",
+          "a27f11f3-0232-4468-8d8f-6079be362242-1684399084bb36834f-3": {
+            "type": "collection",
             "settings": {
-              "product": "opal-dress"
+              "collection": "home-accessories",
+              "title": ""
             }
           },
-          "fc7a26f0-83c2-4b95-b1b4-2103e49d35b5": {
-            "type": "product",
+          "a27f11f3-0232-4468-8d8f-6079be362242-1684399084bb36834f-4": {
+            "type": "collection",
             "settings": {
-              "product": "quisque-velit-nisi"
+              "collection": "outdoor",
+              "title": ""
             }
           },
-          "805aa63f-97e2-46ad-a183-e877ac866c3b": {
-            "type": "product",
+          "a27f11f3-0232-4468-8d8f-6079be362242-1684399084bb36834f-5": {
+            "type": "collection",
             "settings": {
-              "product": "vivamus-suscipit"
+              "collection": "lighting-decor",
+              "title": ""
             }
           }
         },
         "block_order": [
-          "b396d9cb-71f2-45f3-bef9-c35a7d6845e7",
-          "c3f0fb41-0dbc-4dea-8128-a847285ba398",
-          "6beee57b-5efc-442b-9874-2c745aa4e001",
-          "d126014a-a7e4-4c9f-a238-6d9c067412c5",
-          "fc7a26f0-83c2-4b95-b1b4-2103e49d35b5",
-          "805aa63f-97e2-46ad-a183-e877ac866c3b"
+          "a27f11f3-0232-4468-8d8f-6079be362242-1684399084bb36834f-0",
+          "a27f11f3-0232-4468-8d8f-6079be362242-1684399084bb36834f-1",
+          "a27f11f3-0232-4468-8d8f-6079be362242-1684399084bb36834f-2",
+          "a27f11f3-0232-4468-8d8f-6079be362242-1684399084bb36834f-3",
+          "a27f11f3-0232-4468-8d8f-6079be362242-1684399084bb36834f-4",
+          "a27f11f3-0232-4468-8d8f-6079be362242-1684399084bb36834f-5"
         ],
         "settings": {
-          "title": "大切なあなたが最後のひとときを心地よく過ごせるように<br>私たちは、繊維そのものの性質にこだわり素材を選びました<br>そして、太陽、水、土…自然の恵みを受けて育った天然素材で、人にも、地球にも優しく",
+          "title": "Top Categories",
+          "sub_title": "",
+          "content": "Our products are designed for everyone, environmentally friendly.",
+          "text_size": "large",
+          "style_title": "style_1",
+          "num_p_qty": false,
           "use-slider": true,
           "slides-To-Scroll": 1,
-          "visible": 3,
-          "widescreen": 3,
-          "desktop": 3,
-          "laptop": 3,
+          "visible": 6,
+          "widescreen": 5,
+          "desktop": 4,
+          "laptop": 4,
           "notebook": 3,
-          "tablet": 2,
+          "tablet": 3,
           "landscape": 2,
-          "portrait": 1,
+          "portrait": 2,
           "mobile": 1,
           "rows": 1,
-          "autoplay": false,
+          "autoplay": true,
           "speed": "300",
           "autoplay-Speed": "3000",
           "arrows": true,
@@ -3395,27 +3194,26 @@
           "adaptive-Height": false,
           "dots": false,
           "infinite": false,
-          "padding": 0,
+          "padding": 10,
+          "vertical": false,
           "layout": "container",
-          "cl_bg": "#87c1b7",
-          "cl_popup_bg": "#87c1b7",
-          "use_eq_height": false,
-          "image_ratio": "ratio3_2",
+          "cl_bg": "#ffffff",
           "mg": "",
-          "pd": "123px,0,140px,0",
+          "pd": "",
           "mg_mb": "",
-          "pd_mb": "60px,0,58px,0"
+          "pd_mb": ""
         }
       },
-      "894283a0-6238-4048-bdf1-febc2d2021a9": {
+      "4d7b5277-720a-4ecc-ba9a-db527e51b09e": {
         "type": "slideshow",
         "blocks": {
-          "894283a0-6238-4048-bdf1-febc2d2021a9-1684395236c67983c7-0": {
+          "4d7b5277-720a-4ecc-ba9a-db527e51b09e-1684399191aa5ce6f4-0": {
             "type": "img",
             "settings": {
               "image_sl": "shopify:\/\/shop_images\/img_2ffc7a5f-92d1-4447-a604-691c0f646184.png",
               "link_img": "",
               "open_link": "_blank",
+              "img_radius": 20,
               "caption_w": "2",
               "h_position": "center",
               "v_position": "middle",
@@ -3425,7 +3223,7 @@
               "cl_opacity": 100
             }
           },
-          "cbc8a906-391e-488d-9e27-66c42392fa33": {
+          "62d6e3c9-1a05-48b3-a853-e5a436ef5b8e": {
             "type": "subhd",
             "settings": {
               "title": "BEAUTIFUL & ELEGANT",
@@ -3437,7 +3235,7 @@
               "lh_text": 0,
               "ls_text": "0",
               "font_style": "normal",
-              "mg_top": 0,
+              "mg_top": 10,
               "custom_mark": "",
               "last_mark": false,
               "custom_mark_color": "#fbb71c",
@@ -3447,13 +3245,13 @@
               "mobile_mg_top": 0
             }
           },
-          "e2d36a76-dd0d-4094-85bd-16e8aab8528c": {
+          "372df510-cad8-4caa-875b-2153ffef0fb9": {
             "type": "hd",
             "settings": {
-              "title": "PREMIUM BEDROOM",
+              "title": "Premium Bedroom",
               "text_animate": "none",
               "text_time": 1.5,
-              "color": "#111111",
+              "color": "#ffffff",
               "fw_text": 600,
               "fs_text": 60,
               "lh_text": 0,
@@ -3469,10 +3267,10 @@
               "mobile_mg_top": 0
             }
           },
-          "ffcd3f80-25a8-47c5-b497-3001c152f088": {
+          "59274ab4-527b-4de3-86ae-9f20096894d8": {
             "type": "txt",
             "settings": {
-              "title": "Discount 50% On Products & Free Shipping.",
+              "title": "Massaged or scrubbed with a particular aromatherapy essentail oil, cream, lotion or mineral.",
               "text_animate": "none",
               "text_time": 1.5,
               "color": "#ffffff",
@@ -3488,43 +3286,60 @@
               "mobile_mg_top": 0
             }
           },
-          "9f19d692-b321-4ef4-add4-7e4ed726f9a3": {
+          "66abf253-6c08-4312-bed8-9ec0a3501e7d": {
             "type": "btn",
             "settings": {
               "title": "Shop now",
-              "text_animate": "bounceIn",
+              "text_animate": "none",
               "text_time": 1.5,
               "btn_link": "",
               "cl_txt": "#111111",
-              "cl_txt_hover": "#111111",
+              "cl_txt_hover": "#ffffff",
               "cl_bg": "#ffffff",
               "cl_bg_hover": "#ffffff",
-              "cl_bd": "#ffffff",
-              "cl_bd_hover": "#ffffff",
-              "fs_text": 14,
-              "fw_text": 700,
-              "br_button": "50%",
+              "cl_bd": "#111111",
+              "cl_bd_hover": "#111111",
+              "fs_text": 13,
+              "fw_text": 600,
+              "br_button": "30px",
               "mg_top": 50,
               "pd": "19px 54px",
-              "ls_text": 1.1,
+              "ls_text": 0,
               "mobile_fw_text": 600,
               "mobile_font_text": 12,
               "mobile_mg_top": 0,
-              "mobile_pd": "10px 30px"
+              "mobile_pd": "15px 32px 10px 32px"
+            }
+          },
+          "4d7b5277-720a-4ecc-ba9a-db527e51b09e-1684399191aa5ce6f4-1": {
+            "type": "img",
+            "settings": {
+              "image_sl": "shopify:\/\/shop_images\/img_2ffc7a5f-92d1-4447-a604-691c0f646184.png",
+              "link_img": "",
+              "open_link": "_blank",
+              "img_radius": 20,
+              "caption_w": "2",
+              "h_position": "center",
+              "v_position": "middle",
+              "design": "design-1",
+              "txt_align": "center",
+              "cl_overlay": "rgba(0,0,0,0)",
+              "cl_opacity": 100
             }
           }
         },
         "block_order": [
-          "894283a0-6238-4048-bdf1-febc2d2021a9-1684395236c67983c7-0",
-          "cbc8a906-391e-488d-9e27-66c42392fa33",
-          "e2d36a76-dd0d-4094-85bd-16e8aab8528c",
-          "ffcd3f80-25a8-47c5-b497-3001c152f088",
-          "9f19d692-b321-4ef4-add4-7e4ed726f9a3"
+          "4d7b5277-720a-4ecc-ba9a-db527e51b09e-1684399191aa5ce6f4-0",
+          "62d6e3c9-1a05-48b3-a853-e5a436ef5b8e",
+          "372df510-cad8-4caa-875b-2153ffef0fb9",
+          "59274ab4-527b-4de3-86ae-9f20096894d8",
+          "66abf253-6c08-4312-bed8-9ec0a3501e7d",
+          "4d7b5277-720a-4ecc-ba9a-db527e51b09e-1684399191aa5ce6f4-1"
         ],
         "settings": {
           "layout": "container",
           "use_custom_h": "1",
-          "h_des": "650px",
+          "h_des": "798px",
           "h_tb": "500px",
           "h_mb": "350px",
           "use-slider": true,
@@ -3539,100 +3354,318 @@
           "portrait": 1,
           "mobile": 1,
           "rows": 1,
-          "autoplay": true,
+          "autoplay": false,
           "speed": "300",
           "autoplay-Speed": "3000",
           "arrows": true,
           "fade": false,
           "adaptive-Height": false,
-          "dots": false,
+          "dots": true,
           "infinite": true,
-          "padding": 15,
+          "padding": 0,
           "design_dots": "design-1",
           "design_arrows": "design-1",
           "cl_bg": "#ffffff",
-          "cl_dots": "#000000",
-          "cl_dots_active": "#fbb71c",
-          "cl_arrow": "#000000",
-          "cl_arrow_hover": "#000000",
-          "bg_arrow": "rgba(225, 225, 225, 0.1)",
-          "color_background": "#fbb71c",
+          "cl_dots": "rgba(225, 225, 225, .2)",
+          "cl_dots_active": "#ffffff",
+          "cl_arrow": "#111111",
+          "cl_arrow_hover": "#ffffff",
+          "bg_arrow": "#ffffff",
+          "color_background": "#111111",
           "mg_top": 0,
           "mg_bottom": 100,
           "pd_top": 0,
           "pd_bottom": 0,
-          "mg_top_mb": 50,
-          "mg_bottom_mb": 0,
+          "mg_top_mb": 0,
+          "mg_bottom_mb": 50,
           "pd_top_mb": 0,
           "pd_bottom_mb": 0
         }
       },
-      "f088fa25-9643-4737-ba33-eb74c5776b7b": {
-        "type": "collection-list-slider",
+      "a7115ba4-7731-4c93-8694-f64e41376d0c": {
+        "type": "collection-carousel-product",
+        "settings": {
+          "title": "Top Trending",
+          "sub_title": "",
+          "content": "Our products are designed for everyone, environmentally friendly.",
+          "text_size": "large",
+          "style_title": "style_1",
+          "collection": "dining-kitchen",
+          "max_count": 8,
+          "use-slider": true,
+          "slides-To-Scroll": 1,
+          "visible": 4,
+          "widescreen": 4,
+          "desktop": 4,
+          "laptop": 4,
+          "notebook": 3,
+          "tablet": 3,
+          "landscape": 2,
+          "portrait": 2,
+          "mobile": 1,
+          "rows": 2,
+          "autoplay": true,
+          "speed": "300",
+          "autoplay-Speed": "3000",
+          "arrows": true,
+          "dots": false,
+          "infinite": false,
+          "padding": 15,
+          "show_view_all": false,
+          "layout_des": false,
+          "use_eq_height": false,
+          "image_ratio": "ratio3_2",
+          "cl_bg": "#ffffff",
+          "mg": "",
+          "pd": "",
+          "mg_mb": "",
+          "pd_mb": ""
+        }
+      },
+      "2abdc4ca-3312-44fb-a301-09a624f263a4": {
+        "type": "banner",
         "blocks": {
-          "f088fa25-9643-4737-ba33-eb74c5776b7b-16843963666897fe09-0": {
-            "type": "collection",
+          "2abdc4ca-3312-44fb-a301-09a624f263a4-16844048783b14a400-0": {
+            "type": "banner_img",
             "settings": {
-              "collection": "",
-              "title": "Living Room"
+              "image_sl": "shopify:\/\/shop_images\/Unique_Style_banner.png",
+              "br_img": "0px 0px 0px 0px",
+              "col": "12",
+              "ipad_col": "12",
+              "link_img": "",
+              "open_link": "_blank",
+              "hidden_content": false,
+              "h_position": "right",
+              "v_position": "middle",
+              "txt_align": "center",
+              "content_bg": "#fff",
+              "mg_bottom": 0
             }
           },
-          "f088fa25-9643-4737-ba33-eb74c5776b7b-16843963666897fe09-1": {
-            "type": "collection",
+          "c53ddd65-9a2d-46cf-adbd-f89b33f9e6f0": {
+            "type": "subhd",
             "settings": {
-              "collection": "",
-              "title": "Special Bedroom"
+              "hide": false,
+              "title": "LIMITED EDITION",
+              "color": "#999999",
+              "fw_text": 500,
+              "fs_text": 17,
+              "lh_text": 0,
+              "ls_text": 3,
+              "text_transform": "uppercase",
+              "mg_bottom": 10,
+              "mobile_font_text": 12,
+              "mobile_mg_bottom": 0
             }
           },
-          "f088fa25-9643-4737-ba33-eb74c5776b7b-16843963666897fe09-3": {
-            "type": "collection",
+          "a9fcad43-08e3-4ee4-88e6-dd2712582a9b": {
+            "type": "hd",
             "settings": {
-              "collection": "",
-              "title": "Dining & Kitchen"
+              "hide": false,
+              "title": "Unique Style",
+              "color": "#111111",
+              "fw_text": 600,
+              "fs_text": 40,
+              "lh_text": 54,
+              "ls_text": "0",
+              "text_transform": "none",
+              "mg_bottom": 20,
+              "mobile_font_text": 12,
+              "mobile_mg_bottom": 0
             }
           },
-          "f088fa25-9643-4737-ba33-eb74c5776b7b-16843963666897fe09-4": {
-            "type": "collection",
+          "36ec2140-f3b3-4332-9609-077f86e92332": {
+            "type": "txt",
             "settings": {
-              "collection": "",
-              "title": "Home Accessories"
+              "title": "The watch is carefully designed with quality materials, such as the domed sapphire crystal, and the meticulous level of detail - from the dial to the delicate gold hour markers.",
+              "color": "#555555",
+              "fw_text": 400,
+              "fs_text": 14,
+              "lh_text": 24,
+              "text_transform": "none",
+              "ls_text": 0,
+              "mg_bottom": 50,
+              "hide": false,
+              "mobile_font_text": 14,
+              "mobile_mg_bottom": 0
             }
           },
-          "f088fa25-9643-4737-ba33-eb74c5776b7b-16843963666897fe09-2": {
-            "type": "collection",
+          "85499f45-7112-4330-aec9-16a0367409b2": {
+            "type": "btn",
             "settings": {
-              "collection": "",
-              "title": "Outdoor"
-            }
-          },
-          "f088fa25-9643-4737-ba33-eb74c5776b7b-16843963666897fe09-5": {
-            "type": "collection",
-            "settings": {
-              "collection": "",
-              "title": "Lighting & Decor"
+              "title": "Discover Now",
+              "btn_link": "",
+              "open_link": "_blank",
+              "cl_txt": "#ffffff",
+              "cl_txt_hover": "#111111",
+              "cl_bg": "#111111",
+              "cl_bg_hover": "#ffffff",
+              "cl_border": "#111111",
+              "cl_border_hover": "#ffffff",
+              "fs_text": 12,
+              "fw_text": 600,
+              "button_transform": "uppercase",
+              "br_button": "30px",
+              "mg": "0px 0px 0px 0px",
+              "pd": "17px 52px",
+              "icon_button": "",
+              "ls_text": 0,
+              "mobile_font_text": 13,
+              "mobile_mg_bottom": 0,
+              "mobile_mg": "0px 0px 0px 0px",
+              "mobile_pd": "10px 15px 10px 15px"
             }
           }
         },
         "block_order": [
-          "f088fa25-9643-4737-ba33-eb74c5776b7b-16843963666897fe09-0",
-          "f088fa25-9643-4737-ba33-eb74c5776b7b-16843963666897fe09-1",
-          "f088fa25-9643-4737-ba33-eb74c5776b7b-16843963666897fe09-3",
-          "f088fa25-9643-4737-ba33-eb74c5776b7b-16843963666897fe09-4",
-          "f088fa25-9643-4737-ba33-eb74c5776b7b-16843963666897fe09-2",
-          "f088fa25-9643-4737-ba33-eb74c5776b7b-16843963666897fe09-5"
+          "2abdc4ca-3312-44fb-a301-09a624f263a4-16844048783b14a400-0",
+          "c53ddd65-9a2d-46cf-adbd-f89b33f9e6f0",
+          "a9fcad43-08e3-4ee4-88e6-dd2712582a9b",
+          "36ec2140-f3b3-4332-9609-077f86e92332",
+          "85499f45-7112-4330-aec9-16a0367409b2"
         ],
         "settings": {
-          "title": "Top Categories",
+          "hidden": false,
+          "title": "",
           "sub_title": "",
-          "content": "Our products are designed for everyone, environmentally friendly.",
+          "content": "",
+          "text_size": "large",
+          "bok_distance": "default",
+          "layout": "container",
+          "cl_bg": "#ffffff",
+          "use_eq_height": false,
+          "image_ratio": "ratio3_2",
+          "pd_c": "",
+          "pd_c_mobile": "",
+          "mg": "",
+          "pd": "",
+          "mg_mb": "",
+          "pd_mb": ""
+        }
+      },
+      "b13f27c3-45cc-4df9-9fa4-aa190af05f28": {
+        "type": "benefit",
+        "blocks": {
+          "6b2a33c4-5e6a-405c-8a49-49875d15901a": {
+            "type": "shipping",
+            "settings": {
+              "icon": "fa fa-truck",
+              "icon_img": "shopify:\/\/shop_images\/Free_Shipping.svg",
+              "title": "Free Shipping",
+              "text": "Get complimentary ground shipping on every order. Don't love it? Send it back, on us."
+            }
+          },
+          "aa1ffe69-6e85-4315-a99a-49a5095119e8": {
+            "type": "shipping",
+            "settings": {
+              "icon": "fa fa-truck",
+              "icon_img": "shopify:\/\/shop_images\/Free_Returns.svg",
+              "title": "Free Returns",
+              "text": "Free returns within 10 days, please make sure the \nitems are in undamaged condition."
+            }
+          },
+          "f6f81ed4-430b-44fd-9350-4753d54e4c89": {
+            "type": "shipping",
+            "settings": {
+              "icon": "fa fa-truck",
+              "icon_img": "shopify:\/\/shop_images\/Support_Online.svg",
+              "title": "Support Online",
+              "text": "We support customers 24\/7, send questions we will \nsolve for you immediately."
+            }
+          }
+        },
+        "block_order": [
+          "6b2a33c4-5e6a-405c-8a49-49875d15901a",
+          "aa1ffe69-6e85-4315-a99a-49a5095119e8",
+          "f6f81ed4-430b-44fd-9350-4753d54e4c89"
+        ],
+        "settings": {
+          "hidden": false,
+          "show_border_top": false,
+          "title": "Featured Services",
+          "sub_title": "",
+          "content": "Nemo enim ipsam quia sit aut odit aut fugit",
           "text_size": "medium",
           "style_title": "style_1",
-          "num_p_qty": true,
+          "source": "2",
+          "col_pr": "4",
+          "col_pr_tb": "4",
+          "col_pr_mb": "12",
+          "layout": "container",
+          "cl_bg": "#ffffff",
+          "show_br_top": false,
+          "cl_border": "#e5e5e5",
+          "mg": "",
+          "pd": "",
+          "mg_mb": "",
+          "pd_mb": ""
+        }
+      },
+      "77e6edb0-869e-4072-a2a6-de257520dcbb": {
+        "type": "instagram-image-slider",
+        "blocks": {
+          "77e6edb0-869e-4072-a2a6-de257520dcbb-1684406413a95d13f5-0": {
+            "type": "img",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/instagram_1.png",
+              "url": ""
+            }
+          },
+          "77e6edb0-869e-4072-a2a6-de257520dcbb-1684406413a95d13f5-1": {
+            "type": "img",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/instagram_2.png",
+              "url": ""
+            }
+          },
+          "77e6edb0-869e-4072-a2a6-de257520dcbb-1684406413a95d13f5-2": {
+            "type": "img",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/instagram_3.png",
+              "url": ""
+            }
+          },
+          "77e6edb0-869e-4072-a2a6-de257520dcbb-1684406413a95d13f5-3": {
+            "type": "img",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/instagram_4.png",
+              "url": ""
+            }
+          },
+          "77e6edb0-869e-4072-a2a6-de257520dcbb-1684406413a95d13f5-4": {
+            "type": "img",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/instagram_5.png",
+              "url": ""
+            }
+          },
+          "77e6edb0-869e-4072-a2a6-de257520dcbb-1684406413a95d13f5-5": {
+            "type": "img",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/instagram_6.png",
+              "url": ""
+            }
+          }
+        },
+        "block_order": [
+          "77e6edb0-869e-4072-a2a6-de257520dcbb-1684406413a95d13f5-0",
+          "77e6edb0-869e-4072-a2a6-de257520dcbb-1684406413a95d13f5-1",
+          "77e6edb0-869e-4072-a2a6-de257520dcbb-1684406413a95d13f5-2",
+          "77e6edb0-869e-4072-a2a6-de257520dcbb-1684406413a95d13f5-3",
+          "77e6edb0-869e-4072-a2a6-de257520dcbb-1684406413a95d13f5-4",
+          "77e6edb0-869e-4072-a2a6-de257520dcbb-1684406413a95d13f5-5"
+        ],
+        "settings": {
+          "title": "Follow Us",
+          "sub_title": "",
+          "content": "Inspire and let yourself be inspired, from one unique fashion to another.",
+          "text_size": "large",
+          "style_title": "style_1",
           "use-slider": true,
           "slides-To-Scroll": 1,
           "visible": 6,
           "widescreen": 6,
-          "desktop": 5,
+          "desktop": 4,
           "laptop": 4,
           "notebook": 3,
           "tablet": 3,
@@ -3641,18 +3674,15 @@
           "mobile": 1,
           "rows": 1,
           "autoplay": true,
-          "speed": "300",
-          "autoplay-Speed": "3000",
-          "arrows": false,
-          "fade": false,
-          "center-Mode": false,
+          "speed": "6000",
+          "autoplay-Speed": "300",
+          "arrows": true,
           "adaptive-Height": false,
           "dots": false,
           "infinite": false,
           "padding": 10,
-          "vertical": false,
           "layout": "container",
-          "cl_bg": "#fff",
+          "cl_bg": "#ffffff",
           "mg": "",
           "pd": "",
           "mg_mb": "",
@@ -3661,10 +3691,12 @@
       }
     },
     "content_for_index": [
-      "894283a0-6238-4048-bdf1-febc2d2021a9",
-      "f088fa25-9643-4737-ba33-eb74c5776b7b",
-      "7d0d8fb7-9d3d-4a85-832c-502bd57b8eec",
-      "4db007e1-6125-46c4-ad31-a6c450208bd2"
+      "4d7b5277-720a-4ecc-ba9a-db527e51b09e",
+      "a27f11f3-0232-4468-8d8f-6079be362242",
+      "a7115ba4-7731-4c93-8694-f64e41376d0c",
+      "2abdc4ca-3312-44fb-a301-09a624f263a4",
+      "b13f27c3-45cc-4df9-9fa4-aa190af05f28",
+      "77e6edb0-869e-4072-a2a6-de257520dcbb"
     ]
   },
   "presets": {

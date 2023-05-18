@@ -26,7 +26,7 @@
     <div class="products-arrivals ">
           <div class="section-content">
             {% include 'grid-slider', settings:section.settings %} 
-            <div class="content_section slick-carousel">
+    <div class="content_section slick-carousel{% if section.settings.rows > 1 %} row-more{% endif  %}">
               <div class="grid-slider laber-slick-carousel {%if sett_equal%}{{image_ratio}} {%endif%}" {{gridSlider}} data-append-Arrows=".arrows_{{sid}}" data-append-Dots=".dots_{{sid}}" > 
                 {%- if collection  != blank -%} 
                   {%- assign products = collections[collection].products -%}
@@ -310,25 +310,6 @@
     },
     {	
         "type": "checkbox",
-        "id": "fade",
-        "label": "Fade",
-        "default": false,
-        "info": "Only use for 1 column"
-    },
-    {	
-        "type": "checkbox",
-        "id": "center-Mode",
-        "label": "Center Mode",
-        "default": false
-    },
-    {	
-        "type": "checkbox",
-        "id": "adaptive-Height",
-        "label": "Adaptive Height",
-        "default": false
-    },
-    {	
-        "type": "checkbox",
         "id": "dots",
         "label": "Dots",
         "default": false 
@@ -343,18 +324,12 @@
         "type": "range",  
         "id": "padding",  
         "label": "padding",
-		"info": "Distance between items",
+		    "info": "Distance between items",
         "min": 0,
-        "max": 15,
-        "step": 5,
+        "max": 100,
+        "step": 1,
         "unit": "px",
         "default": 10 
-    },
-    {	
-        "type": "checkbox",
-        "id": "vertical",
-        "label": "Vertical",
-        "default": false
     },
 	  {
         "type": "checkbox",

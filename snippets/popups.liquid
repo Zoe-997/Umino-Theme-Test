@@ -1,0 +1,68 @@
+{% assign import_header = settings.select_header | plus: 0 %}
+{%- assign template = template.name | handle -%}
+{% assign wishlist_enable = true | default: settings.wishlist_enable %}
+{% assign compare_enable = true | default: settings.compare_enable %}
+{%- assign namespaces = 'wishlist,compare' | split: ',' -%}
+{%- for namespace in namespaces -%}
+    <template id="template-{{ namespace }}-ajax">        
+            {%- assign image_size = '100x' -%}
+            {%- assign show_title = show_title | default: true -%}
+            {%- assign show_variant = show_variant | default: true -%}
+            {%- assign show_price = show_price | default: true -%}
+            {%- assign show_button_remove = show_button_remove | default: true -%}
+            <div class="product-store-lists" data-js-product data-product-handle="{{ product.handle }}" data-product-variant-id="{{ id }}">
+                <div class="product-store-lists__image ">
+                    <a href="{{ url }}" class="d-block"><img  alt="{{ product.title }}"></a>
+                </div>
+                <div class="product-store-lists__content">                    
+                        <div class="product-store-lists__title">
+                            <h3><a href="{{ url }}">{{ title }}</a></h3>
+                        </div>    
+                        <div class="product-store-lists__price">
+                            {% render 'product-get-price' with price: price compare_at_price: compare_at_price %}
+                        </div>  
+                   <span class="product-store-lists__remove btn-link js-store-lists-remove-{{ namespace }}" title="{{ 'products.product.remove' | t }}">
+              		<i class="icon-trash-2"></i>
+                	</span>
+                 </div>
+               
+            </div>       
+    </template>
+{%- endfor -%}
+<div class="popup js-popup" tabindex="0">
+    <div class="mask-overlay"></div> 
+    
+      <div id="login_pupop" class="hero_canvas" data-include="/search/?view=login">
+        <div class="loading_bg"></div>
+      </div>
+    
+    {% include 'modal-quickview' %}  
+  	{% comment%}
+    {% include 'modal-compare' %}
+  	{% endcomment %}
+    {%- assign search_pr_type = search.terms | split: 'product_type: ' | last | url_encode -%}
+    <div id="search_pupop" class="hero_canvas" data-include="{{ routes.search_url }}?q={{search_pr_type}}&view=ajax-product">
+  	</div>
+    <div class="js_lz_slpr dn" data-include="/search/?q={{t_name}}&view=cr_s_pp"></div>
+    <div class="popup__bg" data-js-popup-bg></div>   	
+    {%- if wishlist_enable -%}
+        <div class="popup__body" data-js-popup-name="wishlist" data-effect="mfp-move-horizontal" data-popup-right data-js-popup-ajax>
+            {% include 'popup-wishlist' %}
+        </div>
+        <div class="popup__body" data-js-popup-name="wishlist-full" data-effect="mfp-move-horizontal" data-popup-center data-js-popup-ajax >
+            {% include 'popup-wishlist-full' %}
+        </div>
+    {%- endif -%}
+    {%- if compare_enable -%}
+        <div class="popup__body" data-js-popup-name="compare-full" data-effect="mfp-move-horizontal" data-popup-center>
+            {% include 'popup-compare-full' %}
+        </div>
+    {%- endif -%}    
+</div>
+<div id="js_cart_popup" class="hero_canvas">
+	{% include 'minicart' %}
+</div>
+{%- section 'mobile_menu' -%}
+
+
+

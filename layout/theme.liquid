@@ -57,19 +57,7 @@
           {% when 1 %}
               {% section 'top-bar' %}
     		  {% section 'top-header' %}
-              {% section 'header1' %}    		  
-          {% when 2 %}
-              {% section 'header2' %}      
-          {% when 3 %}
-   			  {% section 'top-bar' %} 
-  		      {% section 'top-header' %}
-              {% section 'header3' %}
-          {% when 4 %}
-    		  {% section 'top-header' %} 	
-              {% section 'header4' %}
-          {% when 5 %}
-    		  {% section 'top-header' %}  	
-              {% section 'header5' %}
+            {% section 'header1' %}
         {% endcase %}
     </header>
     {% if template contains 'product' %} 
@@ -100,7 +88,7 @@
       </div>
     {%endif%}
 
-	{%- render 'footer'-%}
+	  {% section 'footer1' %}
     {%- section 'menu-mobile-bottom'-%}
     <a class="back-to-top" href="#">
       <i class="icon-chevrons-up"></i>

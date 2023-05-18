@@ -1,5 +1,11 @@
-<link rel="preconnect" href=" {{ 'slideshow.css' | asset_url }}" crossorigin>
-<link rel="preload" as="style" href="{{ 'slideshow.css' | asset_url }}">
+<link
+  rel="preconnect"
+  href=" {{ 'slideshow.css' | asset_url }}"
+  crossorigin>
+<link
+  rel="preload"
+  as="style"
+  href="{{ 'slideshow.css' | asset_url }}">
 {{ 'slideshow.css' | asset_url | stylesheet_tag }}
 {% liquid
   assign sid = section.id
@@ -18,7 +24,10 @@
   <div data-wrapper-slidershow class="{{ section.settings.layout }}">
     <div class="laberSlidershow">
       {% include 'grid-slider', settings: section.settings %}
-      <div class="grid-slider js_carousel vertical-center {% if section.settings.fade_zoom %}fade_zoom{% endif %} arrows-{{ design_arrows }}" {{ gridSlider }} data-append-Dots=".appendDots">
+      <div
+        class="grid-slider js_carousel vertical-center {% if section.settings.fade_zoom %}fade_zoom{% endif %} arrows-{{ design_arrows }}"
+        {{ gridSlider }}
+        data-append-Dots=".appendDots">
         {% if arr_blocks_img.size > 0 %}
           {%- for block in arr_blocks_img -%}
             {% if block.type == 'img' %}
@@ -32,7 +41,10 @@
                 assign design = block.settings.design
               -%}
               <div class="wrap_slide js_image_slide">
-                <div id="laber_bock_{{ block.id }}" class="content-item {{ design }}" {{ block.shopify_attributes }}>
+                <div
+                  id="laber_bock_{{ block.id }}"
+                  class="content-item {{ design }}"
+                  {{ block.shopify_attributes }}>
                   {% liquid
                     assign ratio = image.aspect_ratio | default: 1.0
                     assign pd_top = 1 | divided_by: ratio | times: 100
@@ -41,8 +53,18 @@
                   %}
 
                   {% if image != blank %}
-                    <div class="lazyload laber_bg_lz pr_lazy_img image_pc" data-bgset="{{ image | img_url: 'master' }}" data-ratio="{{ ratio }}" data-sizes="auto" style="padding-top:{{ pd_top }}%;"></div>
-                    <div class="lazyload laber_bg_lz pr_lazy_img image_mobile" data-bgset="{% if image_mobile != blank %}{{ image_mobile | img_url: '480x480' }}{% else %}{{ image | img_url: 'master' }}{% endif %}" data-ratio="{{ ratio_mobile }}" data-sizes="auto" style="padding-top:{% if image_mobile != blank %} {{ pd_top_mobile }}%{% else %} {{ pd_top }}{% endif %};"></div>
+                    <div
+                      class="lazyload laber_bg_lz pr_lazy_img image_pc"
+                      data-bgset="{{ image | img_url: 'master' }}"
+                      data-ratio="{{ ratio }}"
+                      data-sizes="auto"
+                      style="padding-top:{{ pd_top }}%;"></div>
+                    <div
+                      class="lazyload laber_bg_lz pr_lazy_img image_mobile"
+                      data-bgset="{% if image_mobile != blank %}{{ image_mobile | img_url: '480x480' }}{% else %}{{ image | img_url: 'master' }}{% endif %}"
+                      data-ratio="{{ ratio_mobile }}"
+                      data-sizes="auto"
+                      style="padding-top:{% if image_mobile != blank %} {{ pd_top_mobile }}%{% else %} {{ pd_top }}{% endif %};"></div>
                   {% else %}
                     <div class="img-demo">
                       {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder-svg' }}
@@ -62,13 +84,26 @@
                                 {% assign logo = block.settings.logo_img %}
                                 {% assign ratio_logo = logo.aspect_ratio | default: 1.0 %}
                                 {% assign pd_top_logo = 1 | divided_by: ratio_logo | times: 100 %}
-                                <div id="b_{{ block.id }}" class="laber-{{ block.settings.text_animate }}" {{ block.shopify_attributes }} style="display:inline-block; -webkit-animation-duration: {{ block.settings.text_time }}s; animation-duration: {{ block.settings.text_time }}s;">
+                                <div
+                                  id="b_{{ block.id }}"
+                                  class="laber-{{ block.settings.text_animate }}"
+                                  {{ block.shopify_attributes }}
+                                  style="display:inline-block; -webkit-animation-duration: {{ block.settings.text_time }}s; animation-duration: {{ block.settings.text_time }}s;">
                                   <div class="logo_img" style="width:{{ logo.width }}px">
-                                    <div class="lazyload" data-bgset="{% if logo != blank %}{{ logo | img_url: '1x1' }}{% else %}{{ no-logo }}{% endif %}" data-ratio="{{ratio_logo }}" data-sizes="auto" style="padding-top:{% if image != blank %} {{ pd_top_logo }}%{% else %} 100%{% endif %};"></div>
+                                    <div
+                                      class="lazyload"
+                                      data-bgset="{% if logo != blank %}{{ logo | img_url: '1x1' }}{% else %}{{ no-logo }}{% endif %}"
+                                      data-ratio="{{ratio_logo }}"
+                                      data-sizes="auto"
+                                      style="padding-top:{% if image != blank %} {{ pd_top_logo }}%{% else %} 100%{% endif %};"></div>
                                   </div>
                                 </div>
                                 {% when 'subhd' %}
-                                <div id="b_{{ block.id }}" class="slide_item_h4 laber-{{ block.settings.text_animate }}" {{ block.shopify_attributes }} style="-webkit-animation-duration: {{ block.settings.text_time }}s; animation-duration: {{ block.settings.text_time }}s;">
+                                <div
+                                  id="b_{{ block.id }}"
+                                  class="slide_item_h4 laber-{{ block.settings.text_animate }}"
+                                  {{ block.shopify_attributes }}
+                                  style="-webkit-animation-duration: {{ block.settings.text_time }}s; animation-duration: {{ block.settings.text_time }}s;">
                                   {% liquid
                                     assign somearray = block.settings.title | split: ' '
                                     assign pos = block.settings.custom_mark
@@ -79,8 +114,9 @@
                                     <span class="{% if pos contains index_mark %}marked{% endif %}{% if block.settings.last_mark and forloop.last %}marked last{% endif %}">{{ item }}</span>
                                   {% endfor %}
                                   {% style %}
-                                    #b_{{ block.id }} .marked{
-                                      color: {{ block.settings.custom_mark_color }};
+                                    #b_{{ block.id }}.marked {
+                                      color: {{ block.settings.custom_mark_color }}
+                                      ;
                                     }
                                   {% endstyle %}
                                 </div>
@@ -100,16 +136,27 @@
                                     <span class="{% if pos contains index_mark %}marked{% endif %}{% if block.settings.last_mark and forloop.last %}marked last {% endif %}">{{ item }}</span>
                                   {% endfor %}
                                   {% style %}
-                                    #b_{{ block.id }} .marked{
-                                      color: {{ block.settings.custom_mark_color }};
+                                    #b_{{ block.id }}.marked {
+                                      color: {{ block.settings.custom_mark_color }}
+                                      ;
                                     }
                                   {% endstyle %}
                                 </div>
                                 {% when 'txt' %}
-                                <div id="b_{{ block.id }}" class="slide_item_p laber-{{ block.settings.text_animate }} {% if block.settings.hide_mobile %} hide_mobile{% endif %}" {{ block.shopify_attributes }} style="-webkit-animation-duration: {{ block.settings.text_time }}s; animation-duration: {{ block.settings.text_time }}s;">{{ block.settings.title }}</div>
+                                <div
+                                  id="b_{{ block.id }}"
+                                  class="slide_item_p laber-{{ block.settings.text_animate }} {% if block.settings.hide_mobile %} hide_mobile{% endif %}"
+                                  {{ block.shopify_attributes }}
+                                  style="-webkit-animation-duration: {{ block.settings.text_time }}s; animation-duration: {{ block.settings.text_time }}s;">{{ block.settings.title }}</div>
                                 {% when 'btn' %}
                                 {%- if block.settings.title != blank -%}
-                                  <a id="b_{{ block.id }}" class="buttons laber-{{ block.settings.text_animate }}" href="{{ block.settings.btn_link }}" target="{{ open_link }}" {{ block.shopify_attributes }} style="-webkit-animation-duration: {{ block.settings.text_time }}s; animation-duration: {{ block.settings.text_time }}s;">{{ block.settings.title }}</a>
+                                  <a
+                                    id="b_{{ block.id }}"
+                                    class="buttons laber-{{ block.settings.text_animate }}"
+                                    href="{{ block.settings.btn_link }}"
+                                    target="{{ open_link }}"
+                                    {{ block.shopify_attributes }}
+                                    style="-webkit-animation-duration: {{ block.settings.text_time }}s; animation-duration: {{ block.settings.text_time }}s;">{{ block.settings.title }}</a>
                                 {%- endif -%}
                                 {% when 'space' %}
                                 <div
@@ -140,11 +187,14 @@
                           </div>
                         </div>
                         {% style %}
-                          {%- capture rgb -%}{{ block_bg | color_to_rgb }}{%- endcapture -%}
+                          {%- capture rgb -%}
+                            {{ block_bg | color_to_rgb }}
+                          {%- endcapture -%}
                           {%- assign tail = block_bg_opacity | prepend: ', ' | append: ')' -%}
 
-                          #laber_bock_{{ block.id }} .caption{
-                            background-color: {{ rgb | replace: 'rgb', 'rgba' | replace: ')', tail }};
+                          #laber_bock_{{ block.id }}.caption {
+                            background-color: {{ rgb | replace: 'rgb', 'rgba' | replace: ')', tail }}
+                            ;
                           }
                         {% endstyle %}
                       </div>
@@ -169,7 +219,7 @@
   </div>
   {%- for block in section_blocks -%}
     {%- case block.type -%}
-    {% when 'benefit' %}
+      {% when 'benefit' %}
       <div id="b_{{ block.id }}" class="slideshow-benefit">
         <div class="container">
           {% render 'benefit-slideshow' block: block.settings %}
@@ -181,72 +231,73 @@
 {%- render 'section_style' -%}
 
 {%- capture style-slideshow -%}
+  #laber_{{ sid }}{
+    margin-bottom: {{ section.settings.mg_bottom }}px;
+  }
+
   #laber_{{ sid }} .arrows-design-1 .slick-arrow:before{
-    color: {{ section.settings.cl_arrow }};
+  color: {{ section.settings.cl_arrow }};
   }
-
+            
   #laber_{{ sid }} .arrows-design-1 .slick-arrow:hover:before{
-    color: {{ section.settings.cl_arrow_hover }};
+  color: {{ section.settings.cl_arrow_hover }};
   }
-
+            
   #laber_{{ sid }} .arrows-design-1 .slick-arrow:after{
-    background: {{ section.settings.bg_arrow }};
+  background: {{ section.settings.bg_arrow }};
   }
-
+            
   #laber_{{ sid }} .arrows-design-1 .slick-arrow:hover:after{
-    background: {{ section.settings.bg_arrow_hover }};
+  background: {{ section.settings.bg_arrow_hover }};
   }
-
-  #laber_{{ sid }} .slick-dots li button:before{
-    color: {{ section.settings.cl_dots }};
+            
+  #laber_{{ sid }} .slick-dots li button{
+    background-color: {{ section.settings.cl_dots }};
   }
-
-  #laber_{{ sid }} .slick-dots li.slick-active button:before,
-  #laber_{{ sid }} .slick-dots li:hover button:before{
-    color: transparent;
+            
+    #laber_{{ sid }} .slick-dots li.slick-active button,
+  #laber_{{ sid }} .slick-dots li:hover button{
+    background-color: {{ section.settings.cl_dots_active }};
   }
-
-  #laber_{{ sid }} .slick-dots li.slick-active{
-    border-color: {{ section.settings.cl_dots_active }};
+            
+    #laber_{{ sid }} .slick-dots li.slick-active{
+  border-color: {{ section.settings.cl_dots_active }};
   }
 
   {%- if use_custom_h == '1' -%}
     @media only screen and (min-width : 1024px){
-      #laber_{{ sid }} .pr_lazy_img {
-        padding-top: {{ h_des }} !important;
-      }
+    #laber_{{ sid }} .pr_lazy_img {
+    padding-top: {{ h_des }} !important;
     }
-
+                            }
+                        
+                            @media only screen and (min-width : 768px) and (max-width : 1024px){
+                              #laber_{{ sid }} .pr_lazy_img {
+    padding-top: {{ h_tb }} !important;
+    }
+                            }
+                        
+                            @media only screen and (max-width : 767px){
+                              #laber_{{ sid }} .pr_lazy_img {
+    padding-top: {{ h_mb }} !important;
+    }
+                            }{%- elsif use_custom_h == '2' -%}
     @media only screen and (min-width : 768px) and (max-width : 1024px){
-      #laber_{{ sid }} .pr_lazy_img {
-        padding-top: {{ h_tb }} !important;
-      }
+    #laber_{{ sid }} .pr_lazy_img {
+    padding-top: {{ h_tb }} !important;
     }
-
+                            }
+                            
+                            @media only screen and (max-width : 767px){
+                              #laber_{{ sid }} .pr_lazy_img {
+    padding-top: {{ h_mb }} !important;
+    }
+                            }{% else %}
     @media only screen and (max-width : 767px){
-      #laber_{{ sid }} .pr_lazy_img {
-        padding-top: {{ h_mb }} !important;
-      }
+    #laber_{{ sid }} .pr_lazy_img {
+    padding-top: {{ h_mb }} !important;
     }
-  {%- elsif use_custom_h == '2' -%}
-    @media only screen and (min-width : 768px) and (max-width : 1024px){
-      #laber_{{ sid }} .pr_lazy_img {
-        padding-top: {{ h_tb }} !important;
-      }
-    }
-    
-    @media only screen and (max-width : 767px){
-      #laber_{{ sid }} .pr_lazy_img {
-        padding-top: {{ h_mb }} !important;
-      }
-    }
-  {% else %}
-    @media only screen and (max-width : 767px){
-      #laber_{{ sid }} .pr_lazy_img {
-        padding-top: {{ h_mb }} !important;
-      }
-    }
-  {% endif %}
+                            }{% endif %}
 
   {%- if section_blocks.size > 0 %}
     {%- for block in section_blocks -%}
@@ -255,204 +306,214 @@
         assign type = block.type
       -%}
       {%- case block.type -%}
+        {% when 'img' %}
+        #laber_bock_{{ block.id }} .img-demo,
+        #laber_bock_{{ block.id }} .pr_lazy_img{
+        {% if block.settings.img_radius > 0 %}
+          border-radius: {{ block.settings.img_radius }}px;
+          overflow: hidden;
+        {% endif %}
+        }
+
         {% when 'subhd' %}
-          .wrapper_caption #b_{{ id }}.slide_item_h4{
-            font-style: {{ block.settings.font_style }};
-            letter-spacing:{{ block.settings.ls_text }};
-            {% if block.settings.lh_text > 0 %}line-height:{{ block.settings.lh_text }}px;{% endif %}
-            font-size:{{ block.settings.fs_text }}px; 
-            color:{{ block.settings.color }}; 
-            font-weight:{{ block.settings.fw_text }};
-            margin-top: {{ block.settings.mg_top }}px; 
-          }
-          
-          @media (max-width: 1024px) {
-            .wrapper_caption #b_{{ block.id }}.slide_item_h4{
-              font-size:{{ block.settings.mobile_font_text }}px;
-              {% if block.settings.mobile_lh_text > 0 %}line-height:{{ block.settings.mobile_lh_text }}px;{% endif %}
-              font-weight:{{ block.settings.mobile_fw_text }}; 
-            }
-          }
+        .wrapper_caption #b_{{ id }}.slide_item_h4{
+        font-style: {{ block.settings.font_style }};
+        letter-spacing:{{ block.settings.ls_text }};
+        {% if block.settings.lh_text > 0 %}line-height:{{ block.settings.lh_text }}px;{% endif %}
+        font-size:{{ block.settings.fs_text }}px; 
+        color:{{ block.settings.color }}; 
+        font-weight:{{ block.settings.fw_text }};
+        margin-top: {{ block.settings.mg_top }}px; 
+        }
+                                                          
+                                                          @media (max-width: 1024px) {
+                                                            .wrapper_caption #b_{{ block.id }}.slide_item_h4{
+        font-size:{{ block.settings.mobile_font_text }}px;
+        {% if block.settings.mobile_lh_text > 0 %}line-height:{{ block.settings.mobile_lh_text }}px;{% endif %}
+        font-weight:{{ block.settings.mobile_fw_text }}; 
+        }
+                                                          }
 
         {% when 'hd' %}
-          .wrapper_caption #b_{{ id }}.slide_item_h3 {
-              font-style: {{ block.settings.font_style }};	
-              letter-spacing:{{ block.settings.ls_text }};
-              {% if block.settings.lh_text > 0 %}line-height:{{ block.settings.lh_text }}px;{% endif %}
-              font-size:{{ block.settings.fs_text }}px; 
-              color:{{ block.settings.color }}; 
-              font-weight:{{ block.settings.fw_text }};
-              margin-top: {{ block.settings.mg_top }}px;
-          }
-          
-          @media (max-width: 1024px) {
-            .wrapper_caption #b_{{ block.id }}.slide_item_h3{
-              font-weight:{{ block.settings.mobile_fw_text }};
-              {% if block.settings.mobile_lh_text > 0 %}line-height:{{ block.settings.mobile_lh_text }}px;{% endif %}
-              font-size:{{ block.settings.mobile_font_text }}px; 
-            }
-          }
+        .wrapper_caption #b_{{ id }}.slide_item_h3 {
+        font-style: {{ block.settings.font_style }};	
+        letter-spacing:{{ block.settings.ls_text }};
+        {% if block.settings.lh_text > 0 %}line-height:{{ block.settings.lh_text }}px;{% endif %}
+        font-size:{{ block.settings.fs_text }}px; 
+        color:{{ block.settings.color }}; 
+        font-weight:{{ block.settings.fw_text }};
+        margin-top: {{ block.settings.mg_top }}px;
+        }
+                                                          
+                                                          @media (max-width: 1024px) {
+                                                            .wrapper_caption #b_{{ block.id }}.slide_item_h3{
+        font-weight:{{ block.settings.mobile_fw_text }};
+        {% if block.settings.mobile_lh_text > 0 %}line-height:{{ block.settings.mobile_lh_text }}px;{% endif %}
+        font-size:{{ block.settings.mobile_font_text }}px; 
+        }
+                                                          }
 
         {% when 'txt' %}
-          .wrapper_caption #b_{{ id }}.slide_item_p{
-            letter-spacing:{{ block.settings.ls_text }}px;
-            {% if block.settings.lh_text > 0 %}line-height:{{ block.settings.lh_text }}px;{% endif %}
-            font-size:{{ block.settings.fs_text }}px; 
-            color:{{ block.settings.color }}; 
-            font-weight:{{ block.settings.fw_text }};
-            margin-top: {{ block.settings.mg_top }}px;
-          }
-
-          @media (max-width: 1024px) {
-            .wrapper_caption #b_{{ block.id }}.slide_item_p{
-              font-size:{{ block.settings.mobile_font_text }}px;
-              {% if block.settings.mobile_lh_text > 0 %}line-height:{{ block.settings.mobile_lh_text }}px;{% endif %}
-              font-weight:{{ block.settings.mobile_fw_text }};
-            }
-          }
+        .wrapper_caption #b_{{ id }}.slide_item_p{
+        letter-spacing:{{ block.settings.ls_text }}px;
+        {% if block.settings.lh_text > 0 %}line-height:{{ block.settings.lh_text }}px;{% endif %}
+        font-size:{{ block.settings.fs_text }}px; 
+        color:{{ block.settings.color }}; 
+        font-weight:{{ block.settings.fw_text }};
+        margin-top: {{ block.settings.mg_top }}px;
+        }
+                                                
+                                                          @media (max-width: 1024px) {
+                                                            .wrapper_caption #b_{{ block.id }}.slide_item_p{
+        font-size:{{ block.settings.mobile_font_text }}px;
+        {% if block.settings.mobile_lh_text > 0 %}line-height:{{ block.settings.mobile_lh_text }}px;{% endif %}
+        font-weight:{{ block.settings.mobile_fw_text }};
+        }
+                                                          }
         {% when 'btn' %}
-          {% liquid
+        {% liquid
             assign padding = block.settings.pd
             assign padding_split = padding | split: ' ' 
           %}
-          {% if padding_split.size != 0 %}
-            {% if padding_split.size == 1 %}
-              {% liquid 
+        {% if padding_split.size != 0 %}
+          {% if padding_split.size == 1 %}
+            {% liquid 
                 assign padding_top = padding
                 assign padding_bottom = padding
                 assign padding_right = padding
                 assign padding_left = padding
               %}
-            {% elsif padding_split.size == 2 %}
-              {% liquid 
+          {% elsif padding_split.size == 2 %}
+            {% liquid 
                 assign padding_top = padding_split[0]
                 assign padding_bottom = padding_split[0]
                 assign padding_right = padding_split[1]
                 assign padding_left = padding_split[1]
               %}
-            {% elsif padding_split.size == 3 %}
-              {% liquid 
+          {% elsif padding_split.size == 3 %}
+            {% liquid 
                 assign padding_top = padding_split[0]
                 assign padding_right = padding_split[1]
                 assign padding_left = padding_split[1]
                 assign padding_bottom = padding_split[2]
               %}
-            {% else %}
-              {% liquid 
+          {% else %}
+            {% liquid 
                 assign padding_top = padding_split[0]
                 assign padding_right = padding_split[1]
                 assign padding_bottom = padding_split[2]
                 assign padding_left = padding_split[3]
               %}
-            {% endif %}
           {% endif %}
-          
-          .content-item #b_{{ id }}.buttons{
-            margin-top: {{ block.settings.mg_top }}px; 
-            padding-top:{{ padding_top }};
-            padding-right:{{ padding_right }};
-            padding-bottom:{{ padding_bottom }};
-            padding-left:{{ padding_left }};
-            color:{{ block.settings.cl_txt }}; 
-            font-size:{{ block.settings.fs_text }}px; 
-            font-weight:{{ block.settings.fw_text }};
-            border-radius:{{ block.settings.br_button }};
-            letter-spacing:{{ block.settings.ls_text }}px;
-            background: {{ block.settings.cl_bg }}; 
-            border-color: {{ block.settings.cl_bd }};
-          }
+        {% endif %}
 
-          .rtl .content-item #b_{{ id }}.buttons{
-            padding-right:{{ padding_left }};
-            padding-left:{{ padding_right }};
-          }
-
-          .content-item #b_{{ block.id }}.buttons:hover{
-            color:{{ block.settings.cl_txt_hover }};
-          }
-
-          .content-item.design-1 #b_{{ id }}.buttons,
-          .content-item.design-1 #b_{{ block.id }}.buttons:hover{
-            background: transparent;
-            border-color: transparent;
-          }
-
-          .content-item.design-1 #b_{{ id }}.buttons:before{
-            background: {{ block.settings.cl_bg }}; 
-            border-color: {{ block.settings.cl_bd }};
-            border-radius:{{ block.settings.br_button }};
-          }
-
-          .content-item.design-1 #b_{{ id }}.buttons:hover:before{
-            background: {{ block.settings.cl_bg_hover }}; 
-            border-color: {{ block.settings.cl_bd_hover }};
-          }
-
-          @media (max-width: 1024px) {
-            wrapper_caption #b_{{ block.id }}.buttons{
-              margin-top:{{ block.settings.mobile_mg_top }}px; 
-              padding:{{ block.settings.mobile_pd }};
-              font-size:{{ block.settings.mobile_font_text }}px;		
-              font-weight:{{ block.settings.mobile_fw_text }};
-            }	
-          }
+        .content-item #b_{{ id }}.buttons{
+        margin-top: {{ block.settings.mg_top }}px; 
+        padding-top:{{ padding_top }};
+        padding-right:{{ padding_right }};
+        padding-bottom:{{ padding_bottom }};
+        padding-left:{{ padding_left }};
+        color:{{ block.settings.cl_txt }}; 
+        font-size:{{ block.settings.fs_text }}px; 
+        font-weight:{{ block.settings.fw_text }};
+        border-radius:{{ block.settings.br_button }};
+        letter-spacing:{{ block.settings.ls_text }}px;
+        background: {{ block.settings.cl_bg }}; 
+        border-color: {{ block.settings.cl_bd }};
+        }
+                                                
+                                                          .rtl .content-item #b_{{ id }}.buttons{
+        padding-right:{{ padding_left }};
+        padding-left:{{ padding_right }};
+        }
+                                                
+                                                          .content-item #b_{{ block.id }}.buttons:hover{
+        color:{{ block.settings.cl_txt_hover }};
+        }
+                                                
+                                                          .content-item.design-1 #b_{{ id }}.buttons,
+        .content-item.design-1 #b_{{ block.id }}.buttons:hover{
+        background: transparent;
+                                                            border-color: transparent;
+                                                          }
+                                                
+                                                          .content-item.design-1 #b_{{ id }}.buttons:before{
+        background: {{ block.settings.cl_bg }}; 
+        border-color: {{ block.settings.cl_bd }};
+        border-radius:{{ block.settings.br_button }};
+        }
+                                                
+                                                          .content-item.design-1 #b_{{ id }}.buttons:hover:before{
+        background: {{ block.settings.cl_bg_hover }}; 
+        border-color: {{ block.settings.cl_bd_hover }};
+        }
+                                                
+                                                          @media (max-width: 1024px) {
+                                                            wrapper_caption #b_{{ block.id }}.buttons{
+        margin-top:{{ block.settings.mobile_mg_top }}px; 
+        padding:{{ block.settings.mobile_pd }};
+        font-size:{{ block.settings.mobile_font_text }}px;		
+        font-weight:{{ block.settings.mobile_fw_text }};
+        }	
+                                                          }
 
         {% when 'box' %}
-          .wrapper_caption #b_{{ block.id }}.slide_item_box .inside-box h2{
-            text-transform:{{ block.settings.title_transform }}; 
-            letter-spacing:{{ block.settings.ls_title }};
-            {% if block.settings.lh_title > 0 %}line-height:{{ block.settings.lh_title }}px;{% endif %}
-            font-size:{{ block.settings.fs_title }}px; 
-            color:{{ block.settings.color }}; 
-            font-weight:{{ block.settings.fw_title }};
-          }
-          
-          .wrapper_caption #b_{{ block.id }}.slide_item_box .inside-box  p{
-            text-transform:{{ block.settings.contennt_transform }}; 
-            letter-spacing:{{ block.settings.ls_text }}px;
-            {% if block.settings.lh_text > 0 %}line-height:{{ block.settings.lh_text }}px;{% endif %}
-            font-size:{{ block.settings.fs_text }}px; 
-            color:{{ block.settings.color_content }}; 
-            font-weight:{{ block.settings.fw_text }};
-          }
-          
-          .wrapper_caption #b_{{ block.id }}.slide_item_box .inside-box  a{
-            text-transform:{{ block.settings.btn_transform }}; 
-            letter-spacing:{{ block.settings.ls_btn }}px;  
-            font-size:{{ block.settings.fs_text_btn }}px; 
-            background-color:{{ block.settings.cl_bg_btn }}; 
-            color:{{ block.settings.cl_btn }}; 
-            font-weight:{{ block.settings.fw_text_btn }};
-          }
+        .wrapper_caption #b_{{ block.id }}.slide_item_box .inside-box h2{
+        text-transform:{{ block.settings.title_transform }}; 
+        letter-spacing:{{ block.settings.ls_title }};
+        {% if block.settings.lh_title > 0 %}line-height:{{ block.settings.lh_title }}px;{% endif %}
+        font-size:{{ block.settings.fs_title }}px; 
+        color:{{ block.settings.color }}; 
+        font-weight:{{ block.settings.fw_title }};
+        }
+                                                          
+                                                          .wrapper_caption #b_{{ block.id }}.slide_item_box .inside-box  p{
+        text-transform:{{ block.settings.contennt_transform }}; 
+        letter-spacing:{{ block.settings.ls_text }}px;
+        {% if block.settings.lh_text > 0 %}line-height:{{ block.settings.lh_text }}px;{% endif %}
+        font-size:{{ block.settings.fs_text }}px; 
+        color:{{ block.settings.color_content }}; 
+        font-weight:{{ block.settings.fw_text }};
+        }
+                                                          
+                                                          .wrapper_caption #b_{{ block.id }}.slide_item_box .inside-box  a{
+        text-transform:{{ block.settings.btn_transform }}; 
+        letter-spacing:{{ block.settings.ls_btn }}px;  
+        font-size:{{ block.settings.fs_text_btn }}px; 
+        background-color:{{ block.settings.cl_bg_btn }}; 
+        color:{{ block.settings.cl_btn }}; 
+        font-weight:{{ block.settings.fw_text_btn }};
+        }
         {% when 'benefit' %}
-          @media screen and (min-width: 1200px){
-            .laber_slidershow_{{ sid }}{
-              position: relative;
-            }
-  
-            #b_{{ block.id }} .item-media{
-              color: {{ block.settings.color_icon }};
-            }
-  
-            #b_{{ block.id }} .item-details{
-              color: {{ block.settings.color_text }};
-            }
-  
-            #b_{{ block.id }} .item-details .title{
-              color: {{ block.settings.color_title }};
-            }
-          }
+        @media screen and (min-width: 1200px){
+        .laber_slidershow_{{ sid }}{
+        position: relative;
+                                                            }
+                                                  
+                                                            #b_{{ block.id }} .item-media{
+        color: {{ block.settings.color_icon }};
+        }
+                                                  
+                                                            #b_{{ block.id }} .item-details{
+        color: {{ block.settings.color_text }};
+        }
+                                                  
+                                                            #b_{{ block.id }} .item-details .title{
+        color: {{ block.settings.color_title }};
+        }
+                                                          }
       {% endcase %}
     {% endfor %}
   {%- endif- %}
   @media (max-width: 1024px) {
-    .hide_mobile{
-      display:none;
-    }
-  }
-{%- endcapture -%}
+  .hide_mobile{
+                  display:none;
+                }
+              }{%- endcapture -%}
 
-{% style %}{{ style-slideshow }}{% endstyle %}
+{% style %}
+  {{ style-slideshow }}
+{% endstyle %}
 
 {% schema %}
   {
@@ -463,7 +524,7 @@
       {
         "type": "header",
         "content": "t:sections.all.layout.heading"
-      }, 
+      },
       {
         "type": "select",
         "id": "layout",
@@ -478,7 +539,7 @@
           }
         ],
         "label": "t:sections.all.layout.width.label"
-      }, 
+      },
       {
         "type": "select",
         "id": "use_custom_h",
@@ -503,79 +564,70 @@
         "label": "t:sections.slideshow.settings.custom_image.apply_screen.desktop",
         "placeholder": "650px",
         "default": "650px"
-      },
-      {
+      }, {
         "type": "text",
         "id": "h_tb",
         "label": "t:sections.slideshow.settings.custom_image.apply_screen.tablet",
         "placeholder": "500px",
         "default": "500px"
-      },
-      {
+      }, {
         "type": "text",
         "id": "h_mb",
         "label": "t:sections.slideshow.settings.custom_image.apply_screen.mobile",
         "placeholder": "450px",
         "default": "350px"
-      }, 
-      {
+      }, {
         "type": "header",
         "content": "t:slick_slider.label",
         "info": "t:slick_slider.content"
-      },  
-      {
+      }, {
         "type": "checkbox",
         "id": "use-slider",
         "label": "t:slick_slider.use_slider",
         "default": true
-      },
-      {  
-        "type": "range",  
-        "id": "slides-To-Scroll",  
-        "label": "t:slick_slider.scroll.label",  
+      }, {
+        "type": "range",
+        "id": "slides-To-Scroll",
+        "label": "t:slick_slider.scroll.label",
         "info": "t:slick_slider.scroll.content",
         "min": 1,
         "max": 3,
         "step": 1,
         "unit": "col",
         "default": 1
-      },   
-      {  
-        "type": "range",  
-        "id": "visible",  
+      }, {
+        "type": "range",
+        "id": "visible",
         "label": "t:slick_slider.visible.label",
         "info": "t:slick_slider.visible.content",
         "min": 1,
         "max": 3,
         "step": 1,
         "unit": "col",
-        "default": 1 
-      },
-      {  
-        "type": "range",  
-        "id": "widescreen",  
+        "default": 1
+      }, {
+        "type": "range",
+        "id": "widescreen",
         "label": "t:slick_slider.widescreen.label",
         "info": "t:slick_slider.widescreen.content",
         "min": 1,
         "max": 3,
         "step": 1,
         "unit": "col",
-        "default": 1 
-      },  
-      {  
-        "type": "range",  
-        "id": "desktop",  
+        "default": 1
+      }, {
+        "type": "range",
+        "id": "desktop",
         "label": "t:slick_slider.desktop.label",
-        "info":  "t:slick_slider.desktop.content",
+        "info": "t:slick_slider.desktop.content",
         "min": 1,
         "max": 3,
         "step": 1,
         "unit": "col",
-        "default": 1  
-      },    
-      {  
-        "type": "range",  
-        "id": "laptop",  
+        "default": 1
+      }, {
+        "type": "range",
+        "id": "laptop",
         "label": "t:slick_slider.laptop.label",
         "info": "t:slick_slider.laptop.content",
         "min": 1,
@@ -583,130 +635,114 @@
         "step": 1,
         "unit": "col",
         "default": 1
-      },    
-      {  
-        "type": "range",  
-        "id": "notebook",  
+      }, {
+        "type": "range",
+        "id": "notebook",
         "label": "t:slick_slider.notebook.label",
         "info": "t:slick_slider.notebook.content",
         "min": 1,
         "max": 3,
         "step": 1,
         "unit": "col",
-        "default": 1  
-      },  
-      {  
-        "type": "range",  
-        "id": "tablet",  
+        "default": 1
+      }, {
+        "type": "range",
+        "id": "tablet",
         "label": "t:slick_slider.tablet.label",
         "info": "t:slick_slider.tablet.content",
         "min": 1,
         "max": 3,
         "step": 1,
         "unit": "col",
-        "default": 1 
-      },
-      {  
-        "type": "range",  
-        "id": "landscape",  
+        "default": 1
+      }, {
+        "type": "range",
+        "id": "landscape",
         "label": "t:slick_slider.landscape.label",
         "info": "t:slick_slider.landscape.content",
         "min": 1,
         "max": 3,
         "step": 1,
         "unit": "col",
-        "default": 1 
-      }, 
-      {  
-        "type": "range",  
-        "id": "portrait",  
+        "default": 1
+      }, {
+        "type": "range",
+        "id": "portrait",
         "label": "t:slick_slider.portrait.label",
         "info": "t:slick_slider.portrait.content",
         "min": 1,
         "max": 3,
         "step": 1,
         "unit": "col",
-        "default": 1 
-      },
-      {  
-        "type": "range",  
-        "id": "mobile",  
+        "default": 1
+      }, {
+        "type": "range",
+        "id": "mobile",
         "label": "t:slick_slider.mobile.label",
         "info": "t:slick_slider.mobile.content",
         "min": 1,
         "max": 3,
         "step": 1,
         "unit": "col",
-        "default": 1 
-      },
-      {  
-        "type": "range",  
-        "id": "rows",  
-        "label": "t:slick_slider.rows.label",  
+        "default": 1
+      }, {
+        "type": "range",
+        "id": "rows",
+        "label": "t:slick_slider.rows.label",
         "min": 1,
         "max": 3,
         "step": 1,
         "unit": "row",
         "default": 1
-      },
-      {
+      }, {
         "type": "checkbox",
         "id": "autoplay",
         "label": "t:slick_slider.autoplay.label",
         "default": true
-      },
-      {   
+      }, {
         "type": "text",
         "id": "speed",
         "label": "t:slick_slider.speed.label",
         "default": "300",
         "info": "t:slick_slider.speed.content"
-      },
-      {   
+      }, {
         "type": "text",
         "id": "autoplay-Speed",
         "label": "t:slick_slider.autoplay_speed.label",
         "default": "3000",
         "info": "t:slick_slider.autoplay_speed.content"
-      },
-      {   
+      }, {
         "type": "checkbox",
         "id": "arrows",
         "label": "t:slick_slider.arrows.label",
         "default": true
-      },
-      {   
+      }, {
         "type": "checkbox",
         "id": "fade",
         "label": "t:slick_slider.fade.label",
         "default": false,
         "info": "t:slick_slider.fade.content"
-      },
-      {   
+      }, {
         "type": "checkbox",
         "id": "adaptive-Height",
         "label": "t:slick_slider.adaptive_height.label",
         "default": false
-      },
-      {   
+      }, {
         "type": "checkbox",
         "id": "dots",
         "label": "t:slick_slider.dots.label",
-        "default": false 
-      },
-      {   
+        "default": false
+      }, {
         "type": "checkbox",
         "id": "infinite",
         "label": "t:slick_slider.infinite.label",
         "default": true
-      },
-      {
+      }, {
         "type": "number",
         "id": "padding",
         "label": "t:slick_slider.padding.label",
         "default": 15
-      },
-      {
+      }, {
         "type": "select",
         "id": "design_dots",
         "default": "design-1",
@@ -714,19 +750,16 @@
           {
             "value": "design-1",
             "label": "t:slick_slider.dots.designs.design_1"
-          }, 
-          {
+          }, {
             "value": "design-2",
             "label": "t:slick_slider.dots.designs.design_2"
-          }, 
-          {
+          }, {
             "value": "design-3",
             "label": "t:slick_slider.dots.designs.design_3"
           }
         ],
         "label": "t:slick_slider.dots.designs.label"
-      },  
-      {
+      }, {
         "type": "select",
         "id": "design_arrows",
         "default": "design-1",
@@ -734,119 +767,98 @@
           {
             "value": "design-1",
             "label": "t:slick_slider.arrows.designs.design_1"
-          }, 
-          {
+          }, {
             "value": "design-2",
             "label": "t:slick_slider.arrows.designs.design_2"
-          }, 
-          {
+          }, {
             "value": "design-3",
             "label": "t:slick_slider.arrows.designs.design_3"
           }
         ],
         "label": "t:slick_slider.arrows.designs.label"
-      },
-      {
+      }, {
         "type": "header",
         "content": "t:sections.all.colors.heading"
-      }, 
-      {
+      }, {
         "type": "color",
         "id": "cl_bg",
         "label": "t:sections.all.colors.background",
         "default": "#fff"
-      }, 
-      {
-        "type": "color",
+      }, {
+        "type": "color_background",
         "id": "cl_dots",
         "label": "t:slick_slider.dots.colors.color",
         "default": "#000"
-      }, 
-      {
-        "type": "color",
+      }, {
+        "type": "color_background",
         "id": "cl_dots_active",
         "label": "t:slick_slider.dots.colors.color_active",
         "default": "#FBB71C"
-      }, 
-      {
+      }, {
         "type": "color",
         "id": "cl_arrow",
         "label": "t:slick_slider.arrows.colors.color",
         "default": "#000"
-      }, 
-      {
+      }, {
         "type": "color",
         "id": "cl_arrow_hover",
         "label": "t:slick_slider.arrows.colors.color_hover",
         "default": "#000"
-      }, 
-      {
+      }, {
         "type": "color_background",
         "id": "bg_arrow",
         "label": "t:slick_slider.arrows.colors.background",
         "default": "rgba(225, 225, 225, 0.1)"
-      }, 
-      {
-        "type": "color",
+      }, {
+        "type": "color_background",
         "id": "color_background",
         "label": "t:slick_slider.arrows.colors.background_hover",
         "default": "#FBB71C"
-      }, 
-      {
+      }, {
         "type": "header",
         "content": "t:sections.all.spacing.label"
-      }, 
-      {
+      }, {
         "type": "paragraph",
         "content": "t:sections.all.note.set_default"
-      }, 
-      {
+      }, {
         "type": "number",
         "id": "mg_top",
         "label": "t:sections.all.spacing.margin.top",
         "default": 0
-      },
-      {
+      }, {
         "type": "number",
         "id": "mg_bottom",
         "label": "t:sections.all.spacing.margin.bottom",
         "default": 0
-      },
-      {
+      }, {
         "type": "number",
         "id": "pd_top",
         "label": "t:sections.all.spacing.padding.top",
         "default": 0
-      },
-      {
+      }, {
         "type": "number",
         "id": "pd_bottom",
         "label": "t:sections.all.spacing.padding.bottom",
         "default": 0
-      },
-      {
+      }, {
         "type": "header",
         "content": "t:sections.all.layout.mobile.heading"
-      }, 
-      {
+      }, {
         "type": "number",
         "id": "mg_top_mb",
         "label": "t:sections.all.spacing.margin.top",
         "default": 0
-      },
-      {
+      }, {
         "type": "number",
         "id": "mg_bottom_mb",
         "label": "t:sections.all.spacing.margin.bottom",
         "default": 0
-      },
-      {
+      }, {
         "type": "number",
         "id": "pd_top_mb",
         "label": "t:sections.all.spacing.padding.top",
         "default": 0
-      },
-      {
+      }, {
         "type": "number",
         "id": "pd_bottom_mb",
         "label": "t:sections.all.spacing.padding.bottom",
@@ -890,12 +902,19 @@
             ],
             "label": "t:sections.all.links.open.label",
             "default": "_blank"
-          }, 
-          {
+          }, {
+            "type": "range",
+            "id": "img_radius",
+            "label": "Image Radius",
+            "default": 20,
+            "min": 0,
+            "max": 100,
+            "step": 10,
+            "unit": "px"
+          }, {
             "type": "header",
             "content": "t:sections.slideshow.blocks.images.settings.caption.heading"
-          }, 
-          {
+          }, {
             "type": "select",
             "id": "caption_w",
             "default": "2",
@@ -909,8 +928,7 @@
               }
             ],
             "label": "t:sections.all.layout.width.label"
-          }, 
-          {
+          }, {
             "type": "select",
             "id": "h_position",
             "label": "t:sections.all.text_align.horizon.label",
@@ -919,18 +937,15 @@
               {
                 "value": "left",
                 "label": "t:sections.all.text_align.horizon.left"
-              }, 
-              {
+              }, {
                 "value": "center",
                 "label": "t:sections.all.text_align.horizon.center"
-              }, 
-              {
+              }, {
                 "value": "right",
                 "label": "t:sections.all.text_align.horizon.right"
               }
             ]
-          }, 
-          {
+          }, {
             "type": "select",
             "id": "v_position",
             "label": "t:sections.all.text_align.vertical.label",
@@ -939,18 +954,15 @@
               {
                 "value": "top",
                 "label": "t:sections.all.text_align.vertical.top"
-              }, 
-              {
+              }, {
                 "value": "middle",
                 "label": "t:sections.all.text_align.vertical.middle"
-              }, 
-              {
+              }, {
                 "value": "bottom",
                 "label": "t:sections.all.text_align.vertical.bottom"
               }
             ]
-          }, 
-          {
+          }, {
             "type": "select",
             "id": "design",
             "label": "t:sections.all.styles.design.label",
@@ -959,18 +971,15 @@
               {
                 "value": "design-1",
                 "label": "t:sections.all.styles.design.design_1"
-              }, 
-              {
+              }, {
                 "value": "design-2",
                 "label": "t:sections.all.styles.design.design_2"
-              }, 
-              {
+              }, {
                 "value": "design-3",
                 "label": "t:sections.all.styles.design.design_3"
               }
             ]
-          },
-          {
+          }, {
             "type": "select",
             "id": "txt_align",
             "label": "t:sections.all.text_align.label",
@@ -979,28 +988,23 @@
               {
                 "value": "left",
                 "label": "t:sections.all.text_align.left"
-              },
-              {
+              }, {
                 "value": "center",
                 "label": "t:sections.all.text_align.center"
-              },
-              {
+              }, {
                 "value": "right",
                 "label": "t:sections.all.text_align.right"
               }
             ]
-          }, 
-          {
+          }, {
             "type": "header",
             "content": "t:sections.all.colors.heading"
-          }, 
-          {
+          }, {
             "type": "color",
             "id": "cl_overlay",
             "label": "t:sections.all.colors.overlay",
             "default": "transparent"
-          }, 
-          {
+          }, {
             "type": "range",
             "id": "cl_opacity",
             "label": "t:sections.all.colors.opacity",
@@ -1020,7 +1024,7 @@
             "type": "image_picker",
             "id": "logo_img",
             "label": "t:sections.slideshow.blocks.logo.settings.image"
-          }, 
+          },
           {
             "type": "select",
             "id": "text_animate",
@@ -1041,34 +1045,28 @@
               {
                 "value": "fadeInUp",
                 "label": "t:sections.all.effect.animate.fadeInUp"
-              }, 
-              {
+              }, {
                 "value": "zoomIn",
                 "label": "t:sections.all.effect.animate.zoomIn"
-              }, 
-              {
+              }, {
                 "value": "slideInLeft",
                 "label": "t:sections.all.effect.animate.slideInLeft"
-              }, 
-              {
+              }, {
                 "value": "flipInX",
                 "label": "t:sections.all.effect.animate.flipInX"
-              }, 
-              {
+              }, {
                 "value": "slideInRight",
                 "label": "t:sections.all.effect.animate.slideInRight"
-              }, 
-              {
+              }, {
                 "value": "fadeInLeft",
                 "label": "t:sections.all.effect.animate.fadeInLeft"
-              }, 
-              {
+              }, {
                 "value": "fadeInRight",
                 "label": "t:sections.all.effect.animate.fadeInRight"
               }
             ],
             "label": "t:sections.all.effect.animate.label"
-          }, 
+          },
           {
             "type": "range",
             "id": "text_time",
@@ -1084,12 +1082,10 @@
             "id": "mg_top",
             "label": "t:sections.all.spacing.margin.top",
             "default": 0
-          },
-          {
+          }, {
             "type": "header",
             "content": "t:sections.all.layout.mobile.heading"
-          }, 
-          {
+          }, {
             "type": "number",
             "id": "mobile_mg_top",
             "label": "t:sections.all.spacing.margin.top",
@@ -1128,34 +1124,28 @@
               {
                 "value": "fadeInUp",
                 "label": "t:sections.all.effect.animate.fadeInUp"
-              }, 
-              {
+              }, {
                 "value": "zoomIn",
                 "label": "t:sections.all.effect.animate.zoomIn"
-              }, 
-              {
+              }, {
                 "value": "slideInLeft",
                 "label": "t:sections.all.effect.animate.slideInLeft"
-              }, 
-              {
+              }, {
                 "value": "flipInX",
                 "label": "t:sections.all.effect.animate.flipInX"
-              }, 
-              {
+              }, {
                 "value": "slideInRight",
                 "label": "t:sections.all.effect.animate.slideInRight"
-              }, 
-              {
+              }, {
                 "value": "fadeInLeft",
                 "label": "t:sections.all.effect.animate.fadeInLeft"
-              }, 
-              {
+              }, {
                 "value": "fadeInRight",
                 "label": "t:sections.all.effect.animate.fadeInRight"
               }
             ],
             "label": "t:sections.all.effect.animate.label"
-          }, 
+          },
           {
             "type": "range",
             "id": "text_time",
@@ -1171,8 +1161,7 @@
             "id": "color",
             "label": "t:sections.slideshow.blocks.colors.color",
             "default": "#111"
-          }, 
-          {
+          }, {
             "type": "range",
             "id": "fw_text",
             "min": 400,
@@ -1180,8 +1169,7 @@
             "step": 100,
             "label": "t:sections.all.styles.fonts.weight",
             "default": 600
-          }, 
-          {
+          }, {
             "type": "range",
             "id": "fs_text",
             "min": 20,
@@ -1190,8 +1178,7 @@
             "label": "t:sections.all.styles.fonts.size",
             "unit": "px",
             "default": 60
-          }, 
-          {
+          }, {
             "type": "range",
             "id": "lh_text",
             "min": 0,
@@ -1201,15 +1188,13 @@
             "info": "t:sections.all.note.set_default",
             "unit": "px",
             "default": 0
-          }, 
-          {
+          }, {
             "type": "text",
             "id": "ls_text",
             "label": "t:sections.all.styles.fonts.letter_spacing",
             "info": "t:sections.all.styles.fonts.info.letter_spacing",
             "default": "0"
-          }, 
-          {
+          }, {
             "type": "select",
             "id": "font_style",
             "default": "normal",
@@ -1217,47 +1202,39 @@
               {
                 "value": "normal",
                 "label": "t:sections.all.styles.fonts.style.normal"
-              }, 
-              {
+              }, {
                 "value": "italic",
                 "label": "t:sections.all.styles.fonts.style.italic"
               }
             ],
             "label": "t:sections.all.styles.fonts.style.label"
-          },
-          {
+          }, {
             "type": "number",
             "id": "mg_top",
             "label": "t:sections.all.spacing.margin.top",
             "default": 0
-          },
-          {
+          }, {
             "type": "header",
             "content": "t:sections.all.styles.custom_mark.heading"
-          }, 
-          {
+          }, {
             "type": "text",
             "id": "custom_mark",
             "label": "t:sections.all.styles.custom_mark.position",
             "info": "Separator is '|'. Example: 1|2|3 "
-          },
-          {
+          }, {
             "type": "checkbox",
             "id": "last_mark",
             "label": "t:sections.all.styles.custom_mark.last_position",
             "default": false
-          }, 
-          {
+          }, {
             "type": "color",
             "id": "custom_mark_color",
             "label": "t:sections.all.styles.custom_mark.color",
             "default": "#FBB71C"
-          },
-          {
+          }, {
             "type": "header",
             "content": "t:sections.all.layout.mobile.heading"
-          }, 
-          {
+          }, {
             "type": "range",
             "id": "mobile_fw_text",
             "min": 400,
@@ -1265,8 +1242,7 @@
             "step": 100,
             "label": "t:sections.all.styles.fonts.weight",
             "default": 600
-          }, 
-          {
+          }, {
             "type": "range",
             "id": "mobile_lh_text",
             "min": 0,
@@ -1276,8 +1252,7 @@
             "info": "t:sections.all.note.set_default",
             "unit": "px",
             "default": 0
-          }, 
-          {
+          }, {
             "type": "range",
             "id": "mobile_font_text",
             "min": 14,
@@ -1286,8 +1261,7 @@
             "label": "t:sections.all.styles.fonts.size",
             "unit": "px",
             "default": 14
-          },
-          {
+          }, {
             "type": "number",
             "id": "mobile_mg_top",
             "label": "t:sections.all.spacing.margin.top",
@@ -1326,34 +1300,28 @@
               {
                 "value": "fadeInUp",
                 "label": "t:sections.all.effect.animate.fadeInUp"
-              }, 
-              {
+              }, {
                 "value": "zoomIn",
                 "label": "t:sections.all.effect.animate.zoomIn"
-              }, 
-              {
+              }, {
                 "value": "slideInLeft",
                 "label": "t:sections.all.effect.animate.slideInLeft"
-              }, 
-              {
+              }, {
                 "value": "flipInX",
                 "label": "t:sections.all.effect.animate.flipInX"
-              }, 
-              {
+              }, {
                 "value": "slideInRight",
                 "label": "t:sections.all.effect.animate.slideInRight"
-              }, 
-              {
+              }, {
                 "value": "fadeInLeft",
                 "label": "t:sections.all.effect.animate.fadeInLeft"
-              }, 
-              {
+              }, {
                 "value": "fadeInRight",
                 "label": "t:sections.all.effect.animate.fadeInRight"
               }
             ],
             "label": "t:sections.all.effect.animate.label"
-          }, 
+          },
           {
             "type": "range",
             "id": "text_time",
@@ -1377,8 +1345,7 @@
             "step": 100,
             "label": "t:sections.all.styles.fonts.weight",
             "default": 500
-          }, 
-          {
+          }, {
             "type": "range",
             "id": "fs_text",
             "min": 10,
@@ -1387,8 +1354,7 @@
             "label": "t:sections.all.styles.fonts.size",
             "unit": "px",
             "default": 17
-          }, 
-          {
+          }, {
             "type": "range",
             "id": "lh_text",
             "min": 0,
@@ -1398,15 +1364,13 @@
             "info": "t:sections.all.note.set_default",
             "unit": "px",
             "default": 0
-          }, 
-          {
+          }, {
             "type": "text",
             "id": "ls_text",
             "label": "t:sections.all.styles.fonts.letter_spacing",
             "info": "t:sections.all.styles.fonts.info.letter_spacing",
             "default": "0"
-          },
-          {
+          }, {
             "type": "select",
             "id": "font_style",
             "default": "normal",
@@ -1414,47 +1378,39 @@
               {
                 "value": "normal",
                 "label": "t:sections.all.styles.fonts.style.normal"
-              }, 
-              {
+              }, {
                 "value": "italic",
                 "label": "t:sections.all.styles.fonts.style.italic"
               }
             ],
             "label": "t:sections.all.styles.fonts.style.label"
-          },
-          {
+          }, {
             "type": "number",
             "id": "mg_top",
             "label": "t:sections.all.spacing.margin.top",
             "default": 0
-          },
-          {
+          }, {
             "type": "header",
             "content": "t:sections.all.styles.custom_mark.heading"
-          }, 
-          {
+          }, {
             "type": "text",
             "id": "custom_mark",
             "label": "t:sections.all.styles.custom_mark.position",
             "info": "Separator is '|'. Example: 1|2|3 "
-          },
-          {
+          }, {
             "type": "checkbox",
             "id": "last_mark",
             "label": "t:sections.all.styles.custom_mark.last_position",
             "default": false
-          }, 
-          {
+          }, {
             "type": "color",
             "id": "custom_mark_color",
             "label": "t:sections.all.styles.custom_mark.color",
             "default": "#FBB71C"
-          },
-          {
+          }, {
             "type": "header",
             "content": "t:sections.all.layout.mobile.heading"
-          }, 
-          {
+          }, {
             "type": "range",
             "id": "mobile_fw_text",
             "min": 400,
@@ -1462,8 +1418,7 @@
             "step": 100,
             "label": "t:sections.all.styles.fonts.weight",
             "default": 500
-          }, 
-          {
+          }, {
             "type": "range",
             "id": "mobile_lh_text",
             "min": 0,
@@ -1473,8 +1428,7 @@
             "info": "t:sections.all.note.set_default",
             "unit": "px",
             "default": 0
-          }, 
-          {
+          }, {
             "type": "range",
             "id": "mobile_font_text",
             "min": 14,
@@ -1483,16 +1437,14 @@
             "label": "t:sections.all.styles.fonts.size",
             "unit": "px",
             "default": 14
-          },
-          {
+          }, {
             "type": "number",
             "id": "mobile_mg_top",
             "label": "t:sections.all.spacing.margin.top",
             "default": 0
           }
         ]
-      }, 
-      {
+      }, {
         "type": "txt",
         "name": "t:sections.slideshow.blocks.content.name",
         "settings": [
@@ -1523,34 +1475,28 @@
               {
                 "value": "fadeInUp",
                 "label": "t:sections.all.effect.animate.fadeInUp"
-              }, 
-              {
+              }, {
                 "value": "zoomIn",
                 "label": "t:sections.all.effect.animate.zoomIn"
-              }, 
-              {
+              }, {
                 "value": "slideInLeft",
                 "label": "t:sections.all.effect.animate.slideInLeft"
-              }, 
-              {
+              }, {
                 "value": "flipInX",
                 "label": "t:sections.all.effect.animate.flipInX"
-              }, 
-              {
+              }, {
                 "value": "slideInRight",
                 "label": "t:sections.all.effect.animate.slideInRight"
-              }, 
-              {
+              }, {
                 "value": "fadeInLeft",
                 "label": "t:sections.all.effect.animate.fadeInLeft"
-              }, 
-              {
+              }, {
                 "value": "fadeInRight",
                 "label": "t:sections.all.effect.animate.fadeInRight"
               }
             ],
             "label": "t:sections.all.effect.animate.label"
-          }, 
+          },
           {
             "type": "range",
             "id": "text_time",
@@ -1566,8 +1512,7 @@
             "id": "color",
             "label": "t:sections.all.colors.color",
             "default": "#111"
-          }, 
-          {
+          }, {
             "type": "range",
             "id": "fw_text",
             "min": 400,
@@ -1575,8 +1520,7 @@
             "step": 100,
             "label": "t:sections.all.styles.fonts.weight",
             "default": 400
-          }, 
-          {
+          }, {
             "type": "range",
             "id": "fs_text",
             "min": 10,
@@ -1585,8 +1529,7 @@
             "label": "t:sections.all.styles.fonts.size",
             "unit": "px",
             "default": 14
-          }, 
-          {
+          }, {
             "type": "range",
             "id": "lh_text",
             "min": 0,
@@ -1596,8 +1539,7 @@
             "info": "t:sections.all.note.set_default",
             "unit": "px",
             "default": 0
-          }, 
-          {
+          }, {
             "type": "range",
             "id": "ls_text",
             "min": 0,
@@ -1607,24 +1549,20 @@
             "info": "t:sections.all.styles.fonts.info.letter_spacing",
             "unit": "px",
             "default": 0
-          }, 
-          {
+          }, {
             "type": "checkbox",
             "id": "hide_mobile",
             "label": "t:sections.all.layout.mobile.disable",
             "default": false
-          }, 
-          {
+          }, {
             "type": "number",
             "id": "mg_top",
             "label": "t:sections.all.spacing.margin.top",
             "default": 0
-          },
-          {
+          }, {
             "type": "header",
             "content": "t:sections.all.layout.mobile.heading"
-          }, 
-          {
+          }, {
             "type": "range",
             "id": "mobile_fw_text",
             "min": 400,
@@ -1632,8 +1570,7 @@
             "step": 100,
             "label": "t:sections.all.styles.fonts.weight",
             "default": 600
-          }, 
-          {
+          }, {
             "type": "range",
             "id": "mobile_lh_text",
             "min": 0,
@@ -1643,8 +1580,7 @@
             "info": "t:sections.all.note.set_default",
             "unit": "px",
             "default": 0
-          }, 
-          {
+          }, {
             "type": "range",
             "id": "mobile_font_text",
             "min": 14,
@@ -1653,16 +1589,14 @@
             "label": "t:sections.all.styles.fonts.size",
             "unit": "px",
             "default": 14
-          },
-          {
+          }, {
             "type": "number",
             "id": "mobile_mg_top",
             "label": "t:sections.all.spacing.margin.top",
             "default": 0
           }
         ]
-      }, 
-      {
+      }, {
         "type": "btn",
         "name": "t:sections.slideshow.blocks.button.name",
         "settings": [
@@ -1692,34 +1626,28 @@
               {
                 "value": "fadeInUp",
                 "label": "t:sections.all.effect.animate.fadeInUp"
-              }, 
-              {
+              }, {
                 "value": "zoomIn",
                 "label": "t:sections.all.effect.animate.zoomIn"
-              }, 
-              {
+              }, {
                 "value": "slideInLeft",
                 "label": "t:sections.all.effect.animate.slideInLeft"
-              }, 
-              {
+              }, {
                 "value": "flipInX",
                 "label": "t:sections.all.effect.animate.flipInX"
-              }, 
-              {
+              }, {
                 "value": "slideInRight",
                 "label": "t:sections.all.effect.animate.slideInRight"
-              }, 
-              {
+              }, {
                 "value": "fadeInLeft",
                 "label": "t:sections.all.effect.animate.fadeInLeft"
-              }, 
-              {
+              }, {
                 "value": "fadeInRight",
                 "label": "t:sections.all.effect.animate.fadeInRight"
               }
             ],
             "label": "t:sections.all.effect.animate.label"
-          }, 
+          },
           {
             "type": "range",
             "id": "text_time",
@@ -1735,44 +1663,37 @@
             "id": "btn_link",
             "label": "t:sections.slideshow.blocks.button.settings.link",
             "info": "t:sections.all.note.link_blank"
-          }, 
-          {
+          }, {
             "type": "color",
             "id": "cl_txt",
             "label": "t:sections.all.colors.buttons.color",
             "default": "#fff"
-          }, 
-          {
+          }, {
             "type": "color",
             "id": "cl_txt_hover",
             "label": "t:sections.all.colors.buttons.color_hover",
             "default": "#fff"
-          }, 
-          {
+          }, {
             "type": "color",
             "id": "cl_bg",
             "label": "t:sections.all.colors.buttons.background",
             "default": "#FBB71C"
-          }, 
-          {
+          }, {
             "type": "color",
             "id": "cl_bg_hover",
             "label": "t:sections.all.colors.buttons.background_hover",
             "default": "#FBB71C"
-          }, 
-          {
+          }, {
             "type": "color",
             "id": "cl_bd",
             "label": "t:sections.all.colors.buttons.border",
             "default": "#FBB71C"
-          }, 
-          {
+          }, {
             "type": "color",
             "id": "cl_bd_hover",
             "label": "t:sections.all.colors.buttons.border_hover",
             "default": "#FBB71C"
-          }, 
-          {
+          }, {
             "type": "range",
             "id": "fs_text",
             "min": 10,
@@ -1781,8 +1702,7 @@
             "label": "t:sections.all.styles.fonts.size",
             "unit": "px",
             "default": 14
-          }, 
-          {
+          }, {
             "type": "range",
             "id": "fw_text",
             "min": 400,
@@ -1790,30 +1710,26 @@
             "step": 100,
             "label": "t:sections.all.styles.fonts.weight",
             "default": 700
-          }, 
-          {
+          }, {
             "type": "text",
             "id": "br_button",
             "label": "border radius",
             "info": "t:sections.all.styles.border.note.radius",
             "default": "3px 3px",
             "placeholder": "50px 50px,"
-          }, 
-          {
+          }, {
             "type": "number",
             "id": "mg_top",
             "label": "t:sections.all.spacing.margin.top",
             "default": 0
-          },
-          {
+          }, {
             "type": "text",
             "id": "pd",
             "label": "Padding",
             "info": "t:sections.all.spacing.padding.info",
             "default": "15px 32px 10px 32px",
             "placeholder": "50px 50px,"
-          }, 
-          {
+          }, {
             "type": "range",
             "id": "ls_text",
             "min": 0,
@@ -1823,12 +1739,10 @@
             "info": "t:sections.all.styles.fonts.info.letter_spacing",
             "unit": "px",
             "default": 1.1
-          }, 
-          {
+          }, {
             "type": "header",
             "content": "t:sections.all.layout.mobile.heading"
-          }, 
-          {
+          }, {
             "type": "range",
             "id": "mobile_fw_text",
             "min": 400,
@@ -1836,8 +1750,7 @@
             "step": 100,
             "label": "Font weight",
             "default": 600
-          }, 
-          {
+          }, {
             "type": "range",
             "id": "mobile_font_text",
             "min": 10,
@@ -1846,14 +1759,12 @@
             "label": "Font size",
             "unit": "px",
             "default": 12
-          }, 
-          {
+          }, {
             "type": "number",
             "id": "mobile_mg_top",
             "label": "t:sections.all.spacing.margin.top",
             "default": 0
-          },
-          {
+          }, {
             "type": "text",
             "id": "mobile_pd",
             "label": "Padding",
@@ -1862,8 +1773,7 @@
             "placeholder": "50px 50px,"
           }
         ]
-      }, 
-      {
+      }, {
         "type": "box",
         "name": "t:sections.slideshow.blocks.box.name",
         "settings": [
@@ -1887,7 +1797,7 @@
             "step": 100,
             "label": "t:sections.all.styles.fonts.weight",
             "default": 600
-          }, 
+          },
           {
             "type": "range",
             "id": "fs_title",
@@ -1897,8 +1807,7 @@
             "label": "t:sections.all.styles.fonts.size",
             "unit": "px",
             "default": 60
-          }, 
-          {
+          }, {
             "type": "range",
             "id": "lh_title",
             "min": 0,
@@ -1908,8 +1817,7 @@
             "info": "t:sections.all.note.set_default",
             "unit": "px",
             "default": 0
-          }, 
-          {
+          }, {
             "type": "range",
             "id": "ls_title",
             "min": 0,
@@ -1919,25 +1827,21 @@
             "info": "t:sections.all.styles.fonts.info.letter_spacing",
             "unit": "px",
             "default": 0
-          }, 
-          {
+          }, {
             "type": "header",
             "content": "Content settings"
-          }, 
-          {
+          }, {
             "type": "textarea",
             "id": "content",
             "label": "Content",
             "default": "Best treatment for curing stubborn whiteheads<br>—  your skin loves it",
             "info": "t:sections.all.note.br"
-          }, 
-          {
+          }, {
             "type": "color",
             "id": "color_content",
             "label": "Color Text",
             "default": "#111"
-          }, 
-          {
+          }, {
             "type": "range",
             "id": "fw_text",
             "min": 400,
@@ -1945,8 +1849,7 @@
             "step": 100,
             "label": "Font weight",
             "default": 500
-          }, 
-          {
+          }, {
             "type": "range",
             "id": "fs_text",
             "min": 10,
@@ -1955,8 +1858,7 @@
             "label": "Font size",
             "unit": "px",
             "default": 18
-          }, 
-          {
+          }, {
             "type": "range",
             "id": "lh_text",
             "min": 0,
@@ -1966,8 +1868,7 @@
             "info": "t:sections.all.note.set_default",
             "unit": "px",
             "default": 0
-          }, 
-          {
+          }, {
             "type": "range",
             "id": "ls_text",
             "min": 0,
@@ -1977,37 +1878,31 @@
             "info": "t:sections.all.note.set_default",
             "unit": "px",
             "default": 0
-          }, 
-          {
+          }, {
             "type": "header",
             "content": "Button settings"
-          }, 
-          {
+          }, {
             "type": "text",
             "id": "button_text",
             "label": "t:sections.slideshow.blocks.box.settings.link.title",
             "default": "Shop now"
-          }, 
-          {
+          }, {
             "type": "url",
             "id": "btn_link",
             "label": "t:sections.slideshow.blocks.box.settings.link.label",
             "default": "/",
             "info": "t:sections.all.note.link_blank"
-          }, 
-          {
+          }, {
             "type": "color",
             "id": "cl_btn",
             "label": "t:sections.all.styles.colors.buttons.color",
             "default": "#fff"
-          }, 
-          {
+          }, {
             "type": "color",
             "id": "cl_bg_btn",
             "label": "t:sections.all.styles.colors.buttons.background",
             "default": "#f26460"
-          }, 
-          {
+          }, {
             "type": "range",
             "id": "fs_text_btn",
             "min": 10,
@@ -2016,8 +1911,7 @@
             "label": "t:sections.all.styles.fonts.size",
             "unit": "px",
             "default": 14
-          }, 
-          {
+          }, {
             "type": "range",
             "id": "fw_text_btn",
             "min": 400,
@@ -2025,8 +1919,7 @@
             "step": 100,
             "label": "t:sections.all.styles.fonts.weight",
             "default": 700
-          }, 
-          {
+          }, {
             "type": "range",
             "id": "ls_btn",
             "min": 0,
@@ -2038,8 +1931,7 @@
             "default": 2
           }
         ]
-      },
-      {
+      }, {
         "type": "benefit",
         "name": "t:sections.slideshow.blocks.benefit.name",
         "limit": 1,
@@ -2065,120 +1957,99 @@
             "id": "color_title",
             "label": "t:sections.slideshow.blocks.benefit.settings.colors.color_title",
             "default": "#fff"
-          },
-          {
+          }, {
             "type": "color",
             "id": "color_text",
             "label": "t:sections.slideshow.blocks.benefit.settings.colors.color_text",
             "default": "#888"
-          },
-          {
+          }, {
             "type": "header",
             "content": "t:sections.slideshow.blocks.benefit.settings.item_1.heading"
-          },
-          {
+          }, {
             "type": "image_picker",
             "id": "image_1",
             "label": "t:sections.slideshow.blocks.benefit.settings.item_1.image"
-          },
-          {
+          }, {
             "type": "text",
             "id": "icon_1",
             "label": "t:sections.slideshow.blocks.benefit.settings.item_1.icon",
             "default": "fa fa-car",
             "info": "t:sections.slideshow.blocks.benefit.settings.note.use_icon"
-          },
-          {
+          }, {
             "type": "text",
             "id": "title_1",
             "label": "t:sections.slideshow.blocks.benefit.settings.item_1.title",
             "default": "Free Delivery"
-          },
-          {
+          }, {
             "type": "textarea",
             "id": "text_1",
             "label": "t:sections.slideshow.blocks.benefit.settings.item_1.text",
             "default": "On all Orders over $99"
-          },
-          {
+          }, {
             "type": "header",
             "content": "t:sections.slideshow.blocks.benefit.settings.item_2.heading"
-          },
-          {
+          }, {
             "type": "image_picker",
             "id": "image_2",
             "label": "t:sections.slideshow.blocks.benefit.settings.item_2.image"
-          },
-          {
+          }, {
             "type": "text",
             "id": "icon_2",
             "label": "t:sections.slideshow.blocks.benefit.settings.item_2.icon",
             "default": "main-icon-refreshing",
             "info": "t:sections.slideshow.blocks.benefit.settings.note.use_icon"
-          },
-          {
+          }, {
             "type": "text",
             "id": "title_2",
             "label": "t:sections.slideshow.blocks.benefit.settings.item_2.title",
             "default": "90 Days Return"
-          },
-          {
+          }, {
             "type": "textarea",
             "id": "text_2",
             "label": "t:sections.slideshow.blocks.benefit.settings.item_2.text",
             "default": "if goods have problems"
-          },
-          {
+          }, {
             "type": "header",
             "content": "t:sections.slideshow.blocks.benefit.settings.item_3.heading"
-          },
-          {
+          }, {
             "type": "image_picker",
             "id": "image_3",
             "label": "t:sections.slideshow.blocks.benefit.settings.item_3.image"
-          },
-          {
+          }, {
             "type": "text",
             "id": "icon_3",
             "label": "t:sections.slideshow.blocks.benefit.settings.item_3.icon",
             "default": "fa fa-address-card",
             "info": "t:sections.slideshow.blocks.benefit.settings.note.use_icon"
-          },
-          {
+          }, {
             "type": "text",
             "id": "title_3",
             "label": "t:sections.slideshow.blocks.benefit.settings.item_3.title",
             "default": "100% Safe & Secure"
-          },
-          {
+          }, {
             "type": "textarea",
             "id": "text_3",
             "label": "t:sections.slideshow.blocks.benefit.settings.item_3.text",
             "default": "Proin condimentum sagittis"
-          },
-          {
+          }, {
             "type": "header",
             "content": "t:sections.slideshow.blocks.benefit.settings.item_4.heading"
-          },
-          {
+          }, {
             "type": "image_picker",
             "id": "image_4",
             "label": "t:sections.slideshow.blocks.benefit.settings.item_4.image"
-          },
-          {
+          }, {
             "type": "text",
             "id": "icon_4",
             "label": "t:sections.slideshow.blocks.benefit.settings.item_4.icon",
             "default": "fa fa-life-ring",
             "info": "t:sections.slideshow.blocks.benefit.settings.note.use_icon"
-          },
-          {
+          }, {
             "type": "text",
             "id": "title_4",
             "label": "t:sections.slideshow.blocks.benefit.settings.item_4.title",
             "default": "100% Safe & Secure"
-          },
-          {
+          }, {
             "type": "textarea",
             "id": "text_4",
             "label": "t:sections.slideshow.blocks.benefit.settings.item_4.text",
@@ -2192,8 +2063,11 @@
         "name": "1. Slideshow",
         "category": "Images",
         "blocks": [
-          {"type": "img"},
-          {"type": "img"}
+          {
+            "type": "img"
+          }, {
+            "type": "img"
+          }
         ]
       }
     ]
