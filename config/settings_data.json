@@ -22,8 +22,8 @@
     "logo_max_width": 95,
     "color_body_bg": "#ffffff",
     "color_body_text": "#666666",
-    "color_link": "#1a1a1a",
-    "color_link_hover": "#d93939",
+    "color_link": "#9c6d3a",
+    "color_link_hover": "#9c6d3a",
     "color_scrollbar": "#444444",
     "color_link_menu": "#1a1a1a",
     "color_menu_heading": "#1a1a1a",
@@ -67,6 +67,7 @@
     "currency_format": "money_format",
     "supported_currencies": "GBP USD EUR  DKK ARS CNY BRL",
     "default_currency": "USD",
+    "show_flag": false,
     "ajaxcart_enabled": true,
     "ajaxcart_after": "sidebar_cart",
     "show_product_sidebar": false,
@@ -1316,9 +1317,7 @@
               "text_align": "topbar-center",
               "col": "4",
               "color_link": "#ffffff",
-              "bg_color_link": "#d93939",
-              "color_link_hover": "#ffffff",
-              "bg_color_link_hover": "#1a1a1a"
+              "color_link_hover": "#ffffff"
             }
           },
           "0cfd9b2f-3016-425c-a275-f60b6eaf931a": {
