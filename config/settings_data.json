@@ -3574,65 +3574,65 @@
             "type": "collection",
             "settings": {
               "collection": "",
-              "title": ""
+              "title": "Living Room"
             }
           },
           "f088fa25-9643-4737-ba33-eb74c5776b7b-16843963666897fe09-1": {
             "type": "collection",
             "settings": {
               "collection": "",
-              "title": ""
-            }
-          },
-          "f088fa25-9643-4737-ba33-eb74c5776b7b-16843963666897fe09-2": {
-            "type": "collection",
-            "settings": {
-              "collection": "",
-              "title": ""
+              "title": "Special Bedroom"
             }
           },
           "f088fa25-9643-4737-ba33-eb74c5776b7b-16843963666897fe09-3": {
             "type": "collection",
             "settings": {
               "collection": "",
-              "title": ""
+              "title": "Dining & Kitchen"
             }
           },
           "f088fa25-9643-4737-ba33-eb74c5776b7b-16843963666897fe09-4": {
             "type": "collection",
             "settings": {
               "collection": "",
-              "title": ""
+              "title": "Home Accessories"
+            }
+          },
+          "f088fa25-9643-4737-ba33-eb74c5776b7b-16843963666897fe09-2": {
+            "type": "collection",
+            "settings": {
+              "collection": "",
+              "title": "Outdoor"
             }
           },
           "f088fa25-9643-4737-ba33-eb74c5776b7b-16843963666897fe09-5": {
             "type": "collection",
             "settings": {
               "collection": "",
-              "title": ""
+              "title": "Lighting & Decor"
             }
           }
         },
         "block_order": [
           "f088fa25-9643-4737-ba33-eb74c5776b7b-16843963666897fe09-0",
           "f088fa25-9643-4737-ba33-eb74c5776b7b-16843963666897fe09-1",
-          "f088fa25-9643-4737-ba33-eb74c5776b7b-16843963666897fe09-2",
           "f088fa25-9643-4737-ba33-eb74c5776b7b-16843963666897fe09-3",
           "f088fa25-9643-4737-ba33-eb74c5776b7b-16843963666897fe09-4",
+          "f088fa25-9643-4737-ba33-eb74c5776b7b-16843963666897fe09-2",
           "f088fa25-9643-4737-ba33-eb74c5776b7b-16843963666897fe09-5"
         ],
         "settings": {
           "title": "Top Categories",
           "sub_title": "",
-          "content": "Commodo sociosqu venenatis cras dolor sagittis integer luctus maecenas.",
+          "content": "Our products are designed for everyone, environmentally friendly.",
           "text_size": "medium",
           "style_title": "style_1",
           "num_p_qty": true,
           "use-slider": true,
           "slides-To-Scroll": 1,
-          "visible": 5,
-          "widescreen": 4,
-          "desktop": 4,
+          "visible": 6,
+          "widescreen": 6,
+          "desktop": 5,
           "laptop": 4,
           "notebook": 3,
           "tablet": 3,
@@ -3643,7 +3643,7 @@
           "autoplay": true,
           "speed": "300",
           "autoplay-Speed": "3000",
-          "arrows": true,
+          "arrows": false,
           "fade": false,
           "center-Mode": false,
           "adaptive-Height": false,
