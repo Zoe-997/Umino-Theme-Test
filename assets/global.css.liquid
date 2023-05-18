@@ -268,13 +268,13 @@
   }
   {%- assign show_cusotm_width = settings.show_cusotm_width -%}
   {%- assign cusotm_width = settings.cusotm_width -%}
-  {% if show_cusotm_width %}
+  {%- if show_cusotm_width -%}
     @media(min-width: {{- cusotm_width -}}px) {
       .container {
         max-width: {{- cusotm_width -}}px;
       }
     }
-  {% endif %}
+  {%- endif =%}
 
   .full-width,
   .container.full-width {

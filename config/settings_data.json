@@ -26,10 +26,10 @@
     "color_link": "#111111",
     "color_link_hover": "#9c6d3a",
     "color_scrollbar": "#444444",
-    "color_link_menu": "#1a1a1a",
-    "color_menu_heading": "#1a1a1a",
-    "color_link_menu_sub": "#444444",
-    "color_link_menu_hover": "#d93939",
+    "color_link_menu": "#111111",
+    "color_menu_heading": "#111111",
+    "color_link_menu_sub": "#111111",
+    "color_link_menu_hover": "#9c6d3a",
     "color_name_product": "#111111",
     "color_name_product_hover": "#9c6d3a",
     "color_star_product": "#111111",
@@ -1318,7 +1318,7 @@
           "0cfd9b2f-3016-425c-a275-f60b6eaf931a": {
             "type": "top_header_3",
             "settings": {
-              "menu_topbar": "",
+              "menu_topbar": "top-header",
               "header_use_currency": true,
               "header_use_language": true,
               "header_use_social": false,
@@ -1339,7 +1339,7 @@
           "home_page_only": false,
           "layout": "container",
           "bg_top_header": "#f6f6f8",
-          "cl_text": "#1a1a1a",
+          "cl_text": "#111111",
           "cl_text_h": "#9c6d3a"
         }
       },
