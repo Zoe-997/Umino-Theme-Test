@@ -3716,7 +3716,7 @@
           "tablet": 3,
           "landscape": 2,
           "portrait": 2,
-          "mobile": 1,
+          "mobile": 2,
           "rows": 1,
           "autoplay": true,
           "speed": "6000",
