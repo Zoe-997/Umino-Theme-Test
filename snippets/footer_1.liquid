@@ -108,7 +108,7 @@
                         {% endif %}
                       </div>
                       <ul class="store-info-footer">
-                      <li>{% for location in shop.locations %} {{ location.name }} {% endfor %}</li>
+                      <li>{% if block.settings.address %} {{ block.settings.address }} {% endif %}</li>
                         <li><a href="tel: {{ shop.phone }}">{{ shop.phone }}</a></li>
                         <li><a href="mailto: {{ shop.email }}">{{ shop.email }}</a></li>
                       </ul>
