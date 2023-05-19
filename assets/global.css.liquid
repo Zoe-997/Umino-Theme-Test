@@ -9395,6 +9395,25 @@
     border-color: #fff;
     background-color: #fff;
   }
+
+  @media(max-width: 768px){
+    .type_banner .laber_banner a.img .pr_lazy_img{
+      min-height: 300px;
+    }
+
+    .type_banner .laber_banner .banner_text .content_banner{
+      padding: 20px;
+      max-width: calc(100% - 40px);
+    }
+
+    .type_banner .laber_banner .banner_text p{
+      overflow: hidden;
+      text-overflow: ellipsis;
+      -webkit-line-clamp: 2;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+    }
+  }
   /* End banner section */
 
 

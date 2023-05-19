@@ -15,6 +15,7 @@ assign codes = 'USD,EUR,GBP,CAD,ARS,AUD,BBD,BDT,BSD,BHD,BRL,BOB,BND,BGN,ILS,MMK,
             assign country_last = country.currency.name | split: " " | last
             assign country_curency = country.currency.name | remove: country_last
             %}
+            {{country_last}}
           {{ country_curency }} ( {{ country.currency.iso_code }} {{ country.currency.symbol }})
         {% endfor -%}
       </span>

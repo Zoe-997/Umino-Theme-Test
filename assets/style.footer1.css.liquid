@@ -22,6 +22,13 @@
     text-transform: uppercase;
     font-weight: 600;
   }
+
+  .store-info-footer {
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 24px;
+  }
+
   .footer-top .section-title {
     color: #fff;
     margin: 0;
@@ -119,6 +126,7 @@
   }
   .main-footer .newsletter-content .signup-newsletter-form {
     display: flex;
+    flex-wrap: wrap;
     gap: 15px;
   }
   .main-footer .newsletter-content .signup-newsletter-form .col_email {
@@ -250,7 +258,9 @@
 
   .bottom_footer .parent-list .child-list {
     top: auto;
-    bottom: 100%;
+    bottom: calc(100% + 10px);
+    right: auto;
+    left: 0;
   }
 
   .bottom_footer .inner_bottom_footer > * {
@@ -561,9 +571,9 @@
       min-width: inherit;
       width: 100%;
     }
+    .widget_mail .widget_footer .signup-newsletter-form .col_btn,
     .widget_mail .widget_footer .signup-newsletter-form .submit-btn {
       width: 100%;
-      border-radius: 0 3px 3px 0;
     }
     .banner-footer .content-banner h2 {
       font-size: 40px;
@@ -572,6 +582,14 @@
     .banner-footer .content-banner h3 {
       font-size: 16px;
       margin-bottom: 15px;
+    }
+
+    .bottom_footer .inner_bottom_footer>*{
+      flex: 0 0 100%;
+      margin-bottom: 5px;
+    }
+    .bottom_footer .inner_bottom_footer>*:last-child{
+      margin-bottom: 0;
     }
     .banner-footer .content-banner h3 {
       font-size: 16px;
