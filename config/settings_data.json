@@ -2,7 +2,7 @@
   "current": {
     "home_keywords": "Umino Theme, Shopify theme",
     "shop_author": "Zoe Trinh",
-    "production_mode": false,
+    "production_mode": true,
     "rtl": true,
     "show_button_rtl": false,
     "show_load_page": true,
