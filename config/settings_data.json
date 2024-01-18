@@ -185,7 +185,7 @@
     "footer_social_google_link": "",
     "footer_social_google_text": "Google",
     "footer_social_instargram_enable": true,
-    "footer_social_instargram_link": "",
+    "footer_social_instargram_link": "http:\/\/instagram.com\/shopify",
     "footer_social_instargram_text": "Instargram",
     "footer_social_pinterest_enable": true,
     "footer_social_pinterest_link": "",
@@ -3813,6 +3813,41 @@
           "mg_mb": "",
           "pd_mb": ""
         }
+      },
+      "maestrooo_instagram_KfdxbG": {
+        "type": "maestrooo-instagram",
+        "settings": {
+          "hd_align": "center",
+          "title": "Instagram feed",
+          "subheading": "<p>Write content about your brand<\/p>",
+          "button_text": "",
+          "button_link": "",
+          "layout": "grid",
+          "image_size": "small",
+          "full_width": false,
+          "add_spacing": true,
+          "rows_count": 2,
+          "shop_link": "",
+          "show_author": false,
+          "show_caption": true,
+          "show_date": true,
+          "show_info": true,
+          "click_action": "open_instagram",
+          "img_radius": 0,
+          "radius_round": false,
+          "subheading_color": "#000000",
+          "overlay_color": "#000000",
+          "overlay_text_color": "#ffffff",
+          "overlay_opacity": 65,
+          "mg_top": 0,
+          "mg_bottom": 0,
+          "pd_top": 0,
+          "pd_bottom": 0,
+          "mobile_mg_top": 0,
+          "mobile_mg_bottom": 0,
+          "mobile_pd_top": 0,
+          "mobile_pd_bottom": 0
+        }
       }
     },
     "content_for_index": [
@@ -3822,7 +3857,8 @@
       "2abdc4ca-3312-44fb-a301-09a624f263a4",
       "b13f27c3-45cc-4df9-9fa4-aa190af05f28",
       "77e6edb0-869e-4072-a2a6-de257520dcbb",
-      "instagram_image_grid_cXn9ii"
+      "instagram_image_grid_cXn9ii",
+      "maestrooo_instagram_KfdxbG"
     ]
   },
   "presets": {
