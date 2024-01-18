@@ -3733,6 +3733,86 @@
           "mg_mb": "",
           "pd_mb": ""
         }
+      },
+      "instagram_image_grid_cXn9ii": {
+        "type": "instagram-image-grid",
+        "blocks": {
+          "img_anY3pm": {
+            "type": "img",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/instagram_1.png",
+              "url": "https:\/\/www.google.com\/search?gs_ssp=eJzj4tTP1TcwMU02T1JgNGB0YPBiS8_PT89JBQBASQXT&q=google&rlz=1C1CHWL_enVN1090VN1090&oq=go&gs_lcrp=EgZjaHJvbWUqGAgCEC4YQxiDARjHARixAxjRAxiABBiKBTIGCAAQRRg5MgYIARBFGEAyGAgCEC4YQxiDARjHARixAxjRAxiABBiKBTIMCAMQABhDGIAEGIoFMgwIBBAAGEMYgAQYigUyBggFEEUYPDIGCAYQRRg8MgYIBxBFGDzSAQgxODQ2ajBqN6gCALACAA&sourceid=chrome&ie=UTF-8",
+              "mg_bottom": 20
+            }
+          },
+          "img_KUr9E7": {
+            "type": "img",
+            "settings": {
+              "url": "",
+              "mg_bottom": 20
+            }
+          },
+          "img_HmNT87": {
+            "type": "img",
+            "settings": {
+              "url": "",
+              "mg_bottom": 20
+            }
+          },
+          "img_nqj7eg": {
+            "type": "img",
+            "settings": {
+              "url": "",
+              "mg_bottom": 20
+            }
+          },
+          "img_Etd8WR": {
+            "type": "img",
+            "settings": {
+              "url": "",
+              "mg_bottom": 20
+            }
+          },
+          "img_yC9RpG": {
+            "type": "img",
+            "settings": {
+              "url": "",
+              "mg_bottom": 20
+            }
+          },
+          "img_JTt4FM": {
+            "type": "img",
+            "settings": {
+              "url": "",
+              "mg_bottom": 20
+            }
+          }
+        },
+        "block_order": [
+          "img_anY3pm",
+          "img_KUr9E7",
+          "img_HmNT87",
+          "img_nqj7eg",
+          "img_Etd8WR",
+          "img_yC9RpG",
+          "img_JTt4FM"
+        ],
+        "settings": {
+          "hidden": false,
+          "title": "",
+          "sub_title": "",
+          "content": "Commodo sociosqu venenatis cras dolor sagittis integer luctus maecenas.",
+          "text_size": "medium",
+          "style_title": "style_1",
+          "layout": "full-width",
+          "pad": 5,
+          "open_link": "_self",
+          "cl_bg": "#fff",
+          "mg": "",
+          "pd": "",
+          "mg_mb": "",
+          "pd_mb": ""
+        }
       }
     },
     "content_for_index": [
@@ -3741,7 +3821,8 @@
       "a7115ba4-7731-4c93-8694-f64e41376d0c",
       "2abdc4ca-3312-44fb-a301-09a624f263a4",
       "b13f27c3-45cc-4df9-9fa4-aa190af05f28",
-      "77e6edb0-869e-4072-a2a6-de257520dcbb"
+      "77e6edb0-869e-4072-a2a6-de257520dcbb",
+      "instagram_image_grid_cXn9ii"
     ]
   },
   "presets": {
