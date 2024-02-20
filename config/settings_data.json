@@ -3859,7 +3859,15 @@
       "77e6edb0-869e-4072-a2a6-de257520dcbb",
       "instagram_image_grid_cXn9ii",
       "maestrooo_instagram_KfdxbG"
-    ]
+    ],
+    "blocks": {
+      "7990132695519299173": {
+        "type": "shopify:\/\/apps\/simple-affiliate\/blocks\/sa-tracker\/da6b7ee2-2e27-43e4-9184-0df8dc5be07a",
+        "disabled": false,
+        "settings": {
+        }
+      }
+    }
   },
   "presets": {
     "Default": {
